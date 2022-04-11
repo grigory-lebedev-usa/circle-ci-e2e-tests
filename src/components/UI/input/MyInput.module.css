@@ -25,7 +25,7 @@
   box-sizing: border-box;
   background: none;
   z-index: 1;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .input__label {
@@ -36,21 +36,20 @@
   padding: 0px 4px;
   color: #6A6A6A;
   font-size: 15px;
-  transition: all 0.3s ease-in-out;
+  z-index: 10;
+  transition: all 0.2s ease-in-out;
 }
 
 
 .input:focus + .input__label {
   transform: translate(-4px, -18px);
   font-size: 13px;
-  z-index: 10;
   color: var(--focus-and-hover-color);
 }
 
 .input:not(:placeholder-shown).input:not(:focus) + .input__label {
   transform: translate(-4px, -18px);
   font-size: 13px;
-  z-index: 10;
   color: var(--general-color);
 }
 
