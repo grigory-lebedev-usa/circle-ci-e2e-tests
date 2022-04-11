@@ -8,12 +8,19 @@ const MyInput = (props) => {
 	const handleShowPassword = () => {
 		setShowPassword(showPassword ? false : true);
 	}
+
+  const inputTypes = {
+    text: 'text',
+    password: 'password',
+    checkbox: 'checkbox',
+    submit: 'submit',
+  }
   
-  const inputType = props.type !== 'password' ? 'text' : props.type === 'password' && showPassword ? 'text' : 'password';
+  const checkInputType = props.type !== inputTypes.password ? inputTypes.text : props.type === inputTypes.password && showPassword ? inputTypes.text : inputTypes.password;
 
 	return (
 		<div className={classes.input__container}>
-			<input id={props.id} className={classes.input} type={inputType} placeholder=' ' pattern={props.pattern} />
+			<input id={props.id} className={classes.input} type={checkInputType} placeholder=' ' pattern={props.pattern} />
 			<label htmlFor={props.id} className={classes.input__label}>{props.label}</label>
 			  {props.type === 'password' &&
 				<div className={classes.button__container}>
