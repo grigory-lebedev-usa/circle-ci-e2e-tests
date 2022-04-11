@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import inputTypes from '../../../shared/enums';
+import { inputTypes } from '../../../shared/enums';
 import classes from './MyInput.module.css';
 
 const MyInput = (props) => {
