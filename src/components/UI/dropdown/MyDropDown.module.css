@@ -1,0 +1,114 @@
+:root {
+  --general-color:#000;
+  --bg-color: #fff;
+  --focus-and-hover-color: #00A1E5;
+  --bg-hover-color: #C7F1FF;
+  --error-color: #FC004C;
+}
+
+.dropdown__container {
+  position: relative;
+  width: 200px;
+  height: 40px;
+  border: 1px solid var(--general-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+  z-index: 1;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.dropdown__container:hover {
+  border: 1px solid var(--focus-and-hover-color);
+}
+
+.dropdown__container:hover .dropdown__label_active {
+  color: var(--focus-and-hover-color);
+}
+
+.dropdown__container_active {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.dropdown__container_active:hover {
+  border: 1px solid var(--general-color);
+}
+
+.dropdown__container_active:hover .dropdown__label_active {
+  color: var(--general-color);
+}
+
+.dropdown__label {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  background-color: var(--bg-color);
+  padding: 0px 4px;
+  color: #6A6A6A;
+  font-size: 15px;
+  z-index: 10;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.dropdown__label_active {
+  transform: translate(-4px, -18px);
+  font-size: 13px;
+  color: var(--general-color);
+}
+
+.dropdown__label_text {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  font-size: 15px;
+}
+
+.dropdown__icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 13px;
+  height: 6px;
+  background-image: url(/public/img/arrow_down.svg);
+  background-position: 0 0;
+  background-size: cover;
+}
+
+.dropdown__icon_active {
+  background-image: url(/public/img/arrow_up.svg);
+}
+
+.dropdown__list {
+  position: absolute;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown__item {
+  position: relative;
+  width: 200px;
+  height: 40px;
+  list-style-type: none;
+  background-color: var(--bg-color);
+  border: 1px solid var(--general-color);
+  border-top: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.dropdown__item:hover {
+  background-color: var(--bg-hover-color);
+}
+
+.dropdown__button {
+  display: block;
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  font-size: 15px;
+}
+
