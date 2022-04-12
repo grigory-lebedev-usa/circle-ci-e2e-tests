@@ -1,19 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 import classes from './MyDropDown.module.css';
 
-const MyDropDown = () => {
+const MyDropDown = ({title, items = []}) => {
 
-  const [open, setOpen] = useState(false);
+  const [opened, setOpened] = useState(false);
   const [selected, setSelected] = useState(false);
   const [text, setText] = useState('');
 
   const handleSelect = (e) => {
-    setOpen(false);
+    setOpened(false);
     setSelected(true);
     setText(e.target.textContent);
   }
 
-  const handleToggle = () => setOpen(!open);
+  const handleToggle = () => setOpened(!opened);
 
   const useClickOutside = (handler) => {
     let domNode = useRef();
@@ -33,21 +33,20 @@ const MyDropDown = () => {
   }
 
   return (
-    <div ref={useClickOutside(() => setOpen(false))}>
-      <div className={open ? `${classes.dropdown__container} ${classes.dropdown__container_active}` : classes.dropdown__container} onClick={() => handleToggle(!open)}>
-        <label className={selected ? `${classes.dropdown__label} ${classes.dropdown__label_active}` : classes.dropdown__label}>Role</label>
+    <div ref={useClickOutside(() => setOpened(false))}>
+      <div className={opened ? `${classes.dropdown__container} ${classes.dropdown__container_active}` : classes.dropdown__container} onClick={() => handleToggle(!opened)}>
+        <label className={selected ? `${classes.dropdown__label} ${classes.dropdown__label_active}` : classes.dropdown__label}>{title}</label>
         {selected && <label className={classes.dropdown__label_text}>{text}</label>}
-        <div className={open ? `${classes.dropdown__icon} ${classes.dropdown__icon_active}` : classes.dropdown__icon}></div>
+        <div className={opened ? `${classes.dropdown__icon} ${classes.dropdown__icon_active}` : classes.dropdown__icon}></div>
       </div>
       {
-        open &&
+        opened &&
         <ul className={classes.dropdown__list}>
-          <li className={classes.dropdown__item} onClick={e => handleSelect(e)}>
-            <a className={classes.dropdown__button}>Client</a>
-          </li>
-          <li className={classes.dropdown__item} onClick={e => handleSelect(e)}>
-            <a className={classes.dropdown__button}>Driver</a>
-          </li>
+          {items.map(item => (
+            <li className={classes.dropdown__item} key={item.id} onClick={e => handleSelect(e)}>
+              <a className={classes.dropdown__button}>{item.value}</a>
+            </li>
+          ))}
         </ul>
       }
     </div>

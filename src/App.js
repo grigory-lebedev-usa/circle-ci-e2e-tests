@@ -8,7 +8,7 @@ function App() {
 
   axios.get('https://swapi.dev/api/people')
     .then((res) => console.log(res.data.results))
-    .catch((error) => console.error(error))
+    .catch((error) => console.error(error));
 
   return (
     <div className="App">
@@ -19,7 +19,7 @@ function App() {
         <MyInput id="confpass" type="password" label="Confirm password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" />
         <MyInput id="fname" type="text" label="First name" />
         <MyInput id="lname" type="text" label="Last name" />
-        <MyDropDown />
+        <MyDropDown title="Role" items={[{id: 1, value: 'Client'}, {id: 2, value: 'Driver'}]}/>
       </div>
     </div>
   );
