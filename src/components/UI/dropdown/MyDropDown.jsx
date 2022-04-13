@@ -45,7 +45,7 @@ const MyDropDown = ({title, items = []}) => {
         <ul className={classes.dropdown__list}>
           {items.map(item => (
             <li className={classes.dropdown__item} key={item.id} onClick={e => handleSelect(e)}>
-              <a className={classes.dropdown__button}>{item.value}</a>
+              <span className={classes.dropdown__button}>{item.value}</span>
             </li>
           ))}
         </ul>
