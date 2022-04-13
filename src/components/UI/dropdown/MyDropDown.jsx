@@ -16,6 +16,7 @@ const MyDropDown = ({title, items = []}) => {
   const handleToggle = () => setOpened(!opened);
 
   const useClickOutside = (handler) => {
+    console.log('Hello world');
     let domNode = useRef();
     
     useEffect(() => {
