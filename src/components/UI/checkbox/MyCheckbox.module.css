@@ -1,0 +1,39 @@
+.checkbox__container {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.custom__checkbox {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #000;
+  border-radius: 3px;
+}
+
+.custom__checkbox:focus {
+  border: 1px solid #000;
+}
+
+.custom__checkbox:checked {
+  position: relative;
+  background: none;
+}
+
+.custom__checkbox:checked::after {
+  position: absolute;
+  top: 4px;
+  left: 3px;
+  content: "";
+  width: 0.5rem;
+  height: 0.2rem;
+  border: 4px solid black;
+  border-right: none;
+  border-top: none;
+  transform: rotate(-45deg);
+}
+
+.checkbox__label {
+  margin-left: 10px;
+}
