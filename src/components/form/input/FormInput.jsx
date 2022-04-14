@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { inputTypes } from "../../../shared/enums";
-import classes from "./MyInput.module.css";
+import classes from "./FormInput.module.css";
 
-const MyInput = (props) => {
+const FormInput = (props) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = () => {
@@ -44,4 +44,4 @@ const MyInput = (props) => {
   );
 };
 
-export default MyInput;
+export default FormInput;

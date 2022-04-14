@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import classes from "./MyDropDown.module.css";
+import classes from "./FormDropDown.module.css";
 
-const MyDropDown = ({ title, items = [] }) => {
+const FormDropDown = ({ title, items = [] }) => {
   const [opened, setOpened] = useState(false);
   const [selected, setSelected] = useState(false);
   const [text, setText] = useState("");
@@ -78,4 +78,4 @@ const MyDropDown = ({ title, items = [] }) => {
   );
 };
 
-export default MyDropDown;
+export default FormDropDown;

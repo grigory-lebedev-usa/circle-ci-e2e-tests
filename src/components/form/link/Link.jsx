@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./MyLink.module.css";
+import classes from "./Link.module.css";
 
 const MyLink = (props) => {
   return (

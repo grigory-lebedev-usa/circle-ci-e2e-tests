@@ -1,7 +1,7 @@
 import React from "react";
-import classes from "./MyButton.module.css";
+import classes from "./FormButton.module.css";
 
-const MyButton = (props) => {
+const FormButton = (props) => {
   return (
     <div>
       <button className={classes.button}>{props.label}</button>
@@ -9,4 +9,4 @@ const MyButton = (props) => {
   );
 };
 
-export default MyButton;
+export default FormButton;
