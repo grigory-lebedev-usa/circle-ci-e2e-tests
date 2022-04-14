@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import classes from "./Notification.module.css";
 import { notificationTypes } from "../../shared/enums";
 
-const Notification = ({ text = "", type }) => {
-  const [visible, setVisible] = useState(true);
+const Notification = ({ text = "", type, visible, setVisible}) => {
   setTimeout(() => setVisible(false), 8000);
   return (
     <div

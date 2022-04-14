@@ -17,7 +17,6 @@ function App() {
 
   return (
     <div className="App">
-    <Notification text="good job" type="success"/>
       <div>
         <h1>Hello React!</h1>
         <FormInput
