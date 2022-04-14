@@ -6,7 +6,6 @@ import FormDropDown from "./components/form/dropdown/FormDropDown";
 import FormCheckbox from "./components/form/checkbox/FormCheckbox";
 import Link from "./components/link/Link";
 import FormButton from "./components/form/button/FormButton";
-import Notification from "./components/notification/Notification";
 
 function App() {
   
