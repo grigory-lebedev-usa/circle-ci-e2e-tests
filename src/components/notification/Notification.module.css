@@ -1,0 +1,67 @@
+:root {
+  --success-color: #00CB82;
+  --warning-color: #E1CB00;
+  --error-color: #CF6402;
+}
+
+.notification__container {
+  display: none;
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  width: 300px;
+  min-height: 50px;
+  border-radius: 5px;
+  text-align: left;
+  padding: 10px 35px 10px 15px;
+  box-sizing: border-box;
+  animation-name: notification;
+  animation-duration: 10s;
+  transition: 0.2s ease;
+}
+
+.notification__container_visible {
+  display: inline;
+}
+
+.notification__container_visible:hover {
+  animation: none;
+}
+
+.notification__container_success {
+  background-color: var(--success-color);
+}
+
+.notification__container_warning {
+  background-color: var(--warning-color)
+}
+
+.notification__container_error {
+  background-color: var(--error-color);
+}
+
+.notification__text {
+  color: #fff;
+  font-size: 15px;
+  margin: 0;
+}
+
+.notification__close {
+  position: absolute;
+  top: 12px;
+  right: 8px;
+  background: none;
+  border: none;
+  width: 15px;
+  height: 15px;
+  background-image: url(/public/img/close_icon.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+}
+
+@keyframes notification {
+  to {
+    opacity: 0;
+  }
+}

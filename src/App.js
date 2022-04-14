@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
 import FormInput from "./components/form/input/FormInput";
@@ -6,8 +6,10 @@ import FormDropDown from "./components/form/dropdown/FormDropDown";
 import FormCheckbox from "./components/form/checkbox/FormCheckbox";
 import Link from "./components/form/link/Link";
 import FormButton from "./components/form/button/FormButton";
+import Notification from "./components/notification/Notification";
 
 function App() {
+  
   axios
     .get("https://swapi.dev/api/people")
     .then((res) => console.log(res.data.results))
@@ -15,6 +17,7 @@ function App() {
 
   return (
     <div className="App">
+    <Notification text="good job" type="success"/>
       <div>
         <h1>Hello React!</h1>
         <FormInput
@@ -46,7 +49,7 @@ function App() {
         />
         <FormCheckbox label="Keep me logged in" />
         <Link label="Forgot password?" />
-        <FormButton label="Button" />
+        <FormButton label="Button"/>
       </div>
     </div>
   );
