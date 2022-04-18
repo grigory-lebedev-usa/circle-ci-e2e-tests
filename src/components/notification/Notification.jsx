@@ -1,26 +1,47 @@
-import React from "react";
+import React, { useCallback, useEffect} from "react";
 import classes from "./Notification.module.css";
 import { notificationTypes } from "../../shared/enums";
 
-const Notification = ({ text = "", type, visible, setVisible}) => {
-  setTimeout(() => setVisible(false), 8000);
-  return (
-    <div
-      className={
-        visible && type === notificationTypes.success
-          ? `${classes.notification__container} ${classes.notification__container_success} ${classes.notification__container_visible}`
-          : visible && type === notificationTypes.warning
-          ? `${classes.notification__container} ${classes.notification__container_warning} ${classes.notification__container_visible}`
-          : visible && type === notificationTypes.error
-          ? `${classes.notification__container} ${classes.notification__container_error} ${classes.notification__container_visible}`
-          : classes.notification__container
+const Notification = ({ list, setList}) => {
+
+  const deleteNotification = useCallback(id => {
+    const NotificationItem = list.filter(e => e.id !== id);
+    setList(NotificationItem);
+  }, [list, setList]);
+
+  useEffect(() => {
+    if (list.length > 4) {
+      deleteNotification(list[0].id);
+    }
+    const timeout = setTimeout(() => {
+      if(list.length) {
+        deleteNotification(list[0].id);
       }
-    >
-      <p className={classes.notification__text}>{text}</p>
-      <button
-        className={classes.notification__close}
-        onClick={() => setVisible(false)}
-      ></button>
+    }, 8000);
+    return () => {
+      clearTimeout(timeout);
+    }
+  }, [list, deleteNotification]);
+
+  return (
+    <div className={classes.notification__container}>
+      {
+        list.map((notification, i) => (
+          <div key={i} className={notification.type === notificationTypes.success
+            ? `${classes.notification} ${classes.notification__success}`
+            : notification.type === notificationTypes.warning
+            ? `${classes.notification} ${classes.notification__warning}`
+            : notification.type === notificationTypes.error
+            ? `${classes.notification} ${classes.notification__error}`
+            : classes.notification}>
+              <p className={classes.notification__text}>{notification.text}</p>
+              <button
+                className={classes.notification__close}
+                onClick={() => deleteNotification(notification.id)}
+              ></button>
+          </div>
+        ))
+      }
     </div>
   );
 };

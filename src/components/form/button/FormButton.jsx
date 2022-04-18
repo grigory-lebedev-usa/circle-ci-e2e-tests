@@ -1,13 +1,10 @@
-import React, { useState } from "react";
-import Notification from "../../notification/Notification";
+import React from "react";
 import classes from "./FormButton.module.css";
 
-const FormButton = (props) => {
-  const [visible, setVisible] = useState(false)
+const FormButton = ({children, ...props}) => {
   return (
     <div>
-      <Notification text="good job" type="success" visible={visible} setVisible={setVisible}/>
-      <button className={classes.button} onClick={() => setVisible(true)}>{props.label}</button>
+      <button {...props} className={classes.button}>{children}</button>
     </div>
   );
 };
