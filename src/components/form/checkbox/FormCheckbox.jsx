@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import classes from "./MyCheckbox.module.css";
+import classes from "./FormCheckbox.module.css";
 
-const MyCheckbox = (props) => {
+const FormCheckbox = (props) => {
   const [clicked, setClicked] = useState(false);
   return (
     <div
@@ -24,4 +24,4 @@ const MyCheckbox = (props) => {
   );
 };
 
-export default MyCheckbox;
+export default FormCheckbox;
