@@ -6,6 +6,7 @@ import FormDropDown from "./components/form/dropdown/FormDropDown";
 import FormCheckbox from "./components/form/checkbox/FormCheckbox";
 import Link from "./components/link/Link";
 import FormButton from "./components/form/button/FormButton";
+import ProgressSpinner from './components/spinner/ProgressSpinner';
 
 function App() {
   axios
@@ -15,6 +16,7 @@ function App() {
 
   return (
     <div className="App">
+      <ProgressSpinner />
       <div>
         <h1>Hello React!</h1>
         <FormInput
