@@ -6,6 +6,7 @@ import FormDropDown from "./components/form/dropdown/FormDropDown";
 import FormCheckbox from "./components/form/checkbox/FormCheckbox";
 import Link from "./components/link/Link";
 import FormButton from "./components/form/button/FormButton";
+import DropDown from "./components/dropdown/DropDown";
 
 function App() {
   axios
@@ -47,6 +48,7 @@ function App() {
         <FormCheckbox label="Keep me logged in" />
         <Link label="Forgot password?" />
         <FormButton label="Button" />
+        <DropDown items={[{id: 1, value: "English"},{id: 2, value: "Russian"}, {id: 3, value: "German"}]} />
       </div>
     </div>
   );
