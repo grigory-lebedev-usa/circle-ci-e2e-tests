@@ -6,6 +6,7 @@ import FormDropDown from "./components/form/dropdown/FormDropDown";
 import FormCheckbox from "./components/form/checkbox/FormCheckbox";
 import Link from "./components/link/Link";
 import FormButton from "./components/form/button/FormButton";
+import Hint from "./components/hint/Hint";
 
 function App() {
   axios
@@ -47,6 +48,8 @@ function App() {
         <FormCheckbox label="Keep me logged in" />
         <Link label="Forgot password?" />
         <FormButton label="Button" />
+
+        <Hint content="User is blocked until 30.06.2022">User is blocked</Hint>
       </div>
     </div>
   );
