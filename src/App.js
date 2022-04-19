@@ -1,17 +1,19 @@
-import React, { useState } from "react";
-import axios from "axios";
-import "./App.css";
-import FormInput from "./components/form/input/FormInput";
-import FormDropDown from "./components/form/dropdown/FormDropDown";
-import FormCheckbox from "./components/form/checkbox/FormCheckbox";
-import Link from "./components/link/Link";
-import ProgressSpinner from './components/spinner/ProgressSpinner';
-import DropDown from "./components/dropdown/DropDown";
+import React, { useState } from 'react';
 
+import axios from 'axios';
+
+import './App.css';
+import FormInput from './components/form/input/FormInput';
+import FormDropDown from './components/form/dropdown/FormDropDown';
+import FormCheckbox from './components/form/checkbox/FormCheckbox';
+import Link from './components/link/Link';
+import ProgressSpinner from './components/spinner/ProgressSpinner';
+import DropDown from './components/dropdown/DropDown';
+import FormButton from './components/form/button/FormButton';
 
 function App() {
   axios
-    .get("https://swapi.dev/api/people")
+    .get('https://swapi.dev/api/people')
     .then((res) => console.log(res.data.results))
     .catch((error) => console.error(error));
 
@@ -26,42 +28,42 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className='App'>
       <ProgressSpinner active={visibilitySpinner}/>
       <div>
         <h1>Hello React!</h1>
         <FormInput
-          id="email"
-          type="email"
-          label="Email"
-          pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$"
+          id='email'
+          type='email'
+          label='Email'
+          pattern='[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$'
         />
         <FormInput
-          id="pass"
-          type="password"
-          label="Password"
-          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
+          id='pass'
+          type='password'
+          label='Password'
+          pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$'
         />
         <FormInput
-          id="confpass"
-          type="password"
-          label="Confirm password"
-          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
+          id='confpass'
+          type='password'
+          label='Confirm password'
+          pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$'
         />
-        <FormInput id="fname" type="text" label="First name" />
-        <FormInput id="lname" type="text" label="Last name" />
+        <FormInput id='fname' type='text' label='First name' />
+        <FormInput id='lname' type='text' label='Last name' />
         <FormDropDown
-          title="Role"
+          title='Role'
           items={[
-            { id: 1, value: "Client" },
-            { id: 2, value: "Driver" },
+            { id: 1, value: 'Client' },
+            { id: 2, value: 'Driver' },
           ]}
         />
-        <FormCheckbox label="Keep me logged in" />
-        <Link label="Forgot password?" />
+        <FormCheckbox label='Keep me logged in' />
+        <Link label='Forgot password?' />
         <FormButton>Button</FormButton>
         <FormButton onClick={() => showSpinner()} >Show Spinner</FormButton>
-        <DropDown items={[{id: 1, value: "English"},{id: 2, value: "Russian"}, {id: 3, value: "German"}]} />
+        <DropDown items={[{id: 1, value: 'English'},{id: 2, value: 'Russian'}, {id: 3, value: 'German'}]} />
       </div>
     </div>
   );
