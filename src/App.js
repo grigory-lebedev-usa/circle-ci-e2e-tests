@@ -16,7 +16,7 @@ function App() {
 
   return (
     <div className="App">
-      <ProgressSpinner />
+      <ProgressSpinner onActive={true} time={3000}/>
       <div>
         <h1>Hello React!</h1>
         <FormInput
