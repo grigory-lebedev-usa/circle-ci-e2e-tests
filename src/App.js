@@ -9,6 +9,7 @@ import FormCheckbox from './components/form/checkbox/FormCheckbox';
 import Link from './components/link/Link';
 import ProgressSpinner from './components/spinner/ProgressSpinner';
 import DropDown from './components/dropdown/DropDown';
+import Hint from './components/hint/Hint';
 import FormButton from './components/form/button/FormButton';
 
 function App() {
@@ -59,10 +60,11 @@ function App() {
             { id: 2, value: 'Driver' },
           ]}
         />
-        <FormCheckbox label='Keep me logged in' />
-        <Link label='Forgot password?' />
+        <FormCheckbox label="Keep me logged in" />
+        <Link label="Forgot password?" />
         <FormButton>Button</FormButton>
         <FormButton onClick={() => showSpinner()} >Show Spinner</FormButton>
+        <Hint content="User is blocked until 30.06.2022">User</Hint>
         <DropDown items={[{id: 1, value: 'English'},{id: 2, value: 'Russian'}, {id: 3, value: 'German'}]} />
       </div>
     </div>
