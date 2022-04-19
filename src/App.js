@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
 import FormInput from "./components/form/input/FormInput";
@@ -14,9 +14,19 @@ function App() {
     .then((res) => console.log(res.data.results))
     .catch((error) => console.error(error));
 
+  const [visibilitySpinner, setVisibilitySpinner] = useState(false);
+
+  const showSpinner = () => {
+    setVisibilitySpinner(true);
+    
+    setTimeout(() => {
+      setVisibilitySpinner(false)
+    }, 3000)
+  }
+
   return (
     <div className="App">
-      <ProgressSpinner onActive={true} time={3000}/>
+      <ProgressSpinner active={visibilitySpinner}/>
       <div>
         <h1>Hello React!</h1>
         <FormInput
@@ -48,7 +58,8 @@ function App() {
         />
         <FormCheckbox label="Keep me logged in" />
         <Link label="Forgot password?" />
-        <FormButton label="Button" />
+        <FormButton>Button</FormButton>
+        <FormButton onClick={() => showSpinner()} >Show Spinner</FormButton>
       </div>
     </div>
   );
