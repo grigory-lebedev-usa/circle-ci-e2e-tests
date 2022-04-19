@@ -6,11 +6,8 @@ import FormDropDown from "./components/form/dropdown/FormDropDown";
 import FormCheckbox from "./components/form/checkbox/FormCheckbox";
 import Link from "./components/link/Link";
 import FormButton from "./components/form/button/FormButton";
-<<<<<<< HEAD
 import Hint from "./components/hint/Hint";
-=======
 import DropDown from "./components/dropdown/DropDown";
->>>>>>> develop
 
 function App() {
   axios
