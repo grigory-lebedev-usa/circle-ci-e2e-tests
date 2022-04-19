@@ -16,9 +16,6 @@
   position: relative;
 }
 
-.hint__content_visible {
-  visibility: visible;
-}
 
 .hint__content::after {
   content: " ";
@@ -29,4 +26,8 @@
   border-right: 8px solid transparent;
   border-left: 8px solid transparent;
   border-bottom: 8px solid #3E3436;
+}
+
+.hint__container:hover .hint__content{
+  visibility: visible;
 }

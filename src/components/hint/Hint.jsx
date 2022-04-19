@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import classes from './Hint.module.css';
 
 const Hint = ({children, content}) => {
-  
-  const [visible, setVisible] = useState(false);
-
   return (
-    <div className={classes.hint__container} onMouseEnter={() => setVisible(true)} onMouseLeave={() => setVisible(false)}>
+    <div className={classes.hint__container}>
       {children}
-      <div className={visible ? `${classes.hint__content} ${classes.hint__content_visible}` : classes.hint__content}>{content}</div>
+      <div className={classes.hint__content}>{content}</div>
     </div>
   );
 };
