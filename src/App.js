@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
 import FormInput from "./components/form/input/FormInput";
 import FormDropDown from "./components/form/dropdown/FormDropDown";
 import FormCheckbox from "./components/form/checkbox/FormCheckbox";
 import Link from "./components/link/Link";
-import FormButton from "./components/form/button/FormButton";
+import ProgressSpinner from './components/spinner/ProgressSpinner';
 import DropDown from "./components/dropdown/DropDown";
+
 
 function App() {
   axios
@@ -14,8 +15,19 @@ function App() {
     .then((res) => console.log(res.data.results))
     .catch((error) => console.error(error));
 
+  const [visibilitySpinner, setVisibilitySpinner] = useState(false);
+
+  const showSpinner = () => {
+    setVisibilitySpinner(true);
+    
+    setTimeout(() => {
+      setVisibilitySpinner(false)
+    }, 3000)
+  }
+
   return (
     <div className="App">
+      <ProgressSpinner active={visibilitySpinner}/>
       <div>
         <h1>Hello React!</h1>
         <FormInput
@@ -47,7 +59,8 @@ function App() {
         />
         <FormCheckbox label="Keep me logged in" />
         <Link label="Forgot password?" />
-        <FormButton label="Button" />
+        <FormButton>Button</FormButton>
+        <FormButton onClick={() => showSpinner()} >Show Spinner</FormButton>
         <DropDown items={[{id: 1, value: "English"},{id: 2, value: "Russian"}, {id: 3, value: "German"}]} />
       </div>
     </div>
