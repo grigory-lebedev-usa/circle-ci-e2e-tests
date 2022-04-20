@@ -1,0 +1,67 @@
+:root {
+  --general-color:#000;
+  --focus-and-hover-color: #00A1E5;
+  --error-color: #FC004C;
+}
+
+.textarea__container {
+  margin-top: 20px;
+  position: relative;
+  width: 250px;
+  height: 80px;
+}
+
+.textarea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 15px;
+  border: 1px solid var(--general-color);
+  border-radius: 4px;
+  outline: none;
+  padding: 12px 10px;
+  box-sizing: border-box;
+  resize: none;
+  background: none;
+  z-index: 1;
+  transition: all 0.2s ease;
+}
+
+.textarea__label {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  background-color: #FFF;
+  padding: 0px 4px;
+  color: #6A6A6A;
+  font-size: 15px;
+  z-index: 10;
+  transition: all 0.2s ease-in-out;
+}
+
+
+.textarea:focus + .textarea__label {
+  transform: translate(-4px, -18px);
+  font-size: 13px;
+  color: var(--focus-and-hover-color);
+}
+
+.textarea:not(:placeholder-shown).textarea:not(:focus) + .textarea__label {
+  transform: translate(-4px, -18px);
+  font-size: 13px;
+  color: var(--general-color);
+}
+
+.textarea:focus {
+  border: 1px solid var(--focus-and-hover-color);
+}
+
+.textarea:hover {
+  border: 1px solid var(--focus-and-hover-color);
+}
+
+.textarea:not(:placeholder-shown).textarea:hover + .textarea__label {
+  color: var(--focus-and-hover-color);
+}
