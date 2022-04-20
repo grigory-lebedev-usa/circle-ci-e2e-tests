@@ -1,0 +1,38 @@
+.modal__container {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	display: none;
+	background: rgba(0, 0, 0, 0.3);
+	z-index: 1000;
+}
+
+.modal__container_active {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal__content {
+	position: relative;
+	background: #FFF;
+	min-width: 550px;
+	min-height: 135px;
+	border-radius: 4px;
+	box-shadow: 0px 2px 50px #000;
+}
+
+.modal__close {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	border: 0;
+	width: 20px;
+	height: 20px;
+	background-color: #FFF;
+	background-image: url(/public/img/modal_close.svg);
+	background-size: cover;
+	cursor: pointer;
+}

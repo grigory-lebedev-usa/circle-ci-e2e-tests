@@ -11,6 +11,7 @@ import ProgressSpinner from './components/spinner/ProgressSpinner';
 import DropDown from './components/dropdown/DropDown';
 import Hint from './components/hint/Hint';
 import FormButton from './components/form/button/FormButton';
+import Modal from './components/modal/Modal';
 
 function App() {
   axios
@@ -19,6 +20,7 @@ function App() {
     .catch((error) => console.error(error));
 
   const [visibilitySpinner, setVisibilitySpinner] = useState(false);
+  const [openedModal, setOpenedModal] = useState(false);
 
   const showSpinner = () => {
     setVisibilitySpinner(true);
@@ -31,6 +33,9 @@ function App() {
   return (
     <div className='App'>
       <ProgressSpinner active={visibilitySpinner}/>
+      <Modal visible={openedModal} setVisible={setOpenedModal}>
+        <h1>Hello!</h1>
+      </Modal>
       <div>
         <h1>Hello React!</h1>
         <FormInput
@@ -63,6 +68,7 @@ function App() {
         <FormCheckbox label="Keep me logged in" />
         <Link label="Forgot password?" />
         <FormButton>Button</FormButton>
+        <FormButton onClick={() => setOpenedModal(true)}>Open modal</FormButton>
         <FormButton onClick={() => showSpinner()} >Show Spinner</FormButton>
         <Hint content="User is blocked until 30.06.2022">User</Hint>
         <DropDown items={[{id: 1, value: 'English'},{id: 2, value: 'Russian'}, {id: 3, value: 'German'}]} />
