@@ -18,8 +18,12 @@
   text-align: left;
   padding: 10px 35px 10px 15px;
   margin-top: 15px;
-  animation: notification-in-right 0.7s; 
+  animation: notification-in-right 0.7s, notification-close 8s;
   transition: 0.3s ease;
+}
+
+.notification_closed {
+  animation: notification-close 3s;
 }
 
 .notification__success {
@@ -60,5 +64,14 @@
   }
   to {
     transform: translateX(0);
+  }
+}
+
+@keyframes notification-close {
+  70% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }

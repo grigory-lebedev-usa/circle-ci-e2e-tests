@@ -1,47 +1,33 @@
-import React, { useCallback, useEffect} from "react";
-import classes from "./Notification.module.css";
-import { notificationTypes } from "../../shared/enums";
+import React, { useEffect } from 'react';
 
-const Notification = ({ list, setList}) => {
+import classes from './Notification.module.css';
+import { notificationTypes } from '../../shared/enums';
 
-  const deleteNotification = useCallback(id => {
-    const NotificationItem = list.filter(e => e.id !== id);
-    setList(NotificationItem);
-  }, [list, setList]);
+const Notification = ({notification, onDelete}) => {
+
+  const notificationStyled = {
+    [notificationTypes.success]: classes.notification__success,
+    [notificationTypes.warning]: classes.notification__warning,
+    [notificationTypes.error]: classes.notification__error,
+  }
 
   useEffect(() => {
-    if (list.length > 4) {
-      deleteNotification(list[0].id);
-    }
-    const timeout = setTimeout(() => {
-      if(list.length) {
-        deleteNotification(list[0].id);
-      }
+    const timeoutId = setTimeout(() => {
+      onDelete(notification.id)
     }, 8000);
+
     return () => {
-      clearTimeout(timeout);
+      clearTimeout(timeoutId);
     }
-  }, [list, deleteNotification]);
+  }, [notification, onDelete])
 
   return (
-    <div className={classes.notification__container}>
-      {
-        list.map((notification, i) => (
-          <div key={i} className={notification.type === notificationTypes.success
-            ? `${classes.notification} ${classes.notification__success}`
-            : notification.type === notificationTypes.warning
-            ? `${classes.notification} ${classes.notification__warning}`
-            : notification.type === notificationTypes.error
-            ? `${classes.notification} ${classes.notification__error}`
-            : classes.notification}>
-              <p className={classes.notification__text}>{notification.text}</p>
-              <button
-                className={classes.notification__close}
-                onClick={() => deleteNotification(notification.id)}
-              ></button>
-          </div>
-        ))
-      }
+    <div className={`${classes.notification} ${notificationStyled[notification.type]}`}>
+        <p className={classes.notification__text}>{notification.text}</p>
+        <button 
+          className={classes.notification__close}
+          onClick={() => {onDelete(notification.id)}}
+        ></button>
     </div>
   );
 };
