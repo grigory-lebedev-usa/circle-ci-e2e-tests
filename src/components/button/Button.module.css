@@ -1,0 +1,51 @@
+:root {
+  --accept-color: #5DCE7C;
+  --cancel-color: #CE6A5D;
+  --disabled-color: #AEAEAE;
+  --general-color: #C4A267;
+  --dark-color: #494357;
+}
+
+
+.button__container {
+  margin-top: 10px;
+}
+
+.button {
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  width: 65px;
+  height: 30px;
+  background-color: #5DCE7C;
+  border-radius: 25px;
+  text-align: center;
+  transition: 0.2s ease;
+}
+
+.button:active {
+  transform: translateY(3px);
+}
+
+.button__big {
+  width: 140px;
+  height: 50px;
+}
+
+.button__medium {
+  width: 125px;
+  height: 30px;
+}
+
+.button__small {
+  width: 85px;
+  height: 35px;
+}
+
+.button__extra_small {
+  width: 65px;
+  height: 30px;
+}
+
+
+
