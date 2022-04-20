@@ -10,6 +10,7 @@ import FormCheckbox from './components/form/checkbox/FormCheckbox';
 import Link from './components/link/Link';
 import ProgressSpinner from './components/spinner/ProgressSpinner';
 import DropDown from './components/dropdown/DropDown';
+import Hint from './components/hint/Hint';
 import FormButton from './components/form/button/FormButton';
 import { MAX_NOTIFICATION_NUMBER } from './shared/constans';
 import { notificationTypes } from './shared/enums';
@@ -88,8 +89,8 @@ function App() {
         <FormButton>Button</FormButton>
         <FormButton onClick={() => showSpinner()} >Show Spinner</FormButton>
         <FormButton style={{backgroundColor: '#00CB82'}} onClick={() => showNotification('Everything went successfully', notificationTypes.success)}>Success</FormButton>
-        <FormButton style={{backgroundColor: '#E1CB00'}} onClick={() => showNotification('Everything went warning', notificationTypes.warning)}>Warning</FormButton>
-        <FormButton style={{backgroundColor: '#CF6402'}} onClick={() => showNotification('Everything went Error', notificationTypes.error)}>Error</FormButton>
+        <FormButton style={{backgroundColor: '#E1CB00'}} onClick={() => showNotification('Warning', notificationTypes.warning)}>Warning</FormButton>
+        <FormButton style={{backgroundColor: '#CF6402'}} onClick={() => showNotification('Error', notificationTypes.error)}>Error</FormButton>
         <DropDown items={[{id: 1, value: 'English'},{id: 2, value: 'Russian'}, {id: 3, value: 'German'}]} />
       </div>
     </div>
