@@ -92,6 +92,7 @@ function App() {
         <FormButton style={{backgroundColor: '#E1CB00'}} onClick={() => showNotification('Warning', notificationTypes.warning)}>Warning</FormButton>
         <FormButton style={{backgroundColor: '#CF6402'}} onClick={() => showNotification('Error', notificationTypes.error)}>Error</FormButton>
         <DropDown items={[{id: 1, value: 'English'},{id: 2, value: 'Russian'}, {id: 3, value: 'German'}]} />
+        <Hint content='User is blocked 30.12.2022'>User</Hint>
       </div>
     </div>
   );

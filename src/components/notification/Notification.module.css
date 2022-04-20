@@ -18,7 +18,7 @@
   text-align: left;
   padding: 10px 35px 10px 15px;
   margin-top: 15px;
-  animation: notification-in-right 0.7s, notification-close 8s;
+  animation: notification-in-right 0.7s, notification-close 8.5s;
   transition: 0.3s ease;
 }
 
