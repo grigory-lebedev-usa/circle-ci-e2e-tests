@@ -6,9 +6,7 @@ import classes from './Notification.module.css';
 const Notifications = ({notifications, onDelete}) => {
   return (
     <div className={classes.notification__container}>
-      { 
-        notifications.map((notification) => <Notification key={notification.id} notification={notification} onDelete={onDelete}/>)
-      }
+      {notifications.map((notification) => <Notification key={notification.id} notification={notification} onDelete={onDelete}/>)}
     </div>
   );
 };

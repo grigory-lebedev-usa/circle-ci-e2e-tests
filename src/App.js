@@ -12,7 +12,7 @@ import ProgressSpinner from './components/spinner/ProgressSpinner';
 import DropDown from './components/dropdown/DropDown';
 import Hint from './components/hint/Hint';
 import FormButton from './components/form/button/FormButton';
-import { MAX_NOTIFICATION_NUMBER } from './shared/constans';
+import { MAX_NOTIFICATION_NUMBER } from './components/notification/constans';
 import { notificationTypes } from './shared/enums';
 import Notifications from './components/notification/Notifications';
 
@@ -27,20 +27,21 @@ function App() {
   const [notifications, setNotifications] = useState([]);
   const notificationsRef = useRef(null);
 
+  notificationsRef.current = notifications;
+
   const showNotification = (text, type) => {
     if (notifications.length === MAX_NOTIFICATION_NUMBER) {
       notifications.shift()
     }
 
-     notifications.push({text:text, type:type, id:uniqid()})
+     notifications.push({text:text, type:type, id:uniqid()});
 
     setNotifications([...notifications]);
   }
-  
-  notificationsRef.current = notifications;
 
   const deleteNotification = useCallback((id) => {
     setNotifications(notificationsRef.current.filter(notification => notification.id !== id));
+    console.log(notificationsRef.current);
   }, [])
 
   const showSpinner = () => {

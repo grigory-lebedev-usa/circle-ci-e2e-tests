@@ -1,8 +1,4 @@
-:root {
-  --success-color: #00CB82;
-  --warning-color: #E1CB00;
-  --error-color: #CF6402;
-}
+@import url(/src/styles/colors.css);
 
 .notification__container {
   position: fixed;
@@ -23,11 +19,11 @@
 }
 
 .notification_closed {
-  animation: notification-close 3s;
+  animation: notification-clicked-close 0.5s;
 }
 
 .notification__success {
-  background-color: var(--success-color);
+  background-color: var(--success-color)
 }
 
 .notification__warning {
@@ -46,16 +42,19 @@
 
 .notification__close {
   position: absolute;
-  top: 12px;
-  right: 8px;
+  top: 0px;
+  right: 4px;
   background: none;
   border: none;
-  width: 15px;
-  height: 15px;
-  background-image: url(/public/img/close_icon.svg);
-  background-repeat: no-repeat;
-  background-size: cover;
   cursor: pointer;
+  color: rgba(255, 255, 255, 0.85);
+  transform: rotate(45deg);
+  font-size: 35px;
+  transition: all 0.3s ease;
+}
+
+.notification__close:hover {
+  color: #fff;
 }
 
 @keyframes notification-in-right {
@@ -72,6 +71,13 @@
     opacity: 1;
   }
   to {
+    opacity: 0;
+  }
+}
+
+@keyframes notification-clicked-close {
+  to {
+    transform: translateY(3px);
     opacity: 0;
   }
 }

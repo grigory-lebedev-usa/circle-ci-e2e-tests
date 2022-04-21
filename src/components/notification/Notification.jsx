@@ -1,33 +1,46 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import classes from './Notification.module.css';
 import { notificationTypes } from '../../shared/enums';
 
+const notificationClasses = {
+  [notificationTypes.success]: classes.notification__success,
+  [notificationTypes.warning]: classes.notification__warning,
+  [notificationTypes.error]: classes.notification__error,
+}
+
 const Notification = ({notification, onDelete}) => {
 
-  const notificationStyled = {
-    [notificationTypes.success]: classes.notification__success,
-    [notificationTypes.warning]: classes.notification__warning,
-    [notificationTypes.error]: classes.notification__error,
-  }
+  const [isClickedClose, setIsClickedClose] = useState(false);
+  const timeoutIdRef = useRef(null);
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      onDelete(notification.id)
+    timeoutIdRef.current = setTimeout(() => {
+      onDelete(notification.id);
+      console.log('started')
     }, 8000);
 
     return () => {
-      clearTimeout(timeoutId);
+      console.log('clear');
+      clearTimeout(timeoutIdRef.current);
     }
-  }, [notification, onDelete])
+  }, [notification, onDelete]);
+
+  const handleClose = (id) => {
+    setIsClickedClose(true)
+    setTimeout(() => {
+      clearTimeout(timeoutIdRef.current)
+      onDelete(id);
+    }, 400)
+  }
 
   return (
-    <div className={`${classes.notification} ${notificationStyled[notification.type]}`}>
+    <div className={`${classes.notification} ${notificationClasses[notification.type]} ${isClickedClose ? classes.notification_closed : ''}`}>
         <p className={classes.notification__text}>{notification.text}</p>
         <button 
           className={classes.notification__close}
-          onClick={() => {onDelete(notification.id)}}
-        ></button>
+          onClick={() => handleClose(notification.id)}
+        >+</button>
     </div>
   );
 };
