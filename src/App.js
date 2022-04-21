@@ -12,6 +12,7 @@ import DropDown from './components/dropdown/DropDown';
 import Hint from './components/hint/Hint';
 import FormButton from './components/form/button/FormButton';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Button from './components/button/Button';
 import { buttonColors, buttonSizes } from './shared/enums';
 =======
@@ -20,9 +21,20 @@ import { MAX_NOTIFICATION_NUMBER } from './components/notification/constans';
 import { notificationTypes } from './shared/enums';
 import Notifications from './components/notification/Notifications';
 >>>>>>> develop
+=======
+import Button from './components/button/Button';
+import { buttonColors, buttonSizes } from './shared/enums';
+import { MAX_NOTIFICATION_NUMBER } from './components/notification/constans';
+import { notificationTypes } from './shared/enums';
+import Notifications from './components/notification/Notifications';
+>>>>>>> 510d05c5fb18445253cabfa58a63ef22b5ddc457
 
+
+<<<<<<< HEAD
+=======
 function App() {
 
+>>>>>>> 510d05c5fb18445253cabfa58a63ef22b5ddc457
   const [visibilitySpinner, setVisibilitySpinner] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const notificationsRef = useRef([]);
@@ -96,6 +108,10 @@ function App() {
         <Button size={buttonSizes.small} color={buttonColors.accept}>Accept</Button>
         <Button size={buttonSizes.small} color={buttonColors.cancel}>Cancel</Button>
         <Button size={buttonSizes.extraSmall} color={buttonColors.primary}>Car</Button>
+<<<<<<< HEAD
+=======
+        <Hint content='User is blocked 30.12.2022'>User</Hint>
+>>>>>>> 510d05c5fb18445253cabfa58a63ef22b5ddc457
       </div>
     </div>
   );
