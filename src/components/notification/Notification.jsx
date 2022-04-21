@@ -17,11 +17,9 @@ const Notification = ({notification, onDelete}) => {
   useEffect(() => {
     timeoutIdRef.current = setTimeout(() => {
       onDelete(notification.id);
-      console.log('started')
     }, 8000);
 
     return () => {
-      console.log('clear');
       clearTimeout(timeoutIdRef.current);
     }
   }, [notification, onDelete]);

@@ -31,20 +31,17 @@ function App() {
     if (notifications.length === MAX_NOTIFICATION_NUMBER) {
       notificationsRef.current.shift()
     }
-
-     notificationsRef.current.push({text:text, type:type, id:uniqid()});
+    notificationsRef.current.push({text:text, type:type, id:uniqid()});
     setNotifications([...notificationsRef.current]);
   }
 
   const deleteNotification = useCallback((id) => {
     notificationsRef.current = notificationsRef.current.filter(notification => notification.id !== id);
     setNotifications(notificationsRef.current);
-    console.log(notificationsRef.current);
   }, [])
 
   const showSpinner = () => {
     setVisibilitySpinner(true);
-    
     setTimeout(() => {
       setVisibilitySpinner(false)
     }, 3000)
