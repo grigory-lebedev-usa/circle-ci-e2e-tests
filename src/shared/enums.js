@@ -4,10 +4,7 @@ export const inputTypes = {
   checkbox: 'checkbox',
   submit: 'submit',
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> 510d05c5fb18445253cabfa58a63ef22b5ddc457
 export const buttonSizes = {
   big: 'big',
   medium: 'medium',
