@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 
-import axios from 'axios';
+import uniqid from 'uniqid';
 
 import './App.css';
 import FormInput from './components/form/input/FormInput';
@@ -13,18 +13,32 @@ import Hint from './components/hint/Hint';
 import FormButton from './components/form/button/FormButton';
 import Button from './components/button/Button';
 import { buttonColors, buttonSizes } from './shared/enums';
+import { MAX_NOTIFICATION_NUMBER } from './components/notification/constans';
+import { notificationTypes } from './shared/enums';
+import Notifications from './components/notification/Notifications';
+
 
 function App() {
-  axios
-    .get('https://swapi.dev/api/people')
-    .then((res) => console.log(res.data.results))
-    .catch((error) => console.error(error));
 
   const [visibilitySpinner, setVisibilitySpinner] = useState(false);
+  const [notifications, setNotifications] = useState([]);
+  const notificationsRef = useRef([]);
+
+  const showNotification = (text, type) => {
+    if (notifications.length === MAX_NOTIFICATION_NUMBER) {
+      notificationsRef.current.shift()
+    }
+    notificationsRef.current.push({text:text, type:type, id:uniqid()});
+    setNotifications([...notificationsRef.current]);
+  }
+
+  const deleteNotification = useCallback((id) => {
+    notificationsRef.current = notificationsRef.current.filter(notification => notification.id !== id);
+    setNotifications(notificationsRef.current);
+  }, [])
 
   const showSpinner = () => {
     setVisibilitySpinner(true);
-    
     setTimeout(() => {
       setVisibilitySpinner(false)
     }, 3000)
@@ -32,6 +46,7 @@ function App() {
 
   return (
     <div className='App'>
+      <Notifications notifications={notifications} onDelete={deleteNotification}/>
       <ProgressSpinner active={visibilitySpinner}/>
       <div>
         <h1>Hello React!</h1>
@@ -66,13 +81,16 @@ function App() {
         <Link label="Forgot password?" />
         <FormButton>Button</FormButton>
         <FormButton onClick={() => showSpinner()} >Show Spinner</FormButton>
-        <Hint content="User is blocked until 30.06.2022">User</Hint>
+        <FormButton style={{backgroundColor: '#00CB82'}} onClick={() => showNotification('Everything went successfully', notificationTypes.success)}>Success</FormButton>
+        <FormButton style={{backgroundColor: '#E1CB00'}} onClick={() => showNotification('Warning', notificationTypes.warning)}>Warning</FormButton>
+        <FormButton style={{backgroundColor: '#CF6402'}} onClick={() => showNotification('Error', notificationTypes.error)}>Error</FormButton>
         <DropDown items={[{id: 1, value: 'English'},{id: 2, value: 'Russian'}, {id: 3, value: 'German'}]} />
         <Button size={buttonSizes.big} color={buttonColors.general}>History</Button>
         <Button size={buttonSizes.medium} color={buttonColors.disabled}>Ok</Button>
         <Button size={buttonSizes.small} color={buttonColors.accept}>Accept</Button>
         <Button size={buttonSizes.small} color={buttonColors.cancel}>Cancel</Button>
         <Button size={buttonSizes.extraSmall} color={buttonColors.primary}>Car</Button>
+        <Hint content='User is blocked 30.12.2022'>User</Hint>
       </div>
     </div>
   );

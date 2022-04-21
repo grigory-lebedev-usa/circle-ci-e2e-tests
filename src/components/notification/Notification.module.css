@@ -1,0 +1,83 @@
+@import url(/src/styles/colors.css);
+
+.notification__container {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+}
+
+.notification {
+  position: relative;
+  width: 300px;
+  min-height: 50px;
+  border-radius: 5px;
+  text-align: left;
+  padding: 10px 35px 10px 15px;
+  margin-top: 15px;
+  animation: notification-in-right 0.7s, notification-close 8.5s;
+  transition: 0.3s ease;
+}
+
+.notification_closed {
+  animation: notification-clicked-close 0.5s;
+}
+
+.notification__success {
+  background-color: var(--success-color)
+}
+
+.notification__warning {
+  background-color: var(--warning-color);
+}
+
+.notification__error {
+  background-color: var(--error-color);
+}
+
+.notification__text {
+  color: #fff;
+  font-size: 15px;
+  margin: 0;
+}
+
+.notification__close {
+  position: absolute;
+  top: 0px;
+  right: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.85);
+  transform: rotate(45deg);
+  font-size: 35px;
+  transition: all 0.3s ease;
+}
+
+.notification__close:hover {
+  color: #fff;
+}
+
+@keyframes notification-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes notification-close {
+  70% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes notification-clicked-close {
+  to {
+    transform: translateY(3px);
+    opacity: 0;
+  }
+}
