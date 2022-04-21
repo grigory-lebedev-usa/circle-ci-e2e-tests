@@ -19,3 +19,8 @@ export const buttonColors = {
   primary: '#494357',
   general: '#C4A267',
 }
+export const notificationTypes = {
+  success: 'success',
+  warning: 'warning',
+  error: 'error',
+}
