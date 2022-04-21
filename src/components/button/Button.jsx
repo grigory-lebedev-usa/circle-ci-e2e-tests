@@ -10,12 +10,11 @@ const buttonClasses = {
 }
 
 const Button = ({ children, size, color, onClick }) => {
-
   return (
     <div className={classes.button__container}>
       <button
         onClick={onClick}
-        style={{backgroundColor: color, border: `1px solid ${color}`}}
+        style={{backgroundColor: color}}
         className={`${classes.button} ${buttonClasses[size]}`}>{children}
       </button>
     </div>
