@@ -9,5 +9,13 @@ export const buttonSizes = {
   big: 'big',
   medium: 'medium',
   small: 'small',
-  extra_small: 'extra-small'
+  extraSmall: 'extraSmall'
+}
+
+export const buttonColors = {
+  accept: '#5DCE7C',
+  cancel: '#CE6A5D',
+  disabled: '#AEAEAE',
+  primary: '#494357',
+  general: '#C4A267',
 }

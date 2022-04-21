@@ -2,26 +2,21 @@ import React from 'react';
 import { buttonSizes } from '../../shared/enums';
 import classes from './Button.module.css';
 
+const buttonClasses = {
+  [buttonSizes.big]: classes.button_big,
+  [buttonSizes.medium]: classes.button_medium,
+  [buttonSizes.small]: classes.button_small,
+  [buttonSizes.extraSmall]: classes.button_extraSmall,
+}
+
 const Button = ({ children, size, color, onClick }) => {
-
-  const buttonStyled = {
-    [buttonSizes.big]: classes.button__big,
-    [buttonSizes.medium]: classes.button__medium,
-    [buttonSizes.small]: classes.button__small,
-    [buttonSizes.extra_small]: classes.button__extra_small,
-  }
-
-  const buttonColorStyled = {
-    backgroundColor: color,
-    border: `1px solid ${color}`
-  }
 
   return (
     <div className={classes.button__container}>
       <button
         onClick={onClick}
-        style={buttonColorStyled}
-        className={`${classes.button} ${buttonStyled[size]}`}>{children}
+        style={{backgroundColor: color, border: `1px solid ${color}`}}
+        className={`${classes.button} ${buttonClasses[size]}`}>{children}
       </button>
     </div>
   );
