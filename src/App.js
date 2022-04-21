@@ -25,22 +25,20 @@ function App() {
 
   const [visibilitySpinner, setVisibilitySpinner] = useState(false);
   const [notifications, setNotifications] = useState([]);
-  const notificationsRef = useRef(null);
-
-  notificationsRef.current = notifications;
+  const notificationsRef = useRef([]);
 
   const showNotification = (text, type) => {
     if (notifications.length === MAX_NOTIFICATION_NUMBER) {
-      notifications.shift()
+      notificationsRef.current.shift()
     }
 
-     notifications.push({text:text, type:type, id:uniqid()});
-
-    setNotifications([...notifications]);
+     notificationsRef.current.push({text:text, type:type, id:uniqid()});
+    setNotifications([...notificationsRef.current]);
   }
 
   const deleteNotification = useCallback((id) => {
-    setNotifications(notificationsRef.current.filter(notification => notification.id !== id));
+    notificationsRef.current = notificationsRef.current.filter(notification => notification.id !== id);
+    setNotifications(notificationsRef.current);
     console.log(notificationsRef.current);
   }, [])
 
