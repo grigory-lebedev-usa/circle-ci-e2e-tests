@@ -67,7 +67,7 @@ function App() {
         <FormButton onClick={() => showSpinner()} >Show Spinner</FormButton>
         <Hint content='User is blocked until 30.06.2022'>User</Hint>
         <DropDown items={[{id: 1, value: 'English'},{id: 2, value: 'Russian'}, {id: 3, value: 'German'}]} />
-        <Textarea id='textarea' label="Driver report"/>
+        <Textarea id='textarea' label='Driver report' placeholder='Driver report'/>
       </div>
     </div>
   );

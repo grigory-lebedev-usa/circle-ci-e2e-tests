@@ -1,8 +1,4 @@
-:root {
-  --general-color:#000;
-  --focus-and-hover-color: #00A1E5;
-  --error-color: #FC004C;
-}
+@import url(/src/styles/colors.css);
 
 .textarea__container {
   margin-top: 20px;
