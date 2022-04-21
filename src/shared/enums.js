@@ -4,3 +4,9 @@ export const inputTypes = {
   checkbox: 'checkbox',
   submit: 'submit',
 }
+
+export const notificationTypes = {
+  success: 'success',
+  warning: 'warning',
+  error: 'error',
+}
