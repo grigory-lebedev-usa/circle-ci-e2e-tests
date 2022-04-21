@@ -1,0 +1,44 @@
+.button__container {
+  margin-top: 10px;
+}
+
+.button {
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  border-radius: 50px;
+  text-align: center;
+  opacity: 0.9;
+  transition: 0.2s ease;
+}
+
+.button:hover {
+  opacity: 1;
+}
+
+.button:active {
+  transform: translateY(3px);
+}
+
+.button_big {
+  width: 279px;
+  height: 95px;
+}
+
+.button_medium {
+  width: 300px;
+  height: 60px;
+}
+
+.button_small {
+  width: 190px;
+  height: 55px;
+}
+
+.button_extraSmall {
+  width: 130px;
+  height: 45px;
+}
+
+
+
