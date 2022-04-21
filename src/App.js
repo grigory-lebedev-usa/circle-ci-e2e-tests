@@ -22,6 +22,14 @@ function App() {
   const [visibilitySpinner, setVisibilitySpinner] = useState(false);
   const [openedModal, setOpenedModal] = useState(false);
 
+  const openModal = () => {
+    setOpenedModal(true);
+  }
+
+  const closeModal = () => {
+    setOpenedModal(false);
+  }
+
   const showSpinner = () => {
     setVisibilitySpinner(true);
     
@@ -33,7 +41,7 @@ function App() {
   return (
     <div className='App'>
       <ProgressSpinner active={visibilitySpinner}/>
-      <Modal visible={openedModal} setVisible={setOpenedModal}>
+      <Modal isOpened={openedModal} closeModal={closeModal}>
         <h1>Hello!</h1>
       </Modal>
       <div>
@@ -68,7 +76,7 @@ function App() {
         <FormCheckbox label="Keep me logged in" />
         <Link label="Forgot password?" />
         <FormButton>Button</FormButton>
-        <FormButton onClick={() => setOpenedModal(true)}>Open modal</FormButton>
+        <FormButton onClick={openModal}>Open modal</FormButton>
         <FormButton onClick={() => showSpinner()} >Show Spinner</FormButton>
         <Hint content="User is blocked until 30.06.2022">User</Hint>
         <DropDown items={[{id: 1, value: 'English'},{id: 2, value: 'Russian'}, {id: 3, value: 'German'}]} />
