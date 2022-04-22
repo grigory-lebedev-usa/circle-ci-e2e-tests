@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-import classes from './FormDropDown.module.css';
+import PropTypes from 'prop-types';
+
+import classes from './form-drop-down.module.css';
 
 function FormDropDown({ title, items = [] }) {
   const [opened, setOpened] = useState(false);
   const [selected, setSelected] = useState(false);
   const [text, setText] = useState('');
 
-  const handleSelect = (e) => {
+  const handleListItemClick = (e) => {
     setOpened(false);
     setSelected(true);
     setText(e.target.textContent);
@@ -65,7 +67,7 @@ function FormDropDown({ title, items = [] }) {
       {opened && (
         <ul className={classes.dropdown__list}>
           {items.map((item) => (
-            <li className={classes.dropdown__item} key={item.id} onClick={(e) => handleSelect(e)}>
+            <li className={classes.dropdown__item} key={item.id} onClick={handleListItemClick}>
               <span className={classes.dropdown__button}>{item.value}</span>
             </li>
           ))}
@@ -74,5 +76,19 @@ function FormDropDown({ title, items = [] }) {
     </div>
   );
 }
+
+FormDropDown.propTypes = {
+  title: PropTypes.string,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      value: PropTypes.string
+    })
+  ).isRequired
+};
+
+FormDropDown.defaultProps = {
+  title: 'Role'
+};
 
 export default FormDropDown;

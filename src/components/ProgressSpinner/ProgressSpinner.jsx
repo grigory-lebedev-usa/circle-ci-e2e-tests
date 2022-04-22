@@ -1,6 +1,8 @@
 import React from 'react';
 
-import classes from './ProgressSpinner.module.css';
+import PropTypes from 'prop-types';
+
+import classes from './progress-spinner.module.css';
 
 function ProgressSpinner({ active }) {
   return (
@@ -13,5 +15,13 @@ function ProgressSpinner({ active }) {
     </div>
   );
 }
+
+ProgressSpinner.propTypes = {
+  active: PropTypes.bool
+};
+
+ProgressSpinner.defaultProps = {
+  active: false
+};
 
 export default ProgressSpinner;

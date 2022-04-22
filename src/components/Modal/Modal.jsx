@@ -1,6 +1,8 @@
 import React from 'react';
 
-import classes from './Modal.module.css';
+import PropTypes from 'prop-types';
+
+import classes from './modal.module.css';
 
 function Modal({ children, isOpened, closeModal }) {
   const handleStopPropagation = (e) => {
@@ -21,5 +23,11 @@ function Modal({ children, isOpened, closeModal }) {
     </div>
   );
 }
+
+Modal.propTypes = {
+  children: PropTypes.element.isRequired,
+  isOpened: PropTypes.bool.isRequired,
+  closeModal: PropTypes.func.isRequired
+};
 
 export default Modal;

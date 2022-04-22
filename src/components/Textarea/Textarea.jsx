@@ -1,6 +1,8 @@
 import React from 'react';
 
-import classes from './Textarea.module.css';
+import PropTypes from 'prop-types';
+
+import classes from './textarea.module.css';
 
 function Textarea({ id, label, placeholder }) {
   return (
@@ -12,5 +14,15 @@ function Textarea({ id, label, placeholder }) {
     </div>
   );
 }
+
+Textarea.propTypes = {
+  id: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  placeholder: PropTypes.string
+};
+
+Textarea.defaultProps = {
+  placeholder: ''
+};
 
 export default Textarea;

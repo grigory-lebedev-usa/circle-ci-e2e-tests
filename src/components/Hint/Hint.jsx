@@ -1,6 +1,8 @@
 import React from 'react';
 
-import classes from './Hint.module.css';
+import PropTypes from 'prop-types';
+
+import classes from './hint.module.css';
 
 function Hint({ children, content }) {
   return (
@@ -10,5 +12,10 @@ function Hint({ children, content }) {
     </div>
   );
 }
+
+Hint.propTypes = {
+  children: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired
+};
 
 export default Hint;

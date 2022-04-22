@@ -2,7 +2,7 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import classes from './Link.module.css';
+import classes from './link.module.css';
 
 function MyLink({ label, href }) {
   return (

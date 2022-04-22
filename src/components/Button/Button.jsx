@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { buttonSizes } from '../../shared/enums';
 
-import classes from './Button.module.css';
+import classes from './button.module.css';
 
 const buttonClasses = {
   [buttonSizes.big]: classes.button_big,
@@ -28,14 +28,19 @@ function Button({ children, size, color, onClick }) {
 }
 
 Button.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.string.isRequired,
   size: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
-  onClick: PropTypes.func
+  onClick: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.objectOf(
+      PropTypes.oneOfType([PropTypes.func, PropTypes.number, PropTypes.string, PropTypes.object])
+    )
+  ])
 };
 
 Button.defaultProps = {
-  onClick: {}
+  onClick: () => ''
 };
 
 export default Button;

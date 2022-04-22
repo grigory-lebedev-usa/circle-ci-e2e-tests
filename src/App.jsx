@@ -3,19 +3,19 @@ import React, { useCallback, useRef, useState } from 'react';
 import './App.css';
 import uniqid from 'uniqid';
 
-import FormInput from './components/form/input/FormInput';
-import FormDropDown from './components/form/dropdown/FormDropDown';
-import FormCheckbox from './components/form/checkbox/FormCheckbox';
-import Link from './components/link/Link';
-import ProgressSpinner from './components/spinner/ProgressSpinner';
-import DropDown from './components/dropdown/DropDown';
-import Hint from './components/hint/Hint';
-import FormButton from './components/form/button/FormButton';
+import FormInput from './components/Form components/FormInput/FormInput';
+import FormDropDown from './components/Form components/FormDropDown/FormDropDown';
+import FormCheckbox from './components/Form components/FormCheckbox/FormCheckbox';
+import Link from './components/Link/Link';
+import ProgressSpinner from './components/ProgressSpinner/ProgressSpinner';
+import DropDown from './components/DropDown/DropDown';
+import Hint from './components/Hint/Hint';
+import FormButton from './components/Form components/FormButton/FormButton';
 import { buttonColors, buttonSizes, notificationTypes } from './shared/enums';
-import Textarea from './components/textarea/Textarea';
-import { MAX_NOTIFICATION_NUMBER } from './components/notification/constans';
-import Notifications from './components/notification/Notifications';
-import Button from './components/button/Button';
+import Textarea from './components/Textarea/Textarea';
+import { MAX_NOTIFICATION_NUMBER } from './components/Notifications/notifications.constants';
+import Notifications from './components/Notifications/Notifications';
+import Button from './components/Button/Button';
 
 function App() {
   const [visibilitySpinner, setVisibilitySpinner] = useState(false);
@@ -80,7 +80,7 @@ function App() {
             { id: 2, value: 'Driver' }
           ]}
         />
-        <FormCheckbox label="Keep me logged in" />
+        <FormCheckbox id="checkbox" label="Keep me logged in" />
         <Link
           label="Forgot password?"
           href="https://translate.yandex.ru/dictionary/en-ru/forgot%20password"
@@ -88,38 +88,20 @@ function App() {
         <FormButton>Button</FormButton>
         <FormButton onClick={() => showSpinner()}>Show Spinner</FormButton>
         <Hint content="User is blocked until 30.06.2022">User</Hint>
-        <DropDown
-          items={[
-            { id: 1, value: 'English' },
-            { id: 2, value: 'Russian' },
-            { id: 3, value: 'German' }
-          ]}
-        />
         <Textarea id="textarea" label="Driver report" placeholder="Driver report" />
         <FormButton
-          style={{ backgroundColor: '#00CB82' }}
           onClick={() =>
             showNotification('Everything went successfully', notificationTypes.success)
           }>
           Success
         </FormButton>
-        <FormButton
-          style={{ backgroundColor: '#E1CB00' }}
-          onClick={() => showNotification('Warning', notificationTypes.warning)}>
+        <FormButton onClick={() => showNotification('Warning', notificationTypes.warning)}>
           Warning
         </FormButton>
-        <FormButton
-          style={{ backgroundColor: '#CF6402' }}
-          onClick={() => showNotification('Error', notificationTypes.error)}>
+        <FormButton onClick={() => showNotification('Error', notificationTypes.error)}>
           Error
         </FormButton>
-        <DropDown
-          items={[
-            { id: 1, value: 'English' },
-            { id: 2, value: 'Russian' },
-            { id: 3, value: 'German' }
-          ]}
-        />
+        <FormButton>Open modal</FormButton>
         <Button size={buttonSizes.big} color={buttonColors.general}>
           History
         </Button>
@@ -135,6 +117,13 @@ function App() {
         <Button size={buttonSizes.extraSmall} color={buttonColors.primary}>
           Car
         </Button>
+        <DropDown
+          items={[
+            { id: 1, value: 'English' },
+            { id: 2, value: 'Russian' },
+            { id: 3, value: 'German' }
+          ]}
+        />
       </div>
     </div>
   );

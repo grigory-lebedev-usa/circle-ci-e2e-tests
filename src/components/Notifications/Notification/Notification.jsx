@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import { notificationTypes } from '../../shared/enums';
+import PropTypes from 'prop-types';
 
-import classes from './Notification.module.css';
+import { notificationTypes } from '../../../shared/enums';
+
+import classes from '../notifications.module.css';
 
 const notificationClasses = {
   [notificationTypes.success]: classes.notification__success,
@@ -46,5 +48,14 @@ function Notification({ notification, onDelete }) {
     </div>
   );
 }
+
+Notification.propTypes = {
+  notification: PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired
+  }).isRequired,
+  onDelete: PropTypes.func.isRequired
+};
 
 export default Notification;

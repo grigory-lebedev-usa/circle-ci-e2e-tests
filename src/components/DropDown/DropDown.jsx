@@ -2,15 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 
 import PropTypes from 'prop-types';
 
-import classes from './DropDown.module.css';
+import classes from './drop-down.module.css';
 
 function DropDown({ items }) {
   const [opened, setOpened] = useState(false);
-  const [text, setText] = useState('');
+  const [text, setText] = useState('English');
 
   const handleToggle = () => setOpened(!opened);
 
-  const handleSelect = (e) => {
+  const handleListItemClick = (e) => {
     setOpened(false);
     setText(e.target.textContent);
   };
@@ -44,7 +44,7 @@ function DropDown({ items }) {
       {opened && (
         <ul className={classes.dropdown__list}>
           {items.map((item) => (
-            <li className={classes.dropdown__item} key={item.id} onClick={(e) => handleSelect(e)}>
+            <li className={classes.dropdown__item} key={item.id} onClick={handleListItemClick}>
               <span className={classes.dropdown__value}>{item.value}</span>
             </li>
           ))}
@@ -53,5 +53,14 @@ function DropDown({ items }) {
     </div>
   );
 }
+
+DropDown.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      value: PropTypes.string
+    })
+  ).isRequired
+};
 
 export default DropDown;
