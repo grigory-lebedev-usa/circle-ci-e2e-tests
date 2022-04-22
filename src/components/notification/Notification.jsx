@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
+
 import { notificationTypes } from '../../shared/enums';
+
 import classes from './Notification.module.css';
 
 const notificationClasses = {

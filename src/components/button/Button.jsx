@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { buttonSizes } from '../../shared/enums';
+
 import classes from './Button.module.css';
 
 const buttonClasses = {

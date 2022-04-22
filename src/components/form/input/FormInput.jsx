@@ -1,6 +1,18 @@
 import React, { useState } from 'react';
+
 import { inputTypes } from '../../../shared/enums';
+
 import classes from './FormInput.module.css';
+
+const computedInputType = (type, showPassword) => {
+  if (type !== inputTypes.password) {
+    return inputTypes.text;
+  }
+  if (type === inputTypes.password && showPassword) {
+    return inputTypes.text;
+  }
+  return inputTypes.password;
+};
 
 function FormInput({ id, type, label, pattern, placeholder }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -9,22 +21,12 @@ function FormInput({ id, type, label, pattern, placeholder }) {
     setShowPassword(!showPassword);
   };
 
-  const computedInputType = (type) => {
-    if (type !== inputTypes.password) {
-      return inputTypes.text;
-    }
-    if (type === inputTypes.password && showPassword) {
-      return inputTypes.text;
-    }
-    return inputTypes.password;
-  };
-
   return (
     <div className={classes.input__container}>
       <input
         id={id}
         className={classes.input}
-        type={computedInputType(type)}
+        type={computedInputType(type, showPassword)}
         placeholder={placeholder}
         pattern={pattern}
       />

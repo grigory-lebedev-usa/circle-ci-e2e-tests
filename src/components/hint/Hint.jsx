@@ -1,4 +1,5 @@
 import React from 'react';
+
 import classes from './Hint.module.css';
 
 function Hint({ children, content }) {

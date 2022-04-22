@@ -1,4 +1,5 @@
 import React from 'react';
+
 import classes from './Modal.module.css';
 
 function Modal({ children, isOpened, closeModal }) {
