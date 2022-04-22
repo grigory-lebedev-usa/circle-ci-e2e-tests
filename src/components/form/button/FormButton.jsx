@@ -1,5 +1,7 @@
 import React from 'react';
 
+import PropTypes from 'prop-types';
+
 import classes from './FormButton.module.css';
 
 function FormButton({ children, onClick }) {
@@ -11,5 +13,14 @@ function FormButton({ children, onClick }) {
     </div>
   );
 }
+
+FormButton.propTypes = {
+  children: PropTypes.element.isRequired,
+  onClick: PropTypes.func
+};
+
+FormButton.defaultProps = {
+  onClick: {}
+};
 
 export default FormButton;

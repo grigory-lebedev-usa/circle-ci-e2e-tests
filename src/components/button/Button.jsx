@@ -1,5 +1,7 @@
 import React from 'react';
 
+import PropTypes from 'prop-types';
+
 import { buttonSizes } from '../../shared/enums';
 
 import classes from './Button.module.css';
@@ -24,5 +26,16 @@ function Button({ children, size, color, onClick }) {
     </div>
   );
 }
+
+Button.propTypes = {
+  children: PropTypes.element.isRequired,
+  size: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  onClick: PropTypes.func
+};
+
+Button.defaultProps = {
+  onClick: {}
+};
 
 export default Button;

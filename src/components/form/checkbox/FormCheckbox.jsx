@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import PropTypes from 'prop-types'';'
+
 import classes from './FormCheckbox.module.css';
 
 function FormCheckbox({ id, label }) {
@@ -25,6 +27,11 @@ function FormCheckbox({ id, label }) {
       </label>
     </div>
   );
+}
+
+FormCheckbox.propTypes = {
+  id: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired
 }
 
 export default FormCheckbox;

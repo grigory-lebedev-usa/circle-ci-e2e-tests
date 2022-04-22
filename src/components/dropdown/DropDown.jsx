@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 
+import PropTypes from 'prop-types';
+
 import classes from './DropDown.module.css';
 
 function DropDown({ items }) {
   const [opened, setOpened] = useState(false);
-  const [text, setText] = useState('English');
+  const [text, setText] = useState('');
 
   const handleToggle = () => setOpened(!opened);
 
