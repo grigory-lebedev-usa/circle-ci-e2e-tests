@@ -1,6 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
+
+import useClickOutside from '../../hooks/useClickOutside';
 
 import classes from './drop-down.module.css';
 
@@ -15,29 +17,9 @@ function DropDown({ items }) {
     setText(e.target.textContent);
   };
 
-  const useClickOutside = (handler) => {
-    const domNode = useRef();
-
-    useEffect(() => {
-      const maybeHandler = (event) => {
-        if (!domNode.current.contains(event.target)) {
-          handler();
-        }
-      };
-      document.addEventListener('mousedown', maybeHandler);
-      return () => {
-        document.removeEventListener('mousedown', maybeHandler);
-      };
-    });
-    return domNode;
-  };
   return (
     <div className={classes.dropdown__container} ref={useClickOutside(() => setOpened(false))}>
-      <div
-        role="listbox"
-        tabIndex="0"
-        className={classes.dropdown__content}
-        onClick={() => handleToggle(opened)}>
+      <div role="listbox" tabIndex="0" className={classes.dropdown__content} onClick={handleToggle}>
         <div className={classes.dropdown__text}>{text}</div>
         <div className={classes.dropdown__arrow_down} />
       </div>

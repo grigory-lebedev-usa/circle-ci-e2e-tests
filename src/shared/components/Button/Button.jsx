@@ -2,16 +2,8 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import { buttonSizes } from '../../shared/enums';
-
 import classes from './button.module.css';
-
-const buttonClasses = {
-  [buttonSizes.big]: classes.button_big,
-  [buttonSizes.medium]: classes.button_medium,
-  [buttonSizes.small]: classes.button_small,
-  [buttonSizes.extraSmall]: classes.button_extraSmall
-};
+import { buttonClasses } from './button.constants';
 
 function Button({ children, size, color, onClick }) {
   return (

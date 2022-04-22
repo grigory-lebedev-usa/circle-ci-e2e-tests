@@ -3,24 +3,35 @@ import React, { useCallback, useRef, useState } from 'react';
 import './App.css';
 import uniqid from 'uniqid';
 
-import FormInput from './components/Form components/FormInput/FormInput';
-import FormDropDown from './components/Form components/FormDropDown/FormDropDown';
-import FormCheckbox from './components/Form components/FormCheckbox/FormCheckbox';
-import Link from './components/Link/Link';
-import ProgressSpinner from './components/ProgressSpinner/ProgressSpinner';
-import DropDown from './components/DropDown/DropDown';
-import Hint from './components/Hint/Hint';
-import FormButton from './components/Form components/FormButton/FormButton';
-import { buttonColors, buttonSizes, notificationTypes } from './shared/enums';
-import Textarea from './components/Textarea/Textarea';
-import { MAX_NOTIFICATION_NUMBER } from './components/Notifications/notifications.constants';
-import Notifications from './components/Notifications/Notifications';
-import Button from './components/Button/Button';
+import FormInput from './shared/components/form-elements/FormInput/FormInput';
+import FormCheckbox from './shared/components/form-elements/FormCheckbox/FormCheckbox';
+import FormDropDown from './shared/components/form-elements/FormDropDown/FormDropDown';
+import FormButton from './shared/components/form-elements/FormButton/FormButton';
+import Textarea from './shared/components/Textarea/Textarea';
+import ProgressSpinner from './shared/components/ProgressSpinner/ProgressSpinner';
+import Notifications from './shared/components/Notifications/Notifications';
+import Modal from './shared/components/Modal/Modal';
+import Link from './shared/components/Link/Link';
+import Hint from './shared/components/Hint/Hint';
+import DropDown from './shared/components/DropDown/DropDown';
+import Button from './shared/components/Button/Button';
+import { MAX_NOTIFICATION_NUMBER } from './shared/components/Notifications/notifications.constants';
+import { buttonColors, buttonSizes } from './shared/components/Button/button.constants';
+import { notificationTypes } from './shared/components/Notifications/Notification/notification.constants';
 
 function App() {
   const [visibilitySpinner, setVisibilitySpinner] = useState(false);
+  const [openedModal, setOpenedModal] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const notificationsRef = useRef([]);
+
+  const openModal = () => {
+    setOpenedModal(true);
+  };
+
+  const closeModal = () => {
+    setOpenedModal(false);
+  };
 
   const showNotification = (text, type) => {
     if (notifications.length === MAX_NOTIFICATION_NUMBER) {
@@ -47,7 +58,10 @@ function App() {
   return (
     <div className="App">
       <Notifications notifications={notifications} onDelete={deleteNotification} />
-      <ProgressSpinner active={visibilitySpinner} />
+      <ProgressSpinner isOpened={visibilitySpinner} />
+      <Modal isOpened={openedModal} closeModal={closeModal}>
+        <h1>Hello!</h1>
+      </Modal>
       <div className="App-content">
         <h1>Hello React!</h1>
         <FormInput
@@ -101,7 +115,7 @@ function App() {
         <FormButton onClick={() => showNotification('Error', notificationTypes.error)}>
           Error
         </FormButton>
-        <FormButton>Open modal</FormButton>
+        <FormButton onClick={openModal}>Open modal</FormButton>
         <Button size={buttonSizes.big} color={buttonColors.general}>
           History
         </Button>

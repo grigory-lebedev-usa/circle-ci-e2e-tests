@@ -1,6 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
+
+import useClickOutside from '../../../hooks/useClickOutside';
 
 import classes from './form-drop-down.module.css';
 
@@ -17,23 +19,6 @@ function FormDropDown({ title, items = [] }) {
 
   const handleToggle = () => setOpened(!opened);
 
-  const useClickOutside = (handler) => {
-    const domNode = useRef();
-
-    useEffect(() => {
-      const maybeHandler = (event) => {
-        if (!domNode.current.contains(event.target)) {
-          handler();
-        }
-      };
-      document.addEventListener('mousedown', maybeHandler);
-      return () => {
-        document.removeEventListener('mousedown', maybeHandler);
-      };
-    });
-    return domNode;
-  };
-
   return (
     <div ref={useClickOutside(() => setOpened(false))}>
       <div
@@ -45,7 +30,7 @@ function FormDropDown({ title, items = [] }) {
             ? `${classes.dropdown__container} ${classes.dropdown__container_active}`
             : classes.dropdown__container
         }
-        onClick={() => handleToggle(!opened)}>
+        onClick={handleToggle}>
         <label
           htmlFor="dropdown"
           className={

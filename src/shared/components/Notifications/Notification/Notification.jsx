@@ -2,15 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import PropTypes from 'prop-types';
 
-import { notificationTypes } from '../../../shared/enums';
-
 import classes from '../notifications.module.css';
 
-const notificationClasses = {
-  [notificationTypes.success]: classes.notification__success,
-  [notificationTypes.warning]: classes.notification__warning,
-  [notificationTypes.error]: classes.notification__error
-};
+import { notificationClasses } from './notification.constants';
 
 function Notification({ notification, onDelete }) {
   const [isClickedClose, setIsClickedClose] = useState(false);

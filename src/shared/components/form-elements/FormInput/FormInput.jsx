@@ -2,19 +2,8 @@ import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
 
-import { inputTypes } from '../../../shared/enums';
-
 import classes from './form-input.module.css';
-
-const computedInputType = (type, showPassword) => {
-  if (type !== inputTypes.password) {
-    return inputTypes.text;
-  }
-  if (type === inputTypes.password && showPassword) {
-    return inputTypes.text;
-  }
-  return inputTypes.password;
-};
+import { computedInputType, inputTypes } from './form-input.constants';
 
 function FormInput({ id, type, label, pattern, placeholder }) {
   const [showPassword, setShowPassword] = useState(false);
