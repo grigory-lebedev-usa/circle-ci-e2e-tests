@@ -1,47 +1,51 @@
-import React, { useState } from "react";
-import { inputTypes } from "../../../shared/enums";
-import classes from "./FormInput.module.css";
+import React, { useState } from 'react';
+import { inputTypes } from '../../../shared/enums';
+import classes from './FormInput.module.css';
 
-const FormInput = (props) => {
+function FormInput({ id, type, label, pattern, placeholder }) {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = () => {
-    setShowPassword(showPassword ? false : true);
+    setShowPassword(!showPassword);
   };
 
-  const checkInputType =
-    props.type !== inputTypes.password
-      ? inputTypes.text
-      : props.type === inputTypes.password && showPassword
-      ? inputTypes.text
-      : inputTypes.password;
+  const computedInputType = (type) => {
+    if (type !== inputTypes.password) {
+      return inputTypes.text;
+    }
+    if (type === inputTypes.password && showPassword) {
+      return inputTypes.text;
+    }
+    return inputTypes.password;
+  };
 
   return (
     <div className={classes.input__container}>
       <input
-        id={props.id}
+        id={id}
         className={classes.input}
-        type={checkInputType}
-        placeholder=" "
-        pattern={props.pattern}
+        type={computedInputType(type)}
+        placeholder={placeholder}
+        pattern={pattern}
       />
-      <label htmlFor={props.id} className={classes.input__label}>
-        {props.label}
+      <label htmlFor={id} className={classes.input__label}>
+        {label}
       </label>
-      {props.type === inputTypes.password && (
+      {type === inputTypes.password && (
         <div className={classes.button__container}>
           <button
+            type="button"
             className={
               showPassword
                 ? `${classes.password__button} ${classes.password__button_active}`
                 : classes.password__button
             }
             onClick={handleShowPassword}
-          ></button>
+          />
         </div>
       )}
     </div>
   );
-};
+}
 
 export default FormInput;

@@ -1,48 +1,47 @@
-import React, { useState , useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import classes from './DropDown.module.css';
 
-const DropDown = ({ items }) => {
-
+function DropDown({ items }) {
   const [opened, setOpened] = useState(false);
-  const [text, setText] = useState("English");
+  const [text, setText] = useState('English');
 
   const handleToggle = () => setOpened(!opened);
 
   const handleSelect = (e) => {
     setOpened(false);
     setText(e.target.textContent);
-  }
+  };
 
   const useClickOutside = (handler) => {
-    let domNode = useRef();
+    const domNode = useRef();
 
     useEffect(() => {
-      let maybeHandler = (event) => {
+      const maybeHandler = (event) => {
         if (!domNode.current.contains(event.target)) {
           handler();
         }
       };
-      document.addEventListener("mousedown", maybeHandler);
+      document.addEventListener('mousedown', maybeHandler);
       return () => {
-        document.removeEventListener("mousedown", maybeHandler);
+        document.removeEventListener('mousedown', maybeHandler);
       };
     });
     return domNode;
   };
   return (
     <div className={classes.dropdown__container} ref={useClickOutside(() => setOpened(false))}>
-      <div className={classes.dropdown__content} onClick={() => handleToggle(opened)}>
+      <div
+        role="listbox"
+        tabIndex="0"
+        className={classes.dropdown__content}
+        onClick={() => handleToggle(opened)}>
         <div className={classes.dropdown__text}>{text}</div>
-        <div className={classes.dropdown__arrow_down}></div>
+        <div className={classes.dropdown__arrow_down} />
       </div>
       {opened && (
         <ul className={classes.dropdown__list}>
           {items.map((item) => (
-            <li
-              className={classes.dropdown__item}
-              key={item.id}
-              onClick={(e) => handleSelect(e)}
-            >
+            <li className={classes.dropdown__item} key={item.id} onClick={(e) => handleSelect(e)}>
               <span className={classes.dropdown__value}>{item.value}</span>
             </li>
           ))}
@@ -50,6 +49,6 @@ const DropDown = ({ items }) => {
       )}
     </div>
   );
-};
+}
 
 export default DropDown;

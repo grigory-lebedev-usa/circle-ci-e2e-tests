@@ -1,12 +1,14 @@
-import React from "react";
-import classes from "./FormButton.module.css";
+import React from 'react';
+import classes from './FormButton.module.css';
 
-const FormButton = ({children, ...props}) => {
+function FormButton({ children, onClick }) {
   return (
     <div>
-      <button  {...props} className={classes.button}>{children}</button>
+      <button type="submit" onClick={onClick} className={classes.button}>
+        {children}
+      </button>
     </div>
   );
-};
+}
 
 export default FormButton;
