@@ -1,15 +1,18 @@
-import React, { useState } from "react";
-import classes from "./FormCheckbox.module.css";
+import React, { useState } from 'react';
 
-const FormCheckbox = (props) => {
+import classes from './FormCheckbox.module.css';
+
+function FormCheckbox({ id, label }) {
   const [clicked, setClicked] = useState(false);
   return (
     <div
+      role="checkbox"
+      aria-checked="false"
+      tabIndex="0"
       className={classes.checkbox__container}
-      onClick={() => setClicked(!clicked)}
-    >
+      onClick={() => setClicked(!clicked)}>
       <input
-        id={props.id}
+        id={id}
         className={
           clicked
             ? `${classes.custom__checkbox} ${classes.custom__checkbox_active}`
@@ -17,11 +20,11 @@ const FormCheckbox = (props) => {
         }
         type="checkbox"
       />
-      <label id={props.id} className={classes.checkbox__label}>
-        {props.label}
+      <label htmlFor={id} className={classes.checkbox__label}>
+        {label}
       </label>
     </div>
   );
-};
+}
 
 export default FormCheckbox;

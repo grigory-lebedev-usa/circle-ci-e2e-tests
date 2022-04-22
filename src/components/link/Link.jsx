@@ -1,19 +1,15 @@
-import React from "react";
-import classes from "./Link.module.css";
+import React from 'react';
 
-const MyLink = (props) => {
+import classes from './Link.module.css';
+
+function MyLink({ label, href }) {
   return (
     <div>
-      <a
-        className={classes.link}
-        href="https://translate.yandex.ru/dictionary/en-ru/forgot%20password"
-        target="_blank"
-        rel="noreferrer"
-      >
-        {props.label}
+      <a className={classes.link} href={href} target="_blank" rel="noreferrer">
+        {label}
       </a>
     </div>
   );
-};
+}
 
 export default MyLink;
