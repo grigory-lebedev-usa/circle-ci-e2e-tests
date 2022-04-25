@@ -1,4 +1,5 @@
 export const inputTypes = {
+  email: 'email',
   text: 'text',
   password: 'password',
   checkbox: 'checkbox',

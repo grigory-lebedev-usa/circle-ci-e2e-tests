@@ -43,7 +43,7 @@ function FormInput({ id, type, label, pattern, placeholder }) {
 
 FormInput.propTypes = {
   id: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(Object.values(inputTypes)).isRequired,
   label: PropTypes.string.isRequired,
   pattern: PropTypes.string,
   placeholder: PropTypes.string

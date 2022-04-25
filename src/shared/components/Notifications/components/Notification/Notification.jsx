@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import PropTypes from 'prop-types';
 
-import classes from '../notifications.module.css';
+import classes from '../../notifications.module.css';
 
+import { NotificationPropType } from './notification.proptypes';
 import { notificationClasses } from './notification.constants';
 
 function Notification({ notification, onDelete }) {
@@ -44,11 +45,7 @@ function Notification({ notification, onDelete }) {
 }
 
 Notification.propTypes = {
-  notification: PropTypes.shape({
-    text: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired
-  }).isRequired,
+  notification: NotificationPropType.isRequired,
   onDelete: PropTypes.func.isRequired
 };
 

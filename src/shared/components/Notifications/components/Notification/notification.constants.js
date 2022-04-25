@@ -1,4 +1,4 @@
-import classes from '../notifications.module.css';
+import classes from '../../notifications.module.css';
 
 export const notificationTypes = {
   success: 'success',

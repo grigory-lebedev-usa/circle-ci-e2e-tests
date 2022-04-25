@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import useClickOutside from '../../../hooks/useClickOutside';
 
+import { DropDownPropType } from '../../../prop-types';
+
 import classes from './form-drop-down.module.css';
 
 function FormDropDown({ title, items = [] }) {
@@ -64,12 +66,7 @@ function FormDropDown({ title, items = [] }) {
 
 FormDropDown.propTypes = {
   title: PropTypes.string,
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      value: PropTypes.string
-    })
-  ).isRequired
+  items: PropTypes.arrayOf(DropDownPropType).isRequired
 };
 
 FormDropDown.defaultProps = {

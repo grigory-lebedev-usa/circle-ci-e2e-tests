@@ -15,15 +15,13 @@ function FormButton({ children, onClick }) {
 }
 
 FormButton.propTypes = {
-  children: PropTypes.string.isRequired,
-  onClick: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.objectOf(PropTypes.oneOfType([PropTypes.func, PropTypes.number, PropTypes.string]))
-  ])
+  children: PropTypes.node.isRequired,
+  onClick: PropTypes.func
 };
 
 FormButton.defaultProps = {
-  onClick: () => ''
+  // eslint-disable-next-line prettier/prettier
+  onClick: () => { }
 };
 
 export default FormButton;

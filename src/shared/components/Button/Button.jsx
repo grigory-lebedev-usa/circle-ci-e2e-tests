@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import classes from './button.module.css';
-import { buttonClasses } from './button.constants';
+import { buttonClasses, buttonSizes } from './button.constants';
 
 function Button({ children, size, color, onClick }) {
   return (
@@ -20,19 +20,15 @@ function Button({ children, size, color, onClick }) {
 }
 
 Button.propTypes = {
-  children: PropTypes.string.isRequired,
-  size: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  size: PropTypes.oneOf(Object.values(buttonSizes)).isRequired,
   color: PropTypes.string.isRequired,
-  onClick: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.objectOf(
-      PropTypes.oneOfType([PropTypes.func, PropTypes.number, PropTypes.string, PropTypes.object])
-    )
-  ])
+  onClick: PropTypes.func
 };
 
 Button.defaultProps = {
-  onClick: () => ''
+  // eslint-disable-next-line prettier/prettier
+  onClick: () => { }
 };
 
 export default Button;

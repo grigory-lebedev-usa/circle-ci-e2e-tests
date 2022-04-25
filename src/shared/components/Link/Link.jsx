@@ -16,11 +16,7 @@ function MyLink({ label, href }) {
 
 MyLink.propTypes = {
   label: PropTypes.string.isRequired,
-  href: PropTypes.string
-};
-
-MyLink.defaultProps = {
-  href: '#'
+  href: PropTypes.string.isRequired
 };
 
 export default MyLink;

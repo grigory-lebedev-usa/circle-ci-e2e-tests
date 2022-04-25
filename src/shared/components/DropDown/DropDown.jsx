@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import useClickOutside from '../../hooks/useClickOutside';
 
+import { DropDownPropType } from '../../prop-types';
+
 import classes from './drop-down.module.css';
 
 function DropDown({ items }) {
@@ -37,12 +39,7 @@ function DropDown({ items }) {
 }
 
 DropDown.propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      value: PropTypes.string
-    })
-  ).isRequired
+  items: PropTypes.arrayOf(DropDownPropType).isRequired
 };
 
 export default DropDown;

@@ -17,7 +17,8 @@ import DropDown from './shared/components/DropDown/DropDown';
 import Button from './shared/components/Button/Button';
 import { MAX_NOTIFICATION_NUMBER } from './shared/components/Notifications/notifications.constants';
 import { buttonColors, buttonSizes } from './shared/components/Button/button.constants';
-import { notificationTypes } from './shared/components/Notifications/Notification/notification.constants';
+import { notificationTypes } from './shared/components/Notifications/components/Notification/notification.constants';
+import { inputTypes } from './shared/components/form-elements/FormInput/form-input.constants';
 
 function App() {
   const [visibilitySpinner, setVisibilitySpinner] = useState(false);
@@ -66,27 +67,27 @@ function App() {
         <h1>Hello React!</h1>
         <FormInput
           id="email"
-          type="email"
+          type={inputTypes.email}
           label="Email"
           pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$"
           placeholder="Email"
         />
         <FormInput
           id="pass"
-          type="password"
+          type={inputTypes.password}
           label="Password"
           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
           placeholder="Password"
         />
         <FormInput
           id="confpass"
-          type="password"
+          type={inputTypes.password}
           label="Confirm password"
           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
           placeholder="Confirm password"
         />
-        <FormInput id="fname" type="text" label="First name" placeholder="First name" />
-        <FormInput id="lname" type="text" label="Last name" placeholder="Last name" />
+        <FormInput id="fname" type={inputTypes.text} label="First name" placeholder="First name" />
+        <FormInput id="lname" type={inputTypes.text} label="Last name" placeholder="Last name" />
         <FormDropDown
           title="Role"
           items={[

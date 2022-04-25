@@ -13,7 +13,6 @@ export const buttonColors = {
   primary: '#494357',
   general: '#C4A267'
 };
-
 export const buttonClasses = {
   [buttonSizes.big]: classes.button_big,
   [buttonSizes.medium]: classes.button_medium,

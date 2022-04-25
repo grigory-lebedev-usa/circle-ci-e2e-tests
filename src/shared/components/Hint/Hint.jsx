@@ -14,8 +14,8 @@ function Hint({ children, content }) {
 }
 
 Hint.propTypes = {
-  children: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired
+  children: PropTypes.node.isRequired,
+  content: PropTypes.node.isRequired
 };
 
 export default Hint;
