@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './App.css';
-import Header from './components/Header/Header';
 import PageWrapper from './shared/components/PageWrapper/PageWrapper';
+import FormButton from './shared/components/form-elements/FormButton/FormButton';
 
 function App() {
+  const [isLogin, setIsLogin] = useState(false);
   return (
     <div>
-      <PageWrapper>
-        <Header />
+      <PageWrapper isLogin={isLogin}>
+        <FormButton onClick={() => setIsLogin(true)}>Login</FormButton>
       </PageWrapper>
     </div>
   );
