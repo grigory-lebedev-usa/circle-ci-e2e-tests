@@ -6,7 +6,7 @@
   text-transform: uppercase;
   border-radius: 4px;
   background: #00A1E6;
-  border: 1px solid #00A1E6;
+  border: none;
   color: #FFF;
   margin-top: 10px;
   transition: 0.2s ease;
