@@ -20,7 +20,7 @@
   font-size: 13px;
   border: 1px solid var(--general-color);
   border-radius: 4px;
-  outline: none;
+  outline: 0px;
   padding: 12px 10px;
   box-sizing: border-box;
   background: #FFF;
@@ -32,8 +32,8 @@
   position: absolute;
   top: 12px;
   left: 10px;
-  background-color: #FFF;
-  padding: 0px 4px;
+  padding: 0 4px;
+  background: #FFF;
   color: #6A6A6A;
   font-size: 15px;
   z-index: 10;
@@ -42,13 +42,15 @@
 
 
 .input:focus + .input__label {
-  transform: translate(-4px, -18px);
+  transform: translate(-4px, -20px);
+  background: linear-gradient(180deg, transparent 52%, #FFF 48%);
   font-size: 13px;
   color: var(--focus-and-hover-color);
 }
 
 .input:not(:placeholder-shown).input:not(:focus) + .input__label {
-  transform: translate(-4px, -18px);
+  transform: translate(-4px, -20px);
+  background: linear-gradient(180deg, transparent 52%, #FFF 48%);
   font-size: 13px;
   color: var(--general-color);
 }

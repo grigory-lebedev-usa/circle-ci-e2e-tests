@@ -3,7 +3,7 @@ import React, { useState, useCallback, useRef } from 'react';
 // import uniqid from 'uniqid';
 
 import FormInput from '../../shared/components/form-elements/FormInput/FormInput';
-import FormDropDown from '../../shared/components/form-elements/FormDropDown/FormDropDown';
+import FormSelect from '../../shared/components/form-elements/FormSelect/FormSelect';
 import FormButton from '../../shared/components/form-elements/FormButton/FormButton';
 import { inputTypes } from '../../shared/components/form-elements/FormInput/form-input.constants';
 
@@ -13,15 +13,29 @@ import Notifications from '../../shared/components/Notifications/Notifications';
 
 // import { notificationTypes } from '../../shared/components/Notifications/components/Notification/notification.constants';
 
+import useClickOutside from '../../shared/hooks/useClickOutside';
+
+import { DRIVER_ROLE_ID, USER_ROLES } from '../../shared/constants/user-roles.constants';
+
 import classes from './sign-up-form.module.css';
 
 function SignUpForm() {
   const [notifications, setNotifications] = useState([]);
+  const [openedFormSelect, setOpenedFormSelect] = useState(false);
+  const [isHasSectionDriver, setIsHasSectionDriver] = useState(false);
+  const [selectedValue, setSelectedValue] = useState('');
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   // const [formValid, setFormValid] = useState(true);
   const notificationsRef = useRef([]);
+
+  const deleteNotification = useCallback((id) => {
+    notificationsRef.current = notificationsRef.current.filter(
+      (notification) => notification.id !== id
+    );
+    setNotifications(notificationsRef.current);
+  }, []);
 
   // const showNotification = (text, type) => {
   //   if (notifications.length === MAX_NOTIFICATION_NUMBER) {
@@ -31,27 +45,21 @@ function SignUpForm() {
   //   setNotifications([...notificationsRef.current]);
   // };
 
-  const deleteNotification = useCallback((id) => {
-    notificationsRef.current = notificationsRef.current.filter(
-      (notification) => notification.id !== id
-    );
-    setNotifications(notificationsRef.current);
-  }, []);
+  const handleListItemClick = ({ id, value }) => {
+    if (id === DRIVER_ROLE_ID) {
+      setIsHasSectionDriver(true);
+    } else setIsHasSectionDriver(false);
+    setSelectedValue(value);
+    setOpenedFormSelect(false);
+  };
 
-  const handlerEmail = (e) => {
+  const handleDropDownToggle = () => setOpenedFormSelect(!openedFormSelect);
+  const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
 
-  const handlerPassword = (e) => {
+  const handlePasswordChange = (e) => {
     setPassword(e.target.value);
-  };
-
-  const [isDriver, setIsDriver] = useState(false);
-
-  const handleDriver = (bool) => {
-    if (bool) {
-      setIsDriver(true);
-    } else setIsDriver(false);
   };
 
   return (
@@ -67,7 +75,7 @@ function SignUpForm() {
               label="Email"
               placeholder="Email"
               value={email}
-              onChange={handlerEmail}
+              onChange={handleEmailChange}
             />
             <FormInput
               id="pass"
@@ -75,7 +83,7 @@ function SignUpForm() {
               label="Password"
               placeholder="Password"
               value={password}
-              onChange={handlerPassword}
+              onChange={handlePasswordChange}
             />
             <FormInput
               id="confpass"
@@ -95,16 +103,17 @@ function SignUpForm() {
               label="Last name"
               placeholder="Last name"
             />
-            <FormDropDown
-              title="Role"
-              items={[
-                { id: 1, value: 'Client' },
-                { id: 2, value: 'Driver' }
-              ]}
-              select={handleDriver}
+            <FormSelect
+              isOpened={openedFormSelect}
+              label="Role"
+              items={USER_ROLES}
+              onToggle={handleDropDownToggle}
+              ref={useClickOutside(() => setOpenedFormSelect(false))}
+              onListItemClick={handleListItemClick}
+              value={selectedValue}
             />
           </div>
-          {isDriver && (
+          {isHasSectionDriver && (
             <div className={classes.car__block}>
               <p className={classes.car__title}>Car</p>
               <FormInput id="make" type={inputTypes.text} label="Make" placeholder="Make" />
