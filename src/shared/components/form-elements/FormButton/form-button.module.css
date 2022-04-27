@@ -19,3 +19,8 @@
 .button:active {
   transform: translateY(3px);
 }
+
+.button:disabled {
+  background: #AEAEAE;
+  cursor: not-allowed;
+}

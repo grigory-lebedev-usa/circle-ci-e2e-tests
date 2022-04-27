@@ -7,10 +7,12 @@
 }
 
 .dropdown__container {
+  margin-top: 10px;
   position: relative;
   width: 200px;
   height: 40px;
   border: 1px solid var(--general-color);
+  background: var(--bg-color);
   border-radius: 4px;
   box-sizing: border-box;
   z-index: 2;

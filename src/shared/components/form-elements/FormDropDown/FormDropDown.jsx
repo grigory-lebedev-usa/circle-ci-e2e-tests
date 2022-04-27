@@ -8,7 +8,7 @@ import { DropDownPropType } from '../../../prop-types';
 
 import classes from './form-drop-down.module.css';
 
-function FormDropDown({ title, items = [] }) {
+function FormDropDown({ title, items = [], select }) {
   const [opened, setOpened] = useState(false);
   const [selected, setSelected] = useState(false);
   const [text, setText] = useState('');
@@ -17,6 +17,9 @@ function FormDropDown({ title, items = [] }) {
     setOpened(false);
     setSelected(true);
     setText(e.target.textContent);
+    if (e.target.textContent === 'Driver') {
+      select(true);
+    } else select(false);
   };
 
   const handleToggle = () => setOpened(!opened);
@@ -66,7 +69,8 @@ function FormDropDown({ title, items = [] }) {
 
 FormDropDown.propTypes = {
   title: PropTypes.string,
-  items: PropTypes.arrayOf(DropDownPropType).isRequired
+  items: PropTypes.arrayOf(DropDownPropType).isRequired,
+  select: PropTypes.func.isRequired
 };
 
 FormDropDown.defaultProps = {
