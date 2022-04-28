@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import classes from './form-input.module.css';
 import { computedInputType, inputTypes } from './form-input.constants';
 
-function FormInput({ id, type, label, placeholder, onChange, value }) {
+function FormInput({ id, type, label, placeholder, onChange, value, name }) {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = () => {
@@ -21,6 +21,7 @@ function FormInput({ id, type, label, placeholder, onChange, value }) {
         placeholder={placeholder}
         onChange={onChange}
         value={value}
+        name={name}
       />
       <label htmlFor={id} className={classes.input__label}>
         {label}
@@ -48,7 +49,8 @@ FormInput.propTypes = {
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  name: PropTypes.string.isRequired
 };
 
 FormInput.defaultProps = {

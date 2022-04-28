@@ -7,7 +7,7 @@ import { DropDownPropType } from '../../../prop-types';
 import classes from './form-select.module.css';
 
 const FormSelect = React.forwardRef(
-  ({ isOpened, label, items, onToggle, onListItemClick, value }, ref) => {
+  ({ isOpened, label, items, onToggle, onListItemClick, value, name }, ref) => {
     const handleListItemClick = (item) => {
       if (onListItemClick) {
         onListItemClick(item);
@@ -17,6 +17,7 @@ const FormSelect = React.forwardRef(
     return (
       <div ref={ref}>
         <div
+          name={name}
           id="dropdown"
           role="listbox"
           tabIndex="0"
@@ -67,7 +68,8 @@ FormSelect.propTypes = {
   items: PropTypes.arrayOf(DropDownPropType).isRequired,
   onToggle: PropTypes.func.isRequired,
   onListItemClick: PropTypes.func,
-  value: PropTypes.string.isRequired
+  value: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
 };
 
 FormSelect.defaultProps = {
