@@ -28,6 +28,10 @@
   transition: all 0.2s ease;
 }
 
+.input_invalid {
+  border: 1px solid var(--error-color)
+}
+
 .input__label {
   position: absolute;
   top: 12px;
@@ -41,15 +45,15 @@
 }
 
 .input:focus + .input__label {
-  transform: translate(-4px, -20px);
-  background: linear-gradient(180deg, transparent 52%, #FFF 48%);
+  transform: translate(-4px, -18px);
+  background: linear-gradient(180deg, transparent 40%, #FFF 20%, #FFF 20% );
   font-size: 13px;
   color: var(--focus-and-hover-color);
 }
 
 .input:not(:placeholder-shown).input:not(:focus) + .input__label {
-  transform: translate(-4px, -20px);
-  background: linear-gradient(180deg, transparent 52%, #FFF 48%);
+  transform: translate(-4px, -18px);
+  background: linear-gradient(180deg, transparent 40%, #FFF 20%, #FFF 20% );
   font-size: 13px;
   color: var(--general-color);
 }

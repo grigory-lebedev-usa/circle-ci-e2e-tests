@@ -43,3 +43,11 @@
   right: 0;
   text-align: center;
 }
+
+.error {
+  color: #FC004C;
+  font-size: 12px;
+  margin: 5px 0px 0px 5px;
+  display: block;
+  width: 200px;
+}
