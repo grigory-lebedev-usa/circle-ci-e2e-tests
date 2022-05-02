@@ -1,6 +1,7 @@
 .dropdown__container {
   position: relative;
   width: auto;
+  z-index: 999;
 }
 
 .dropdown__content {
