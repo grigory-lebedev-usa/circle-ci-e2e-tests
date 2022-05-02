@@ -1,6 +1,8 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 
-import uniqid from 'uniqid';
+// import uniqid from 'uniqid';
+
+// import axios from 'axios';
 
 import FormInput from '../../shared/components/form-elements/FormInput/FormInput';
 import FormSelect from '../../shared/components/form-elements/FormSelect/FormSelect';
@@ -9,9 +11,9 @@ import { inputTypes } from '../../shared/components/form-elements/FormInput/form
 
 import Notifications from '../../shared/components/Notifications/Notifications';
 
-import { MAX_NOTIFICATION_NUMBER } from '../../shared/components/Notifications/notifications.constants';
+// import { MAX_NOTIFICATION_NUMBER } from '../../shared/components/Notifications/notifications.constants';
 
-import { notificationTypes } from '../../shared/components/Notifications/components/Notification/notification.constants';
+// import { notificationTypes } from '../../shared/components/Notifications/components/Notification/notification.constants';
 
 import useClickOutside from '../../shared/hooks/useClickOutside';
 
@@ -21,25 +23,19 @@ import {
   USER_ROLES
 } from '../../shared/constants/user-roles.constants';
 
-import ProgressSpinner from '../../shared/components/ProgressSpinner/ProgressSpinner';
+// import ProgressSpinner from '../../shared/components/ProgressSpinner/ProgressSpinner';
 
 import classes from './sign-up-form.module.css';
+import { generateValidationError } from './helpers/generateValidationError';
+import { initialErrorsState, initialFormState } from './sign-up-form.constants';
 
 function SignUpForm() {
   const [notifications, setNotifications] = useState([]);
   const [openedFormSelect, setOpenedFormSelect] = useState(false);
   const [isHasSectionDriver, setIsHasSectionDriver] = useState(false);
-  const [selectedValue, setSelectedValue] = useState('');
-  const [visibilitySpinner, setVisibilitySpinner] = useState(false);
+  const [selectedRole, setSelectedRole] = useState('');
+  // const [visibilitySpinner, setVisibilitySpinner] = useState(false);
   const notificationsRef = useRef([]);
-
-  const showSpinner = () => {
-    setVisibilitySpinner(true);
-
-    setTimeout(() => {
-      setVisibilitySpinner(false);
-    }, 3000);
-  };
 
   const deleteNotification = useCallback((id) => {
     notificationsRef.current = notificationsRef.current.filter(
@@ -48,37 +44,27 @@ function SignUpForm() {
     setNotifications(notificationsRef.current);
   }, []);
 
-  const showNotification = (text, type) => {
-    if (notifications.length === MAX_NOTIFICATION_NUMBER) {
-      notificationsRef.current.shift();
-    }
-    notificationsRef.current.push({ text, type, id: uniqid() });
-    setNotifications([...notificationsRef.current]);
-  };
+  // const showNotification = (text, type) => {
+  //   if (notifications.length === MAX_NOTIFICATION_NUMBER) {
+  //     notificationsRef.current.shift();
+  //   }
+  //   notificationsRef.current.push({ text, type, id: uniqid() });
+  //   setNotifications([...notificationsRef.current]);
+  // };
 
-  const handleListItemClick = ({ id: roleId, value: listItemText }) => {
+  const handleRoleSelect = ({ id: roleId, value: listItemText }) => {
     if (roleId === DRIVER_ROLE_ID) {
       setIsHasSectionDriver(true);
     } else setIsHasSectionDriver(false);
-    setSelectedValue(listItemText);
+    setSelectedRole(listItemText);
     setOpenedFormSelect(false);
   };
 
   const handleDropDownToggle = () => setOpenedFormSelect(!openedFormSelect);
 
-  const [formValid, setFormValid] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
 
-  const [formState, setFormState] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
-    firstName: '',
-    lastName: '',
-    make: '',
-    model: '',
-    year: '',
-    color: ''
-  });
+  const [formState, setFormState] = useState(initialFormState);
 
   const { email, password, confirmPassword, firstName, lastName, make, model, year, color } =
     formState;
@@ -88,213 +74,11 @@ function SignUpForm() {
     setFormState({ ...formState, [name]: value });
   };
 
-  const [errors, setErrors] = useState({
-    email: {
-      valid: false,
-      errorMessage: ''
-    },
-    password: {
-      valid: false,
-      errorMessage: ''
-    },
-    confirmPassword: {
-      valid: false,
-      errorMessage: ''
-    },
-    firstName: {
-      valid: false,
-      errorMessage: ''
-    },
-    lastName: {
-      valid: false,
-      errorMessage: ''
-    },
-    make: {
-      valid: false,
-      errorMessage: ''
-    },
-    model: {
-      valid: false,
-      errorMessage: ''
-    },
-    year: {
-      valid: false,
-      errorMessage: ''
-    },
-    color: {
-      valid: false,
-      errorMessage: ''
-    }
-  });
+  const [errors, setErrors] = useState(initialErrorsState);
 
   const handleInputBlur = (e) => {
     const { name, value } = e.target;
-    switch (name) {
-      case 'email':
-        if (!value) {
-          setErrors({
-            ...errors,
-            [name]: { valid: false, errorMessage: 'Email is required' }
-          });
-        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i.test(value)) {
-          setErrors({
-            ...errors,
-            [name]: { valid: false, errorMessage: 'Email none pass validation' }
-          });
-        } else {
-          setErrors({
-            ...errors,
-            [name]: { valid: true, errorMessage: '' }
-          });
-        }
-        break;
-      case 'password':
-        if (!value) {
-          setErrors({
-            ...errors,
-            [name]: { valid: false, errorMessage: 'Password is required' }
-          });
-        } else if (value.length < 6 || value.length > 20) {
-          setErrors({
-            ...errors,
-            [name]: {
-              valid: false,
-              errorMessage: 'Password need to be 6 characters and no more 20 characters'
-            }
-          });
-        } else {
-          setErrors({
-            ...errors,
-            [name]: { valid: true, errorMessage: '' }
-          });
-        }
-        break;
-      case 'confirmPassword':
-        if (!value) {
-          setErrors({
-            ...errors,
-            [name]: {
-              valid: false,
-              errorMessage: 'Confirm password is required'
-            }
-          });
-        } else if (value !== password) {
-          setErrors({
-            ...errors,
-            [name]: {
-              valid: false,
-              errorMessage: `Password doesn't match`
-            }
-          });
-        } else {
-          setErrors({
-            ...errors,
-            [name]: { valid: true, errorMessage: '' }
-          });
-        }
-        break;
-      case 'firstName':
-        if (!value) {
-          setErrors({
-            ...errors,
-            [name]: {
-              valid: false,
-              errorMessage: 'First name is required'
-            }
-          });
-        } else {
-          setErrors({
-            ...errors,
-            [name]: { valid: true, errorMessage: '' }
-          });
-        }
-        break;
-      case 'lastName':
-        if (!value) {
-          setErrors({
-            ...errors,
-            [name]: {
-              valid: false,
-              errorMessage: 'Last name is required'
-            }
-          });
-        } else {
-          setErrors({
-            ...errors,
-            [name]: { valid: true, errorMessage: '' }
-          });
-        }
-        break;
-      case 'make':
-        if (!value) {
-          setErrors({
-            ...errors,
-            [name]: {
-              valid: false,
-              errorMessage: 'Make is required'
-            }
-          });
-        } else {
-          setErrors({
-            ...errors,
-            [name]: { valid: true, errorMessage: '' }
-          });
-        }
-        break;
-      case 'model':
-        if (!value) {
-          setErrors({
-            ...errors,
-            [name]: {
-              valid: false,
-              errorMessage: 'Model is required'
-            }
-          });
-        } else {
-          setErrors({
-            ...errors,
-            [name]: { valid: true, errorMessage: '' }
-          });
-        }
-        break;
-      case 'year':
-        if (!value) {
-          setErrors({
-            ...errors,
-            [name]: {
-              valid: false,
-              errorMessage: 'Year is required'
-            }
-          });
-        } else {
-          setErrors({
-            ...errors,
-            [name]: { valid: true, errorMessage: '' }
-          });
-        }
-        break;
-      case 'color':
-        if (!value) {
-          setErrors({
-            ...errors,
-            [name]: {
-              valid: false,
-              errorMessage: 'Color is required'
-            }
-          });
-        } else {
-          setErrors({
-            ...errors,
-            [name]: { valid: true, errorMessage: '' }
-          });
-        }
-        break;
-      default:
-        setErrors({
-          ...errors
-        });
-        break;
-    }
+    setErrors(generateValidationError(name, value, errors, password));
   };
 
   useEffect(() => {
@@ -309,20 +93,20 @@ function SignUpForm() {
         errors.model.valid &&
         errors.year.valid &&
         errors.color.valid &&
-        selectedValue === USER_ROLES[DRIVER_ROLE_ID].value
+        selectedRole === USER_ROLES[DRIVER_ROLE_ID].value
       ) {
-        setFormValid(true);
-      } else setFormValid(false);
+        setIsFormValid(true);
+      } else setIsFormValid(false);
     } else if (
       errors.email.valid &&
       errors.password.valid &&
       errors.confirmPassword.valid &&
       errors.firstName.valid &&
       errors.lastName.valid &&
-      selectedValue === USER_ROLES[CLIENT_ROLE_ID].value
+      selectedRole === USER_ROLES[CLIENT_ROLE_ID].value
     ) {
-      setFormValid(true);
-    } else setFormValid(false);
+      setIsFormValid(true);
+    } else setIsFormValid(false);
   }, [
     errors.color.valid,
     errors.confirmPassword.valid,
@@ -334,29 +118,16 @@ function SignUpForm() {
     errors.password.valid,
     errors.year.valid,
     isHasSectionDriver,
-    selectedValue
+    selectedRole
   ]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    showNotification('You have successfully registered', notificationTypes.success);
-    showSpinner();
-    setFormState({
-      email: '',
-      password: '',
-      confirmPassword: '',
-      firstName: '',
-      lastName: '',
-      make: '',
-      model: '',
-      year: '',
-      color: ''
-    });
   };
 
   return (
     <form className={classes.form__wrapper} onSubmit={handleSubmit}>
-      <ProgressSpinner isOpened={visibilitySpinner} />
+      {/* <ProgressSpinner isOpened={visibilitySpinner} /> */}
       <Notifications notifications={notifications} onDelete={deleteNotification} />
       <div className={classes.form__content}>
         <h1 className={classes.form__title}>Sign Up</h1>
@@ -439,8 +210,8 @@ function SignUpForm() {
               items={USER_ROLES}
               onToggle={handleDropDownToggle}
               ref={useClickOutside(() => setOpenedFormSelect(false))}
-              onListItemClick={handleListItemClick}
-              value={selectedValue}
+              onListItemClick={handleRoleSelect}
+              value={selectedRole}
             />
           </div>
           {isHasSectionDriver && (
@@ -505,7 +276,7 @@ function SignUpForm() {
             </div>
           )}
           <div className={classes.button}>
-            <FormButton disabled={!formValid}>Register</FormButton>
+            <FormButton disabled={!isFormValid}>Register</FormButton>
           </div>
         </div>
       </div>
