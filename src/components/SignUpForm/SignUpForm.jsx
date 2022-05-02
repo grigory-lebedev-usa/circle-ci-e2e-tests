@@ -1,9 +1,7 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 
-// import uniqid from 'uniqid';
-
-// import axios from 'axios';
-// TODO: I commented code for the next ticket
+import uniqid from 'uniqid';
+import axios from 'axios';
 
 import FormInput from '../../shared/components/form-elements/FormInput/FormInput';
 import FormSelect from '../../shared/components/form-elements/FormSelect/FormSelect';
@@ -12,10 +10,9 @@ import { inputTypes } from '../../shared/components/form-elements/FormInput/form
 
 import Notifications from '../../shared/components/Notifications/Notifications';
 
-// import { MAX_NOTIFICATION_NUMBER } from '../../shared/components/Notifications/notifications.constants';
+import { MAX_NOTIFICATION_NUMBER } from '../../shared/components/Notifications/notifications.constants';
 
-// import { notificationTypes } from '../../shared/components/Notifications/components/Notification/notification.constants';
-// TODO: I commented code for the next ticket
+import { notificationTypes } from '../../shared/components/Notifications/components/Notification/notification.constants';
 
 import useClickOutside from '../../shared/hooks/useClickOutside';
 
@@ -25,8 +22,7 @@ import {
   USER_ROLES
 } from '../../shared/constants/user-roles.constants';
 
-// import ProgressSpinner from '../../shared/components/ProgressSpinner/ProgressSpinner';
-// TODO: I commented code for the next ticket
+import ProgressSpinner from '../../shared/components/ProgressSpinner/ProgressSpinner';
 
 import classes from './sign-up-form.module.css';
 import { generateValidationError } from './helpers/generateValidationError';
@@ -37,8 +33,7 @@ function SignUpForm() {
   const [openedFormSelect, setOpenedFormSelect] = useState(false);
   const [isHasSectionDriver, setIsHasSectionDriver] = useState(false);
   const [selectedRole, setSelectedRole] = useState('');
-  // const [visibilitySpinner, setVisibilitySpinner] = useState(false);
-  // TODO: I commented code for the next ticket
+  const [visibilitySpinner, setVisibilitySpinner] = useState(false);
   const notificationsRef = useRef([]);
 
   const deleteNotification = useCallback((id) => {
@@ -48,14 +43,14 @@ function SignUpForm() {
     setNotifications(notificationsRef.current);
   }, []);
 
-  // const showNotification = (text, type) => {
-  //   if (notifications.length === MAX_NOTIFICATION_NUMBER) {
-  //     notificationsRef.current.shift();
-  //   }
-  //   notificationsRef.current.push({ text, type, id: uniqid() });
-  //   setNotifications([...notificationsRef.current]);
-  // };
-  // TODO: I commented code for the next ticket
+  const showNotification = (text, type) => {
+    if (notifications.length === MAX_NOTIFICATION_NUMBER) {
+      notificationsRef.current.shift();
+    }
+    notificationsRef.current.push({ text, type, id: uniqid() });
+    setNotifications([...notificationsRef.current]);
+  };
+
   const handleRoleSelect = ({ id: roleId, value: listItemText }) => {
     if (roleId === DRIVER_ROLE_ID) {
       setIsHasSectionDriver(true);
@@ -127,12 +122,53 @@ function SignUpForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setVisibilitySpinner(true);
+    if (isHasSectionDriver) {
+      try {
+        await axios.post('https://young-dusk-13958.herokuapp.com/register', {
+          email: email.toLowerCase(),
+          password,
+          firstName,
+          lastName,
+          role: selectedRole.toLowerCase(),
+          car: {
+            make,
+            model,
+            year,
+            color
+          }
+        });
+        showNotification(
+          'You have successfully registered, go to your email and pass verification',
+          notificationTypes.success
+        );
+      } catch (error) {
+        showNotification(error.response.data.message, notificationTypes.error);
+      }
+      setVisibilitySpinner(false);
+    } else {
+      try {
+        await axios.post('https://young-dusk-13958.herokuapp.com/register', {
+          email: email.toLowerCase(),
+          password,
+          firstName,
+          lastName,
+          role: selectedRole.toLowerCase()
+        });
+        showNotification(
+          'You have successfully registered, go to your email and pass verification',
+          notificationTypes.success
+        );
+      } catch (error) {
+        showNotification(error.response.data.message, notificationTypes.error);
+      }
+    }
+    setVisibilitySpinner(false);
   };
 
   return (
     <form className={classes.form__wrapper} onSubmit={handleSubmit}>
-      {/* <ProgressSpinner isOpened={visibilitySpinner} /> */}
-      {/* TODO: I commented code for the next ticket */}
+      <ProgressSpinner isOpened={visibilitySpinner} />
       <Notifications notifications={notifications} onDelete={deleteNotification} />
       <div className={classes.form__content}>
         <h1 className={classes.form__title}>Sign Up</h1>
