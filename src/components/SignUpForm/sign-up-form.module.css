@@ -12,7 +12,7 @@
 }
 
 .form__container {
-  padding: 15px 25px 65px 25px; 
+  padding: 35px 50px 125px 50px; 
   background: rgba(255, 254, 254, 0.7);
   border-radius: 4px;
   position: relative;
@@ -24,6 +24,7 @@
 .form__title {
   color: #fff;
   font-weight: 400;
+  font-size: 50px;
 }
 
 .car__block {
@@ -37,17 +38,15 @@
 
 .button {
   position: absolute;
-  bottom: 15px;
+  bottom: 25px;
   margin: 0 auto;
-  left: 0;
-  right: 0;
   text-align: center;
 }
 
 .error {
   color: #FC004C;
-  font-size: 12px;
+  font-size: 24px;
   margin: 5px 0px 0px 5px;
   display: block;
-  width: 200px;
+  width: 400px;
 }
