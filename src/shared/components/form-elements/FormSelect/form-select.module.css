@@ -7,13 +7,13 @@
 }
 
 .dropdown__container {
-  margin-top: 10px;
+  margin-top: 20px;
   position: relative;
-  width: 200px;
-  height: 40px;
+  width: 400px;
+  height: 80px;
   border: 1px solid var(--general-color);
   background: var(--bg-color);
-  border-radius: 4px;
+  border-radius: 8px;
   box-sizing: border-box;
   z-index: 2;
   cursor: pointer;
@@ -47,37 +47,37 @@
 
 .dropdown__label {
   position: absolute;
-  top: 12px;
-  left: 10px;
+  top: 24px;
+  left: 12px;
   background-color: var(--bg-color);
   padding: 0px 4px;
   color: #6A6A6A;
-  font-size: 15px;
+  font-size: 27px;
   z-index: 10;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
 
 .dropdown__label_active {
-  transform: translate(-4px, -20px);
+  transform: translate(-0px, -40px);
   background: linear-gradient(180deg, transparent 45%, #FFF 32%, #FFF 32%);
-  font-size: 13px;
+  font-size: 27px;
   color: var(--general-color);
 }
 
 .dropdown__label_text {
   position: absolute;
-  top: 10px;
+  top: 24px;
   left: 12px;
-  font-size: 15px;
+  font-size: 27px;
 }
 
 .dropdown__icon {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 13px;
-  height: 6px;
+  top: 35px;
+  right: 35px;
+  width: 29px;
+  height: 11px;
   background-image: url(/public/img/arrow_down.svg);
   background-position: 0 0;
   background-size: cover;
@@ -97,8 +97,8 @@
 
 .dropdown__item {
   position: relative;
-  width: 200px;
-  height: 40px;
+  width: 400px;
+  height: 80px;
   list-style-type: none;
   background-color: var(--bg-color);
   border: 1px solid var(--general-color);
@@ -115,7 +115,7 @@
 .dropdown__button {
   display: block;
   position: absolute;
-  top: 12px;
-  left: 10px;
-  font-size: 15px;
+  top: 24px;
+  left: 12px;
+  font-size: 27px;
 }

@@ -13,9 +13,11 @@
 
 .dropdown__text {
   color: #fff;
+  font-size: 28px;
 }
 
 .dropdown__arrow_down {
+  margin-left: 3px;
   width: 16px;
   height: 4px;
   background-image: url(/public/img/dropdown__arrow_down.svg);
@@ -27,7 +29,7 @@
   position: absolute;
   box-sizing: border-box;
   top: calc(100% + 5px);
-  right: calc(-14%);
+  right: calc(-9%);
   padding: 0;
   margin: 0;
   z-index: 2;
@@ -35,8 +37,8 @@
 
 .dropdown__item {
   position: relative;
-  width: 120px;
-  height: 40px;
+  padding: 10px 30px;
+  font-size: 28px;
   list-style-type: none;
   background: #3E3436;
   box-sizing: border-box;
