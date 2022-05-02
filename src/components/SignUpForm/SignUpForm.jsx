@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 
 import uniqid from 'uniqid';
-import axios from 'axios';
 
 import FormInput from '../../shared/components/form-elements/FormInput/FormInput';
 import FormSelect from '../../shared/components/form-elements/FormSelect/FormSelect';
@@ -23,6 +22,8 @@ import {
 } from '../../shared/constants/user-roles.constants';
 
 import ProgressSpinner from '../../shared/components/ProgressSpinner/ProgressSpinner';
+
+import { axiosInstance } from '../../services/axios.service';
 
 import classes from './sign-up-form.module.css';
 import { generateValidationError } from './helpers/generateValidationError';
@@ -125,7 +126,7 @@ function SignUpForm() {
     setVisibilitySpinner(true);
     if (isHasSectionDriver) {
       try {
-        await axios.post('https://young-dusk-13958.herokuapp.com/register', {
+        await axiosInstance.post('register', {
           email: email.toLowerCase(),
           password,
           firstName,
@@ -148,7 +149,7 @@ function SignUpForm() {
       setVisibilitySpinner(false);
     } else {
       try {
-        await axios.post('https://young-dusk-13958.herokuapp.com/register', {
+        await axiosInstance.post('register', {
           email: email.toLowerCase(),
           password,
           firstName,
