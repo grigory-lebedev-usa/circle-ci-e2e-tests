@@ -7,15 +7,21 @@
 }
 
 .dropdown__container {
+  margin-top: 10px;
   position: relative;
   width: 200px;
   height: 40px;
   border: 1px solid var(--general-color);
+  background: var(--bg-color);
   border-radius: 4px;
   box-sizing: border-box;
   z-index: 2;
   cursor: pointer;
   transition: .2s ease;
+}
+
+.dropdown__container_invalid {
+  border: 1px solid var(--error-color);
 }
 
 .dropdown__container:hover {
@@ -53,7 +59,8 @@
 }
 
 .dropdown__label_active {
-  transform: translate(-4px, -18px);
+  transform: translate(-4px, -20px);
+  background: linear-gradient(180deg, transparent 45%, #FFF 32%, #FFF 32%);
   font-size: 13px;
   color: var(--general-color);
 }

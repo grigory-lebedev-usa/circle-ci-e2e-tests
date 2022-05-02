@@ -3,15 +3,16 @@ export const inputTypes = {
   text: 'text',
   password: 'password',
   checkbox: 'checkbox',
+  number: 'number',
   submit: 'submit'
 };
 
 export const computedInputType = (type, showPassword) => {
   if (type !== inputTypes.password) {
-    return inputTypes.text;
+    return type;
   }
   if (type === inputTypes.password && showPassword) {
     return inputTypes.text;
   }
-  return inputTypes.password;
+  return type;
 };

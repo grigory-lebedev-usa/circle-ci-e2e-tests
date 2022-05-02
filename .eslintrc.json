@@ -18,15 +18,30 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react"],
+  "plugins": [
+    "react"
+  ],
   "rules": {
-    "indent": ["error", 2],
-    "prettier/prettier": ["error",  {"endOfLine": "auto", "tabWidth": 2 }],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto",
+        "tabWidth": 2
+      }
+    ],
     "react/react-in-jsx-scope": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "jsx-a11y/control-has-associated-label": "off",
-    "react/jsx-filename-extension": [1, { "extensions": ["index.js", ".jsx"] }],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          "index.js",
+          ".jsx"
+        ]
+      }
+    ],
     "import/prefer-default-export": "off",
     "import/order": [
       "error",
@@ -38,7 +53,9 @@
             "position": "before"
           }
         ],
-        "pathGroupsExcludedImportTypes": ["react"],
+        "pathGroupsExcludedImportTypes": [
+          "react"
+        ],
         "newlines-between": "always-and-inside-groups"
       }
     ]
