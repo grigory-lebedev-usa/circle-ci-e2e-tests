@@ -81,10 +81,11 @@
   background-image: url(/public/img/arrow_down.svg);
   background-position: 0 0;
   background-size: cover;
+  transition: transform 0.2s;
 }
 
 .dropdown__icon_active {
-  background-image: url(/public/img/arrow_up.svg);
+  transform: rotate(180deg);
 }
 
 .dropdown__list {
