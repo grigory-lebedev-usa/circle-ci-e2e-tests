@@ -1,7 +1,7 @@
-import { notificationTypes } from '../../shared/components/Notifications/components/Notification/notification.constants';
-import useNotifications from '../../shared/hooks/useNotifications';
-import useAppSpinner from '../../shared/hooks/useAppSpinner';
-import { axiosInstance } from '../axios.service';
+import { notificationTypes } from '../../../shared/components/Notifications/components/Notification/notification.constants';
+import useNotifications from '../../../shared/hooks/useNotifications';
+import useAppSpinner from '../../../shared/hooks/useAppSpinner';
+import { axiosInstance } from '../../../services/axios.service';
 
 export function useRegistration() {
   const { showSpinner, closeSpinner } = useAppSpinner();

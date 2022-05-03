@@ -5,12 +5,14 @@ import FormSelect from '../../shared/components/form-elements/FormSelect/FormSel
 import FormButton from '../../shared/components/form-elements/FormButton/FormButton';
 import { inputTypes } from '../../shared/components/form-elements/FormInput/form-input.constants';
 import useClickOutside from '../../shared/hooks/useClickOutside';
-import { useRegistration } from '../../services/hooks/useRegistration';
+
 import {
   CLIENT_ROLE_ID,
   DRIVER_ROLE_ID,
   USER_ROLES
 } from '../../shared/constants/user-roles.constants';
+
+import { useRegistration } from './hooks/useRegistration';
 
 import classes from './sign-up-form.module.css';
 import { generateValidationError } from './helpers/generateValidationError';
