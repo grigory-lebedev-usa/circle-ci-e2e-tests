@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 
 import classes from './progress-spinner.module.css';
 
-function ProgressSpinner({ isOpened }) {
+function ProgressSpinner({ isVisible }) {
   return (
     <div>
-      {isOpened && (
+      {isVisible && (
         <div className={classes.spinner__container}>
           <div className={classes.spinner} />
         </div>
@@ -17,11 +17,11 @@ function ProgressSpinner({ isOpened }) {
 }
 
 ProgressSpinner.propTypes = {
-  isOpened: PropTypes.bool
+  isVisible: PropTypes.bool
 };
 
 ProgressSpinner.defaultProps = {
-  isOpened: false
+  isVisible: false
 };
 
 export default ProgressSpinner;

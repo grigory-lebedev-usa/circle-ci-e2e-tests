@@ -1,56 +1,26 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react';
-
-import uniqid from 'uniqid';
+import React, { useState, useEffect } from 'react';
 
 import FormInput from '../../shared/components/form-elements/FormInput/FormInput';
 import FormSelect from '../../shared/components/form-elements/FormSelect/FormSelect';
 import FormButton from '../../shared/components/form-elements/FormButton/FormButton';
 import { inputTypes } from '../../shared/components/form-elements/FormInput/form-input.constants';
-
-import Notifications from '../../shared/components/Notifications/Notifications';
-
-import { MAX_NOTIFICATION_NUMBER } from '../../shared/components/Notifications/notifications.constants';
-
-import { notificationTypes } from '../../shared/components/Notifications/components/Notification/notification.constants';
-
 import useClickOutside from '../../shared/hooks/useClickOutside';
-
+import { useRegistration } from '../../services/hooks/useRegistration';
 import {
   CLIENT_ROLE_ID,
   DRIVER_ROLE_ID,
   USER_ROLES
 } from '../../shared/constants/user-roles.constants';
 
-import ProgressSpinner from '../../shared/components/ProgressSpinner/ProgressSpinner';
-
-import { axiosInstance } from '../../services/axios.service';
-
 import classes from './sign-up-form.module.css';
 import { generateValidationError } from './helpers/generateValidationError';
 import { initialErrorsState, initialFormState } from './sign-up-form.constants';
 
 function SignUpForm() {
-  const [notifications, setNotifications] = useState([]);
   const [openedFormSelect, setOpenedFormSelect] = useState(false);
   const [isHasSectionDriver, setIsHasSectionDriver] = useState(false);
   const [selectedRole, setSelectedRole] = useState('');
-  const [visibilitySpinner, setVisibilitySpinner] = useState(false);
-  const notificationsRef = useRef([]);
-
-  const deleteNotification = useCallback((id) => {
-    notificationsRef.current = notificationsRef.current.filter(
-      (notification) => notification.id !== id
-    );
-    setNotifications(notificationsRef.current);
-  }, []);
-
-  const showNotification = (text, type) => {
-    if (notifications.length === MAX_NOTIFICATION_NUMBER) {
-      notificationsRef.current.shift();
-    }
-    notificationsRef.current.push({ text, type, id: uniqid() });
-    setNotifications([...notificationsRef.current]);
-  };
+  const { registerDriver, registerClient } = useRegistration();
 
   const handleRoleSelect = ({ id: roleId, value: listItemText }) => {
     if (roleId === DRIVER_ROLE_ID) {
@@ -123,54 +93,28 @@ function SignUpForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setVisibilitySpinner(true);
     if (isHasSectionDriver) {
-      try {
-        await axiosInstance.post('register', {
-          email: email.toLowerCase(),
-          password,
-          firstName,
-          lastName,
-          role: selectedRole.toLowerCase(),
-          car: {
-            make,
-            model,
-            year,
-            color
-          }
-        });
-        showNotification(
-          'You have successfully registered, go to your email and pass verification',
-          notificationTypes.success
-        );
-      } catch (error) {
-        showNotification(error.response.data.message, notificationTypes.error);
-      }
-      setVisibilitySpinner(false);
+      await registerDriver({
+        email: email.toLowerCase(),
+        password,
+        firstName,
+        lastName,
+        role: selectedRole.toLowerCase(),
+        car: { make, model, year, color }
+      });
     } else {
-      try {
-        await axiosInstance.post('register', {
-          email: email.toLowerCase(),
-          password,
-          firstName,
-          lastName,
-          role: selectedRole.toLowerCase()
-        });
-        showNotification(
-          'You have successfully registered, go to your email and pass verification',
-          notificationTypes.success
-        );
-      } catch (error) {
-        showNotification(error.response.data.message, notificationTypes.error);
-      }
+      await registerClient({
+        email: email.toLowerCase(),
+        password,
+        firstName,
+        lastName,
+        role: selectedRole.toLowerCase()
+      });
     }
-    setVisibilitySpinner(false);
   };
 
   return (
     <form className={classes.form__wrapper} onSubmit={handleSubmit}>
-      <ProgressSpinner isOpened={visibilitySpinner} />
-      <Notifications notifications={notifications} onDelete={deleteNotification} />
       <div className={classes.form__content}>
         <h1 className={classes.form__title}>Sign Up</h1>
         <div className={classes.form__container}>
