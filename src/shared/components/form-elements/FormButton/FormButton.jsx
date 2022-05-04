@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 
 import classes from './form-button.module.css';
 
-function FormButton({ children, onClick, disabled }) {
+function FormButton({ children, onClick, disabled, styles }) {
   return (
-    <div>
+    <div className={styles}>
       <button type="submit" disabled={disabled} onClick={onClick} className={classes.button}>
         {children}
       </button>
@@ -17,13 +17,15 @@ function FormButton({ children, onClick, disabled }) {
 FormButton.propTypes = {
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  styles: PropTypes.string
 };
 
 FormButton.defaultProps = {
   // eslint-disable-next-line prettier/prettier
   onClick: () => { },
-  disabled: false
+  disabled: false,
+  styles: ''
 };
 
 export default FormButton;

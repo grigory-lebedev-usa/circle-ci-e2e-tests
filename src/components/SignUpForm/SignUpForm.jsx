@@ -122,6 +122,7 @@ function SignUpForm() {
               onChange={handleInputChange}
               onBlur={handleInputBlur}
               errorMessage={errors.email.errorMessage}
+              styles={classes.input}
             />
             {errors.email.errorMessage && (
               <span className={classes.error}>{errors.email.errorMessage}</span>
@@ -136,6 +137,7 @@ function SignUpForm() {
               onChange={handleInputChange}
               onBlur={handleInputBlur}
               errorMessage={errors.password.errorMessage}
+              styles={classes.input}
             />
             {errors.password.errorMessage && (
               <span className={classes.error}>{errors.password.errorMessage}</span>
@@ -150,6 +152,7 @@ function SignUpForm() {
               onChange={handleInputChange}
               onBlur={handleInputBlur}
               errorMessage={errors.confirmPassword.errorMessage}
+              styles={classes.input}
             />
             {errors.confirmPassword.errorMessage && (
               <span className={classes.error}>{errors.confirmPassword.errorMessage}</span>
@@ -164,6 +167,7 @@ function SignUpForm() {
               onChange={handleInputChange}
               onBlur={handleInputBlur}
               errorMessage={errors.firstName.errorMessage}
+              styles={classes.input}
             />
             {errors.firstName.errorMessage && (
               <span className={classes.error}>{errors.firstName.errorMessage}</span>
@@ -178,6 +182,7 @@ function SignUpForm() {
               onChange={handleInputChange}
               onBlur={handleInputBlur}
               errorMessage={errors.lastName.errorMessage}
+              styles={classes.input}
             />
             {errors.lastName.errorMessage && (
               <span className={classes.error}>{errors.lastName.errorMessage}</span>
@@ -203,6 +208,7 @@ function SignUpForm() {
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}
                 errorMessage={errors.make.errorMessage}
+                styles={classes.input}
               />
               {errors.make.errorMessage && (
                 <span className={classes.error}>{errors.make.errorMessage}</span>
@@ -217,6 +223,7 @@ function SignUpForm() {
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}
                 errorMessage={errors.model.errorMessage}
+                styles={classes.input}
               />
               {errors.model.errorMessage && (
                 <span className={classes.error}>{errors.model.errorMessage}</span>
@@ -231,6 +238,7 @@ function SignUpForm() {
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}
                 errorMessage={errors.year.errorMessage}
+                styles={classes.input}
               />
               {errors.year.errorMessage && (
                 <span className={classes.error}>{errors.year.errorMessage}</span>
@@ -245,15 +253,16 @@ function SignUpForm() {
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}
                 errorMessage={errors.color.errorMessage}
+                styles={classes.input}
               />
               {errors.color.errorMessage && (
                 <span className={classes.error}>{errors.color.errorMessage}</span>
               )}
             </div>
           )}
-          <div className={classes.button}>
-            <FormButton disabled={!isFormValid}>Register</FormButton>
-          </div>
+          <FormButton disabled={!isFormValid} styles={classes.button}>
+            Register
+          </FormButton>
         </div>
       </div>
     </form>

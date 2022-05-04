@@ -12,7 +12,7 @@
 }
 
 .form__container {
-  padding: 50px 50px 125px 50px;
+  padding: 50px;
   background: rgba(255, 254, 254, 0.7);
   border-radius: 4px;
   position: relative;
@@ -26,22 +26,8 @@
   font-size: 50px;
 }
 
-.car__block {
-  margin-left: 25px;
-}
-
-.car__title {
-  font-size: 36px;
-  margin-left: 15px;
-}
-
 .button {
-  position: absolute;
-  bottom: 25px;
-  margin: 0 auto;
-  right: 0;
-  left: 0;
-  text-align: center;
+  margin-top: 25px;
 }
 
 .input:first-child {
@@ -49,7 +35,7 @@
 }
 
 .input {
-  margin-top: 20px;
+  margin-top: 50px;
 }
 
 .error {
@@ -58,4 +44,17 @@
   margin: 5px 0px 0px 5px;
   display: block;
   width: 400px;
+}
+
+.checkbox {
+  margin-top: 36px;
+}
+
+.link:first-child {
+  margin-top: 36px;
+}
+
+.link {
+  margin-top: 27px;
+  text-align: center;
 }

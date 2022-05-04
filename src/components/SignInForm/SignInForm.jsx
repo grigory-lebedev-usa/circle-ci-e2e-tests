@@ -1,0 +1,93 @@
+import React, { useEffect, useState } from 'react';
+
+import FormInput from '../../shared/components/form-elements/FormInput/FormInput';
+import FormButton from '../../shared/components/form-elements/FormButton/FormButton';
+
+import { inputTypes } from '../../shared/components/form-elements/FormInput/form-input.constants';
+
+import FormCheckbox from '../../shared/components/form-elements/FormCheckbox/FormCheckbox';
+
+import Link from '../../shared/components/Link/Link';
+
+import classes from './sign-in-form.module.css';
+import { initialErrors, initialFormState } from './sign-in-form.constants';
+import { generateValidationError } from './helpers/generateValidationError';
+
+function SignInForm() {
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [formState, setFormState] = useState(initialFormState);
+  const { email, password } = formState;
+  const [errors, setErrors] = useState(initialErrors);
+
+  useEffect(() => {
+    if (errors.email.valid && errors.password.valid) {
+      setIsFormValid(true);
+    } else setIsFormValid(false);
+  }, [errors.email.valid, errors.password.valid]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormState({ ...formState, [name]: value });
+  };
+
+  const handleInputBlur = (e) => {
+    const { name, value } = e.target;
+    setErrors(generateValidationError(name, value, errors));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  return (
+    <form className={classes.form__wrapper} onSubmit={handleSubmit}>
+      <div className={classes.form__content}>
+        <h1 className={classes.form__title}>Sign In</h1>
+        <div className={classes.form__container}>
+          <div>
+            <FormInput
+              id="email"
+              type={inputTypes.email}
+              label="Email"
+              placeholder="Email"
+              name="email"
+              value={email}
+              onChange={handleInputChange}
+              onBlur={handleInputBlur}
+              styles={classes.input}
+            />
+            {errors.email.errorMessage && (
+              <span className={classes.error}>{errors.email.errorMessage}</span>
+            )}
+            <FormInput
+              id="password"
+              type={inputTypes.password}
+              label="Password"
+              placeholder="Password"
+              name="password"
+              value={password}
+              onChange={handleInputChange}
+              onBlur={handleInputBlur}
+              styles={classes.input}
+            />
+            {errors.password.errorMessage && (
+              <span className={classes.error}>{errors.password.errorMessage}</span>
+            )}
+            <FormCheckbox id="checkbox" label="Keep me logged in" styles={classes.checkbox} />
+            <FormButton disabled={!isFormValid} styles={classes.button}>
+              Login
+            </FormButton>
+            <Link href="#link" styles={classes.link}>
+              Forgot password?
+            </Link>
+            <Link href="#link" styles={classes.link}>
+              I don’t have an account
+            </Link>
+          </div>
+        </div>
+      </div>
+    </form>
+  );
+}
+
+export default SignInForm;

@@ -4,19 +4,24 @@ import PropTypes from 'prop-types';
 
 import classes from './link.module.css';
 
-function MyLink({ label, href }) {
+function Link({ children, href, styles }) {
   return (
-    <div>
-      <a className={classes.link} href={href} target="_blank" rel="noreferrer">
-        {label}
+    <div className={styles}>
+      <a className={classes.link} href={href}>
+        {children}
       </a>
     </div>
   );
 }
 
-MyLink.propTypes = {
-  label: PropTypes.string.isRequired,
-  href: PropTypes.string.isRequired
+Link.propTypes = {
+  children: PropTypes.node.isRequired,
+  href: PropTypes.string.isRequired,
+  styles: PropTypes.string
 };
 
-export default MyLink;
+Link.defaultProps = {
+  styles: ''
+};
+
+export default Link;
