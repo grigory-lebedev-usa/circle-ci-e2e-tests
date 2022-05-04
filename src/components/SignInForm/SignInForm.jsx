@@ -55,6 +55,7 @@ function SignInForm() {
               onChange={handleInputChange}
               onBlur={handleInputBlur}
               styles={classes.input}
+              errorMessage={errors.email.errorMessage}
             />
             {errors.email.errorMessage && (
               <span className={classes.error}>{errors.email.errorMessage}</span>
@@ -69,6 +70,7 @@ function SignInForm() {
               onChange={handleInputChange}
               onBlur={handleInputBlur}
               styles={classes.input}
+              errorMessage={errors.password.errorMessage}
             />
             {errors.password.errorMessage && (
               <span className={classes.error}>{errors.password.errorMessage}</span>
