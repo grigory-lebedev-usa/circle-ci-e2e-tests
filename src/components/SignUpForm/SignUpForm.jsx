@@ -4,7 +4,6 @@ import FormInput from '../../shared/components/form-elements/FormInput/FormInput
 import FormSelect from '../../shared/components/form-elements/FormSelect/FormSelect';
 import FormButton from '../../shared/components/form-elements/FormButton/FormButton';
 import { inputTypes } from '../../shared/components/form-elements/FormInput/form-input.constants';
-import useClickOutside from '../../shared/hooks/useClickOutside';
 
 import {
   CLIENT_ROLE_ID,
@@ -19,39 +18,14 @@ import { generateValidationError } from './helpers/generateValidationError';
 import { initialErrorsState, initialFormState } from './sign-up-form.constants';
 
 function SignUpForm() {
-  const [openedFormSelect, setOpenedFormSelect] = useState(false);
   const [isHasSectionDriver, setIsHasSectionDriver] = useState(false);
-  const [selectedRole, setSelectedRole] = useState('');
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [formState, setFormState] = useState(initialFormState);
+  const [errors, setErrors] = useState(initialErrorsState);
   const { registerDriver, registerClient } = useRegistration();
 
-  const handleRoleSelect = ({ id: roleId, value: listItemText }) => {
-    if (roleId === DRIVER_ROLE_ID) {
-      setIsHasSectionDriver(true);
-    } else setIsHasSectionDriver(false);
-    setSelectedRole(listItemText);
-    setOpenedFormSelect(false);
-  };
-
-  const handleDropDownToggle = () => setOpenedFormSelect(!openedFormSelect);
-
-  const [isFormValid, setIsFormValid] = useState(false);
-
-  const [formState, setFormState] = useState(initialFormState);
-
-  const { email, password, confirmPassword, firstName, lastName, make, model, year, color } =
+  const { email, password, confirmPassword, firstName, lastName, role, make, model, year, color } =
     formState;
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormState({ ...formState, [name]: value });
-  };
-
-  const [errors, setErrors] = useState(initialErrorsState);
-
-  const handleInputBlur = (e) => {
-    const { name, value } = e.target;
-    setErrors(generateValidationError(name, value, errors, password));
-  };
 
   useEffect(() => {
     if (isHasSectionDriver) {
@@ -65,7 +39,7 @@ function SignUpForm() {
         errors.model.valid &&
         errors.year.valid &&
         errors.color.valid &&
-        selectedRole === USER_ROLES[DRIVER_ROLE_ID].value
+        role === USER_ROLES[DRIVER_ROLE_ID].value
       ) {
         setIsFormValid(true);
       } else setIsFormValid(false);
@@ -75,7 +49,7 @@ function SignUpForm() {
       errors.confirmPassword.valid &&
       errors.firstName.valid &&
       errors.lastName.valid &&
-      selectedRole === USER_ROLES[CLIENT_ROLE_ID].value
+      role === USER_ROLES[CLIENT_ROLE_ID].value
     ) {
       setIsFormValid(true);
     } else setIsFormValid(false);
@@ -90,8 +64,25 @@ function SignUpForm() {
     errors.password.valid,
     errors.year.valid,
     isHasSectionDriver,
-    selectedRole
+    role
   ]);
+
+  const handleSelectChange = ({ id: roleId, value }) => {
+    if (roleId === DRIVER_ROLE_ID) {
+      setIsHasSectionDriver(true);
+    } else setIsHasSectionDriver(false);
+    setFormState({ ...formState, role: value });
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormState({ ...formState, [name]: value });
+  };
+
+  const handleInputBlur = (e) => {
+    const { name, value } = e.target;
+    setErrors(generateValidationError(name, value, errors, password));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -101,7 +92,7 @@ function SignUpForm() {
         password,
         firstName,
         lastName,
-        role: selectedRole.toLowerCase(),
+        role: role.toLowerCase(),
         car: { make, model, year, color }
       });
     } else {
@@ -110,7 +101,7 @@ function SignUpForm() {
         password,
         firstName,
         lastName,
-        role: selectedRole.toLowerCase()
+        role: role.toLowerCase()
       });
     }
   };
@@ -193,13 +184,10 @@ function SignUpForm() {
             )}
             <FormSelect
               id="role"
-              isOpened={openedFormSelect}
               label="Role"
               items={USER_ROLES}
-              onToggle={handleDropDownToggle}
-              ref={useClickOutside(() => setOpenedFormSelect(false))}
-              onListItemClick={handleRoleSelect}
-              value={selectedRole}
+              onChange={handleSelectChange}
+              value={role}
             />
           </div>
           {isHasSectionDriver && (

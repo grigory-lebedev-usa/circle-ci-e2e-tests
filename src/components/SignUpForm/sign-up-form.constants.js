@@ -19,6 +19,10 @@ export const initialErrorsState = {
     valid: false,
     errorMessage: ''
   },
+  role: {
+    valid: false,
+    errorMessage: ''
+  },
   make: {
     valid: false,
     errorMessage: ''
@@ -43,6 +47,7 @@ export const initialFormState = {
   confirmPassword: '',
   firstName: '',
   lastName: '',
+  role: '',
   make: '',
   model: '',
   year: '',

@@ -1,7 +1,7 @@
 import { notificationTypes } from '../../../shared/components/Notifications/components/Notification/notification.constants';
 import useNotifications from '../../../shared/hooks/useNotifications';
 import useAppSpinner from '../../../shared/hooks/useAppSpinner';
-import { axiosInstance } from '../../../services/axios.service';
+import { axiosService } from '../../../services/axios.service';
 
 export function useRegistration() {
   const { showSpinner, closeSpinner } = useAppSpinner();
@@ -9,7 +9,7 @@ export function useRegistration() {
   const registerDriver = async (requestPayload) => {
     try {
       showSpinner();
-      await axiosInstance.post('register', requestPayload);
+      await axiosService.post('register', requestPayload);
       showNotification(
         'You have successfully registered, go to your email and pass verification',
         notificationTypes.success
@@ -23,7 +23,7 @@ export function useRegistration() {
   const registerClient = async (requestPayload) => {
     try {
       showSpinner();
-      await axiosInstance.post('register', requestPayload);
+      await axiosService.post('register', requestPayload);
       showNotification(
         'You have successfully registered, go to your email and pass verification',
         notificationTypes.success
