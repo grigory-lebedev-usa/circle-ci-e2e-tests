@@ -1,23 +1,9 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react';
-
-// import uniqid from 'uniqid';
-
-// import axios from 'axios';
-// TODO: I commented code for the next ticket
+import React, { useState, useEffect } from 'react';
 
 import FormInput from '../../shared/components/form-elements/FormInput/FormInput';
 import FormSelect from '../../shared/components/form-elements/FormSelect/FormSelect';
 import FormButton from '../../shared/components/form-elements/FormButton/FormButton';
 import { inputTypes } from '../../shared/components/form-elements/FormInput/form-input.constants';
-
-import Notifications from '../../shared/components/Notifications/Notifications';
-
-// import { MAX_NOTIFICATION_NUMBER } from '../../shared/components/Notifications/notifications.constants';
-
-// import { notificationTypes } from '../../shared/components/Notifications/components/Notification/notification.constants';
-// TODO: I commented code for the next ticket
-
-import useClickOutside from '../../shared/hooks/useClickOutside';
 
 import {
   CLIENT_ROLE_ID,
@@ -25,65 +11,21 @@ import {
   USER_ROLES
 } from '../../shared/constants/user-roles.constants';
 
-// import ProgressSpinner from '../../shared/components/ProgressSpinner/ProgressSpinner';
-// TODO: I commented code for the next ticket
+import { useRegistration } from './hooks/useRegistration';
 
 import classes from './sign-up-form.module.css';
 import { generateValidationError } from './helpers/generateValidationError';
 import { initialErrorsState, initialFormState } from './sign-up-form.constants';
 
 function SignUpForm() {
-  const [notifications, setNotifications] = useState([]);
-  const [openedFormSelect, setOpenedFormSelect] = useState(false);
   const [isHasSectionDriver, setIsHasSectionDriver] = useState(false);
-  const [selectedRole, setSelectedRole] = useState('');
-  // const [visibilitySpinner, setVisibilitySpinner] = useState(false);
-  // TODO: I commented code for the next ticket
-  const notificationsRef = useRef([]);
-
-  const deleteNotification = useCallback((id) => {
-    notificationsRef.current = notificationsRef.current.filter(
-      (notification) => notification.id !== id
-    );
-    setNotifications(notificationsRef.current);
-  }, []);
-
-  // const showNotification = (text, type) => {
-  //   if (notifications.length === MAX_NOTIFICATION_NUMBER) {
-  //     notificationsRef.current.shift();
-  //   }
-  //   notificationsRef.current.push({ text, type, id: uniqid() });
-  //   setNotifications([...notificationsRef.current]);
-  // };
-  // TODO: I commented code for the next ticket
-  const handleRoleSelect = ({ id: roleId, value: listItemText }) => {
-    if (roleId === DRIVER_ROLE_ID) {
-      setIsHasSectionDriver(true);
-    } else setIsHasSectionDriver(false);
-    setSelectedRole(listItemText);
-    setOpenedFormSelect(false);
-  };
-
-  const handleDropDownToggle = () => setOpenedFormSelect(!openedFormSelect);
-
   const [isFormValid, setIsFormValid] = useState(false);
-
   const [formState, setFormState] = useState(initialFormState);
-
-  const { email, password, confirmPassword, firstName, lastName, make, model, year, color } =
-    formState;
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormState({ ...formState, [name]: value });
-  };
-
   const [errors, setErrors] = useState(initialErrorsState);
+  const { registerDriver, registerClient } = useRegistration();
 
-  const handleInputBlur = (e) => {
-    const { name, value } = e.target;
-    setErrors(generateValidationError(name, value, errors, password));
-  };
+  const { email, password, confirmPassword, firstName, lastName, role, make, model, year, color } =
+    formState;
 
   useEffect(() => {
     if (isHasSectionDriver) {
@@ -97,7 +39,7 @@ function SignUpForm() {
         errors.model.valid &&
         errors.year.valid &&
         errors.color.valid &&
-        selectedRole === USER_ROLES[DRIVER_ROLE_ID].value
+        role === USER_ROLES[DRIVER_ROLE_ID].value
       ) {
         setIsFormValid(true);
       } else setIsFormValid(false);
@@ -107,7 +49,7 @@ function SignUpForm() {
       errors.confirmPassword.valid &&
       errors.firstName.valid &&
       errors.lastName.valid &&
-      selectedRole === USER_ROLES[CLIENT_ROLE_ID].value
+      role === USER_ROLES[CLIENT_ROLE_ID].value
     ) {
       setIsFormValid(true);
     } else setIsFormValid(false);
@@ -122,18 +64,50 @@ function SignUpForm() {
     errors.password.valid,
     errors.year.valid,
     isHasSectionDriver,
-    selectedRole
+    role
   ]);
+
+  const handleSelectChange = ({ id: roleId, value }) => {
+    if (roleId === DRIVER_ROLE_ID) {
+      setIsHasSectionDriver(true);
+    } else setIsHasSectionDriver(false);
+    setFormState({ ...formState, role: value });
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormState({ ...formState, [name]: value });
+  };
+
+  const handleInputBlur = (e) => {
+    const { name, value } = e.target;
+    setErrors(generateValidationError(name, value, errors, password));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isHasSectionDriver) {
+      await registerDriver({
+        email: email.toLowerCase(),
+        password,
+        firstName,
+        lastName,
+        role: role.toLowerCase(),
+        car: { make, model, year, color }
+      });
+    } else {
+      await registerClient({
+        email: email.toLowerCase(),
+        password,
+        firstName,
+        lastName,
+        role: role.toLowerCase()
+      });
+    }
   };
 
   return (
     <form className={classes.form__wrapper} onSubmit={handleSubmit}>
-      {/* <ProgressSpinner isOpened={visibilitySpinner} /> */}
-      {/* TODO: I commented code for the next ticket */}
-      <Notifications notifications={notifications} onDelete={deleteNotification} />
       <div className={classes.form__content}>
         <h1 className={classes.form__title}>Sign Up</h1>
         <div className={classes.form__container}>
@@ -210,13 +184,10 @@ function SignUpForm() {
             )}
             <FormSelect
               id="role"
-              isOpened={openedFormSelect}
               label="Role"
               items={USER_ROLES}
-              onToggle={handleDropDownToggle}
-              ref={useClickOutside(() => setOpenedFormSelect(false))}
-              onListItemClick={handleRoleSelect}
-              value={selectedRole}
+              onChange={handleSelectChange}
+              value={role}
             />
           </div>
           {isHasSectionDriver && (

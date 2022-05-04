@@ -40,6 +40,8 @@
   position: absolute;
   bottom: 25px;
   margin: 0 auto;
+  right: 0;
+  left: 0;
   text-align: center;
 }
 

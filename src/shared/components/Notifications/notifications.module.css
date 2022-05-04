@@ -2,6 +2,7 @@
 
 .notification__container {
   position: fixed;
+  z-index: 1000;
   right: 25px;
   bottom: 25px;
 }
