@@ -9,6 +9,8 @@ import FormCheckbox from '../../shared/components/form-elements/FormCheckbox/For
 
 import Link from '../../shared/components/Link/Link';
 
+import { useLogin } from './hooks/useLogin';
+
 import classes from './sign-in-form.module.css';
 import { initialErrors, initialFormState } from './sign-in-form.constants';
 import { generateValidationError } from './helpers/generateValidationError';
@@ -18,6 +20,7 @@ function SignInForm() {
   const [formState, setFormState] = useState(initialFormState);
   const { email, password } = formState;
   const [errors, setErrors] = useState(initialErrors);
+  const { login } = useLogin();
 
   useEffect(() => {
     if (errors.email.valid && errors.password.valid) {
@@ -35,8 +38,9 @@ function SignInForm() {
     setErrors(generateValidationError(name, value, errors));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    await login({ email: email.toLowerCase(), password });
   };
 
   return (
