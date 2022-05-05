@@ -24,33 +24,36 @@ function FormInput({
   };
 
   return (
-    <div className={`${classes.input__container} ${styles}`}>
-      <input
-        id={id}
-        className={`${classes.input} ${errorMessage && classes.input_invalid}`}
-        type={computedInputType(type, showPassword)}
-        placeholder={placeholder}
-        onChange={onChange}
-        value={value}
-        name={name}
-        onBlur={onBlur}
-      />
-      <label htmlFor={id} className={classes.input__label}>
-        {label}
-      </label>
-      {type === inputTypes.password && (
-        <div className={classes.button__container}>
-          <button
-            type="button"
-            className={
-              showPassword
-                ? `${classes.password__button} ${classes.password__button_active}`
-                : classes.password__button
-            }
-            onClick={handleShowPassword}
-          />
-        </div>
-      )}
+    <div className={`${styles}`}>
+      <div className={`${classes.input__container}`}>
+        <input
+          id={id}
+          className={`${classes.input} ${errorMessage && classes.input_invalid}`}
+          type={computedInputType(type, showPassword)}
+          placeholder={placeholder}
+          onChange={onChange}
+          value={value}
+          name={name}
+          onBlur={onBlur}
+        />
+        <label htmlFor={id} className={classes.input__label}>
+          {label}
+        </label>
+        {type === inputTypes.password && (
+          <div className={classes.button__container}>
+            <button
+              type="button"
+              className={
+                showPassword
+                  ? `${classes.password__button} ${classes.password__button_active}`
+                  : classes.password__button
+              }
+              onClick={handleShowPassword}
+            />
+          </div>
+        )}
+      </div>
+      {errorMessage && <span className={classes.error}>{errorMessage}</span>}
     </div>
   );
 }

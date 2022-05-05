@@ -1,3 +1,5 @@
+@import url(/src/styles/colors.css);
+
 .form__wrapper {
   display: flex;
   align-items: center;
@@ -13,7 +15,7 @@
 
 .form__container {
   padding: 50px;
-  background: rgba(255, 254, 254, 0.7);
+  background: var(--form-background);
   border-radius: 4px;
   position: relative;
   display: flex;
@@ -36,14 +38,6 @@
 
 .input {
   margin-top: 50px;
-}
-
-.error {
-  color: #FC004C;
-  font-size: 24px;
-  margin: 5px 0px 0px 5px;
-  display: block;
-  width: 400px;
 }
 
 .checkbox {
