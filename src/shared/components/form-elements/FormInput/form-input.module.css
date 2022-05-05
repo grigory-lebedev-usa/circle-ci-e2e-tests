@@ -1,14 +1,9 @@
-:root {
-  --general-color:#000;
-  --focus-and-hover-color: #00A1E5;
-  --error-color: #FC004C;
-}
+@import url(/src/styles/colors.css);
 
 .input__container {
   position: relative;
   width: 400px;
   height: 80px;
-  margin-top: 20px;
 }
 
 .input {
@@ -98,4 +93,12 @@
 
 .password__button_active {
   background-image: url(/public/img/no-view.svg);
+}
+
+.error {
+  color: var(--input-and-textarea-error-color);
+  font-size: 24px;
+  margin: 10px 0px 0px 5px;
+  display: block;
+  width: 400px;
 }

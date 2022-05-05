@@ -10,6 +10,7 @@
   width: 33px;
   height: 33px;
   border: 1px solid #000;
+  background: #fff;
   border-radius: 3px;
   position: relative;
   z-index: 1;
@@ -20,18 +21,15 @@
   border: 1px solid #000;
 }
 
-.custom__checkbox {
-  background: none;
-}
 
 .custom__checkbox_active::after {
   position: absolute;
   top: 7px;
-  left: 6px;
+  left: 5px;
   content: "";
   width: 1rem;
   height: 0.3rem;
-  border: 5px solid black;
+  border: 7px solid black;
   border-right: none;
   border-top: none;
   transform: rotate(-45deg);

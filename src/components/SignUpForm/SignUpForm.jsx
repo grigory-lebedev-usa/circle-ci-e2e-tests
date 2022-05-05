@@ -11,10 +11,11 @@ import {
   USER_ROLES
 } from '../../shared/constants/user-roles.constants';
 
+import { generateValidationError } from '../helpers/generateValidationError';
+
 import { useRegistration } from './hooks/useRegistration';
 
 import classes from './sign-up-form.module.css';
-import { generateValidationError } from './helpers/generateValidationError';
 import { initialErrorsState, initialFormState } from './sign-up-form.constants';
 
 function SignUpForm() {
@@ -122,10 +123,8 @@ function SignUpForm() {
               onChange={handleInputChange}
               onBlur={handleInputBlur}
               errorMessage={errors.email.errorMessage}
+              styles={classes.input}
             />
-            {errors.email.errorMessage && (
-              <span className={classes.error}>{errors.email.errorMessage}</span>
-            )}
             <FormInput
               id="password"
               type={inputTypes.password}
@@ -136,10 +135,8 @@ function SignUpForm() {
               onChange={handleInputChange}
               onBlur={handleInputBlur}
               errorMessage={errors.password.errorMessage}
+              styles={classes.input}
             />
-            {errors.password.errorMessage && (
-              <span className={classes.error}>{errors.password.errorMessage}</span>
-            )}
             <FormInput
               id="confirm-password"
               type={inputTypes.password}
@@ -150,10 +147,8 @@ function SignUpForm() {
               onChange={handleInputChange}
               onBlur={handleInputBlur}
               errorMessage={errors.confirmPassword.errorMessage}
+              styles={classes.input}
             />
-            {errors.confirmPassword.errorMessage && (
-              <span className={classes.error}>{errors.confirmPassword.errorMessage}</span>
-            )}
             <FormInput
               id="first-name"
               type={inputTypes.text}
@@ -164,10 +159,8 @@ function SignUpForm() {
               onChange={handleInputChange}
               onBlur={handleInputBlur}
               errorMessage={errors.firstName.errorMessage}
+              styles={classes.input}
             />
-            {errors.firstName.errorMessage && (
-              <span className={classes.error}>{errors.firstName.errorMessage}</span>
-            )}
             <FormInput
               id="last-name"
               type={inputTypes.text}
@@ -178,10 +171,8 @@ function SignUpForm() {
               onChange={handleInputChange}
               onBlur={handleInputBlur}
               errorMessage={errors.lastName.errorMessage}
+              styles={classes.input}
             />
-            {errors.lastName.errorMessage && (
-              <span className={classes.error}>{errors.lastName.errorMessage}</span>
-            )}
             <FormSelect
               id="role"
               label="Role"
@@ -203,10 +194,8 @@ function SignUpForm() {
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}
                 errorMessage={errors.make.errorMessage}
+                styles={classes.input}
               />
-              {errors.make.errorMessage && (
-                <span className={classes.error}>{errors.make.errorMessage}</span>
-              )}
               <FormInput
                 id="model"
                 type={inputTypes.text}
@@ -217,10 +206,8 @@ function SignUpForm() {
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}
                 errorMessage={errors.model.errorMessage}
+                styles={classes.input}
               />
-              {errors.model.errorMessage && (
-                <span className={classes.error}>{errors.model.errorMessage}</span>
-              )}
               <FormInput
                 id="year"
                 type={inputTypes.number}
@@ -231,10 +218,8 @@ function SignUpForm() {
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}
                 errorMessage={errors.year.errorMessage}
+                styles={classes.input}
               />
-              {errors.year.errorMessage && (
-                <span className={classes.error}>{errors.year.errorMessage}</span>
-              )}
               <FormInput
                 id="color"
                 type={inputTypes.text}
@@ -245,15 +230,13 @@ function SignUpForm() {
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}
                 errorMessage={errors.color.errorMessage}
+                styles={classes.input}
               />
-              {errors.color.errorMessage && (
-                <span className={classes.error}>{errors.color.errorMessage}</span>
-              )}
             </div>
           )}
-          <div className={classes.button}>
-            <FormButton disabled={!isFormValid}>Register</FormButton>
-          </div>
+          <FormButton disabled={!isFormValid} styles={classes.button}>
+            Register
+          </FormButton>
         </div>
       </div>
     </form>

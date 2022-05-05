@@ -5,7 +5,18 @@ import PropTypes from 'prop-types';
 import classes from './form-input.module.css';
 import { computedInputType, inputTypes } from './form-input.constants';
 
-function FormInput({ id, type, label, placeholder, onChange, value, name, onBlur, errorMessage }) {
+function FormInput({
+  id,
+  type,
+  label,
+  placeholder,
+  onChange,
+  value,
+  name,
+  onBlur,
+  errorMessage,
+  styles
+}) {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = () => {
@@ -13,33 +24,36 @@ function FormInput({ id, type, label, placeholder, onChange, value, name, onBlur
   };
 
   return (
-    <div className={classes.input__container}>
-      <input
-        id={id}
-        className={`${classes.input} ${errorMessage && classes.input_invalid}`}
-        type={computedInputType(type, showPassword)}
-        placeholder={placeholder}
-        onChange={onChange}
-        value={value}
-        name={name}
-        onBlur={onBlur}
-      />
-      <label htmlFor={id} className={classes.input__label}>
-        {label}
-      </label>
-      {type === inputTypes.password && (
-        <div className={classes.button__container}>
-          <button
-            type="button"
-            className={
-              showPassword
-                ? `${classes.password__button} ${classes.password__button_active}`
-                : classes.password__button
-            }
-            onClick={handleShowPassword}
-          />
-        </div>
-      )}
+    <div className={`${styles}`}>
+      <div className={`${classes.input__container}`}>
+        <input
+          id={id}
+          className={`${classes.input} ${errorMessage && classes.input_invalid}`}
+          type={computedInputType(type, showPassword)}
+          placeholder={placeholder}
+          onChange={onChange}
+          value={value}
+          name={name}
+          onBlur={onBlur}
+        />
+        <label htmlFor={id} className={classes.input__label}>
+          {label}
+        </label>
+        {type === inputTypes.password && (
+          <div className={classes.button__container}>
+            <button
+              type="button"
+              className={
+                showPassword
+                  ? `${classes.password__button} ${classes.password__button_active}`
+                  : classes.password__button
+              }
+              onClick={handleShowPassword}
+            />
+          </div>
+        )}
+      </div>
+      {errorMessage && <span className={classes.error}>{errorMessage}</span>}
     </div>
   );
 }
@@ -53,11 +67,14 @@ FormInput.propTypes = {
   placeholder: PropTypes.string,
   name: PropTypes.string.isRequired,
   onBlur: PropTypes.func.isRequired,
-  errorMessage: PropTypes.string.isRequired
+  errorMessage: PropTypes.string,
+  styles: PropTypes.string
 };
 
 FormInput.defaultProps = {
-  placeholder: ''
+  placeholder: '',
+  errorMessage: '',
+  styles: ''
 };
 
 export default FormInput;
