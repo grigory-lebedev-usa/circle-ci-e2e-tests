@@ -6,8 +6,12 @@ import classes from './form-button.module.css';
 
 function FormButton({ children, onClick, disabled, styles }) {
   return (
-    <div className={styles}>
-      <button type="submit" disabled={disabled} onClick={onClick} className={classes.button}>
+    <div>
+      <button
+        type="submit"
+        disabled={disabled}
+        onClick={onClick}
+        className={`${classes.button} ${styles}`}>
         {children}
       </button>
     </div>
