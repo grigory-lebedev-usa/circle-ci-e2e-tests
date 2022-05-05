@@ -9,9 +9,10 @@ import FormCheckbox from '../../shared/components/form-elements/FormCheckbox/For
 
 import Link from '../../shared/components/Link/Link';
 
+import { generateValidationError } from '../helpers/generateValidationError';
+
 import classes from './sign-in-form.module.css';
 import { initialErrors, initialFormState } from './sign-in-form.constants';
-import { generateValidationError } from './helpers/generateValidationError';
 
 function SignInForm() {
   const [isFormValid, setIsFormValid] = useState(false);

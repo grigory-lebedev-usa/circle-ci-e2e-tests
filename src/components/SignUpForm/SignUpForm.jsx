@@ -11,10 +11,11 @@ import {
   USER_ROLES
 } from '../../shared/constants/user-roles.constants';
 
+import { generateValidationError } from '../helpers/generateValidationError';
+
 import { useRegistration } from './hooks/useRegistration';
 
 import classes from './sign-up-form.module.css';
-import { generateValidationError } from './helpers/generateValidationError';
 import { initialErrorsState, initialFormState } from './sign-up-form.constants';
 
 function SignUpForm() {
