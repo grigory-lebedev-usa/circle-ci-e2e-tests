@@ -124,9 +124,6 @@ function SignUpForm() {
               errorMessage={errors.email.errorMessage}
               styles={classes.input}
             />
-            {errors.email.errorMessage && (
-              <span className={classes.error}>{errors.email.errorMessage}</span>
-            )}
             <FormInput
               id="password"
               type={inputTypes.password}
@@ -139,9 +136,6 @@ function SignUpForm() {
               errorMessage={errors.password.errorMessage}
               styles={classes.input}
             />
-            {errors.password.errorMessage && (
-              <span className={classes.error}>{errors.password.errorMessage}</span>
-            )}
             <FormInput
               id="confirm-password"
               type={inputTypes.password}
@@ -154,9 +148,6 @@ function SignUpForm() {
               errorMessage={errors.confirmPassword.errorMessage}
               styles={classes.input}
             />
-            {errors.confirmPassword.errorMessage && (
-              <span className={classes.error}>{errors.confirmPassword.errorMessage}</span>
-            )}
             <FormInput
               id="first-name"
               type={inputTypes.text}
@@ -169,9 +160,6 @@ function SignUpForm() {
               errorMessage={errors.firstName.errorMessage}
               styles={classes.input}
             />
-            {errors.firstName.errorMessage && (
-              <span className={classes.error}>{errors.firstName.errorMessage}</span>
-            )}
             <FormInput
               id="last-name"
               type={inputTypes.text}
@@ -184,9 +172,6 @@ function SignUpForm() {
               errorMessage={errors.lastName.errorMessage}
               styles={classes.input}
             />
-            {errors.lastName.errorMessage && (
-              <span className={classes.error}>{errors.lastName.errorMessage}</span>
-            )}
             <FormSelect
               id="role"
               label="Role"
@@ -210,9 +195,6 @@ function SignUpForm() {
                 errorMessage={errors.make.errorMessage}
                 styles={classes.input}
               />
-              {errors.make.errorMessage && (
-                <span className={classes.error}>{errors.make.errorMessage}</span>
-              )}
               <FormInput
                 id="model"
                 type={inputTypes.text}
@@ -225,9 +207,6 @@ function SignUpForm() {
                 errorMessage={errors.model.errorMessage}
                 styles={classes.input}
               />
-              {errors.model.errorMessage && (
-                <span className={classes.error}>{errors.model.errorMessage}</span>
-              )}
               <FormInput
                 id="year"
                 type={inputTypes.number}
@@ -240,9 +219,6 @@ function SignUpForm() {
                 errorMessage={errors.year.errorMessage}
                 styles={classes.input}
               />
-              {errors.year.errorMessage && (
-                <span className={classes.error}>{errors.year.errorMessage}</span>
-              )}
               <FormInput
                 id="color"
                 type={inputTypes.text}
@@ -255,9 +231,6 @@ function SignUpForm() {
                 errorMessage={errors.color.errorMessage}
                 styles={classes.input}
               />
-              {errors.color.errorMessage && (
-                <span className={classes.error}>{errors.color.errorMessage}</span>
-              )}
             </div>
           )}
           <FormButton disabled={!isFormValid} styles={classes.button}>

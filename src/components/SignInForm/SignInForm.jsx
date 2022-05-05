@@ -20,9 +20,7 @@ function SignInForm() {
   const [errors, setErrors] = useState(initialErrors);
 
   useEffect(() => {
-    if (errors.email.valid && errors.password.valid) {
-      setIsFormValid(true);
-    } else setIsFormValid(false);
+    setIsFormValid(errors.email.valid && errors.password.valid);
   }, [errors.email.valid, errors.password.valid]);
 
   const handleInputChange = (e) => {
@@ -57,9 +55,6 @@ function SignInForm() {
               styles={classes.input}
               errorMessage={errors.email.errorMessage}
             />
-            {errors.email.errorMessage && (
-              <span className={classes.error}>{errors.email.errorMessage}</span>
-            )}
             <FormInput
               id="password"
               type={inputTypes.password}
@@ -72,9 +67,6 @@ function SignInForm() {
               styles={classes.input}
               errorMessage={errors.password.errorMessage}
             />
-            {errors.password.errorMessage && (
-              <span className={classes.error}>{errors.password.errorMessage}</span>
-            )}
             <FormCheckbox id="checkbox" label="Keep me logged in" styles={classes.checkbox} />
             <FormButton disabled={!isFormValid} styles={classes.button}>
               Login
