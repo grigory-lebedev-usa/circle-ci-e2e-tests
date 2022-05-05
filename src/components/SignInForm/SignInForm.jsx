@@ -13,6 +13,7 @@ import { generateValidationError } from '../helpers/generateValidationError';
 
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
 
+import { useLogin } from './hooks/useLogin';
 import classes from './sign-in-form.module.css';
 import { initialErrors, initialFormState } from './sign-in-form.constants';
 
@@ -22,6 +23,7 @@ function SignInForm() {
   const { email, password } = formState;
   const [errors, setErrors] = useState(initialErrors);
   const [isOpenedForgotPassword, setIsOpenedForgotPassword] = useState(false);
+  const { login } = useLogin();
 
   useEffect(() => {
     setIsFormValid(errors.email.valid && errors.password.valid);
@@ -45,8 +47,9 @@ function SignInForm() {
     setErrors(generateValidationError(name, value, errors));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    await login({ email: email.toLowerCase(), password });
   };
 
   return (

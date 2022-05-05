@@ -10,6 +10,7 @@ import FormInput from '../../shared/components/form-elements/FormInput/FormInput
 import { generateValidationError } from '../helpers/generateValidationError';
 
 import classes from './forgot-password.module.css';
+import { useForgotPassword } from './hooks/useForgotPassword';
 
 function ForgotPassword({ isOpened, onClose }) {
   const [isFormValid, setIsFormValid] = useState(false);
@@ -25,6 +26,8 @@ function ForgotPassword({ isOpened, onClose }) {
     setIsFormValid(errors.email.valid);
   }, [errors.email.valid]);
 
+  const { resetPassword } = useForgotPassword();
+
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -34,16 +37,23 @@ function ForgotPassword({ isOpened, onClose }) {
     setErrors(generateValidationError(name, value));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setEmail('');
     onClose();
+    await resetPassword({ email: email.toLowerCase() });
+    setEmail('');
+    setErrors({
+      email: {
+        valid: false,
+        errorMessage: ''
+      }
+    });
   };
 
   return (
     <div>
       {isOpened && (
-        <div className={classes.container}>
+        <div className={`${classes.container}`}>
           <p className={classes.text}>
             We need to know your email to send the link to reset you password.
           </p>
@@ -57,7 +67,6 @@ function ForgotPassword({ isOpened, onClose }) {
               value={email}
               onChange={handleEmailChange}
               onBlur={handleEmailBlur}
-              errorMessage={errors.email.errorMessage}
             />
             <FormButton disabled={!isFormValid} styles={classes.button}>
               Send
