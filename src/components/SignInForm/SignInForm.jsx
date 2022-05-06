@@ -32,6 +32,7 @@ function SignInForm() {
   // const showForgotPassword = () => {
   //   setIsOpenedForgotPassword(true);
   // };
+  // TODO: next task implement
 
   const closeForgotPassword = () => {
     setIsOpenedForgotPassword(false);
@@ -90,7 +91,11 @@ function SignInForm() {
               </FormButton>
               {/* <Link styles={classes.link} onClick={showForgotPassword}>
                 Forgot password?
-              </Link> */}
+              </Link> 
+              
+              TODO: next task implement 
+              */}
+
               <Link to="/register" styles={classes.link}>
                 I don’t have an account
               </Link>
