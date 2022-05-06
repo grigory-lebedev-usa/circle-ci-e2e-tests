@@ -4,9 +4,12 @@ import PropTypes from 'prop-types';
 
 import DropDown from '../../../../shared/components/DropDown/DropDown';
 
+import useAuth from '../../../../shared/hooks/useAuth';
+
 import classes from './navigation.module.css';
 
 function Navigation({ isLogin }) {
+  const { logout } = useAuth();
   return (
     <div>
       <div className={classes.dropdown__block}>
@@ -20,7 +23,7 @@ function Navigation({ isLogin }) {
       </div>
       {isLogin && (
         <div className={classes.logout__block}>
-          <button className={classes.logout_btn} type="submit">
+          <button className={classes.logout_btn} onClick={logout} type="submit">
             Log out
           </button>
         </div>
@@ -30,7 +33,7 @@ function Navigation({ isLogin }) {
 }
 
 Navigation.propTypes = {
-  isLogin: PropTypes.func.isRequired
+  isLogin: PropTypes.bool.isRequired
 };
 
 export default Navigation;

@@ -13,7 +13,10 @@ import { generateValidationError } from '../helpers/generateValidationError';
 
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
 
-import { useLogin } from './hooks/useLogin';
+import useAuth from '../../shared/hooks/useAuth';
+
+import { ROUTES } from '../../ app.constants';
+
 import classes from './sign-in-form.module.css';
 import { initialErrors, initialFormState } from './sign-in-form.constants';
 
@@ -23,11 +26,15 @@ function SignInForm() {
   const { email, password } = formState;
   const [errors, setErrors] = useState(initialErrors);
   const [isOpenedForgotPassword, setIsOpenedForgotPassword] = useState(false);
-  const { login } = useLogin();
+  const { login } = useAuth();
 
   useEffect(() => {
     setIsFormValid(errors.email.valid && errors.password.valid);
   }, [errors.email.valid, errors.password.valid]);
+
+  const showForgotPassword = () => {
+    setIsOpenedForgotPassword(true);
+  };
 
   const closeForgotPassword = () => {
     setIsOpenedForgotPassword(false);
@@ -84,10 +91,10 @@ function SignInForm() {
               <FormButton disabled={!isFormValid} styles={classes.button}>
                 Login
               </FormButton>
-
-              {/* TODO: implement forgot password functionality */}
-
-              <Link to="/register" styles={classes.link}>
+              <button className={classes.button__link} type="button" onClick={showForgotPassword}>
+                Forgot Password?
+              </button>
+              <Link to={ROUTES.REGISTER} styles={classes.link}>
                 I don’t have an account
               </Link>
             </div>

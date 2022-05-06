@@ -13,6 +13,8 @@
 
 .dropdown__text {
   color: #fff;
+  font-family: 'Rasa', sans-serif;
+  font-weight: 400;
   font-size: 28px;
 }
 
@@ -39,6 +41,8 @@
   position: relative;
   padding: 10px 30px;
   font-size: 28px;
+  font-family: 'Rasa', sans-serif;
+  font-weight: 400;
   list-style-type: none;
   background: #3E3436;
   box-sizing: border-box;

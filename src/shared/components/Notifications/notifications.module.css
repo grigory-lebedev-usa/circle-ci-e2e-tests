@@ -3,17 +3,17 @@
 .notification__container {
   position: fixed;
   z-index: 1000;
-  right: 25px;
-  bottom: 25px;
+  right: 50px;
+  bottom: 50px;
 }
 
 .notification {
   position: relative;
-  width: 300px;
-  min-height: 50px;
-  border-radius: 5px;
+  width: 600px;
+  min-height: 70px;
+  border-radius: 10px;
   text-align: left;
-  padding: 10px 35px 10px 15px;
+  padding: 20px 70px 20px 30px;
   margin-top: 15px;
   animation: notification-in-right 0.7s, notification-close 8.5s;
   transition: 0.3s ease;
@@ -37,7 +37,8 @@
 
 .notification__text {
   color: #fff;
-  font-size: 15px;
+  font-size: 25px;
+  line-height: 29px;
   margin: 0;
 }
 
@@ -50,7 +51,7 @@
   cursor: pointer;
   color: rgba(255, 255, 255, 0.85);
   transform: rotate(45deg);
-  font-size: 35px;
+  font-size: 50px;
   transition: all 0.3s ease;
 }
 
