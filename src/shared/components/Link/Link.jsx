@@ -1,22 +1,24 @@
 import React from 'react';
 
+import { Link as RouterLink } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 
 import classes from './link.module.css';
 
-function Link({ children, href, styles, onClick }) {
+function Link({ children, to, styles, onClick }) {
   return (
     <div className={styles}>
-      <a className={classes.link} href={href} onClick={onClick}>
+      <RouterLink to={to} className={classes.link} onClick={onClick}>
         {children}
-      </a>
+      </RouterLink>
     </div>
   );
 }
 
 Link.propTypes = {
   children: PropTypes.node.isRequired,
-  href: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired,
   styles: PropTypes.string,
   onClick: PropTypes.func
 };
