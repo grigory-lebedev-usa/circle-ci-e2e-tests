@@ -29,9 +29,9 @@ function SignInForm() {
     setIsFormValid(errors.email.valid && errors.password.valid);
   }, [errors.email.valid, errors.password.valid]);
 
-  const showForgotPassword = () => {
-    setIsOpenedForgotPassword(true);
-  };
+  // const showForgotPassword = () => {
+  //   setIsOpenedForgotPassword(true);
+  // };
 
   const closeForgotPassword = () => {
     setIsOpenedForgotPassword(false);
@@ -88,10 +88,10 @@ function SignInForm() {
               <FormButton disabled={!isFormValid} styles={classes.button}>
                 Login
               </FormButton>
-              <Link href="#link" styles={classes.link} onClick={showForgotPassword}>
+              {/* <Link styles={classes.link} onClick={showForgotPassword}>
                 Forgot password?
-              </Link>
-              <Link href="#link" styles={classes.link}>
+              </Link> */}
+              <Link to="/register" styles={classes.link}>
                 I don’t have an account
               </Link>
             </div>

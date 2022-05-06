@@ -11,7 +11,7 @@ export function useRegistration() {
       showSpinner();
       await axiosService.post('register', requestPayload);
       showNotification(
-        'You have successfully registered, go to your email and pass verification',
+        'We sent the activation link to email address. Please activate your account.',
         notificationTypes.success
       );
     } catch (error) {
@@ -25,7 +25,7 @@ export function useRegistration() {
       showSpinner();
       await axiosService.post('register', requestPayload);
       showNotification(
-        'You have successfully registered, go to your email and pass verification',
+        'We sent the activation link to email address. Please activate your account.',
         notificationTypes.success
       );
     } catch (error) {

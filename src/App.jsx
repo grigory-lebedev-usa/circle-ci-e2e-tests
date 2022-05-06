@@ -1,9 +1,11 @@
 import React from 'react';
 
+import { Routes, Route } from 'react-router-dom';
+
+import { ROUTES } from './ app.constants';
 import './App.css';
 
-// import SignUpForm from './components/SignUpForm/SignUpForm';
-// TODO: next task (router)
+import SignUpForm from './components/SignUpForm/SignUpForm';
 import SignInForm from './components/SignInForm/SignInForm';
 import PageWrapper from './shared/components/PageWrapper/PageWrapper';
 import { SpinnerProvider } from './shared/hooks/useAppSpinner';
@@ -15,7 +17,10 @@ function App() {
       <SpinnerProvider>
         <NotificationsProvider>
           <PageWrapper>
-            <SignInForm />
+            <Routes>
+              <Route path={ROUTES.REGISTER} element={<SignUpForm />} />
+              <Route path={ROUTES.LOGIN} element={<SignInForm />} />
+            </Routes>
           </PageWrapper>
         </NotificationsProvider>
       </SpinnerProvider>
