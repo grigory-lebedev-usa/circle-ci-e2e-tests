@@ -1,18 +1,12 @@
-:root {
-  --general-color: #000;
-  --bg-color: #fff;
-  --focus-and-hover-color: #00A1E5;
-  --bg-hover-color: #C7F1FF;
-  --error-color: #FC004C;
-}
+@import url(/src/styles/colors.css);
 
 .dropdown__container {
   margin-top: 20px;
   position: relative;
   width: 400px;
   height: 80px;
-  border: 1px solid var(--general-color);
-  background: var(--bg-color);
+  border: 1px solid #000;
+  background: #fff;
   border-radius: 8px;
   box-sizing: border-box;
   z-index: 2;
@@ -21,7 +15,7 @@
 }
 
 .dropdown__container_invalid {
-  border: 1px solid var(--error-color);
+  border: 1px solid var(--invalid-color);
 }
 
 .dropdown__container:hover {
@@ -38,11 +32,11 @@
 }
 
 .dropdown__container_active:hover {
-  border: 1px solid var(--general-color);
+  border: 1px solid #000;
 }
 
 .dropdown__container_active:hover .dropdown__label_active {
-  color: var(--general-color);
+  color: #000;
 }
 
 .dropdown__label {
@@ -62,7 +56,7 @@
   transform: translate(-0px, -40px);
   background: linear-gradient(180deg, transparent 45%, #FFF 32%, #FFF 32%);
   font-size: 27px;
-  color: var(--general-color);
+  color: #000;
 }
 
 .dropdown__label_text {
@@ -101,8 +95,8 @@
   width: 400px;
   height: 80px;
   list-style-type: none;
-  background-color: var(--bg-color);
-  border: 1px solid var(--general-color);
+  background-color: #fff;
+  border: 1px solid #000;
   border-top: none;
   box-sizing: border-box;
   cursor: pointer;
@@ -110,7 +104,7 @@
 }
 
 .dropdown__item:hover {
-  background-color: var(--bg-hover-color);
+  background-color: var(--hover-item-select-color);
 }
 
 .dropdown__button {

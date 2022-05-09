@@ -13,9 +13,7 @@ function Header({ isLogin }) {
       {isLogin && (
         <div className={classes.header}>
           <div className={classes.container}>
-            <div className={classes.header__content}>
-              <h1 className={classes.header__title}>GeneralSoft Taxi</h1>
-            </div>
+            <h1 className={classes.header__title}>GeneralSoft Taxi</h1>
           </div>
         </div>
       )}
@@ -24,7 +22,7 @@ function Header({ isLogin }) {
 }
 
 Header.propTypes = {
-  isLogin: PropTypes.func.isRequired
+  isLogin: PropTypes.bool.isRequired
 };
 
 export default Header;
