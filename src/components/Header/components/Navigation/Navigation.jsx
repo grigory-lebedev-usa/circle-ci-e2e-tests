@@ -23,7 +23,7 @@ function Navigation({ isLogin }) {
       </div>
       {isLogin && (
         <div className={classes.logout__block}>
-          <button className={classes.logout_btn} onClick={logout} type="submit">
+          <button className={classes.logout_btn} onClick={logout} type="button">
             Log out
           </button>
         </div>

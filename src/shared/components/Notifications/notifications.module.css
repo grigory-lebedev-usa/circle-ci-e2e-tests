@@ -24,15 +24,15 @@
 }
 
 .notification__success {
-  background-color: var(--success-color);
+  background-color: var(--notification-success-color);
 }
 
 .notification__warning {
-  background-color: var(--warning-color);
+  background-color: var(--notification-warning-color);
 }
 
 .notification__error {
-  background-color: var(--error-color);
+  background-color: var(--notification-error-color);
 }
 
 .notification__text {

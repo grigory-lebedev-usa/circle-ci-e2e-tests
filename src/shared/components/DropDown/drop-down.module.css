@@ -1,3 +1,5 @@
+@import url(/src/styles/colors.css);
+
 .dropdown__container {
   position: relative;
   width: auto;
@@ -44,7 +46,7 @@
   font-family: 'Rasa', sans-serif;
   font-weight: 400;
   list-style-type: none;
-  background: #3E3436;
+  background: var(--bg-dropdown-color);
   box-sizing: border-box;
   cursor: pointer;
   opacity: 0.9;
@@ -79,7 +81,7 @@
   border-top: none;
   border-right: 8px solid transparent;
   border-left: 8px solid transparent;
-  border-bottom: 8px solid #3E3436;
+  border-bottom: 8px solid var(--bg-dropdown-color);
 }
 
 .dropdown__value {

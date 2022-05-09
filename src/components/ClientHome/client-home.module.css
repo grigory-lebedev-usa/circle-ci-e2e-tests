@@ -1,3 +1,5 @@
+@import url(/src/styles/colors.css);
+
 .container {
   position: relative;
 }
@@ -38,8 +40,8 @@
 
 .line {
   width: 268px;
-  border: 5px solid #C4A267;
-  background-color: #C4A267;
+  border: 5px solid var(--primary-color);
+  background-color: var(--primary-color);
 }
 
 .block__text {
@@ -70,14 +72,14 @@
   font-size: 48px;
   line-height: 58px;
   text-transform: uppercase;
-  color: #C4A267;
+  color: var(--primary-color);
   margin-right: 30px;
 }
 
 .qualities__circle {
   width: 19px;
   height: 19px;
-  background-color: #C4A267;
+  background-color: var(--primary-color);
   border-radius: 50%;
   margin-right: 30px;
 }

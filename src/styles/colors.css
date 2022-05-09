@@ -1,10 +1,11 @@
 :root {
-  --general-color: #000;
+  --primary-color: #C4A267;
   --focus-and-hover-color: #00A1E5;
-  --input-and-textarea-error-color: #FC004C;
-  --success-color: #00CB82;
-  --warning-color: #E1CB00;
-  --error-color: #CF6402;
-  --form-background: rgba(255, 254, 254, 0.7);
-  --header-title: #C4A267;
+  --hover-item-select-color: #C7F1FF;
+  --invalid-color: #FC004C;
+  --notification-success-color: #00CB82;
+  --notification-warning-color: #E1CB00;
+  --notification-error-color: #CF6402;
+  --form-background-color: rgba(255, 254, 254, 0.7);
+  --bg-dropdown-color: #3E3436;
 }

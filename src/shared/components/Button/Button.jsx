@@ -9,7 +9,7 @@ function Button({ children, size, color, onClick, styles }) {
   return (
     <div className={`${classes.button__container} ${styles}`}>
       <button
-        type="submit"
+        type="button"
         onClick={onClick}
         style={{ backgroundColor: color }}
         className={`${classes.button} ${buttonClasses[size]}`}>

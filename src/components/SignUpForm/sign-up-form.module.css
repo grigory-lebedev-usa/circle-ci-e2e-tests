@@ -1,3 +1,5 @@
+@import url(/src/styles/colors.css);
+
 .form__wrapper {
   display: flex;
   align-items: center;
@@ -13,7 +15,7 @@
 
 .form__container {
   padding: 50px 50px 125px 50px;
-  background: rgba(255, 254, 254, 0.7);
+  background: var(--form-background-color);
   border-radius: 4px;
   position: relative;
   display: flex;
@@ -53,7 +55,7 @@
 }
 
 .error {
-  color: #FC004C;
+  color: var(--invalid-color);
   font-size: 24px;
   margin: 5px 0px 0px 5px;
   display: block;

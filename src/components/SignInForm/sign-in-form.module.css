@@ -15,7 +15,7 @@
 
 .form__container {
   padding: 50px;
-  background: var(--form-background);
+  background: var(--form-background-color);
   border-radius: 4px;
   position: relative;
   display: flex;
