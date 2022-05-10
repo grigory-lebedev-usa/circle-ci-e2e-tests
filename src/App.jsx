@@ -4,7 +4,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
-import { ROUTES } from './ app.constants';
+import { ROUTES } from './app.constants';
 import './App.css';
 
 import useAuth, { AuthProvider } from './shared/hooks/useAuth';
@@ -15,11 +15,12 @@ import PageWrapper from './shared/components/PageWrapper/PageWrapper';
 import ClientHome from './components/ClientHome/ClientHome';
 import SignUpForm from './components/SignUpForm/SignUpForm';
 import SignInForm from './components/SignInForm/SignInForm';
+import ClientOrder from './components/ClientOrder/ClientOrder';
 
 function RequireAuth({ children }) {
   const { isAuthed } = useAuth();
 
-  return isAuthed === true ? children : <Navigate to="/login" replace />;
+  return isAuthed === true ? children : <Navigate to={ROUTES.LOGIN} replace />;
 }
 
 RequireAuth.propTypes = {
@@ -42,6 +43,7 @@ function App() {
                     </RequireAuth>
                   }
                 />
+                <Route path={ROUTES.ORDER} element={<ClientOrder />} />
                 <Route path={ROUTES.REGISTER} element={<SignUpForm />} />
                 <Route path={ROUTES.LOGIN} element={<SignInForm />} />
               </Routes>

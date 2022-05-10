@@ -9,9 +9,8 @@ export const buttonSizes = {
 export const buttonColors = {
   accept: '#5DCE7C',
   cancel: '#CE6A5D',
-  disabled: '#AEAEAE',
-  primary: '#494357',
-  general: '#C4A267'
+  primary: '#C4A267',
+  general: '#494357'
 };
 export const buttonClasses = {
   [buttonSizes.big]: classes.button_big,

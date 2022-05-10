@@ -8,7 +8,7 @@ import { axiosService } from '../../services/axios.service';
 
 import { notificationTypes } from '../components/Notifications/components/Notification/notification.constants';
 
-import { ROUTES } from '../../ app.constants';
+import { ROUTES } from '../../app.constants';
 
 import useNotifications from './useNotifications';
 import useAppSpinner from './useAppSpinner';
@@ -17,7 +17,7 @@ const authContext = React.createContext();
 
 function useAuth() {
   const navigate = useNavigate();
-  const [isAuthed, setIsAuthed] = useState(false);
+  const [isAuthed, setIsAuthed] = useState(true);
   const { showSpinner, closeSpinner } = useAppSpinner();
   const { showNotification } = useNotifications();
 
