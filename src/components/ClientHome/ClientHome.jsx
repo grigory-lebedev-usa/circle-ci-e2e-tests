@@ -4,12 +4,14 @@ import Button from '../../shared/components/Button/Button';
 import { buttonColors, buttonSizes } from '../../shared/components/Button/button.constants';
 
 import classes from './client-home.module.css';
+import { useUser } from './hooks/useUser';
 
 function ClientHome() {
+  const { user } = useUser();
   return (
     <div className={classes.container}>
       <div className={classes.block__greetings}>
-        <p className={classes.greetings__text}>Welcome </p>
+        <p className={classes.greetings__text}>{`Welcome ${user.firstName} ${user.lastName}`}</p>
       </div>
       <div className={classes.block__title}>
         <h2 className={classes.title}>The best taxi in the world</h2>
