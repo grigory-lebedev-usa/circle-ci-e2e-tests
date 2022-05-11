@@ -4,7 +4,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
-import { ROUTES } from './app.constants';
+import { ROUTES } from './constants/app.constants';
 import './App.css';
 
 import useAuth, { AuthProvider } from './shared/hooks/useAuth';

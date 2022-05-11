@@ -4,7 +4,12 @@ import { notificationTypes } from '../../../shared/components/Notifications/comp
 import useNotifications from '../../../shared/hooks/useNotifications';
 import useAppSpinner from '../../../shared/hooks/useAppSpinner';
 import { axiosService } from '../../../services/axios.service';
+<<<<<<< HEAD
 import { ROUTES } from '../../../app.constants';
+=======
+import { ROUTES } from '../../../constants/app.constants';
+import { API_ROUTES } from '../../../constants/api.constants';
+>>>>>>> develop
 
 export function useRegistration() {
   const navigate = useNavigate();
@@ -13,7 +18,7 @@ export function useRegistration() {
   const registerDriver = async (requestPayload) => {
     try {
       showSpinner();
-      await axiosService.post('register', requestPayload);
+      await axiosService.post(API_ROUTES.REGISTER, requestPayload);
       showNotification(
         'We sent the activation link to email address. Please activate your account.',
         notificationTypes.success
@@ -28,7 +33,7 @@ export function useRegistration() {
   const registerClient = async (requestPayload) => {
     try {
       showSpinner();
-      await axiosService.post('register', requestPayload);
+      await axiosService.post(API_ROUTES.REGISTER, requestPayload);
       showNotification(
         'We sent the activation link to email address. Please activate your account.',
         notificationTypes.success
