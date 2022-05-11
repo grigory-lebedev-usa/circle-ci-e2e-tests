@@ -8,7 +8,9 @@ import { axiosService } from '../../services/axios.service';
 
 import { notificationTypes } from '../components/Notifications/components/Notification/notification.constants';
 
-import { ROUTES } from '../../ app.constants';
+import { ROUTES, STORAGE_KEYS } from '../../constants/app.constants';
+
+import { API_ROUTES } from '../../constants/api.constants';
 
 import useNotifications from './useNotifications';
 import useAppSpinner from './useAppSpinner';
@@ -24,9 +26,9 @@ function useAuth() {
   const login = async (requestPayload) => {
     try {
       showSpinner();
-      const response = await axiosService.post('login', requestPayload);
+      const response = await axiosService.post(API_ROUTES.LOGIN, requestPayload);
       showNotification('You have successfully logged in', notificationTypes.success);
-      localStorage.setItem('token', response.data.accessToken);
+      localStorage.setItem(STORAGE_KEYS.TOKEN, response.data.accessToken);
       setIsAuthed(true);
       navigate(ROUTES.HOME);
     } catch (error) {
@@ -37,7 +39,7 @@ function useAuth() {
   };
 
   const logout = () => {
-    localStorage.clear();
+    localStorage.removeItem(STORAGE_KEYS.TOKEN);
     setIsAuthed(false);
     navigate(ROUTES.LOGIN);
   };

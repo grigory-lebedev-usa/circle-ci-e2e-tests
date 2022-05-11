@@ -3,3 +3,8 @@ export const ROUTES = {
   LOGIN: '/login',
   HOME: '/'
 };
+
+export const STORAGE_KEYS = {
+  USER: 'user',
+  TOKEN: 'token'
+};

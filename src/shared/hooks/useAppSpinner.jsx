@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 
 import PropTypes from 'prop-types';
 
@@ -9,13 +9,13 @@ const SpinnerContext = React.createContext();
 function useAppSpinner() {
   const [visibilitySpinner, setVisibilitySpinner] = useState(false);
 
-  const showSpinner = () => {
+  const showSpinner = useCallback(() => {
     setVisibilitySpinner(true);
-  };
+  }, []);
 
-  const closeSpinner = () => {
+  const closeSpinner = useCallback(() => {
     setVisibilitySpinner(false);
-  };
+  }, []);
 
   return { visibilitySpinner, showSpinner, closeSpinner };
 }

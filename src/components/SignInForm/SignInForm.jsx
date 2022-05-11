@@ -15,7 +15,7 @@ import ForgotPassword from '../ForgotPassword/ForgotPassword';
 
 import useAuth from '../../shared/hooks/useAuth';
 
-import { ROUTES } from '../../ app.constants';
+import { ROUTES } from '../../constants/app.constants';
 
 import classes from './sign-in-form.module.css';
 import { initialErrors, initialFormState } from './sign-in-form.constants';
