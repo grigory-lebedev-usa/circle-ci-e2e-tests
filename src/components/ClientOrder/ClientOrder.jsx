@@ -5,18 +5,24 @@ import { inputTypes } from '../../shared/components/form-elements/FormInput/form
 import FormInput from '../../shared/components/form-elements/FormInput/FormInput';
 import Button from '../../shared/components/Button/Button';
 
-import { buttonColors, buttonSizes } from '../../shared/components/Button/button.constants';
+import {
+  buttonColors,
+  buttonSizes,
+  buttonTypes
+} from '../../shared/components/Button/button.constants';
 
 import { generateValidationError } from '../helpers/generateValidationError';
 
 import classes from './client-order.module.css';
 import { initialErrors, initialFormState } from './client-order.constants';
+import { useOrder } from './hooks/useOrder';
 
 function ClientOrder() {
   const [isFormValid, setIsFormValid] = useState(false);
   const [formState, setFormState] = useState(initialFormState);
   const { source, destination } = formState;
   const [errors, setErrors] = useState(initialErrors);
+  const { createOrder, deleteOrder, orderId } = useOrder();
 
   useEffect(() => {
     setIsFormValid(errors.source.valid && errors.destination.valid);
@@ -34,6 +40,11 @@ function ClientOrder() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    await createOrder({ source, destination });
+  };
+
+  const handleDeleteOrder = async () => {
+    await deleteOrder(orderId);
   };
 
   return (
@@ -71,8 +82,20 @@ function ClientOrder() {
             errorMessage={errors.destination.errorMessage}
           />
         </div>
-        <Button size={buttonSizes.big} color={buttonColors.primary} disabled={!isFormValid}>
+        <Button
+          size={buttonSizes.big}
+          color={buttonColors.primary}
+          disabled={!isFormValid}
+          type={buttonTypes.submit}>
           Order
+        </Button>
+        <Button
+          className={classes.button2}
+          size={buttonSizes.big}
+          color={buttonColors.primary}
+          type={buttonTypes.button}
+          onClick={handleDeleteOrder}>
+          Delete Order
         </Button>
       </form>
       <div className={classes.decoration__container}>
