@@ -119,7 +119,7 @@ function SignUpForm() {
               onChange={handleInputChange}
               onBlur={handleInputBlur}
               errorMessage={errors.email.errorMessage}
-              styles={classes.input}
+              className={classes.input}
             />
             <FormInput
               id="password"
@@ -131,7 +131,7 @@ function SignUpForm() {
               onChange={handleInputChange}
               onBlur={handleInputBlur}
               errorMessage={errors.password.errorMessage}
-              styles={classes.input}
+              className={classes.input}
             />
             <FormInput
               id="confirm-password"
@@ -143,7 +143,7 @@ function SignUpForm() {
               onChange={handleInputChange}
               onBlur={handleInputBlur}
               errorMessage={errors.confirmPassword.errorMessage}
-              styles={classes.input}
+              className={classes.input}
             />
             <FormInput
               id="first-name"
@@ -155,7 +155,7 @@ function SignUpForm() {
               onChange={handleInputChange}
               onBlur={handleInputBlur}
               errorMessage={errors.firstName.errorMessage}
-              styles={classes.input}
+              className={classes.input}
             />
             <FormInput
               id="last-name"
@@ -167,7 +167,7 @@ function SignUpForm() {
               onChange={handleInputChange}
               onBlur={handleInputBlur}
               errorMessage={errors.lastName.errorMessage}
-              styles={classes.input}
+              className={classes.input}
             />
             <FormSelect
               id="role"
@@ -190,7 +190,7 @@ function SignUpForm() {
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}
                 errorMessage={errors.make.errorMessage}
-                styles={classes.input}
+                className={classes.input}
               />
               <FormInput
                 id="model"
@@ -202,7 +202,7 @@ function SignUpForm() {
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}
                 errorMessage={errors.model.errorMessage}
-                styles={classes.input}
+                className={classes.input}
               />
               <FormInput
                 id="year"
@@ -214,7 +214,7 @@ function SignUpForm() {
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}
                 errorMessage={errors.year.errorMessage}
-                styles={classes.input}
+                className={classes.input}
               />
               <FormInput
                 id="color"
@@ -226,11 +226,11 @@ function SignUpForm() {
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}
                 errorMessage={errors.color.errorMessage}
-                styles={classes.input}
+                className={classes.input}
               />
             </div>
           )}
-          <FormButton disabled={!isFormValid} styles={classes.button}>
+          <FormButton disabled={!isFormValid} className={classes.button}>
             Register
           </FormButton>
         </div>

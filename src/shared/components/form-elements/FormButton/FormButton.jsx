@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 
 import classes from './form-button.module.css';
 
-function FormButton({ children, onClick, disabled, styles }) {
+function FormButton({ children, onClick, disabled, className }) {
   return (
     <div>
       <button
         type="submit"
         disabled={disabled}
         onClick={onClick}
-        className={`${classes.button} ${styles}`}>
+        className={`${classes.button} ${className}`}>
         {children}
       </button>
     </div>
@@ -22,14 +22,14 @@ FormButton.propTypes = {
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
-  styles: PropTypes.string
+  className: PropTypes.string
 };
 
 FormButton.defaultProps = {
   // eslint-disable-next-line prettier/prettier
   onClick: () => { },
   disabled: false,
-  styles: ''
+  className: ''
 };
 
 export default FormButton;

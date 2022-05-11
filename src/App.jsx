@@ -15,11 +15,12 @@ import PageWrapper from './shared/components/PageWrapper/PageWrapper';
 import ClientHome from './components/ClientHome/ClientHome';
 import SignUpForm from './components/SignUpForm/SignUpForm';
 import SignInForm from './components/SignInForm/SignInForm';
+import ClientOrder from './components/ClientOrder/ClientOrder';
 
 function RequireAuth({ children }) {
   const { isAuthed } = useAuth();
 
-  return isAuthed === true ? children : <Navigate to="/login" replace />;
+  return isAuthed === true ? children : <Navigate to={ROUTES.LOGIN} replace />;
 }
 
 RequireAuth.propTypes = {
@@ -39,6 +40,14 @@ function App() {
                   element={
                     <RequireAuth>
                       <ClientHome />
+                    </RequireAuth>
+                  }
+                />
+                <Route
+                  path={ROUTES.ORDER}
+                  element={
+                    <RequireAuth>
+                      <ClientOrder />
                     </RequireAuth>
                   }
                 />

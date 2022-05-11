@@ -1,7 +1,14 @@
 import React from 'react';
 
 import Button from '../../shared/components/Button/Button';
-import { buttonColors, buttonSizes } from '../../shared/components/Button/button.constants';
+import Link from '../../shared/components/Link/Link';
+import {
+  buttonColors,
+  buttonSizes,
+  buttonTypes
+} from '../../shared/components/Button/button.constants';
+
+import { ROUTES } from '../../constants/app.constants';
 
 import classes from './client-home.module.css';
 import { useUser } from './hooks/useUser';
@@ -32,10 +39,16 @@ function ClientHome() {
         <p className={classes.qualities__text}>24/7 Supports</p>
       </div>
       <div className={classes.block__buttons}>
-        <Button size={buttonSizes.big} color={buttonColors.general} styles={classes.button}>
-          Create order
-        </Button>
-        <Button size={buttonSizes.big} color={buttonColors.general}>
+        <Link to={ROUTES.ORDER}>
+          <Button
+            size={buttonSizes.big}
+            color={buttonColors.primary}
+            className={classes.button}
+            type={buttonTypes.button}>
+            Create order
+          </Button>
+        </Link>
+        <Button size={buttonSizes.big} color={buttonColors.primary} type={buttonTypes.button}>
           View history
         </Button>
       </div>

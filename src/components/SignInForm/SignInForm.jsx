@@ -72,7 +72,7 @@ function SignInForm() {
                 value={email}
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}
-                styles={classes.input}
+                className={classes.input}
                 errorMessage={errors.email.errorMessage}
               />
               <FormInput
@@ -84,18 +84,20 @@ function SignInForm() {
                 value={password}
                 onChange={handleInputChange}
                 onBlur={handleInputBlur}
-                styles={classes.input}
+                className={classes.input}
                 errorMessage={errors.password.errorMessage}
               />
-              <FormCheckbox id="checkbox" label="Keep me logged in" styles={classes.checkbox} />
-              <FormButton disabled={!isFormValid} styles={classes.button}>
+              <FormCheckbox id="checkbox" label="Keep me logged in" className={classes.checkbox} />
+              <FormButton disabled={!isFormValid} className={classes.button}>
                 Login
               </FormButton>
               <button className={classes.button__link} type="button" onClick={showForgotPassword}>
                 Forgot Password?
               </button>
-              <Link to={ROUTES.REGISTER} styles={classes.link}>
-                I don’t have an account
+              <Link to={ROUTES.REGISTER} className={classes.link}>
+                <button className={classes.button__link} type="button" onClick={showForgotPassword}>
+                  I don’t have an account
+                </button>
               </Link>
             </div>
           </div>
