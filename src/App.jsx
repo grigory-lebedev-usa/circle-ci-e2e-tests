@@ -20,7 +20,7 @@ import ClientOrder from './components/ClientOrder/ClientOrder';
 function RequireAuth({ children }) {
   const { isAuthed } = useAuth();
 
-  return isAuthed === true ? children : <Navigate to={ROUTES.HOME} replace />;
+  return isAuthed === true ? children : <Navigate to={ROUTES.LOGIN} replace />;
 }
 
 RequireAuth.propTypes = {
