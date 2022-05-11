@@ -4,12 +4,8 @@ import { notificationTypes } from '../../../shared/components/Notifications/comp
 import useNotifications from '../../../shared/hooks/useNotifications';
 import useAppSpinner from '../../../shared/hooks/useAppSpinner';
 import { axiosService } from '../../../services/axios.service';
-<<<<<<< HEAD
-import { ROUTES } from '../../../app.constants';
-=======
 import { ROUTES } from '../../../constants/app.constants';
 import { API_ROUTES } from '../../../constants/api.constants';
->>>>>>> develop
 
 export function useRegistration() {
   const navigate = useNavigate();
