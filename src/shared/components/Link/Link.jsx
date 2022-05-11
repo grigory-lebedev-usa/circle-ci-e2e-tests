@@ -4,12 +4,10 @@ import { Link as RouterLink } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
-import classes from './link.module.css';
-
-function Link({ children, to, styles, onClick }) {
+function Link({ children, to, className, onClick }) {
   return (
-    <div className={styles}>
-      <RouterLink to={to} className={classes.link} onClick={onClick}>
+    <div className={className}>
+      <RouterLink to={to} onClick={onClick}>
         {children}
       </RouterLink>
     </div>
@@ -19,12 +17,12 @@ function Link({ children, to, styles, onClick }) {
 Link.propTypes = {
   children: PropTypes.node.isRequired,
   to: PropTypes.string.isRequired,
-  styles: PropTypes.string,
+  className: PropTypes.string,
   onClick: PropTypes.func
 };
 
 Link.defaultProps = {
-  styles: '',
+  className: '',
   // eslint-disable-next-line prettier/prettier
   onClick: () => { }
 };

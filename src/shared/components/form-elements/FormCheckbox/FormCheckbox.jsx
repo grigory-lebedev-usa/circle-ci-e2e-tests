@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import classes from './form-checkbox.module.css';
 
-function FormCheckbox({ id, label, styles }) {
+function FormCheckbox({ id, label, className }) {
   const [checked, setChecked] = useState(false);
 
   const handleChecked = () => {
@@ -15,7 +15,7 @@ function FormCheckbox({ id, label, styles }) {
       role="checkbox"
       aria-checked="mixed"
       tabIndex="0"
-      className={`${classes.checkbox__container} ${styles}`}
+      className={`${classes.checkbox__container} ${className}`}
       onClick={handleChecked}>
       <input
         id={id}
@@ -36,11 +36,11 @@ function FormCheckbox({ id, label, styles }) {
 FormCheckbox.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  styles: PropTypes.string
+  className: PropTypes.string
 };
 
 FormCheckbox.defaultProps = {
-  styles: ''
+  className: ''
 };
 
 export default FormCheckbox;

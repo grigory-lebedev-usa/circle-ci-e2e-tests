@@ -43,7 +43,14 @@ function App() {
                     </RequireAuth>
                   }
                 />
-                <Route path={ROUTES.ORDER} element={<ClientOrder />} />
+                <Route
+                  path={ROUTES.ORDER}
+                  element={
+                    <RequireAuth>
+                      <ClientOrder />
+                    </RequireAuth>
+                  }
+                />
                 <Route path={ROUTES.REGISTER} element={<SignUpForm />} />
                 <Route path={ROUTES.LOGIN} element={<SignInForm />} />
               </Routes>

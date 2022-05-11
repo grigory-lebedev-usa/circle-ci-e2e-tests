@@ -2,7 +2,11 @@ import React from 'react';
 
 import Button from '../../shared/components/Button/Button';
 import Link from '../../shared/components/Link/Link';
-import { buttonColors, buttonSizes } from '../../shared/components/Button/button.constants';
+import {
+  buttonColors,
+  buttonSizes,
+  buttonTypes
+} from '../../shared/components/Button/button.constants';
 
 import { ROUTES } from '../../constants/app.constants';
 
@@ -36,11 +40,15 @@ function ClientHome() {
       </div>
       <div className={classes.block__buttons}>
         <Link to={ROUTES.ORDER}>
-          <Button size={buttonSizes.big} color={buttonColors.primary} styles={classes.button}>
+          <Button
+            size={buttonSizes.big}
+            color={buttonColors.primary}
+            className={classes.button}
+            type={buttonTypes.button}>
             Create order
           </Button>
         </Link>
-        <Button size={buttonSizes.big} color={buttonColors.primary}>
+        <Button size={buttonSizes.big} color={buttonColors.primary} type={buttonTypes.button}>
           View history
         </Button>
       </div>

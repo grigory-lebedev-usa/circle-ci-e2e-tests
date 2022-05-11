@@ -68,7 +68,7 @@ function ForgotPassword({ isOpened, onClose }) {
               onChange={handleEmailChange}
               onBlur={handleEmailBlur}
             />
-            <FormButton disabled={!isFormValid} styles={classes.button}>
+            <FormButton disabled={!isFormValid} className={classes.button}>
               Send
             </FormButton>
           </form>

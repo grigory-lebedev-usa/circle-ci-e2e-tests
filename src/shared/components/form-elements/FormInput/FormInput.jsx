@@ -15,7 +15,7 @@ function FormInput({
   name,
   onBlur,
   errorMessage,
-  styles
+  className
 }) {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -24,7 +24,7 @@ function FormInput({
   };
 
   return (
-    <div className={`${styles}`}>
+    <div className={`${className}`}>
       <div className={`${classes.input__container}`}>
         <input
           id={id}
@@ -68,13 +68,13 @@ FormInput.propTypes = {
   name: PropTypes.string.isRequired,
   onBlur: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,
-  styles: PropTypes.string
+  className: PropTypes.string
 };
 
 FormInput.defaultProps = {
   placeholder: '',
   errorMessage: '',
-  styles: ''
+  className: ''
 };
 
 export default FormInput;

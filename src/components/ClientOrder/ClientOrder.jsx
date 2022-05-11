@@ -64,7 +64,7 @@ function ClientOrder() {
             label="Destination"
             placeholder="Destination"
             name="destination"
-            styles={classes.input}
+            className={classes.input}
             value={destination}
             onChange={handleInputChange}
             onBlur={handleInputBlur}
