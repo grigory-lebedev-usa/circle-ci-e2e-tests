@@ -7,11 +7,13 @@ import classes from './client-home.module.css';
 import { useUser } from './hooks/useUser';
 
 function ClientHome() {
-  const { user } = useUser();
+  const {
+    user: { firstName, lastName }
+  } = useUser();
   return (
     <div className={classes.container}>
       <div className={classes.block__greetings}>
-        <p className={classes.greetings__text}>{`Welcome ${user.firstName} ${user.lastName}`}</p>
+        <p className={classes.greetings__text}>{`Welcome ${firstName} ${lastName}`}</p>
       </div>
       <div className={classes.block__title}>
         <h2 className={classes.title}>The best taxi in the world</h2>
