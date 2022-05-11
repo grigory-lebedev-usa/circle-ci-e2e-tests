@@ -1,3 +1,5 @@
+@import url(/src/styles/colors.css);
+
 .button {
   font-family: 'Rasa', sans-serif;
   font-weight: 700;
@@ -15,6 +17,12 @@
 
 .button:active {
   transform: translateY(3px);
+}
+
+.button:disabled {
+  background: #AEAEAE !important;
+  cursor: not-allowed;
+  opacity: 1;
 }
 
 .button_big {

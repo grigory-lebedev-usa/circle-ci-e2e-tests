@@ -152,6 +152,36 @@ export function generateValidationError(name, value, errors, password) {
         [name]: { valid: true, errorMessage: '' }
       };
 
+    case 'source':
+      if (!value) {
+        return {
+          ...errors,
+          [name]: {
+            valid: false,
+            errorMessage: 'Source is required'
+          }
+        };
+      }
+      return {
+        ...errors,
+        [name]: { valid: true, errorMessage: '' }
+      };
+
+    case 'destination':
+      if (!value) {
+        return {
+          ...errors,
+          [name]: {
+            valid: false,
+            errorMessage: 'Destination is required'
+          }
+        };
+      }
+      return {
+        ...errors,
+        [name]: { valid: true, errorMessage: '' }
+      };
+
     default:
       return {
         ...errors

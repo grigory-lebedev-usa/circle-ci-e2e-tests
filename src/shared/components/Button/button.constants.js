@@ -18,3 +18,7 @@ export const buttonClasses = {
   [buttonSizes.small]: classes.button_small,
   [buttonSizes.extraSmall]: classes.button_extraSmall
 };
+export const buttonTypes = {
+  submit: 'submit',
+  button: 'button'
+};

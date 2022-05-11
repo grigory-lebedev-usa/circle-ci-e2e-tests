@@ -28,10 +28,10 @@ function ClientHome() {
         <p className={classes.qualities__text}>24/7 Supports</p>
       </div>
       <div className={classes.block__buttons}>
-        <Button size={buttonSizes.big} color={buttonColors.general} styles={classes.button}>
+        <Button size={buttonSizes.big} color={buttonColors.primary} styles={classes.button}>
           Create order
         </Button>
-        <Button size={buttonSizes.big} color={buttonColors.general}>
+        <Button size={buttonSizes.big} color={buttonColors.primary}>
           View history
         </Button>
       </div>
