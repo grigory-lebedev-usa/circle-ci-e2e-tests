@@ -8,7 +8,7 @@ import useClickOutside from '../../../hooks/useClickOutside';
 
 import classes from './form-select.module.css';
 
-function FormSelect({ label, items, onChange, value, id }) {
+const FormSelect = React.forwardRef(({ label, items, onChange, value, id }, ref) => {
   const [isOpened, setIsOpened] = useState(false);
 
   const handleFormSelectToggle = () => setIsOpened(!isOpened);
@@ -26,6 +26,7 @@ function FormSelect({ label, items, onChange, value, id }) {
         id={id}
         role="listbox"
         tabIndex="0"
+        ref={ref}
         className={
           isOpened
             ? `${classes.dropdown__container} ${classes.dropdown__container_active}`
@@ -64,7 +65,7 @@ function FormSelect({ label, items, onChange, value, id }) {
       )}
     </div>
   );
-}
+});
 
 FormSelect.propTypes = {
   label: PropTypes.string.isRequired,
