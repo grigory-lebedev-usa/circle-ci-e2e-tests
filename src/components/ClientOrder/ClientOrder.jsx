@@ -90,7 +90,7 @@ function ClientOrder() {
           Order
         </Button>
         <Button
-          className={classes.button2}
+          className={classes.deleteOrderButton}
           size={buttonSizes.big}
           color={buttonColors.primary}
           type={buttonTypes.button}
