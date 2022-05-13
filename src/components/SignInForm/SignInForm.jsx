@@ -13,7 +13,11 @@ import ForgotPassword from '../ForgotPassword/ForgotPassword';
 
 import { ROUTES } from '../../constants/app.constants';
 
+import useAuth from '../../shared/hooks/useAuth';
+
 import { inputTypes } from '../../shared/components/form-elements/FormInput/form-input.constants';
+
+import { optionsValidate } from '../helpers/optionsValidate';
 
 import classes from './sign-in-form.module.css';
 import { initialFormState } from './sign-in-form.constants';
@@ -21,10 +25,12 @@ import { initialFormState } from './sign-in-form.constants';
 function SignInForm() {
   const [isOpenedForgotPassword, setIsOpenedForgotPassword] = useState(false);
 
+  const { login } = useAuth();
+
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors, isValid }
   } = useForm({ defaultValues: initialFormState, mode: 'onTouched' });
 
   const showForgotPassword = () => {
@@ -35,7 +41,9 @@ function SignInForm() {
     setIsOpenedForgotPassword(false);
   };
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    await login(data);
+  };
 
   return (
     <div>
@@ -46,25 +54,27 @@ function SignInForm() {
           <div className={classes.form__container}>
             <div>
               <FormInput
-                {...register('email', { required: 'Email is required' })}
+                {...register('email', optionsValidate.email)}
                 id="email"
                 type={inputTypes.email}
                 label="Email"
                 placeholder="Email"
                 className={classes.input}
+                error={errors.email?.message}
               />
-              {errors?.email && <span>{errors.email.message}</span>}
               <FormInput
-                {...register('password', { required: true })}
+                {...register('password', optionsValidate.password)}
                 id="password"
                 type={inputTypes.password}
                 label="Password"
                 placeholder="Password"
                 className={classes.input}
+                error={errors.password?.message}
               />
-              {errors?.password && <span>error</span>}
               <FormCheckbox id="checkbox" label="Keep me logged in" className={classes.checkbox} />
-              <FormButton className={classes.button}>Login</FormButton>
+              <FormButton className={classes.button} disabled={!isValid}>
+                Login
+              </FormButton>
               <button className={classes.button__link} type="button" onClick={showForgotPassword}>
                 Forgot Password?
               </button>

@@ -6,7 +6,7 @@ import classes from './form-input.module.css';
 import { computedInputType, inputTypes } from './form-input.constants';
 
 const FormInput = React.forwardRef(
-  ({ id, type, label, placeholder, onChange, onBlur, name, className }, ref) => {
+  ({ id, type, label, placeholder, onChange, onBlur, name, className, error }, ref) => {
     const [showPassword, setShowPassword] = useState(false);
 
     const handleShowPassword = () => {
@@ -15,10 +15,10 @@ const FormInput = React.forwardRef(
 
     return (
       <div className={`${className}`}>
-        <div className={`${classes.input__container}`}>
+        <div className={classes.input__container}>
           <input
             id={id}
-            className={`${classes.input}`}
+            className={`${classes.input} ${error && classes.input_invalid}`}
             type={computedInputType(type, showPassword)}
             placeholder={placeholder}
             onChange={onChange}
@@ -43,6 +43,7 @@ const FormInput = React.forwardRef(
             </div>
           )}
         </div>
+        {error && <span className={classes.error}>{error}</span>}
       </div>
     );
   }
@@ -54,6 +55,7 @@ FormInput.propTypes = {
   label: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   name: PropTypes.string.isRequired,
+  error: PropTypes.string,
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
   className: PropTypes.string
@@ -65,7 +67,8 @@ FormInput.defaultProps = {
   onChange: () => { },
   // eslint-disable-next-line prettier/prettier
   onBlur: () => { },
-  className: ''
+  className: '',
+  error: ''
 };
 
 export default FormInput;

@@ -1,53 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import PropTypes from 'prop-types';
+
+import { useForm } from 'react-hook-form';
 
 import FormButton from '../../shared/components/form-elements/FormButton/FormButton';
 
 import { inputTypes } from '../../shared/components/form-elements/FormInput/form-input.constants';
 
 import FormInput from '../../shared/components/form-elements/FormInput/FormInput';
-import { generateValidationError } from '../helpers/generateValidationError';
+
+import { optionsValidate } from '../helpers/optionsValidate';
 
 import classes from './forgot-password.module.css';
 import { useForgotPassword } from './hooks/useForgotPassword';
 
 function ForgotPassword({ isOpened, onClose }) {
-  const [isFormValid, setIsFormValid] = useState(false);
-  const [email, setEmail] = useState('');
-  const [errors, setErrors] = useState({
-    email: {
-      valid: false,
-      errorMessage: ''
-    }
-  });
-
-  useEffect(() => {
-    setIsFormValid(errors.email.valid);
-  }, [errors.email.valid]);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid }
+  } = useForm({ defaultValues: { email: '' }, mode: 'onTouched' });
 
   const { resetPassword } = useForgotPassword();
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handleEmailBlur = (e) => {
-    const { name, value } = e.target;
-    setErrors(generateValidationError(name, value));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (data) => {
     onClose();
-    await resetPassword({ email: email.toLowerCase() });
-    setEmail('');
-    setErrors({
-      email: {
-        valid: false,
-        errorMessage: ''
-      }
-    });
+    await resetPassword(data);
   };
 
   return (
@@ -57,18 +36,16 @@ function ForgotPassword({ isOpened, onClose }) {
           <p className={classes.text}>
             We need to know your email to send the link to reset you password.
           </p>
-          <form className={classes.form__container} onSubmit={handleSubmit}>
+          <form className={classes.form__container} onSubmit={handleSubmit(onSubmit)}>
             <FormInput
               id="email"
               type={inputTypes.email}
               label="Email"
               placeholder="Email"
-              name="email"
-              value={email}
-              onChange={handleEmailChange}
-              onBlur={handleEmailBlur}
+              {...register('email', optionsValidate.email)}
+              error={errors.email?.message}
             />
-            <FormButton disabled={!isFormValid} className={classes.button}>
+            <FormButton disabled={!isValid} className={classes.button}>
               Send
             </FormButton>
           </form>

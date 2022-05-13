@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 
@@ -7,28 +7,30 @@ import FormSelect from '../../shared/components/form-elements/FormSelect/FormSel
 import FormButton from '../../shared/components/form-elements/FormButton/FormButton';
 import { inputTypes } from '../../shared/components/form-elements/FormInput/form-input.constants';
 
-import { USER_ROLES } from '../../constants/user-roles.constants';
+import { USER_ROLES, DRIVER_ROLE_ID } from '../../constants/user-roles.constants';
 
 // import { useRegistration } from './hooks/useRegistration';
+
+import { optionsValidate } from '../helpers/optionsValidate';
 
 import classes from './sign-up-form.module.css';
 import { initialFormState } from './sign-up-form.constants';
 
 function SignUpForm() {
-  // const [isHasSectionDriver, setIsHasSectionDriver] = useState(false);
+  const [isHasSectionDriver, setIsHasSectionDriver] = useState(false);
   // const { registerDriver, registerClient } = useRegistration();
   const {
     register,
+    watch,
     handleSubmit,
-    formState: { errors }
+    formState: { errors, isValid }
   } = useForm({ defaultValues: initialFormState, mode: 'onTouched' });
 
-  // const handleSelectChange = ({ id: roleId, value }) => {
-  //   if (roleId === DRIVER_ROLE_ID) {
-  //     setIsHasSectionDriver(true);
-  //   } else setIsHasSectionDriver(false);
-  //   setFormState({ ...formState, role: value });
-  // };
+  const handleSelectChange = ({ id: roleId }) => {
+    if (roleId === DRIVER_ROLE_ID) {
+      setIsHasSectionDriver(true);
+    } else setIsHasSectionDriver(false);
+  };
 
   const onSubmit = (data) => {
     console.log(data);
@@ -45,28 +47,36 @@ function SignUpForm() {
               type={inputTypes.email}
               label="Email"
               placeholder="Email"
-              {...register('email', { required: true })}
+              {...register('email', optionsValidate.email)}
               className={classes.input}
+              error={errors.email?.message}
             />
-            {errors?.email && <span>error</span>}
             <FormInput
               id="password"
               type={inputTypes.password}
               label="Password"
               placeholder="Password"
-              {...register('password', { required: true })}
+              {...register('password', optionsValidate.password)}
               className={classes.input}
+              error={errors.password?.message}
             />
-            {errors?.password && <span>error</span>}
             <FormInput
               id="confirm-password"
               type={inputTypes.password}
               label="Confirm password"
               placeholder="Confirm password"
-              {...register('confirmPassword', { required: true })}
+              {...register('confirmPassword', {
+                required: 'Confirm password is required',
+                validate: (value) => {
+                  if (watch('password') !== value) {
+                    return 'Your password do no match';
+                  }
+                  return false;
+                }
+              })}
               className={classes.input}
+              error={errors.confirmPassword?.message}
             />
-            {errors?.confirmPassword && <span>error</span>}
             <FormInput
               id="first-name"
               type={inputTypes.text}
@@ -74,8 +84,8 @@ function SignUpForm() {
               placeholder="First name"
               {...register('firstName', { required: true })}
               className={classes.input}
+              error={errors.firstName?.message}
             />
-            {errors?.firstName && <span>error</span>}
             <FormInput
               id="last-name"
               type={inputTypes.text}
@@ -83,16 +93,11 @@ function SignUpForm() {
               placeholder="Last name"
               {...register('lastName', { required: true })}
               className={classes.input}
+              error={errors.lastName?.message}
             />
-            {errors?.lastName && <span>error</span>}
-            <FormSelect
-              id="role"
-              label="Role"
-              items={USER_ROLES}
-              {...register('role', { required: true })}
-            />
+            <FormSelect id="role" label="Role" options={USER_ROLES} onChange={handleSelectChange} />
           </div>
-          {/* {isHasSectionDriver && (
+          {isHasSectionDriver && (
             <div className={classes.car__block}>
               <p className={classes.car__title}>Car</p>
               <FormInput
@@ -100,52 +105,42 @@ function SignUpForm() {
                 type={inputTypes.text}
                 label="Make"
                 placeholder="Make"
-                name="make"
-                value={make}
-                onChange={handleInputChange}
-                onBlur={handleInputBlur}
-                errorMessage={errors.make.errorMessage}
+                {...register('make', { required: true })}
                 className={classes.input}
+                error={errors.make?.message}
               />
               <FormInput
                 id="model"
                 type={inputTypes.text}
                 label="Model"
                 placeholder="Model"
-                name="model"
-                value={model}
-                onChange={handleInputChange}
-                onBlur={handleInputBlur}
-                errorMessage={errors.model.errorMessage}
+                {...register('model', { required: true })}
                 className={classes.input}
+                error={errors.model?.message}
               />
               <FormInput
                 id="year"
                 type={inputTypes.number}
                 label="Year"
                 placeholder="Year"
-                name="year"
-                value={year}
-                onChange={handleInputChange}
-                onBlur={handleInputBlur}
-                errorMessage={errors.year.errorMessage}
+                {...register('year', { required: true })}
                 className={classes.input}
+                error={errors.year?.message}
               />
               <FormInput
                 id="color"
                 type={inputTypes.text}
                 label="Color"
                 placeholder="Color"
-                name="color"
-                value={color}
-                onChange={handleInputChange}
-                onBlur={handleInputBlur}
-                errorMessage={errors.color.errorMessage}
+                {...register('color', { required: true })}
                 className={classes.input}
+                error={errors.color?.message}
               />
             </div>
-          )} */}
-          <FormButton className={classes.button}>Register</FormButton>
+          )}
+          <FormButton className={classes.button} disabled={!isValid}>
+            Register
+          </FormButton>
         </div>
       </div>
     </form>
