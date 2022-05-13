@@ -16,6 +16,7 @@ import ClientHome from './components/ClientHome/ClientHome';
 import SignUpForm from './components/SignUpForm/SignUpForm';
 import SignInForm from './components/SignInForm/SignInForm';
 import ClientOrder from './components/ClientOrder/ClientOrder';
+import CurrentOrder from './components/CurrentOrder/CurrentOrder';
 
 function RequireAuth({ children }) {
   const { isAuthed } = useAuth();
@@ -51,6 +52,7 @@ function App() {
                     </RequireAuth>
                   }
                 />
+                <Route path={ROUTES.CURRENT_ORDER} element={<CurrentOrder />} />
                 <Route path={ROUTES.REGISTER} element={<SignUpForm />} />
                 <Route path={ROUTES.LOGIN} element={<SignInForm />} />
               </Routes>

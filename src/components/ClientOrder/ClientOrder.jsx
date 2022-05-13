@@ -22,7 +22,7 @@ function ClientOrder() {
   const [formState, setFormState] = useState(initialFormState);
   const { source, destination } = formState;
   const [errors, setErrors] = useState(initialErrors);
-  const { createOrder, deleteOrder, orderId } = useOrder();
+  const { createOrder } = useOrder();
 
   useEffect(() => {
     setIsFormValid(errors.source.valid && errors.destination.valid);
@@ -41,10 +41,6 @@ function ClientOrder() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await createOrder({ source, destination });
-  };
-
-  const handleDeleteOrder = async () => {
-    await deleteOrder(orderId);
   };
 
   return (
@@ -88,14 +84,6 @@ function ClientOrder() {
           disabled={!isFormValid}
           type={buttonTypes.submit}>
           Order
-        </Button>
-        <Button
-          className={classes.deleteOrderButton}
-          size={buttonSizes.big}
-          color={buttonColors.primary}
-          type={buttonTypes.button}
-          onClick={handleDeleteOrder}>
-          Delete Order
         </Button>
       </form>
       <div className={classes.decoration__container}>
