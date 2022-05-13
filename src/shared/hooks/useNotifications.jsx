@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useReducer } from 'react';
 
 import uniqid from 'uniqid';
 import PropTypes from 'prop-types';
@@ -8,34 +8,52 @@ import { MAX_NOTIFICATION_NUMBER } from '../components/Notifications/notificatio
 
 const NotificationsContext = React.createContext();
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'added': {
+      if (state.notifications.length === MAX_NOTIFICATION_NUMBER) {
+        return { notifications: { ...state.notifications.shift() } };
+      }
+      return {
+        notifications: [
+          ...state.notifications,
+          { id: action.id, text: action.text, type: action.typeNotification }
+        ]
+      };
+    }
+    case 'deleted': {
+      return {
+        notifications: [
+          ...state.notifications.filter((notification) => notification.id !== action.id)
+        ]
+      };
+    }
+    default: {
+      return state;
+    }
+  }
+};
+
 function useNotifications() {
-  const [notifications, setNotifications] = useState([]);
-  const notificationsRef = useRef([]);
+  const [state, dispatch] = useReducer(reducer, { notifications: [] });
 
   const deleteNotification = useCallback((id) => {
-    notificationsRef.current = notificationsRef.current.filter(
-      (notification) => notification.id !== id
-    );
-    setNotifications(notificationsRef.current);
+    dispatch({ type: 'deleted', id });
   }, []);
 
-  const showNotification = (text, type) => {
-    if (notifications.length === MAX_NOTIFICATION_NUMBER) {
-      notificationsRef.current.shift();
-    }
-    notificationsRef.current.push({ text, type, id: uniqid() });
-    setNotifications([...notificationsRef.current]);
+  const showNotification = (text, typeNotification) => {
+    dispatch({ type: 'added', text, typeNotification, id: uniqid() });
   };
 
-  return { notifications, showNotification, deleteNotification };
+  return { state, showNotification, deleteNotification };
 }
 
 export function NotificationsProvider({ children }) {
   const notificationsHook = useNotifications();
-  const { notifications, deleteNotification } = notificationsHook;
+  const { state, deleteNotification } = notificationsHook;
   return (
     <NotificationsContext.Provider value={notificationsHook}>
-      <Notifications notifications={notifications} onDelete={deleteNotification} />
+      <Notifications notifications={state.notifications} onDelete={deleteNotification} />
       {children}
     </NotificationsContext.Provider>
   );
