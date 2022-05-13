@@ -10,7 +10,7 @@ import './App.css';
 import useAuth, { AuthProvider } from './shared/hooks/useAuth';
 
 import { SpinnerProvider } from './shared/hooks/useAppSpinner';
-import { NotificationsProvider } from './shared/hooks/useNotifications';
+import { NotificationsProvider } from './shared/hooks/useNotifications/useNotifications';
 import PageWrapper from './shared/components/PageWrapper/PageWrapper';
 import ClientHome from './components/ClientHome/ClientHome';
 import SignUpForm from './components/SignUpForm/SignUpForm';

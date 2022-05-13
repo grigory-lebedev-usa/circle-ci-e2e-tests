@@ -1,31 +1,25 @@
-import React, { useState, useRef, useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useReducer } from 'react';
 
 import uniqid from 'uniqid';
 import PropTypes from 'prop-types';
 
-import Notifications from '../components/Notifications/Notifications';
-import { MAX_NOTIFICATION_NUMBER } from '../components/Notifications/notifications.constants';
+import Notifications from '../../components/Notifications/Notifications';
+
+import { ADD_NOTIFICATION, DELETE_NOTIFICATION, initialState } from './notifications.constants';
+import { notificationsReducer } from './notifications.reducer';
 
 const NotificationsContext = React.createContext();
 
 function useNotifications() {
-  const [notifications, setNotifications] = useState([]);
-  const notificationsRef = useRef([]);
+  const [notifications, dispatch] = useReducer(notificationsReducer, initialState);
 
   const deleteNotification = useCallback((id) => {
-    notificationsRef.current = notificationsRef.current.filter(
-      (notification) => notification.id !== id
-    );
-    setNotifications(notificationsRef.current);
+    dispatch({ type: DELETE_NOTIFICATION, payload: id });
   }, []);
 
-  const showNotification = (text, type) => {
-    if (notifications.length === MAX_NOTIFICATION_NUMBER) {
-      notificationsRef.current.shift();
-    }
-    notificationsRef.current.push({ text, type, id: uniqid() });
-    setNotifications([...notificationsRef.current]);
-  };
+  const showNotification = useCallback((text, type) => {
+    dispatch({ type: ADD_NOTIFICATION, payload: { id: uniqid(), text, type } });
+  }, []);
 
   return { notifications, showNotification, deleteNotification };
 }
