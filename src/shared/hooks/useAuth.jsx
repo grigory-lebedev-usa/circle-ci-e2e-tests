@@ -12,7 +12,8 @@ import { ROUTES, STORAGE_KEYS } from '../../constants/app.constants';
 
 import { API_ROUTES } from '../../constants/api.constants';
 
-import useNotifications from './useNotifications';
+import useNotifications from './useNotifications/useNotifications';
+
 import useAppSpinner from './useAppSpinner';
 
 const authContext = React.createContext();

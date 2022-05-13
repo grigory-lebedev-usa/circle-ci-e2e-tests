@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import { notificationTypes } from '../../../shared/components/Notifications/components/Notification/notification.constants';
-import useNotifications from '../../../shared/hooks/useNotifications';
+import useNotifications from '../../../shared/hooks/useNotifications/useNotifications';
 import useAppSpinner from '../../../shared/hooks/useAppSpinner';
 import { axiosService } from '../../../services/axios.service';
 import { ROUTES } from '../../../constants/app.constants';
