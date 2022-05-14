@@ -10,8 +10,9 @@ import {
 
 import { ROUTES } from '../../constants/app.constants';
 
+import { useUser } from '../../api/hooks/useUser';
+
 import classes from './client-home.module.css';
-import { useUser } from './hooks/useUser';
 
 function ClientHome() {
   const {

@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 
-import { API_ROUTES } from '../../../constants/api.constants';
-import { ROUTES } from '../../../constants/app.constants';
-import { axiosService } from '../../../services/axios.service';
-import { notificationTypes } from '../../../shared/components/Notifications/components/Notification/notification.constants';
-import useAppSpinner from '../../../shared/hooks/useAppSpinner';
-import useNotifications from '../../../shared/hooks/useNotifications/useNotifications';
+import { API_ROUTES } from '../../constants/api.constants';
+import { ROUTES } from '../../constants/app.constants';
+import { axiosService } from '../../services/axios.service';
+import { notificationTypes } from '../../shared/components/Notifications/components/Notification/notification.constants';
+import useAppSpinner from '../../shared/hooks/useAppSpinner';
+import useNotifications from '../../shared/hooks/useNotifications/useNotifications';
 
 export function useOrder() {
   const navigate = useNavigate();

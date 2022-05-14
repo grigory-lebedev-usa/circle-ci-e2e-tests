@@ -13,9 +13,10 @@ import {
 
 import { generateValidationError } from '../helpers/generateValidationError';
 
+import { useOrder } from '../../api/hooks/useOrder';
+
 import classes from './client-order.module.css';
 import { initialErrors, initialFormState } from './client-order.constants';
-import { useOrder } from './hooks/useOrder';
 
 function ClientOrder() {
   const [isFormValid, setIsFormValid] = useState(false);

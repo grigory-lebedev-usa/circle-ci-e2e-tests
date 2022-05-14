@@ -20,7 +20,6 @@ import CurrentOrder from './components/CurrentOrder/CurrentOrder';
 
 function RequireAuth({ children }) {
   const { isAuthed } = useAuth();
-
   return isAuthed === true ? children : <Navigate to={ROUTES.LOGIN} replace />;
 }
 

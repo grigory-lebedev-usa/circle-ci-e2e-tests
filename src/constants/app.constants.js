@@ -7,6 +7,13 @@ export const ROUTES = {
 };
 
 export const STORAGE_KEYS = {
-  USER: 'user',
-  TOKEN: 'token'
+  TOKEN: 'token',
+  USER: 'user'
+};
+
+export const USER_VALUES = {
+  authed: false,
+  token: '',
+  refreshToken: '',
+  role: ''
 };
