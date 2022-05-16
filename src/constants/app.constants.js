@@ -7,7 +7,6 @@ export const ROUTES = {
 };
 
 export const STORAGE_KEYS = {
-  TOKEN: 'token',
   USER: 'user'
 };
 

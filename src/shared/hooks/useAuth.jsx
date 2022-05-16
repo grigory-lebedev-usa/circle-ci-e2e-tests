@@ -20,7 +20,9 @@ const authContext = React.createContext();
 
 function useAuth() {
   const navigate = useNavigate();
-  const [isAuthed, setIsAuthed] = useState(false);
+  const [isAuthed, setIsAuthed] = useState(
+    JSON.parse(localStorage.getItem(STORAGE_KEYS.USER)).authed
+  );
   const { showSpinner, closeSpinner } = useAppSpinner();
   const { showNotification } = useNotifications();
 
@@ -29,8 +31,12 @@ function useAuth() {
       showSpinner();
       const { data } = await axiosService.post(API_ROUTES.LOGIN, requestPayload);
       showNotification('You have successfully logged in', notificationTypes.success);
-      localStorage.setItem(STORAGE_KEYS.TOKEN, data.accessToken);
-      setIsAuthed(true);
+      const user = JSON.parse(localStorage.getItem(STORAGE_KEYS.USER));
+      user.authed = true;
+      user.refreshToken = data.refreshToken;
+      user.token = data.accessToken;
+      localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user));
+      setIsAuthed(JSON.parse(localStorage.getItem(STORAGE_KEYS.USER)).authed);
       navigate(ROUTES.HOME);
     } catch (error) {
       showNotification(error.response.data.message, notificationTypes.error);
@@ -40,9 +46,8 @@ function useAuth() {
   };
 
   const logout = () => {
-    localStorage.removeItem(STORAGE_KEYS.TOKEN);
     localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(USER_VALUES));
-    setIsAuthed(false);
+    setIsAuthed(JSON.parse(localStorage.getItem(STORAGE_KEYS.USER)).authed);
     navigate(ROUTES.LOGIN);
   };
 
