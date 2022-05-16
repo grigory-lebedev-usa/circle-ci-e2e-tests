@@ -9,7 +9,7 @@ import { CLIENT_ROLE_ID, DRIVER_ROLE_ID, USER_ROLES } from '../../constants/user
 
 import { generateValidationError } from '../helpers/generateValidationError';
 
-import { useRegistration } from './hooks/useRegistration';
+import { useRegistration } from '../../api/hooks/useRegistration';
 
 import classes from './sign-up-form.module.css';
 import { initialErrorsState, initialFormState } from './sign-up-form.constants';

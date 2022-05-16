@@ -9,8 +9,9 @@ import { inputTypes } from '../../shared/components/form-elements/FormInput/form
 import FormInput from '../../shared/components/form-elements/FormInput/FormInput';
 import { generateValidationError } from '../helpers/generateValidationError';
 
+import { useForgotPassword } from '../../api/hooks/useForgotPassword';
+
 import classes from './forgot-password.module.css';
-import { useForgotPassword } from './hooks/useForgotPassword';
 
 function ForgotPassword({ isOpened, onClose }) {
   const [isFormValid, setIsFormValid] = useState(false);
