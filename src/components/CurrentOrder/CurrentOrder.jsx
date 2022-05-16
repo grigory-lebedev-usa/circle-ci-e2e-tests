@@ -9,17 +9,20 @@ import { useOrder } from '../../api/hooks/useOrder';
 import classes from './current-order.module.css';
 
 function CurrentOrder() {
-  const { deleteOrder } = useOrder();
+  const {
+    deleteOrder,
+    order: { id, source, destination }
+  } = useOrder();
 
   const handleCancelOrder = async () => {
-    await deleteOrder('');
+    await deleteOrder(id);
   };
   return (
     <div className={classes.container}>
       <div className={classes.block__description}>
         <h2 className={classes.description__title}>Current order</h2>
         <div className={classes.line} />
-        <p className={classes.description__text}>source - destination</p>
+        <p className={classes.description__text}>{`${source} - ${destination}`}</p>
       </div>
       <div className={classes.wrapper__message}>
         <p className={classes.message}>

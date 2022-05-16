@@ -7,7 +7,6 @@ export const axiosService = axios.create({ baseURL: APP_CONFIG.apiURL });
 
 axiosService.interceptors.request.use((conf) => {
   const config = conf;
-  const { token } = JSON.parse(localStorage.getItem(STORAGE_KEYS.USER));
-  config.headers.Authorization = `Bearer ${token}`;
+  config.headers.Authorization = `Bearer ${localStorage.getItem(STORAGE_KEYS.TOKEN)}`;
   return config;
 });
