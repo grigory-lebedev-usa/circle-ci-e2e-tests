@@ -8,7 +8,12 @@ import { axiosService } from '../../services/axios.service';
 
 import { notificationTypes } from '../components/Notifications/components/Notification/notification.constants';
 
-import { ROUTES, STORAGE_KEYS, USER_VALUES } from '../../constants/app.constants';
+import {
+  PRIVATE_ROUTES,
+  PUBLIC_ROUTES,
+  STORAGE_KEYS,
+  USER_VALUES
+} from '../../constants/app.constants';
 
 import { API_ROUTES } from '../../constants/api.constants';
 
@@ -20,7 +25,9 @@ const authContext = React.createContext();
 
 function useAuth() {
   const navigate = useNavigate();
-  const [isAuthed, setIsAuthed] = useState(false);
+  const [isAuthed, setIsAuthed] = useState(
+    JSON.parse(localStorage.getItem(STORAGE_KEYS.USER))?.authed || false
+  );
   const { showSpinner, closeSpinner } = useAppSpinner();
   const { showNotification } = useNotifications();
 
@@ -29,9 +36,13 @@ function useAuth() {
       showSpinner();
       const { data } = await axiosService.post(API_ROUTES.LOGIN, requestPayload);
       showNotification('You have successfully logged in', notificationTypes.success);
-      localStorage.setItem(STORAGE_KEYS.TOKEN, data.accessToken);
-      setIsAuthed(true);
-      navigate(ROUTES.HOME);
+      const user = JSON.parse(localStorage.getItem(STORAGE_KEYS.USER));
+      user.authed = true;
+      user.refreshToken = data.refreshToken;
+      user.token = data.accessToken;
+      localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user));
+      setIsAuthed(JSON.parse(localStorage.getItem(STORAGE_KEYS.USER)).authed);
+      navigate(PRIVATE_ROUTES.HOME);
     } catch (error) {
       showNotification(error.response.data.message, notificationTypes.error);
     } finally {
@@ -40,10 +51,9 @@ function useAuth() {
   };
 
   const logout = () => {
-    localStorage.removeItem(STORAGE_KEYS.TOKEN);
     localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(USER_VALUES));
-    setIsAuthed(false);
-    navigate(ROUTES.LOGIN);
+    setIsAuthed(JSON.parse(localStorage.getItem(STORAGE_KEYS.USER)).authed);
+    navigate(PUBLIC_ROUTES.LOGIN);
   };
 
   return { isAuthed, login, logout };

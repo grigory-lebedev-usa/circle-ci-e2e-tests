@@ -1,5 +1,6 @@
 :root {
   --primary-color: #C4A267;
+  --primary-color-rgba: rgba(196, 162, 103, 0.7);
   --focus-and-hover-color: #00A1E5;
   --hover-item-select-color: #C7F1FF;
   --invalid-color: #FC004C;

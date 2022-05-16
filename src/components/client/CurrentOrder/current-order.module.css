@@ -46,7 +46,7 @@
 .wrapper__message {
   width: 835px;
   padding: 10px 32px 10px 32px;
-  background: rgba(196, 162, 103, 0.7);
+  background: var(--primary-color-rgba);
   border-radius: 8px;
   text-align: center;
 }
