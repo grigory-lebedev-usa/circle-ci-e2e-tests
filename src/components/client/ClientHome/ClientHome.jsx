@@ -21,7 +21,9 @@ function ClientHome() {
   return (
     <div className={classes.container}>
       <div className={classes.block__greetings}>
-        <p className={classes.greetings__text}>{`Welcome ${firstName} ${lastName}`}</p>
+        <p className={classes.greetings__text}>
+          Welcome<p className={classes.greetings__text}>{`${firstName} ${lastName}`}</p>
+        </p>
       </div>
       <div className={classes.block__title}>
         <h2 className={classes.title}>The best taxi in the world</h2>
