@@ -8,7 +8,8 @@ import useAppSpinner from '../../shared/hooks/useAppSpinner';
 import { axiosService } from '../../services/axios.service';
 import { API_ROUTES } from '../../constants/api.constants';
 import { INITIAL_USER_STATE } from '../../components/client/ClientHome/client-home.constants';
-import { PRIVATE_ROUTES, STORAGE_KEYS } from '../../constants/app.constants';
+import { PRIVATE_ROUTES } from '../../constants/app.constants';
+import LocalStorageService from '../../services/LocalStorageService';
 
 export function useUser() {
   const navigate = useNavigate();
@@ -21,9 +22,7 @@ export function useUser() {
         showSpinner();
         const { data } = await axiosService.get(API_ROUTES.USER_ME);
         setUser(data);
-        const userLocalStorage = JSON.parse(localStorage.getItem(STORAGE_KEYS.USER));
-        userLocalStorage.role = user.role;
-        localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(userLocalStorage));
+        LocalStorageService.role = user.role;
       } catch (error) {
         showNotification(error.response.data.message, notificationTypes.error);
       } finally {

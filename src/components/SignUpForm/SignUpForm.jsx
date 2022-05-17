@@ -19,7 +19,7 @@ function SignUpForm() {
   const [isFormValid, setIsFormValid] = useState(false);
   const [formState, setFormState] = useState(initialFormState);
   const [errors, setErrors] = useState(initialErrorsState);
-  const { registerDriver, registerClient } = useRegistration();
+  const { register } = useRegistration();
 
   const { email, password, confirmPassword, firstName, lastName, role, make, model, year, color } =
     formState;
@@ -84,7 +84,7 @@ function SignUpForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isHasSectionDriver) {
-      await registerDriver({
+      await register({
         email: email.toLowerCase(),
         password,
         firstName,
@@ -93,7 +93,7 @@ function SignUpForm() {
         car: { make, model, year, color }
       });
     } else {
-      await registerClient({
+      await register({
         email: email.toLowerCase(),
         password,
         firstName,

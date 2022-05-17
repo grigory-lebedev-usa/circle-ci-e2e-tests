@@ -8,6 +8,7 @@ import useAppSpinner from '../../shared/hooks/useAppSpinner';
 import { axiosService } from '../../services/axios.service';
 import { PUBLIC_ROUTES, STORAGE_KEYS, USER_VALUES } from '../../constants/app.constants';
 import { API_ROUTES } from '../../constants/api.constants';
+import LocalStorageService from '../../services/LocalStorageService';
 
 export function useRegistration() {
   const navigate = useNavigate();
@@ -16,11 +17,10 @@ export function useRegistration() {
 
   useEffect(() => {
     if (!localStorage.getItem(STORAGE_KEYS.USER)) {
-      localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(USER_VALUES));
+      LocalStorageService.user = USER_VALUES;
     }
   });
-
-  const registerDriver = async (requestPayload) => {
+  const register = async (requestPayload) => {
     try {
       showSpinner();
       await axiosService.post(API_ROUTES.REGISTER, requestPayload);
@@ -35,20 +35,5 @@ export function useRegistration() {
       closeSpinner();
     }
   };
-  const registerClient = async (requestPayload) => {
-    try {
-      showSpinner();
-      await axiosService.post(API_ROUTES.REGISTER, requestPayload);
-      showNotification(
-        'We sent the activation link to email address. Please activate your account.',
-        notificationTypes.success
-      );
-      navigate(PUBLIC_ROUTES.LOGIN);
-    } catch (error) {
-      showNotification(error.response.data.message, notificationTypes.error);
-    } finally {
-      closeSpinner();
-    }
-  };
-  return { registerDriver, registerClient };
+  return { register };
 }

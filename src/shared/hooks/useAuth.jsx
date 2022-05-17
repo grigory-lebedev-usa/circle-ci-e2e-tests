@@ -8,14 +8,11 @@ import { axiosService } from '../../services/axios.service';
 
 import { notificationTypes } from '../components/Notifications/components/Notification/notification.constants';
 
-import {
-  PRIVATE_ROUTES,
-  PUBLIC_ROUTES,
-  STORAGE_KEYS,
-  USER_VALUES
-} from '../../constants/app.constants';
+import { PRIVATE_ROUTES, PUBLIC_ROUTES, USER_VALUES } from '../../constants/app.constants';
 
 import { API_ROUTES } from '../../constants/api.constants';
+
+import LocalStorageService from '../../services/LocalStorageService';
 
 import useNotifications from './useNotifications/useNotifications';
 
@@ -25,23 +22,22 @@ const authContext = React.createContext();
 
 function useAuth() {
   const navigate = useNavigate();
-  const [isAuthed, setIsAuthed] = useState(
-    JSON.parse(localStorage.getItem(STORAGE_KEYS.USER))?.authed || false
-  );
+  const [isAuthed, setIsAuthed] = useState(LocalStorageService.authed || false);
   const { showSpinner, closeSpinner } = useAppSpinner();
   const { showNotification } = useNotifications();
 
   const login = async (requestPayload) => {
     try {
       showSpinner();
-      const { data } = await axiosService.post(API_ROUTES.LOGIN, requestPayload);
+      const {
+        data: { accessToken, refreshToken, expirationTime }
+      } = await axiosService.post(API_ROUTES.LOGIN, requestPayload);
       showNotification('You have successfully logged in', notificationTypes.success);
-      const user = JSON.parse(localStorage.getItem(STORAGE_KEYS.USER));
-      user.authed = true;
-      user.refreshToken = data.refreshToken;
-      user.token = data.accessToken;
-      localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user));
-      setIsAuthed(JSON.parse(localStorage.getItem(STORAGE_KEYS.USER)).authed);
+      LocalStorageService.authed = true;
+      LocalStorageService.accessToken = accessToken;
+      LocalStorageService.refreshToken = refreshToken;
+      LocalStorageService.expirationTime = expirationTime;
+      setIsAuthed(LocalStorageService.authed);
       navigate(PRIVATE_ROUTES.HOME);
     } catch (error) {
       showNotification(error.response.data.message, notificationTypes.error);
@@ -51,8 +47,7 @@ function useAuth() {
   };
 
   const logout = () => {
-    localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(USER_VALUES));
-    setIsAuthed(JSON.parse(localStorage.getItem(STORAGE_KEYS.USER)).authed);
+    LocalStorageService.user = USER_VALUES;
     navigate(PUBLIC_ROUTES.LOGIN);
   };
 

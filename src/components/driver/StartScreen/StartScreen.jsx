@@ -8,7 +8,7 @@ import { PRIVATE_ROUTES } from '../../../constants/app.constants';
 import Button from '../../../shared/components/Button/Button';
 import { buttonColors, buttonSizes } from '../../../shared/components/Button/button.constants';
 
-import { inputType } from './start-screen.constants';
+import { inputType, src } from './start-screen.constants';
 
 import classes from './start-screen.module.css';
 
@@ -17,6 +17,7 @@ function StartScreen() {
   const [isValid, setIsValid] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const image = selectedFile ? imagePreview : src.photo;
   const fileInput = useRef();
   const { uploadPhoto, user } = useUser();
 
@@ -48,8 +49,6 @@ function StartScreen() {
   const handleFileSave = () => {
     uploadPhoto({ file: selectedFile });
   };
-
-  const image = selectedFile ? imagePreview : '/public/img/wrapper_car_img.png)';
 
   return (
     <div className={classes.container}>
