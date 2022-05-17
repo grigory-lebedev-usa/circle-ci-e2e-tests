@@ -8,7 +8,7 @@ import { axiosService } from '../../services/axios.service';
 
 import { notificationTypes } from '../components/Notifications/components/Notification/notification.constants';
 
-import { PRIVATE_ROUTES, PUBLIC_ROUTES, USER_VALUES } from '../../constants/app.constants';
+import { PRIVATE_ROUTES, PUBLIC_ROUTES } from '../../constants/app.constants';
 
 import { API_ROUTES } from '../../constants/api.constants';
 
@@ -47,7 +47,7 @@ function useAuth() {
   };
 
   const logout = () => {
-    LocalStorageService.user = USER_VALUES;
+    LocalStorageService.clear();
     navigate(PUBLIC_ROUTES.LOGIN);
   };
 

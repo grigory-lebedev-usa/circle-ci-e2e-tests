@@ -10,7 +10,7 @@ export default class LocalStorageService {
   }
 
   static get authed() {
-    return this.user.authed;
+    return this.user?.authed;
   }
 
   static set authed(authed) {
