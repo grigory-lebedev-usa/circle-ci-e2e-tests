@@ -1,0 +1,19 @@
+.container {
+  position: absolute;
+  right: 0;
+  display: flex;
+}
+
+.text {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Rasa';
+  font-weight: 300;
+  font-size: 96px;
+  line-height: 117px;
+}
+
+.img {
+  display: block;
+  margin-bottom: 10px;
+}

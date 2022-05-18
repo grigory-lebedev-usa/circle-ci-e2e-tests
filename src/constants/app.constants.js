@@ -7,7 +7,8 @@ export const PRIVATE_ROUTES = {
   HOME: '/',
   ORDER: '/order',
   CURRENT_ORDER: '/current-order',
-  DRIVER_START: 'driver-start'
+  DRIVER_START: '/driver-start',
+  DRIVER_ORDERS: '/driver-orders'
 };
 
 export const STORAGE_KEYS = {

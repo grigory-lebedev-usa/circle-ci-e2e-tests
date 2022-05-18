@@ -1,0 +1,41 @@
+@import url(/src/styles/colors.css);
+
+.block__text {
+  margin-top: 70px;
+  width: 945px;
+  margin-bottom: 80px;
+}
+
+.text {
+  margin: 0;
+  font-family: 'Rasa';
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 58px;
+  margin-left: 60px;  
+  color: #fff;
+}
+
+.block__qualities {
+  display: flex;
+  align-items: center;
+}
+
+.qualities__text {
+  margin: 0;
+  font-family: 'Rasa';
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 58px;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  margin-right: 30px;
+}
+
+.qualities__circle {
+  width: 19px;
+  height: 19px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  margin-right: 30px;
+}
