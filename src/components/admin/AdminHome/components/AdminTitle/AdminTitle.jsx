@@ -1,6 +1,6 @@
-import classes from './title.module.css';
+import classes from './admin-title.module.css';
 
-function Title() {
+function AdminTitle() {
   return (
     <div className={classes.block__title}>
       <h2 className={classes.title}>Administration</h2>
@@ -8,4 +8,4 @@ function Title() {
   );
 }
 
-export default Title;
+export default AdminTitle;

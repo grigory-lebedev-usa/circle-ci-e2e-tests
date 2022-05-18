@@ -1,10 +1,10 @@
 import Home from '../../Home/Home';
 
-import Title from './components/Title/Title';
-import BlockButtons from './components/BlockButtons/BlockButtons';
+import AdminContent from './components/AdminContent/AdminContent';
+import AdminTitle from './components/AdminTitle/AdminTitle';
 
 function AdminHome() {
-  return <Home title={<Title />} buttons={<BlockButtons />} />;
+  return <Home title={<AdminTitle />} content={<AdminContent />} />;
 }
 
 export default AdminHome;

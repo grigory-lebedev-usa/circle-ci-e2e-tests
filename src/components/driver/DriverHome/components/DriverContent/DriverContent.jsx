@@ -1,6 +1,8 @@
-import classes from './content.module.css';
+import DriverActions from '../DriverActions/DriverActions';
 
-function Content() {
+import classes from './driver-content.module.css';
+
+function DriverContent() {
   return (
     <>
       <div className={classes.block__text}>
@@ -15,8 +17,9 @@ function Content() {
         <div className={classes.qualities__circle} />
         <p className={classes.qualities__text}>24/7 Supports</p>
       </div>
+      <DriverActions />
     </>
   );
 }
 
-export default Content;
+export default DriverContent;

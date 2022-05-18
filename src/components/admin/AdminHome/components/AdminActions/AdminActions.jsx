@@ -5,9 +5,9 @@ import {
   buttonTypes
 } from '../../../../../shared/components/Button/button.constants';
 
-import classes from './block-buttons.module.css';
+import classes from './admin-actions.module.css';
 
-function BlockButtons() {
+function AdminActions() {
   return (
     <div className={classes.block__buttons}>
       <Button
@@ -24,4 +24,4 @@ function BlockButtons() {
   );
 }
 
-export default BlockButtons;
+export default AdminActions;

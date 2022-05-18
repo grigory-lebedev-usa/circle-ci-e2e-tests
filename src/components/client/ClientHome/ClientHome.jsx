@@ -1,11 +1,10 @@
 import Home from '../../Home/Home';
 
-import Title from './components/ClientTitle/ClientTitle';
-import Content from './components/ClientContent/ClientContent';
-import BlockButtons from './components/ClientActions/ClientActions';
+import ClientTitle from './components/ClientTitle/ClientTitle';
+import ClientContent from './components/ClientContent/ClientContent';
 
 function ClientHome() {
-  return <Home title={<Title />} content={<Content />} buttons={<BlockButtons />} />;
+  return <Home title={<ClientTitle />} content={<ClientContent />} />;
 }
 
 export default ClientHome;

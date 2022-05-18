@@ -1,8 +1,8 @@
 import React from 'react';
 
-import classes from './title.module.css';
+import classes from './driver-title.module.css';
 
-function Title() {
+function DriverTitle() {
   return (
     <div className={classes.block__title}>
       <h2 className={classes.title}>The best taxi in the world</h2>
@@ -10,4 +10,4 @@ function Title() {
   );
 }
 
-export default Title;
+export default DriverTitle;

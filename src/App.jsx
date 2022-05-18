@@ -12,12 +12,12 @@ import { NotificationsProvider } from './shared/hooks/useNotifications/useNotifi
 import SignUpForm from './components/SignUpForm/SignUpForm';
 import SignInForm from './components/SignInForm/SignInForm';
 import ClientOrder from './components/client/ClientOrder/ClientOrder';
-import CurrentOrder from './components/client/CurrentOrder/CurrentOrder';
+import CurrentOrder from './components/client/ClientCurrentOrder/CurrentOrder';
 import PageWrapper from './shared/components/PageWrapper/PageWrapper';
 import PrivateRoute from './shared/components/Router/components/PrivateRoute';
 import DriverStartScreen from './components/driver/DriverStartScreen/DriverStartScreen';
-import ClientHome from './components/client/ClientHome/ClientHome';
 import { USER_ROLES } from './constants/user-roles.constants';
+import ClientHome from './components/client/ClientHome/ClientHome';
 
 function App() {
   return (

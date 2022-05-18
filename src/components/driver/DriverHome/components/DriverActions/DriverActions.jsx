@@ -8,9 +8,9 @@ import {
 
 import Link from '../../../../../shared/components/Link/Link';
 
-import classes from './block-buttons.module.css';
+import classes from './driver-actions.module.css';
 
-function BlockButtons() {
+function DriverActions() {
   return (
     <div className={classes.block__buttons}>
       <Link to={PRIVATE_ROUTES.DRIVER_ORDERS}>
@@ -29,4 +29,4 @@ function BlockButtons() {
   );
 }
 
-export default BlockButtons;
+export default DriverActions;

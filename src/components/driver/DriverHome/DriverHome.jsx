@@ -1,14 +1,10 @@
 import Home from '../../Home/Home';
 
-import Title from './components/Title/Title';
-import Content from './components/Content/Content';
-import BlockButtons from './components/BlockButtons/BlockButtons';
-import Rating from './components/Rating/Rating';
+import DriverTitle from './components/DriverTitle/DriverTitle';
+import DriverContent from './components/DriverContent/DriverContent';
 
 function DriverHome() {
-  return (
-    <Home title={<Title />} content={<Content />} buttons={<BlockButtons />} rating={<Rating />} />
-  );
+  return <Home title={<DriverTitle />} content={<DriverContent />} />;
 }
 
 export default DriverHome;
