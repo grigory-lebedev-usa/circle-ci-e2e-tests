@@ -5,14 +5,20 @@ import FormSelect from '../../shared/components/form-elements/FormSelect/FormSel
 import FormButton from '../../shared/components/form-elements/FormButton/FormButton';
 import { inputTypes } from '../../shared/components/form-elements/FormInput/form-input.constants';
 
-import { CLIENT_ROLE_ID, DRIVER_ROLE_ID, USER_ROLES } from '../../constants/user-roles.constants';
-
 import { generateValidationError } from '../helpers/generateValidationError';
 
 import { useRegistration } from '../../api/hooks/useRegistration';
 
+import { USER_ROLES } from '../../constants/user-roles.constants';
+
+import {
+  initialErrorsState,
+  initialFormState,
+  DRIVER_ROLE_ID,
+  USER_SELECT
+} from './sign-up-form.constants';
+
 import classes from './sign-up-form.module.css';
-import { initialErrorsState, initialFormState } from './sign-up-form.constants';
 
 function SignUpForm() {
   const [isHasSectionDriver, setIsHasSectionDriver] = useState(false);
@@ -36,7 +42,7 @@ function SignUpForm() {
         errors.model.valid &&
         errors.year.valid &&
         errors.color.valid &&
-        role === USER_ROLES[DRIVER_ROLE_ID].value
+        role === USER_ROLES.ADMIN
       ) {
         setIsFormValid(true);
       } else setIsFormValid(false);
@@ -46,7 +52,7 @@ function SignUpForm() {
       errors.confirmPassword.valid &&
       errors.firstName.valid &&
       errors.lastName.valid &&
-      role === USER_ROLES[CLIENT_ROLE_ID].value
+      role === USER_ROLES.CLIENT
     ) {
       setIsFormValid(true);
     } else setIsFormValid(false);
@@ -172,7 +178,7 @@ function SignUpForm() {
             <FormSelect
               id="role"
               label="Role"
-              items={USER_ROLES}
+              items={USER_SELECT}
               onChange={handleSelectChange}
               value={role}
             />

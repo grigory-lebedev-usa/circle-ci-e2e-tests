@@ -6,9 +6,9 @@ import { buttonColors, buttonSizes } from '../../../shared/components/Button/but
 
 import { useOrder } from '../../../api/hooks/useOrder';
 
-import classes from './current-order.module.css';
+import classes from './client-current-order.module.css';
 
-function CurrentOrder() {
+function ClientCurrentOrder() {
   const {
     deleteOrder,
     order: { id, source, destination }
@@ -41,4 +41,4 @@ function CurrentOrder() {
   );
 }
 
-export default CurrentOrder;
+export default ClientCurrentOrder;

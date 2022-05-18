@@ -7,7 +7,7 @@ import useNotifications from '../../shared/hooks/useNotifications/useNotificatio
 import useAppSpinner from '../../shared/hooks/useAppSpinner';
 import { axiosService } from '../../services/axios.service';
 import { API_ROUTES } from '../../constants/api.constants';
-import { INITIAL_USER_STATE } from '../../components/client/ClientHome/client-home.constants';
+import { INITIAL_USER_STATE } from '../../components/Home/home.constants';
 import { PRIVATE_ROUTES } from '../../constants/app.constants';
 import LocalStorageService from '../../services/LocalStorageService';
 

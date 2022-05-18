@@ -1,0 +1,9 @@
+.block__buttons {
+  margin-top: 185px;
+  margin-left: 268px;
+  display: flex;
+}
+
+.button {
+  margin-right: 90px;
+}

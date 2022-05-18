@@ -1,0 +1,27 @@
+@import url(/src/styles/colors.css);
+
+.container {
+  position: relative;
+}
+
+.block__greetings {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #fff;
+}
+
+.greetings__text {
+  margin: 0;
+  font-family: 'Rasa';
+  font-weight: 300;
+  font-size: 96px;
+  line-height: 117px;
+  text-align: right;
+}
+
+.line {
+  width: 268px;
+  border: 5px solid var(--primary-color);
+  background-color: var(--primary-color);
+}

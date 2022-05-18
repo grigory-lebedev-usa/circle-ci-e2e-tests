@@ -1,0 +1,16 @@
+.block__title {
+  margin-top: 30px;
+  margin-bottom: 50px;
+  width: 560px;
+}
+
+.title {
+  margin: 0;
+  font-family: 'Rasa';
+  font-weight: 300;
+  font-size: 96px;
+  line-height: 117px;
+  margin-left: 60px;  
+  color: #fff;
+  width: 500;
+}
