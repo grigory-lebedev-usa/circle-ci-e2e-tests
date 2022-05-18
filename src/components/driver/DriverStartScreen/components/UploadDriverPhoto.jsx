@@ -2,17 +2,17 @@ import React, { useState, useRef, useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import { useUser } from '../../../api/hooks/useUser';
-import { PRIVATE_ROUTES } from '../../../constants/app.constants';
+import { useUser } from '../../../../api/hooks/useUser';
+import { PRIVATE_ROUTES } from '../../../../constants/app.constants';
 
-import Button from '../../../shared/components/Button/Button';
-import { buttonColors, buttonSizes } from '../../../shared/components/Button/button.constants';
+import Button from '../../../../shared/components/Button/Button';
+import { buttonColors, buttonSizes } from '../../../../shared/components/Button/button.constants';
 
-import { inputType, src } from './start-screen.constants';
+import { inputType, src } from './upload-driver-photo.constants';
 
-import classes from './start-screen.module.css';
+import classes from './upload-driver-photo.module.css';
 
-function StartScreen() {
+function UploadDriverPhoto() {
   const navigate = useNavigate();
   const [isValid, setIsValid] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -92,4 +92,4 @@ function StartScreen() {
   );
 }
 
-export default StartScreen;
+export default UploadDriverPhoto;

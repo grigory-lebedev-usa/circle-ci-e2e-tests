@@ -20,9 +20,9 @@ export function useUser() {
     const getUser = async () => {
       try {
         showSpinner();
-        const { data } = await axiosService.get(API_ROUTES.USER_ME);
-        setUser(data);
-        LocalStorageService.role = user.role;
+        const { data: userInfo } = await axiosService.get(API_ROUTES.USER_ME);
+        setUser(userInfo);
+        LocalStorageService.role = userInfo.role;
       } catch (error) {
         showNotification(error.response.data.message, notificationTypes.error);
       } finally {
@@ -30,7 +30,7 @@ export function useUser() {
       }
     };
     getUser();
-  }, [closeSpinner, showNotification, showSpinner, user.role]);
+  }, [closeSpinner, showNotification, showSpinner]);
 
   const uploadPhoto = useCallback(
     async ({ file }) => {

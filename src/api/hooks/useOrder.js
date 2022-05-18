@@ -45,8 +45,8 @@ export function useOrder() {
     const getOrder = async () => {
       try {
         showSpinner();
-        const { data } = await axiosService.get(API_ROUTES.ORDER);
-        setOrder(data);
+        const { data: orderInfo } = await axiosService.get(API_ROUTES.ORDER);
+        setOrder(orderInfo);
       } catch (error) {
         showNotification(error.response.data.message, notificationTypes.error);
       } finally {

@@ -1,25 +1,16 @@
-import { useEffect } from 'react';
-
 import { useNavigate } from 'react-router-dom';
 
 import { notificationTypes } from '../../shared/components/Notifications/components/Notification/notification.constants';
 import useNotifications from '../../shared/hooks/useNotifications/useNotifications';
 import useAppSpinner from '../../shared/hooks/useAppSpinner';
 import { axiosService } from '../../services/axios.service';
-import { PUBLIC_ROUTES, STORAGE_KEYS, USER_VALUES } from '../../constants/app.constants';
+import { PUBLIC_ROUTES } from '../../constants/app.constants';
 import { API_ROUTES } from '../../constants/api.constants';
-import LocalStorageService from '../../services/LocalStorageService';
 
 export function useRegistration() {
   const navigate = useNavigate();
   const { showSpinner, closeSpinner } = useAppSpinner();
   const { showNotification } = useNotifications();
-
-  useEffect(() => {
-    if (!localStorage.getItem(STORAGE_KEYS.USER)) {
-      LocalStorageService.user = USER_VALUES;
-    }
-  });
   const register = async (requestPayload) => {
     try {
       showSpinner();

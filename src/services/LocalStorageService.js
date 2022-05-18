@@ -2,7 +2,7 @@ import { STORAGE_KEYS } from '../constants/app.constants';
 
 export default class LocalStorageService {
   static get user() {
-    return JSON.parse(localStorage.getItem(STORAGE_KEYS.USER));
+    return JSON.parse(localStorage.getItem(STORAGE_KEYS.USER)) || {};
   }
 
   static set user(user) {

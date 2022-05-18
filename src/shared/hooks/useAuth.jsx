@@ -8,7 +8,7 @@ import { axiosService } from '../../services/axios.service';
 
 import { notificationTypes } from '../components/Notifications/components/Notification/notification.constants';
 
-import { PRIVATE_ROUTES, PUBLIC_ROUTES } from '../../constants/app.constants';
+import { PRIVATE_ROUTES, PUBLIC_ROUTES, USER_VALUES } from '../../constants/app.constants';
 
 import { API_ROUTES } from '../../constants/api.constants';
 
@@ -29,6 +29,7 @@ function useAuth() {
   const login = async (requestPayload) => {
     try {
       showSpinner();
+      LocalStorageService.user = USER_VALUES;
       const {
         data: { accessToken, refreshToken, expirationTime }
       } = await axiosService.post(API_ROUTES.LOGIN, requestPayload);
