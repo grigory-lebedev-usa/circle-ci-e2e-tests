@@ -12,12 +12,13 @@ import { NotificationsProvider } from './shared/hooks/useNotifications/useNotifi
 import SignUpForm from './components/SignUpForm/SignUpForm';
 import SignInForm from './components/SignInForm/SignInForm';
 import ClientOrder from './components/client/ClientOrder/ClientOrder';
-import CurrentOrder from './components/client/ClientCurrentOrder/CurrentOrder';
+import ClientCurrentOrder from './components/client/ClientCurrentOrder/ClientCurrentOrder';
 import PageWrapper from './shared/components/PageWrapper/PageWrapper';
 import PrivateRoute from './shared/components/Router/components/PrivateRoute';
 import DriverStartScreen from './components/driver/DriverStartScreen/DriverStartScreen';
 import { USER_ROLES } from './constants/user-roles.constants';
 import ClientHome from './components/client/ClientHome/ClientHome';
+import DriverOrders from './components/driver/DriverOrders/DriverOrders';
 
 function App() {
   return (
@@ -47,7 +48,7 @@ function App() {
                   path={PRIVATE_ROUTES.CURRENT_ORDER}
                   element={
                     <PrivateRoute roles={[USER_ROLES.CLIENT]}>
-                      <CurrentOrder />
+                      <ClientCurrentOrder />
                     </PrivateRoute>
                   }
                 />
@@ -56,6 +57,14 @@ function App() {
                   element={
                     <PrivateRoute roles={[USER_ROLES.DRIVER]}>
                       <DriverStartScreen />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path={PRIVATE_ROUTES.DRIVER_ORDERS}
+                  element={
+                    <PrivateRoute roles={[USER_ROLES.DRIVER]}>
+                      <DriverOrders />
                     </PrivateRoute>
                   }
                 />
