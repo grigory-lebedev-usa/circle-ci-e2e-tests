@@ -3,5 +3,6 @@ export const INITIAL_USER_STATE = {
   email: '',
   firstName: '',
   lastName: '',
-  role: ''
+  role: '',
+  car: {}
 };

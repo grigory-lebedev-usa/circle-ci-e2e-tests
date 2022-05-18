@@ -6,11 +6,11 @@ import Navigation from './components/Navigation/Navigation';
 
 import classes from './header.module.css';
 
-function Header({ isLogin }) {
+function Header({ isPrivatePage }) {
   return (
     <div>
-      <Navigation isLogin={isLogin} />
-      {isLogin && (
+      <Navigation isPrivatePage={isPrivatePage} />
+      {isPrivatePage && (
         <div className={classes.header}>
           <div className={classes.container}>
             <h1 className={classes.header__title}>GeneralSoft Taxi</h1>
@@ -22,7 +22,11 @@ function Header({ isLogin }) {
 }
 
 Header.propTypes = {
-  isLogin: PropTypes.bool.isRequired
+  isPrivatePage: PropTypes.bool
+};
+
+Header.defaultProps = {
+  isPrivatePage: false
 };
 
 export default Header;

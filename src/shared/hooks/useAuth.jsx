@@ -8,9 +8,11 @@ import { axiosService } from '../../services/axios.service';
 
 import { notificationTypes } from '../components/Notifications/components/Notification/notification.constants';
 
-import { ROUTES, STORAGE_KEYS, USER_VALUES } from '../../constants/app.constants';
+import { PRIVATE_ROUTES, PUBLIC_ROUTES, USER_VALUES } from '../../constants/app.constants';
 
 import { API_ROUTES } from '../../constants/api.constants';
+
+import LocalStorageService from '../../services/LocalStorageService';
 
 import useNotifications from './useNotifications/useNotifications';
 
@@ -20,18 +22,24 @@ const authContext = React.createContext();
 
 function useAuth() {
   const navigate = useNavigate();
-  const [isAuthed, setIsAuthed] = useState(false);
+  const [isAuthed, setIsAuthed] = useState(LocalStorageService.authed || false);
   const { showSpinner, closeSpinner } = useAppSpinner();
   const { showNotification } = useNotifications();
 
   const login = async (requestPayload) => {
     try {
       showSpinner();
-      const { data } = await axiosService.post(API_ROUTES.LOGIN, requestPayload);
+      LocalStorageService.user = USER_VALUES;
+      const {
+        data: { accessToken, refreshToken, expirationTime }
+      } = await axiosService.post(API_ROUTES.LOGIN, requestPayload);
       showNotification('You have successfully logged in', notificationTypes.success);
-      localStorage.setItem(STORAGE_KEYS.TOKEN, data.accessToken);
-      setIsAuthed(true);
-      navigate(ROUTES.HOME);
+      LocalStorageService.authed = true;
+      LocalStorageService.accessToken = accessToken;
+      LocalStorageService.refreshToken = refreshToken;
+      LocalStorageService.expirationTime = expirationTime;
+      setIsAuthed(LocalStorageService.authed);
+      navigate(PRIVATE_ROUTES.HOME);
     } catch (error) {
       showNotification(error.response.data.message, notificationTypes.error);
     } finally {
@@ -40,10 +48,8 @@ function useAuth() {
   };
 
   const logout = () => {
-    localStorage.removeItem(STORAGE_KEYS.TOKEN);
-    localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(USER_VALUES));
-    setIsAuthed(false);
-    navigate(ROUTES.LOGIN);
+    LocalStorageService.clear();
+    navigate(PUBLIC_ROUTES.LOGIN);
   };
 
   return { isAuthed, login, logout };

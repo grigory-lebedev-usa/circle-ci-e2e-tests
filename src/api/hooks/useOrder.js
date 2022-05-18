@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { API_ROUTES } from '../../constants/api.constants';
-import { ROUTES } from '../../constants/app.constants';
+import { PRIVATE_ROUTES } from '../../constants/app.constants';
 import { axiosService } from '../../services/axios.service';
 import { notificationTypes } from '../../shared/components/Notifications/components/Notification/notification.constants';
 import useAppSpinner from '../../shared/hooks/useAppSpinner';
@@ -20,7 +20,7 @@ export function useOrder() {
       showSpinner();
       await axiosService.post(API_ROUTES.ORDER, requestPayload);
       showNotification('You have successfully created an order', notificationTypes.success);
-      navigate(ROUTES.CURRENT_ORDER);
+      navigate(PRIVATE_ROUTES.CURRENT_ORDER);
     } catch (error) {
       showNotification(error.response.data.message, notificationTypes.error);
     } finally {
@@ -33,7 +33,7 @@ export function useOrder() {
       showSpinner();
       await axiosService.delete(`${API_ROUTES.ORDER}/${id}`);
       showNotification('You have successfully cancel an order', notificationTypes.success);
-      navigate(ROUTES.HOME);
+      navigate(PRIVATE_ROUTES.HOME);
     } catch (error) {
       showNotification(error.response.data.message, notificationTypes.error);
     } finally {
@@ -45,8 +45,8 @@ export function useOrder() {
     const getOrder = async () => {
       try {
         showSpinner();
-        const { data } = await axiosService.get(API_ROUTES.ORDER);
-        setOrder(data);
+        const { data: orderInfo } = await axiosService.get(API_ROUTES.ORDER);
+        setOrder(orderInfo);
       } catch (error) {
         showNotification(error.response.data.message, notificationTypes.error);
       } finally {

@@ -1,0 +1,53 @@
+@import url(/src/styles/colors.css);
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.photo__wrapper {
+  margin-top: 50px;
+  padding: 30px 63px 46px 63px;
+  background: var(--primary-color-rgba);
+  text-align: center;
+}
+
+.photo__title {
+  margin: 0;
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 56px;
+}
+
+.photo__text {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 42px;
+}
+
+.photo__content {
+  display: flex;
+  align-items: center;
+}
+
+.photo {
+  width: 536px;
+  height: 371px;
+  background-image: url(/public/img/wrapper_car_img.png);
+  background-size: cover;
+}
+
+.input_file {
+  display: none;
+}
+
+.block__buttons {
+  margin-left: 126px;
+}
+
+.button {
+  margin-top: 50px;
+}
+

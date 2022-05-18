@@ -1,16 +1,16 @@
 import React from 'react';
 
-import Button from '../../shared/components/Button/Button';
-import Link from '../../shared/components/Link/Link';
+import Button from '../../../shared/components/Button/Button';
+import Link from '../../../shared/components/Link/Link';
 import {
   buttonColors,
   buttonSizes,
   buttonTypes
-} from '../../shared/components/Button/button.constants';
+} from '../../../shared/components/Button/button.constants';
 
-import { ROUTES } from '../../constants/app.constants';
+import { PRIVATE_ROUTES } from '../../../constants/app.constants';
 
-import { useUser } from '../../api/hooks/useUser';
+import { useUser } from '../../../api/hooks/useUser';
 
 import classes from './client-home.module.css';
 
@@ -21,7 +21,8 @@ function ClientHome() {
   return (
     <div className={classes.container}>
       <div className={classes.block__greetings}>
-        <p className={classes.greetings__text}>{`Welcome ${firstName} ${lastName}`}</p>
+        <p className={classes.greetings__text}>Welcome</p>
+        <p className={classes.greetings__text}>{`${firstName} ${lastName}`}</p>
       </div>
       <div className={classes.block__title}>
         <h2 className={classes.title}>The best taxi in the world</h2>
@@ -40,7 +41,7 @@ function ClientHome() {
         <p className={classes.qualities__text}>24/7 Supports</p>
       </div>
       <div className={classes.block__buttons}>
-        <Link to={ROUTES.ORDER}>
+        <Link to={PRIVATE_ROUTES.ORDER}>
           <Button
             size={buttonSizes.big}
             color={buttonColors.primary}

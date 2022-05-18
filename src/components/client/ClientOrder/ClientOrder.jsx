@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 
-import { inputTypes } from '../../shared/components/form-elements/FormInput/form-input.constants';
+import { inputTypes } from '../../../shared/components/form-elements/FormInput/form-input.constants';
 
-import FormInput from '../../shared/components/form-elements/FormInput/FormInput';
-import Button from '../../shared/components/Button/Button';
+import FormInput from '../../../shared/components/form-elements/FormInput/FormInput';
+import Button from '../../../shared/components/Button/Button';
 
 import {
   buttonColors,
   buttonSizes,
   buttonTypes
-} from '../../shared/components/Button/button.constants';
+} from '../../../shared/components/Button/button.constants';
 
-import { generateValidationError } from '../helpers/generateValidationError';
+import { generateValidationError } from '../../helpers/generateValidationError';
 
-import { useOrder } from '../../api/hooks/useOrder';
+import { useOrder } from '../../../api/hooks/useOrder';
 
 import classes from './client-order.module.css';
 import { initialErrors, initialFormState } from './client-order.constants';

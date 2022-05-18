@@ -1,31 +1,22 @@
 import React from 'react';
 
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
-import PropTypes from 'prop-types';
-
-import { ROUTES } from './constants/app.constants';
+import { PRIVATE_ROUTES, PUBLIC_ROUTES } from './constants/app.constants';
 import './App.css';
 
-import useAuth, { AuthProvider } from './shared/hooks/useAuth';
+import { AuthProvider } from './shared/hooks/useAuth';
 
 import { SpinnerProvider } from './shared/hooks/useAppSpinner';
 import { NotificationsProvider } from './shared/hooks/useNotifications/useNotifications';
-import PageWrapper from './shared/components/PageWrapper/PageWrapper';
-import ClientHome from './components/ClientHome/ClientHome';
+import ClientHome from './components/client/ClientHome/ClientHome';
 import SignUpForm from './components/SignUpForm/SignUpForm';
 import SignInForm from './components/SignInForm/SignInForm';
-import ClientOrder from './components/ClientOrder/ClientOrder';
-import CurrentOrder from './components/CurrentOrder/CurrentOrder';
-
-function RequireAuth({ children }) {
-  const { isAuthed } = useAuth();
-  return isAuthed === true ? children : <Navigate to={ROUTES.LOGIN} replace />;
-}
-
-RequireAuth.propTypes = {
-  children: PropTypes.node.isRequired
-};
+import ClientOrder from './components/client/ClientOrder/ClientOrder';
+import CurrentOrder from './components/client/CurrentOrder/CurrentOrder';
+import PageWrapper from './shared/components/PageWrapper/PageWrapper';
+import PrivateRoute from './shared/components/Router/components/PrivateRoute';
+import DriverStartScreen from './components/driver/DriverStartScreen/DriverStartScreen';
 
 function App() {
   return (
@@ -36,24 +27,39 @@ function App() {
             <PageWrapper>
               <Routes>
                 <Route
-                  path={ROUTES.HOME}
+                  path={PRIVATE_ROUTES.HOME}
                   element={
-                    <RequireAuth>
+                    <PrivateRoute>
                       <ClientHome />
-                    </RequireAuth>
+                    </PrivateRoute>
                   }
                 />
                 <Route
-                  path={ROUTES.ORDER}
+                  path={PRIVATE_ROUTES.ORDER}
                   element={
-                    <RequireAuth>
+                    <PrivateRoute>
                       <ClientOrder />
-                    </RequireAuth>
+                    </PrivateRoute>
                   }
                 />
-                <Route path={ROUTES.CURRENT_ORDER} element={<CurrentOrder />} />
-                <Route path={ROUTES.REGISTER} element={<SignUpForm />} />
-                <Route path={ROUTES.LOGIN} element={<SignInForm />} />
+                <Route
+                  path={PRIVATE_ROUTES.CURRENT_ORDER}
+                  element={
+                    <PrivateRoute>
+                      <CurrentOrder />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path={PRIVATE_ROUTES.DRIVER_START}
+                  element={
+                    <PrivateRoute>
+                      <DriverStartScreen />
+                    </PrivateRoute>
+                  }
+                />
+                <Route path={PUBLIC_ROUTES.REGISTER} element={<SignUpForm />} />
+                <Route path={PUBLIC_ROUTES.LOGIN} element={<SignInForm />} />
               </Routes>
             </PageWrapper>
           </AuthProvider>

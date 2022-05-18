@@ -15,7 +15,7 @@ import ForgotPassword from '../ForgotPassword/ForgotPassword';
 
 import useAuth from '../../shared/hooks/useAuth';
 
-import { ROUTES } from '../../constants/app.constants';
+import { PUBLIC_ROUTES } from '../../constants/app.constants';
 
 import classes from './sign-in-form.module.css';
 import { initialErrors, initialFormState } from './sign-in-form.constants';
@@ -94,7 +94,7 @@ function SignInForm() {
               <button className={classes.button__link} type="button" onClick={showForgotPassword}>
                 Forgot Password?
               </button>
-              <Link to={ROUTES.REGISTER} className={classes.link}>
+              <Link to={PUBLIC_ROUTES.REGISTER} className={classes.link}>
                 <button className={classes.button__link} type="button" onClick={showForgotPassword}>
                   I don’t have an account
                 </button>

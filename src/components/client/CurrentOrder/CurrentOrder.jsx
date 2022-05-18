@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Button from '../../shared/components/Button/Button';
-import Refresh from '../../shared/components/Refresh/Refresh';
-import { buttonColors, buttonSizes } from '../../shared/components/Button/button.constants';
+import Button from '../../../shared/components/Button/Button';
+import Refresh from '../../../shared/components/Refresh/Refresh';
+import { buttonColors, buttonSizes } from '../../../shared/components/Button/button.constants';
 
-import { useOrder } from '../../api/hooks/useOrder';
+import { useOrder } from '../../../api/hooks/useOrder';
 
 import classes from './current-order.module.css';
 
