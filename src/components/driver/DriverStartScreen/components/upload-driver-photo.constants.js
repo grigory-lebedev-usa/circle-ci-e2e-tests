@@ -3,5 +3,5 @@ export const inputType = {
 };
 
 export const src = {
-  photo: '/public/img/wrapper_car_img.png'
+  photo: '/img/wrapper_car_img.png'
 };
