@@ -1,6 +1,8 @@
-import classes from './content.module.css';
+import ClientActions from '../ClientActions/ClientActions';
 
-function Content() {
+import classes from './client-content.module.css';
+
+function ClientContent() {
   return (
     <>
       <div className={classes.block__text}>
@@ -15,8 +17,9 @@ function Content() {
         <div className={classes.qualities__circle} />
         <p className={classes.qualities__text}>24/7 Supports</p>
       </div>
+      <ClientActions />
     </>
   );
 }
 
-export default Content;
+export default ClientContent;

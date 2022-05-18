@@ -1,6 +1,6 @@
-import classes from './title.module.css';
+import classes from './client-title.module.css';
 
-function Title() {
+function ClientTitle() {
   return (
     <div className={classes.block__title}>
       <h2 className={classes.title}>The best taxi in the world</h2>
@@ -8,4 +8,4 @@ function Title() {
   );
 }
 
-export default Title;
+export default ClientTitle;
