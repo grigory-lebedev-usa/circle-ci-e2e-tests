@@ -42,6 +42,7 @@ function FormInput({
         {type === inputTypes.password && (
           <div className={classes.button__container}>
             <button
+              tabIndex="-1"
               type="button"
               className={
                 showPassword
