@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { PRIVATE_ROUTES, PUBLIC_ROUTES } from './constants/app.constants';
 import './App.css';
@@ -18,6 +18,7 @@ import PrivateRoute from './shared/components/Router/components/PrivateRoute';
 import DriverStartScreen from './components/driver/DriverStartScreen/DriverStartScreen';
 import { USER_ROLES } from './constants/user-roles.constants';
 import ClientHome from './components/client/ClientHome/ClientHome';
+import NotFoundPage from './shared/components/NotFoundPage/NotFoundPage';
 
 function App() {
   return (
@@ -59,6 +60,8 @@ function App() {
                     </PrivateRoute>
                   }
                 />
+                <Route path="*" element={<Navigate to={PUBLIC_ROUTES.NOT_FOUND_PAGE} replace />} />
+                <Route path={PUBLIC_ROUTES.NOT_FOUND_PAGE} element={<NotFoundPage />} />
                 <Route path={PUBLIC_ROUTES.REGISTER} element={<SignUpForm />} />
                 <Route path={PUBLIC_ROUTES.LOGIN} element={<SignInForm />} />
               </Routes>
