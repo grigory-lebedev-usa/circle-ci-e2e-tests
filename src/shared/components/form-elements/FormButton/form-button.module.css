@@ -16,7 +16,7 @@
   background: #1eb1f0;
 }
 
-.button:active {
+.button:active:not(:disabled) {
   transform: translateY(3px);
 }
 
