@@ -19,7 +19,7 @@ function PrivateRoute({ children, roles }) {
   if (!hasPermissions) {
     return (
       <div>
-        <p>You dont have permissions</p>
+        <h1 style={{ color: 'white' }}>You dont have permissions</h1>
       </div>
     );
   }

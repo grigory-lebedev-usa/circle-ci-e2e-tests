@@ -1,14 +1,12 @@
 import { useOrder } from '../../../api/hooks/useOrder';
 import Refresh from '../../../shared/components/Refresh/Refresh';
-import Button from '../../../shared/components/Button/Button';
 
-import { buttonColors, buttonSizes } from '../../../shared/components/Button/button.constants';
+import Order from './components/Order/Order';
 
 import classes from './driver-orders.module.css';
 
 function DriverOrders() {
-  const { order } = useOrder();
-  console.log(order);
+  const { orders } = useOrder();
   return (
     <div className={classes.container}>
       <div className={classes.block__title}>
@@ -16,17 +14,9 @@ function DriverOrders() {
       </div>
       <div className={classes.line} />
       <div className={classes.driver__orders}>
-        <div className={classes.driver__item}>
-          <h4 className={classes.item__title}>Who:</h4>
-          <p className={classes.item__text}>Vasya Pupkin</p>
-          <h4 className={classes.item__title}>From:</h4>
-          <p className={classes.item__text}>Chkalova street, 28/3</p>
-          <h4 className={classes.item__title}>To:</h4>
-          <p className={classes.item__text}>Lenina 53</p>
-          <Button color={buttonColors.accept} size={buttonSizes.small} className={classes.button}>
-            Offer
-          </Button>
-        </div>
+        {orders.map((order) => (
+          <Order key={String(order?.id)} order={order} />
+        ))}
       </div>
       <Refresh className={classes.refresh} />
     </div>

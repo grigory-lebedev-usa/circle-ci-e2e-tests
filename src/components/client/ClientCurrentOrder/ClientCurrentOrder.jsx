@@ -11,7 +11,7 @@ import classes from './client-current-order.module.css';
 function ClientCurrentOrder() {
   const {
     deleteOrder,
-    order: { id, source, destination }
+    orders: { id, source, destination }
   } = useOrder();
 
   const handleCancelOrder = async () => {

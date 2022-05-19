@@ -1,26 +1,27 @@
 import { useEffect, useState } from 'react';
 
-import { useNavigate } from 'react-router-dom';
-
 import { API_ROUTES } from '../../constants/api.constants';
-import { PRIVATE_ROUTES } from '../../constants/app.constants';
 import { axiosService } from '../../services/axios.service';
 import { notificationTypes } from '../../shared/components/Notifications/components/Notification/notification.constants';
 import useAppSpinner from '../../shared/hooks/useAppSpinner';
 import useNotifications from '../../shared/hooks/useNotifications/useNotifications';
 
-export function useOrder() {
-  const navigate = useNavigate();
+export function useOffer() {
   const { showSpinner, closeSpinner } = useAppSpinner();
   const { showNotification } = useNotifications();
-  const [orders, setOrders] = useState([{}]);
+  const [offerId, setOfferId] = useState('');
+  const [isOffer, setIsOffer] = useState(false);
+  const [offers, setOffers] = useState([{}]);
 
-  const createOrder = async (requestPayload) => {
+  const createOffer = async (requestPayload) => {
     try {
       showSpinner();
-      await axiosService.post(API_ROUTES.ORDER, requestPayload);
-      showNotification('You have successfully created an order', notificationTypes.success);
-      navigate(PRIVATE_ROUTES.CURRENT_ORDER);
+      const {
+        data: { id }
+      } = await axiosService.post(API_ROUTES.OFFER, requestPayload);
+      setOfferId(id);
+      showNotification('Your offer was successfully sent', notificationTypes.success);
+      setIsOffer(true);
     } catch (error) {
       showNotification(error.response.data.message, notificationTypes.error);
     } finally {
@@ -28,12 +29,12 @@ export function useOrder() {
     }
   };
 
-  const deleteOrder = async (id) => {
+  const deleteOffer = async (id) => {
     try {
       showSpinner();
-      await axiosService.delete(`${API_ROUTES.ORDER}/${id}`);
-      showNotification('You have successfully cancel an order', notificationTypes.success);
-      navigate(PRIVATE_ROUTES.HOME);
+      await axiosService.delete(`${API_ROUTES.OFFER}/${id}`);
+      showNotification('Your offer was cancel', notificationTypes.success);
+      setIsOffer(false);
     } catch (error) {
       showNotification(error.response.data.message, notificationTypes.error);
     } finally {
@@ -42,19 +43,19 @@ export function useOrder() {
   };
 
   useEffect(() => {
-    const getOrder = async () => {
+    const getOffer = async () => {
       try {
         showSpinner();
-        const { data: orderInfo } = await axiosService.get(API_ROUTES.ORDER);
-        setOrders(orderInfo);
+        const { data: offerInfo } = await axiosService.get(API_ROUTES.OFFER);
+        setOffers(offerInfo);
       } catch (error) {
         showNotification(error.response.data.message, notificationTypes.error);
       } finally {
         closeSpinner();
       }
     };
-    getOrder();
+    getOffer();
   }, [closeSpinner, showNotification, showSpinner]);
 
-  return { createOrder, deleteOrder, orders };
+  return { createOffer, deleteOffer, offers, offerId, isOffer };
 }

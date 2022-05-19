@@ -1,0 +1,99 @@
+.driver__order {
+  width: 100%;
+  height: 105px;
+  margin-top: 30px;
+  position: relative;
+  background: var(--primary-color-rgba);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.driver__order:first-child {
+  margin-top: 90px;
+}
+
+.order__title {
+  font-family: 'Rasa';
+  font-weight: 300;
+  font-size: 48px;
+  line-height: 58px;
+  text-transform: uppercase;
+  margin-left: 30px;
+}
+
+.order__title:first-child {
+  margin-left: 20px;
+}
+
+.order__text {
+  font-family: 'Rasa';
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 58px;
+  color: #fff;
+  margin-left: 10px;
+}
+
+.button__offer {
+  position: absolute;
+  right: 36px;
+}
+
+.modal__content {
+  padding: 50px 145px 15px 145px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.modal__item {
+  display: flex;
+  position: relative;
+  margin-left: 25px;
+}
+
+.modal__title {
+  margin: 0;
+  font-family: 'Rasa';
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 58px;
+}
+
+.modal__text {
+  margin: 0;
+  font-family: 'Rasa';
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 58px;
+  position: absolute;
+  left: 170px;
+}
+
+.offer__text {
+  margin: 30px 0px;
+  font-family: 'Rasa';
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 58px;
+  color: #1BBDA0;
+}
+
+.modal__input {
+  margin: 0 auto;
+}
+
+.modal__actions {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.modal__button {
+  margin-left: 20px;
+}
+
+.modal__form {
+  margin: 0 auto;
+}

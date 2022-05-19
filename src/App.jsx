@@ -17,8 +17,8 @@ import PageWrapper from './shared/components/PageWrapper/PageWrapper';
 import PrivateRoute from './shared/components/Router/components/PrivateRoute';
 import DriverStartScreen from './components/driver/DriverStartScreen/DriverStartScreen';
 import { USER_ROLES } from './constants/user-roles.constants';
-import ClientHome from './components/client/ClientHome/ClientHome';
 import DriverOrders from './components/driver/DriverOrders/DriverOrders';
+import HomeRoutes from './shared/components/Router/components/HomeRoutes/HomeRoutes';
 
 function App() {
   return (
@@ -32,7 +32,7 @@ function App() {
                   path={PRIVATE_ROUTES.HOME}
                   element={
                     <PrivateRoute roles={[USER_ROLES.CLIENT, USER_ROLES.ADMIN, USER_ROLES.DRIVER]}>
-                      <ClientHome />
+                      <HomeRoutes />
                     </PrivateRoute>
                   }
                 />

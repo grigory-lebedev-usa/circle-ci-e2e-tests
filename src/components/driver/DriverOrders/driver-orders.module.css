@@ -34,48 +34,6 @@
   height: auto;
 }
 
-.driver__item {
-  width: 100%;
-  height: 105px;
-  margin-top: 30px;
-  position: relative;
-  background: var(--primary-color-rgba);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-}
-
-.driver__item:first-child {
-  margin-top: 90px;
-}
-
-.item__title {
-  font-family: 'Rasa';
-  font-weight: 300;
-  font-size: 48px;
-  line-height: 58px;
-  text-transform: uppercase;
-  margin-left: 30px;
-}
-
-.item__title:first-child {
-  margin-left: 20px;
-}
-
-.item__text {
-  font-family: 'Rasa';
-  font-weight: 400;
-  font-size: 48px;
-  line-height: 58px;
-  color: #fff;
-  margin-left: 10px;
-}
-
-.button {
-  position: absolute;
-  right: 36px;
-}
-
 .refresh {
   position: fixed;
   right: 80px;
