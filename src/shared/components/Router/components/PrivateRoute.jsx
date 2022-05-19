@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
 
-import { useUser } from '../../../../api/hooks/useUser';
+import useUser from '../../../hooks/useUser';
 
 import { PUBLIC_ROUTES } from '../../../../constants/app.constants';
 
