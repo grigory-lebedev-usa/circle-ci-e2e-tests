@@ -20,7 +20,7 @@ import { USER_ROLES } from './constants/user-roles.constants';
 import DriverOrders from './components/driver/DriverOrders/DriverOrders';
 import HomeRoutes from './shared/components/Router/components/HomeRoutes/HomeRoutes';
 import NotFoundPage from './shared/components/NotFoundPage/NotFoundPage';
-import { UserProvider } from './shared/hooks/useUser';
+import { UserProvider } from './shared/hooks/useUser/useUser';
 
 function App() {
   return (

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import useUser from '../../shared/hooks/useUser';
+import useUser from '../../shared/hooks/useUser/useUser';
 
 import classes from './home.module.css';
 

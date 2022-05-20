@@ -1,22 +1,19 @@
-import React, { useEffect, useContext, useCallback, useState } from 'react';
+import React, { useContext, useCallback, useState } from 'react';
 
 import PropTypes from 'prop-types';
 
 import { useNavigate } from 'react-router-dom';
 
-import { axiosService } from '../../services/axios.service';
+import { axiosService } from '../../../services/axios.service';
 
-import { notificationTypes } from '../components/Notifications/components/Notification/notification.constants';
-import { INITIAL_USER_STATE } from '../../components/Home/home.constants';
+import { notificationTypes } from '../../components/Notifications/components/Notification/notification.constants';
 
-import { API_ROUTES } from '../../constants/api.constants';
+import { API_ROUTES } from '../../../constants/api.constants';
 
-import { PRIVATE_ROUTES } from '../../constants/app.constants';
+import { PRIVATE_ROUTES } from '../../../constants/app.constants';
 
-import LocalStorageService from '../../services/LocalStorageService';
-
-import useNotifications from './useNotifications/useNotifications';
-import useAppSpinner from './useAppSpinner';
+import useNotifications from '../useNotifications/useNotifications';
+import useAppSpinner from '../useAppSpinner';
 
 const userContext = React.createContext();
 
@@ -24,21 +21,18 @@ function useUser() {
   const navigate = useNavigate();
   const { showSpinner, closeSpinner } = useAppSpinner();
   const { showNotification } = useNotifications();
-  const [user, setUser] = useState(INITIAL_USER_STATE);
-  useEffect(() => {
-    const getUser = async () => {
-      try {
-        showSpinner();
-        const { data: userInfo } = await axiosService.get(API_ROUTES.USER_ME);
-        setUser(userInfo);
-        LocalStorageService.role = userInfo.role;
-      } catch (error) {
-        showNotification(error.response.data.message, notificationTypes.error);
-      } finally {
-        closeSpinner();
-      }
-    };
-    getUser();
+  const [user, setUser] = useState({});
+
+  const getUser = useCallback(async () => {
+    try {
+      showSpinner();
+      const { data: userInfo } = await axiosService.get(API_ROUTES.USER_ME);
+      setUser(userInfo);
+    } catch (error) {
+      showNotification(error.response.data.message, notificationTypes.error);
+    } finally {
+      closeSpinner();
+    }
   }, [closeSpinner, showNotification, showSpinner]);
 
   const uploadPhoto = useCallback(
@@ -60,7 +54,7 @@ function useUser() {
     [user, showSpinner, showNotification, navigate, closeSpinner]
   );
 
-  return { user, uploadPhoto };
+  return { getUser, user, uploadPhoto };
 }
 
 export function UserProvider({ children }) {

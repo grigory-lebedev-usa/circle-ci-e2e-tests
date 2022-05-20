@@ -18,6 +18,8 @@ import useNotifications from './useNotifications/useNotifications';
 
 import useAppSpinner from './useAppSpinner';
 
+import useUser from './useUser/useUser';
+
 const authContext = React.createContext();
 
 function useAuth() {
@@ -25,6 +27,7 @@ function useAuth() {
   const [isAuthed, setIsAuthed] = useState(LocalStorageService.authed || false);
   const { showSpinner, closeSpinner } = useAppSpinner();
   const { showNotification } = useNotifications();
+  const { getUser } = useUser();
 
   const login = async (requestPayload) => {
     try {
@@ -33,13 +36,14 @@ function useAuth() {
       const {
         data: { accessToken, refreshToken, expirationTime }
       } = await axiosService.post(API_ROUTES.LOGIN, requestPayload);
-      showNotification('You have successfully logged in', notificationTypes.success);
       LocalStorageService.authed = true;
       LocalStorageService.accessToken = accessToken;
       LocalStorageService.refreshToken = refreshToken;
       LocalStorageService.expirationTime = expirationTime;
-      setIsAuthed(LocalStorageService.authed);
+      setIsAuthed(true);
+      await getUser();
       navigate(PRIVATE_ROUTES.HOME);
+      showNotification('You have successfully logged in', notificationTypes.success);
     } catch (error) {
       showNotification(error.response.data.message, notificationTypes.error);
     } finally {
