@@ -1,8 +1,8 @@
-import { useUser } from '../../../../../api/hooks/useUser';
 import { USER_ROLES } from '../../../../../constants/user-roles.constants';
 import ClientHome from '../../../../../components/client/ClientHome/ClientHome';
 import DriverHome from '../../../../../components/driver/DriverHome/DriverHome';
 import AdminHome from '../../../../../components/admin/AdminHome/AdminHome';
+import useUser from '../../../../hooks/useUser';
 
 function HomeRoutes() {
   const {

@@ -42,7 +42,7 @@ function SignUpForm() {
         errors.model.valid &&
         errors.year.valid &&
         errors.color.valid &&
-        role === USER_ROLES.ADMIN
+        role.toLowerCase() === USER_ROLES.DRIVER
       ) {
         setIsFormValid(true);
       } else setIsFormValid(false);
@@ -52,7 +52,7 @@ function SignUpForm() {
       errors.confirmPassword.valid &&
       errors.firstName.valid &&
       errors.lastName.valid &&
-      role === USER_ROLES.CLIENT
+      role.toLowerCase() === USER_ROLES.CLIENT
     ) {
       setIsFormValid(true);
     } else setIsFormValid(false);

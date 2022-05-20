@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
 
-import { useUser } from '../../../../api/hooks/useUser';
-
 import { PUBLIC_ROUTES } from '../../../../constants/app.constants';
 
 import useAuth from '../../../hooks/useAuth';
+import useUser from '../../../hooks/useUser';
+import NotFoundPage from '../../NotFoundPage/NotFoundPage';
 
 function PrivateRoute({ children, roles }) {
   const { isAuthed } = useAuth();
@@ -17,11 +17,7 @@ function PrivateRoute({ children, roles }) {
     return <Navigate to={PUBLIC_ROUTES.LOGIN} replace />;
   }
   if (!hasPermissions) {
-    return (
-      <div>
-        <h1 style={{ color: 'white' }}>You dont have permissions</h1>
-      </div>
-    );
+    return <NotFoundPage />;
   }
   return children;
 }
