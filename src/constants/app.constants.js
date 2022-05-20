@@ -20,6 +20,5 @@ export const USER_VALUES = {
   authed: false,
   accessToken: '',
   refreshToken: '',
-  expirationTime: '',
-  role: ''
+  expirationTime: ''
 };

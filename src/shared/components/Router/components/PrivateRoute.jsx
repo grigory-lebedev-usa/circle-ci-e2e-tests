@@ -9,9 +9,10 @@ import NotFoundPage from '../../NotFoundPage/NotFoundPage';
 
 function PrivateRoute({ children, roles }) {
   const { isAuthed } = useAuth();
-  const { user } = useUser();
-  console.log('user', user);
-  const hasPermissions = roles.includes(user.role);
+  const {
+    user: { role }
+  } = useUser();
+  const hasPermissions = roles.includes(role);
   if (!isAuthed) {
     return <Navigate to={PUBLIC_ROUTES.LOGIN} replace />;
   }
