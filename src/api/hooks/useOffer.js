@@ -9,19 +9,13 @@ import useNotifications from '../../shared/hooks/useNotifications/useNotificatio
 export function useOffer() {
   const { showSpinner, closeSpinner } = useAppSpinner();
   const { showNotification } = useNotifications();
-  const [offerId, setOfferId] = useState('');
-  const [isOffer, setIsOffer] = useState(false);
   const [offers, setOffers] = useState([{}]);
 
   const createOffer = async (requestPayload) => {
     try {
       showSpinner();
-      const {
-        data: { id }
-      } = await axiosService.post(API_ROUTES.OFFER, requestPayload);
-      setOfferId(id);
+      await axiosService.post(API_ROUTES.OFFER, requestPayload);
       showNotification('Your offer was successfully sent', notificationTypes.success);
-      setIsOffer(true);
     } catch (error) {
       showNotification(error.response.data.message, notificationTypes.error);
     } finally {
@@ -34,7 +28,6 @@ export function useOffer() {
       showSpinner();
       await axiosService.delete(`${API_ROUTES.OFFER}/${id}`);
       showNotification('Your offer was cancel', notificationTypes.success);
-      setIsOffer(false);
     } catch (error) {
       showNotification(error.response.data.message, notificationTypes.error);
     } finally {
@@ -57,5 +50,5 @@ export function useOffer() {
     getOffer();
   }, [closeSpinner, showNotification, showSpinner]);
 
-  return { createOffer, deleteOffer, offers, offerId, isOffer };
+  return { createOffer, deleteOffer, offers };
 }

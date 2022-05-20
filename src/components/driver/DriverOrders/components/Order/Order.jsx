@@ -23,7 +23,8 @@ function Order({ order }) {
   const [isOpenedModal, setIsOpenedModal] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
   const [price, setPrice] = useState('');
-  const { createOffer, deleteOffer, offerId, isOffer } = useOffer();
+  const { createOffer, deleteOffer, offers } = useOffer();
+  const [offerId] = offers.filter(({ orderId }) => orderId === order.id);
   const [errors, setErrors] = useState({
     price: {
       valid: false,
@@ -123,11 +124,11 @@ function Order({ order }) {
       <h4 className={classes.order__title}>To:</h4>
       <p className={classes.order__text}>{order?.destination}</p>
       <Button
-        color={isOffer ? buttonColors.cancel : buttonColors.accept}
+        color={offerId ? buttonColors.cancel : buttonColors.accept}
         size={buttonSizes.small}
         className={classes.button__offer}
-        onClick={isOffer ? handleOfferCancel : openModal}>
-        {isOffer ? 'Cancel' : 'Offer'}
+        onClick={offerId ? handleOfferCancel : openModal}>
+        {offerId ? 'Cancel' : 'Offer'}
       </Button>
     </div>
   );

@@ -32,13 +32,12 @@ function useUser() {
       showSpinner();
       const { data: userInfo } = await axiosService.get(API_ROUTES.USER_ME);
       dispatch({ type: CREATE_USER, payload: userInfo });
-      console.log(userState);
     } catch (error) {
       showNotification(error.response.data.message, notificationTypes.error);
     } finally {
       closeSpinner();
     }
-  }, [closeSpinner, showNotification, showSpinner, userState]);
+  }, [closeSpinner, showNotification, showSpinner]);
 
   const uploadPhoto = useCallback(
     async ({ file }) => {
