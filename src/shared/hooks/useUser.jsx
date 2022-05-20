@@ -1,17 +1,25 @@
-import { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useContext, useCallback, useState } from 'react';
+
+import PropTypes from 'prop-types';
 
 import { useNavigate } from 'react-router-dom';
 
-import { notificationTypes } from '../../shared/components/Notifications/components/Notification/notification.constants';
-import useNotifications from '../../shared/hooks/useNotifications/useNotifications';
-import useAppSpinner from '../../shared/hooks/useAppSpinner';
 import { axiosService } from '../../services/axios.service';
-import { API_ROUTES } from '../../constants/api.constants';
+
+import { notificationTypes } from '../components/Notifications/components/Notification/notification.constants';
 import { INITIAL_USER_STATE } from '../../components/Home/home.constants';
-import { PRIVATE_ROUTES } from '../../constants/app.constants';
 import LocalStorageService from '../../services/LocalStorageService';
 
-export function useUser() {
+import { API_ROUTES } from '../../constants/api.constants';
+
+import { PRIVATE_ROUTES } from '../../constants/app.constants';
+
+import useNotifications from './useNotifications/useNotifications';
+import useAppSpinner from './useAppSpinner';
+
+const userContext = React.createContext();
+
+function useUser() {
   const navigate = useNavigate();
   const { showSpinner, closeSpinner } = useAppSpinner();
   const { showNotification } = useNotifications();
@@ -52,4 +60,17 @@ export function useUser() {
   );
 
   return { user, uploadPhoto };
+}
+
+export function UserProvider({ children }) {
+  const user = useUser();
+  return <userContext.Provider value={user}>{children}</userContext.Provider>;
+}
+
+UserProvider.propTypes = {
+  children: PropTypes.node.isRequired
+};
+
+export default function UserConsumer() {
+  return useContext(userContext);
 }
