@@ -23,6 +23,7 @@ function Order({ order, offer: { id } }) {
   const [isOpenedModal, setIsOpenedModal] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
   const [price, setPrice] = useState('');
+  const [isOffer, setIsOffer] = useState(false);
   const { createOffer, deleteOffer } = useOffer();
   const [errors, setErrors] = useState({
     price: {
@@ -30,6 +31,10 @@ function Order({ order, offer: { id } }) {
       errorMessage: ''
     }
   });
+
+  useEffect(() => {
+    setIsOffer(id);
+  }, [id]);
 
   useEffect(() => {
     setIsFormValid(errors.price.valid);
@@ -123,11 +128,11 @@ function Order({ order, offer: { id } }) {
       <h4 className={classes.order__title}>To:</h4>
       <p className={classes.order__text}>{order?.destination}</p>
       <Button
-        color={id ? buttonColors.cancel : buttonColors.accept}
+        color={isOffer ? buttonColors.cancel : buttonColors.accept}
         size={buttonSizes.small}
         className={classes.button__offer}
-        onClick={id ? handleOfferCancel : openModal}>
-        {id ? 'Cancel' : 'Offer'}
+        onClick={isOffer ? handleOfferCancel : openModal}>
+        {isOffer ? 'Cancel' : 'Offer'}
       </Button>
     </div>
   );

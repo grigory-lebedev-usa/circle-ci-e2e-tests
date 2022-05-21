@@ -9,12 +9,18 @@ import Order from './components/Order/Order';
 import classes from './driver-orders.module.css';
 
 function DriverOrders() {
-  const { orders } = useOrder();
+  const { getOrder, orders } = useOrder();
   const { getOffer, offers } = useOffer();
 
   useEffect(() => {
+    getOrder();
     getOffer();
-  }, [getOffer]);
+  }, [getOffer, getOrder]);
+
+  const handleRefresh = () => {
+    getOrder();
+    getOffer();
+  };
 
   return (
     <div className={classes.container}>
@@ -31,7 +37,7 @@ function DriverOrders() {
           />
         ))}
       </div>
-      <Refresh className={classes.refresh} />
+      <Refresh className={classes.refresh} onClick={handleRefresh} />
     </div>
   );
 }

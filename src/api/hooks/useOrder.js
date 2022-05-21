@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -41,20 +41,17 @@ export function useOrder() {
     }
   };
 
-  useEffect(() => {
-    const getOrder = async () => {
-      try {
-        showSpinner();
-        const { data: orderInfo } = await axiosService.get(API_ROUTES.ORDER);
-        setOrders(orderInfo);
-      } catch (error) {
-        showNotification(error.response.data.message, notificationTypes.error);
-      } finally {
-        closeSpinner();
-      }
-    };
-    getOrder();
+  const getOrder = useCallback(async () => {
+    try {
+      showSpinner();
+      const { data: orderInfo } = await axiosService.get(API_ROUTES.ORDER);
+      setOrders(orderInfo);
+    } catch (error) {
+      showNotification(error.response.data.message, notificationTypes.error);
+    } finally {
+      closeSpinner();
+    }
   }, [closeSpinner, showNotification, showSpinner]);
 
-  return { createOrder, deleteOrder, orders };
+  return { createOrder, deleteOrder, getOrder, orders };
 }
