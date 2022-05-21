@@ -19,12 +19,11 @@ import { useOffer } from '../../../../../api/hooks/useOffer';
 
 import classes from './order.module.css';
 
-function Order({ order }) {
+function Order({ order, offer: { id } }) {
   const [isOpenedModal, setIsOpenedModal] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
   const [price, setPrice] = useState('');
-  const { createOffer, deleteOffer, offers } = useOffer();
-  const [offerId] = offers.filter(({ orderId }) => orderId === order.id);
+  const { createOffer, deleteOffer } = useOffer();
   const [errors, setErrors] = useState({
     price: {
       valid: false,
@@ -60,7 +59,7 @@ function Order({ order }) {
   };
 
   const handleOfferCancel = () => {
-    deleteOffer(offerId);
+    deleteOffer(id);
   };
 
   return (
@@ -124,11 +123,11 @@ function Order({ order }) {
       <h4 className={classes.order__title}>To:</h4>
       <p className={classes.order__text}>{order?.destination}</p>
       <Button
-        color={offerId ? buttonColors.cancel : buttonColors.accept}
+        color={id ? buttonColors.cancel : buttonColors.accept}
         size={buttonSizes.small}
         className={classes.button__offer}
-        onClick={offerId ? handleOfferCancel : openModal}>
-        {offerId ? 'Cancel' : 'Offer'}
+        onClick={id ? handleOfferCancel : openModal}>
+        {id ? 'Cancel' : 'Offer'}
       </Button>
     </div>
   );
@@ -141,11 +140,17 @@ Order.propTypes = {
     destination: PropTypes.string,
     id: PropTypes.string,
     source: PropTypes.string
+  }),
+  offer: PropTypes.shape({
+    client: PropTypes.objectOf(PropTypes.string),
+    createdAt: PropTypes.number,
+    id: PropTypes.string
   })
 };
 
 Order.defaultProps = {
-  order: {}
+  order: {},
+  offer: {}
 };
 
 export default Order;

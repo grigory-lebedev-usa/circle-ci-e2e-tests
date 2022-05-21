@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { API_ROUTES } from '../../constants/api.constants';
 import { axiosService } from '../../services/axios.service';
@@ -35,20 +35,17 @@ export function useOffer() {
     }
   };
 
-  useEffect(() => {
-    const getOffer = async () => {
-      try {
-        showSpinner();
-        const { data: offerInfo } = await axiosService.get(API_ROUTES.OFFER);
-        setOffers(offerInfo);
-      } catch (error) {
-        showNotification(error.response.data.message, notificationTypes.error);
-      } finally {
-        closeSpinner();
-      }
-    };
-    getOffer();
+  const getOffer = useCallback(async () => {
+    try {
+      showSpinner();
+      const { data: offerInfo } = await axiosService.get(API_ROUTES.OFFER);
+      setOffers(offerInfo);
+    } catch (error) {
+      showNotification(error.response.data.message, notificationTypes.error);
+    } finally {
+      closeSpinner();
+    }
   }, [closeSpinner, showNotification, showSpinner]);
 
-  return { createOffer, deleteOffer, offers };
+  return { createOffer, deleteOffer, getOffer, offers };
 }

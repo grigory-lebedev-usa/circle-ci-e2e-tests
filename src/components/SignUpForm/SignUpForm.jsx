@@ -7,7 +7,7 @@ import { inputTypes } from '../../shared/components/form-elements/FormInput/form
 
 import { generateValidationError } from '../helpers/generateValidationError';
 
-import { useRegistration } from '../../api/hooks/useRegistration';
+import useUser from '../../shared/hooks/useUser/useUser';
 
 import { USER_ROLES } from '../../constants/user-roles.constants';
 
@@ -25,7 +25,7 @@ function SignUpForm() {
   const [isFormValid, setIsFormValid] = useState(false);
   const [formState, setFormState] = useState(initialFormState);
   const [errors, setErrors] = useState(initialErrorsState);
-  const { register } = useRegistration();
+  const { register } = useUser();
 
   const { email, password, confirmPassword, firstName, lastName, role, make, model, year, color } =
     formState;

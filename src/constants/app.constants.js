@@ -17,7 +17,7 @@ export const STORAGE_KEYS = {
 };
 
 export const USER_VALUES = {
-  authed: false,
+  isAuthenticated: false,
   accessToken: '',
   refreshToken: '',
   expirationTime: ''

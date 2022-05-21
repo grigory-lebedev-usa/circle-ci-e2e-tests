@@ -13,7 +13,7 @@ import { generateValidationError } from '../helpers/generateValidationError';
 
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
 
-import useAuth from '../../shared/hooks/useAuth';
+import useUser from '../../shared/hooks/useUser/useUser';
 
 import { PUBLIC_ROUTES } from '../../constants/app.constants';
 
@@ -26,7 +26,7 @@ function SignInForm() {
   const { email, password } = formState;
   const [errors, setErrors] = useState(initialErrors);
   const [isOpenedForgotPassword, setIsOpenedForgotPassword] = useState(false);
-  const { login } = useAuth();
+  const { login } = useUser();
 
   useEffect(() => {
     setIsFormValid(errors.email.valid && errors.password.valid);

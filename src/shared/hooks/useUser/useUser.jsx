@@ -1,4 +1,4 @@
-import React, { useContext, useCallback, useReducer } from 'react';
+import React, { useContext, useCallback, useReducer, useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 
@@ -8,16 +8,18 @@ import { axiosService } from '../../../services/axios.service';
 
 import { notificationTypes } from '../../components/Notifications/components/Notification/notification.constants';
 
+import { PRIVATE_ROUTES, PUBLIC_ROUTES, USER_VALUES } from '../../../constants/app.constants';
+
 import { API_ROUTES } from '../../../constants/api.constants';
 
-import { PRIVATE_ROUTES } from '../../../constants/app.constants';
+import LocalStorageService from '../../../services/LocalStorageService';
 
 import useNotifications from '../useNotifications/useNotifications';
+
 import useAppSpinner from '../useAppSpinner';
 
 import { userReducer } from './user.reducer';
-import { INITIAL_STATE } from './user.constants';
-import { CREATE_USER } from './user.actions';
+import { CREATE_USER, ERROR_LOGIN, SUCCESS_LOGIN } from './user.actions';
 
 const userContext = React.createContext();
 
@@ -25,7 +27,10 @@ function useUser() {
   const navigate = useNavigate();
   const { showSpinner, closeSpinner } = useAppSpinner();
   const { showNotification } = useNotifications();
-  const [userState, dispatch] = useReducer(userReducer, INITIAL_STATE);
+  const [{ user, isAuthenticated }, dispatch] = useReducer(userReducer, {
+    user: {},
+    isAuthenticated: LocalStorageService.isAuthenticated
+  });
 
   const getUser = useCallback(async () => {
     try {
@@ -39,10 +44,16 @@ function useUser() {
     }
   }, [closeSpinner, showNotification, showSpinner]);
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      getUser();
+    }
+  }, [getUser, isAuthenticated]);
+
   const uploadPhoto = useCallback(
     async ({ file }) => {
       try {
-        const { id } = userState;
+        const { id } = user;
         const formData = new FormData();
         formData.append('file', file);
         showSpinner();
@@ -55,10 +66,37 @@ function useUser() {
         closeSpinner();
       }
     },
-    [userState, showSpinner, showNotification, navigate, closeSpinner]
+    [user, showSpinner, showNotification, navigate, closeSpinner]
   );
 
-  return { getUser, user: userState, uploadPhoto };
+  const login = async (requestPayload) => {
+    try {
+      showSpinner();
+      LocalStorageService.user = USER_VALUES;
+      const {
+        data: { accessToken, refreshToken, expirationTime }
+      } = await axiosService.post(API_ROUTES.LOGIN, requestPayload);
+      dispatch({ type: SUCCESS_LOGIN });
+      LocalStorageService.accessToken = accessToken;
+      LocalStorageService.refreshToken = refreshToken;
+      LocalStorageService.expirationTime = expirationTime;
+      await getUser();
+      navigate(PRIVATE_ROUTES.HOME);
+      showNotification('You have successfully logged in', notificationTypes.success);
+    } catch (error) {
+      dispatch({ type: ERROR_LOGIN });
+      showNotification(error.response.data.message, notificationTypes.error);
+    } finally {
+      closeSpinner();
+    }
+  };
+
+  const logout = () => {
+    LocalStorageService.clear();
+    navigate(PUBLIC_ROUTES.LOGIN);
+  };
+
+  return { user, isAuthenticated, login, logout, uploadPhoto, getUser };
 }
 
 export function UserProvider({ children }) {
@@ -70,6 +108,6 @@ UserProvider.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-export default function UserConsumer() {
+export default function AuthConsumer() {
   return useContext(userContext);
 }
