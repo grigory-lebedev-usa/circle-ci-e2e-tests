@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useCallback, useState } from 'react';
+import React, { useContext, useCallback, useState } from 'react';
 
 import PropTypes from 'prop-types';
 
@@ -24,20 +24,18 @@ function useUser() {
   const { showSpinner, closeSpinner } = useAppSpinner();
   const { showNotification } = useNotifications();
   const [user, setUser] = useState(INITIAL_USER_STATE);
-  useEffect(() => {
-    const getUser = async () => {
-      try {
-        showSpinner();
-        const { data: userInfo } = await axiosService.get(API_ROUTES.USER_ME);
-        setUser(userInfo);
-        LocalStorageService.role = userInfo.role;
-      } catch (error) {
-        showNotification(error.response.data.message, notificationTypes.error);
-      } finally {
-        closeSpinner();
-      }
-    };
-    getUser();
+
+  const getUser = useCallback(async () => {
+    try {
+      showSpinner();
+      const { data: userInfo } = await axiosService.get(API_ROUTES.USER_ME);
+      setUser(userInfo);
+      LocalStorageService.role = userInfo.role;
+    } catch (error) {
+      showNotification(error.response.data.message, notificationTypes.error);
+    } finally {
+      closeSpinner();
+    }
   }, [closeSpinner, showNotification, showSpinner]);
 
   const uploadPhoto = useCallback(
@@ -59,7 +57,7 @@ function useUser() {
     [user, showSpinner, showNotification, navigate, closeSpinner]
   );
 
-  return { user, uploadPhoto };
+  return { getUser, user, uploadPhoto };
 }
 
 export function UserProvider({ children }) {

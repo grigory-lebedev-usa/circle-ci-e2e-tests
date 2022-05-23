@@ -19,7 +19,7 @@
   border-radius: 4px;
   position: relative;
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
 }
 
 .form__title {
@@ -44,20 +44,4 @@
   right: 0;
   left: 0;
   text-align: center;
-}
-
-.input:first-child {
-  margin-top: 0px;
-}
-
-.input {
-  margin-top: 20px;
-}
-
-.error {
-  color: var(--invalid-color);
-  font-size: 24px;
-  margin: 5px 0px 0px 5px;
-  display: block;
-  width: 400px;
 }
