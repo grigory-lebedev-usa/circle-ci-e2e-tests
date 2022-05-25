@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
-import { inputTypes } from '../../../shared/components/form-elements/FormInput/form-input.constants';
+import { INPUT_TYPES } from '../../../shared/components/form-elements/FormInput/form-input.constants';
 
 import FormInput from '../../../shared/components/form-elements/FormInput/FormInput';
 import Button from '../../../shared/components/Button/Button';
 
 import {
-  buttonColors,
-  buttonSizes,
-  buttonTypes
+  BUTTON_SIZES,
+  BUTTON_COLORS,
+  BUTTON_VARIANTS,
+  BUTTON_TYPES
 } from '../../../shared/components/Button/button.constants';
 
 import { generateValidationError } from '../../helpers/generateValidationError';
@@ -57,7 +58,7 @@ function ClientOrder() {
         <div className={classes.form__container}>
           <FormInput
             id="source"
-            type={inputTypes.text}
+            type={INPUT_TYPES.TEXT}
             label="Source"
             placeholder="Source"
             name="source"
@@ -68,7 +69,7 @@ function ClientOrder() {
           />
           <FormInput
             id="destination"
-            type={inputTypes.text}
+            type={INPUT_TYPES.TEXT}
             label="Destination"
             placeholder="Destination"
             name="destination"
@@ -80,10 +81,12 @@ function ClientOrder() {
           />
         </div>
         <Button
-          size={buttonSizes.big}
-          color={buttonColors.primary}
+          size={BUTTON_SIZES.BIG}
+          color={BUTTON_COLORS.PRIMARY}
+          variant={BUTTON_VARIANTS.CONTAINED}
           disabled={!isFormValid}
-          type={buttonTypes.submit}>
+          type={BUTTON_TYPES.SUBMIT}
+        >
           Order
         </Button>
       </form>

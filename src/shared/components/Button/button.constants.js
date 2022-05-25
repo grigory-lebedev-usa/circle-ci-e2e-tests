@@ -1,24 +1,23 @@
-import classes from './button.module.css';
+export const BUTTON_SIZES = {
+  BIG: 'big',
+  MEDIUM: 'medium',
+  SMALL: 'small',
+  LARGE: 'large'
+};
 
-export const buttonSizes = {
-  big: 'big',
-  medium: 'medium',
-  small: 'small',
-  extraSmall: 'extraSmall'
+export const BUTTON_VARIANTS = {
+  FORM: 'form',
+  CONTAINED: 'contained',
+  TEXT: 'text'
 };
-export const buttonColors = {
-  accept: '#5DCE7C',
-  cancel: '#CE6A5D',
-  primary: '#C4A267',
-  general: '#494357'
+
+export const BUTTON_COLORS = {
+  FORM: 'form',
+  PRIMARY: 'primary',
+  SECONDARY: 'secondary'
 };
-export const buttonClasses = {
-  [buttonSizes.big]: classes.button_big,
-  [buttonSizes.medium]: classes.button_medium,
-  [buttonSizes.small]: classes.button_small,
-  [buttonSizes.extraSmall]: classes.button_extraSmall
-};
-export const buttonTypes = {
-  submit: 'submit',
-  button: 'button'
+
+export const BUTTON_TYPES = {
+  SUBMIT: 'submit',
+  BUTTON: 'button'
 };

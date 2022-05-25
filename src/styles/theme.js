@@ -5,39 +5,132 @@ import { COLORS } from './colors';
 const theme = createTheme({
   palette: {
     form: {
-      main: COLORS.form,
-      contrastText: COLORS.white
+      main: COLORS.FORM,
+      contrastText: COLORS.WHITE
     },
     primary: {
-      main: COLORS.primary,
-      contrastText: COLORS.white
+      main: COLORS.PRIMARY,
+      contrastText: COLORS.WHITE
     },
     secondary: {
-      main: COLORS.secondary,
-      contrastText: COLORS.white
+      main: COLORS.SECONDARY,
+      contrastText: COLORS.WHITE
     }
   },
   components: {
+    MuiBackdrop: {
+      styleOverrides: {
+        root: {
+          color: COLORS.WHITE
+        }
+      }
+    },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          fontSize: '25px'
+        }
+      }
+    },
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+          transition: 'all 0.3s ease',
+          color: COLORS.BLACK,
+          '&:hover': {
+            color: COLORS.FORM
+          }
+        }
+      }
+    },
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: { width: '33px', height: '33px' }
+      }
+    },
+    MuiFormControl: {
+      styleOverrides: {
+        root: {
+          width: '100%',
+          height: '100%'
+        }
+      }
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          borderRadius: '8px'
+        }
+      }
+    },
+    MuiList: {
+      styleOverrides: {
+        root: {
+          paddingTop: '0px',
+          paddingBottom: '0px'
+        }
+      }
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          fontSize: '27px',
+          paddingTop: '10px',
+          paddingBottom: '10px',
+          '&:hover': {
+            backgroundColor: '#C7F1FF'
+          },
+          '&.Mui-selected': {
+            backgroundColor: '#C7F1FF'
+          }
+        }
+      }
+    },
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          fontSize: '27px'
+          fontSize: '27px',
+          transform: `translate(14px, 21px) scale(1)`,
+          '&.Mui-focused': {
+            transform: `translate(14px, -16px) scale(0.75)`
+          }
         },
-        focused: {
-          transform: 'translate(14px, -14px) scale(0.75)'
+        shrink: {
+          transform: `translate(14px, -14px) scale(0.75)`,
+          color: COLORS.BLACK
         }
       }
     },
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          width: '400px',
-          height: '80px',
           fontSize: '27px',
-          backgroundColor: COLORS.white
+          borderRadius: '8px',
+          transition: 'all 0.3s ease',
+          width: '100%',
+          height: '100%',
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderWidth: '1px'
+          },
+          '&:hover .MuiOutlinedInput-notchedOutline': {
+            borderColor: COLORS.FORM
+          }
+        },
+        input: {
+          borderColor: COLORS.FORM,
+          '::-webkit-textfield-decoration-container': {
+            visibility: 'hidden'
+          }
         },
         notchedOutline: {
-          borderColor: COLORS.black
+          borderColor: COLORS.BLACK
+        }
+      }
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          marginRight: '-6px'
         }
       }
     },
@@ -52,28 +145,63 @@ const theme = createTheme({
       styleOverrides: {
         root: ({ ownerState }) => ({
           ...(ownerState.variant === 'form' && {
-            backgroundColor: COLORS.form,
-            color: COLORS.white,
+            backgroundColor: COLORS.FORM,
+            color: COLORS.WHITE,
+            width: '100%',
+            height: '100%',
             fontSize: '32px',
             lineHeight: '38px',
             fontWeight: '400',
-            width: '400px',
-            height: '80px',
             borderRadius: '8px',
             transition: 'all 0.3s ease',
-            ':hover': {
+            '&:hover': {
               backgroundColor: '#1eb1f0'
             },
-            ':active:not(:disabled)': {
+            '&:active:not(:disabled)': {
               transform: 'translateY(3px)'
             },
-            ':disabled': {
+            '&:disabled': {
               backgroundColor: COLORS.disabled,
               cursor: 'not-allowed',
-              color: COLORS.white
+              color: COLORS.WHITE
             }
-          })
-        })
+          }),
+          ...(ownerState.variant === 'contained' &&
+            ownerState.size === 'big' && {
+              fontSize: '36px',
+              lineHeight: '44px',
+              width: '280px',
+              height: '95px'
+            }),
+          ...(ownerState.variant === 'contained' &&
+            ownerState.size === 'medium' && {
+              fontSize: '36px',
+              lineHeight: '44px',
+              width: '300px',
+              height: '60px'
+            }),
+          ...(ownerState.variant === 'contained' &&
+            ownerState.size === 'small' && {
+              fontSize: '36px',
+              lineHeight: '44px',
+              width: '190px',
+              height: '55px'
+            }),
+          ...(ownerState.variant === 'contained' &&
+            ownerState.size === 'large' && {
+              fontSize: '36px',
+              lineHeight: '44px',
+              width: '130px',
+              height: '45px'
+            })
+        }),
+        contained: {
+          fontFamily: `'Rasa', 'sans-serif'`,
+          fontWeight: 700,
+          borderRadius: '50px',
+          boxShadow: 'none',
+          textTransform: 'none'
+        }
       }
     }
   }

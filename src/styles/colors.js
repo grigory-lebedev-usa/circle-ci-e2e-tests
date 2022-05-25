@@ -1,11 +1,11 @@
 export const COLORS = {
-  primary: '#C4A267',
-  secondary: '#3E3436',
-  success: '#00CB82',
-  warning: '#E1CB00',
-  error: '#CF6402',
-  disabled: '#AEAEAE',
-  white: '#FFF',
-  black: '#000',
-  form: '#00A1E5'
+  PRIMARY: '#C4A267',
+  SECONDARY: '#494357',
+  SUCCESS: '#00CB82',
+  WARNING: '#E1CB00',
+  ERROR: '#CF6402',
+  DISABLED: '#AEAEAE',
+  WHITE: '#FFF',
+  BLACK: '#000',
+  FORM: '#00A1E5'
 };

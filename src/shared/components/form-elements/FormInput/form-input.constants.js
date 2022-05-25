@@ -1,18 +1,18 @@
-export const inputTypes = {
-  email: 'email',
-  text: 'text',
-  password: 'password',
-  checkbox: 'checkbox',
-  number: 'number',
-  submit: 'submit'
+export const INPUT_TYPES = {
+  EMAIL: 'email',
+  TEXT: 'text',
+  PASSWORD: 'password',
+  CHECKBOX: 'checkbox',
+  NUMBER: 'number',
+  SUBMIT: 'submit'
 };
 
 export const computedInputType = (type, showPassword) => {
-  if (type !== inputTypes.password) {
+  if (type !== INPUT_TYPES.PASSWORD) {
     return type;
   }
-  if (type === inputTypes.password && showPassword) {
-    return inputTypes.text;
+  if (type === INPUT_TYPES.PASSWORD && showPassword) {
+    return INPUT_TYPES.TEXT;
   }
   return type;
 };

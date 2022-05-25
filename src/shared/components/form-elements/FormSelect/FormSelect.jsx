@@ -1,67 +1,35 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import PropTypes from 'prop-types';
 
-import { DropDownPropType } from '../../../prop-types';
+import { FormControl, InputLabel, Select, OutlinedInput, MenuItem } from '@mui/material';
 
-import useClickOutside from '../../../hooks/useClickOutside';
+import { DropDownPropType } from '../../../prop-types';
 
 import classes from './form-select.module.css';
 
-function FormSelect({ label, items, onChange, value, id }) {
-  const [isOpened, setIsOpened] = useState(false);
-
-  const handleFormSelectToggle = () => setIsOpened(!isOpened);
-
-  const handleListItemClick = (item) => {
-    if (onChange) {
-      onChange(item);
-      setIsOpened(false);
-    }
+function FormSelect({ label, items, id, className }) {
+  const [selectedValue, setSelectedValue] = useState('');
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value);
   };
-
   return (
-    <div ref={useClickOutside(() => setIsOpened(false))}>
-      <div
-        id={id}
-        role="listbox"
-        tabIndex="0"
-        className={
-          isOpened
-            ? `${classes.dropdown__container} ${classes.dropdown__container_active}`
-            : `${classes.dropdown__container}`
-        }
-        onClick={handleFormSelectToggle}>
-        <label
-          htmlFor="dropdown"
-          className={
-            value
-              ? `${classes.dropdown__label} ${classes.dropdown__label_active}`
-              : classes.dropdown__label
-          }>
-          {label}
-        </label>
-        {!!value && <span className={classes.dropdown__label_text}>{value}</span>}
-        <div
-          className={
-            isOpened
-              ? `${classes.dropdown__icon} ${classes.dropdown__icon_active}`
-              : classes.dropdown__icon
-          }
-        />
-      </div>
-      {isOpened && (
-        <ul className={classes.dropdown__list}>
+    <div className={`${classes.container} ${className}`}>
+      <FormControl color="form">
+        <InputLabel id="demo-multiple-name-label">{label}</InputLabel>
+        <Select
+          id={id}
+          value={selectedValue}
+          onChange={handleChange}
+          input={<OutlinedInput label={label} />}
+        >
           {items.map((item) => (
-            <li
-              className={classes.dropdown__item}
-              key={item.id}
-              onClick={() => handleListItemClick(item)}>
-              <span className={classes.dropdown__button}>{item.value}</span>
-            </li>
+            <MenuItem key={item.id} value={item.value}>
+              {item.value}
+            </MenuItem>
           ))}
-        </ul>
-      )}
+        </Select>
+      </FormControl>
     </div>
   );
 }
@@ -69,14 +37,16 @@ function FormSelect({ label, items, onChange, value, id }) {
 FormSelect.propTypes = {
   label: PropTypes.string.isRequired,
   items: PropTypes.arrayOf(DropDownPropType).isRequired,
-  onChange: PropTypes.func,
-  value: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired
+  // onChange: PropTypes.func,
+  // value: PropTypes.string,
+  id: PropTypes.string.isRequired,
+  className: PropTypes.string
 };
 
 FormSelect.defaultProps = {
-  // eslint-disable-next-line prettier/prettier
-  onChange: () => { }
+  // onChange: () => {},
+  // value: '',
+  className: ''
 };
 
 export default FormSelect;

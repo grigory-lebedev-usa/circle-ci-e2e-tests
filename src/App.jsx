@@ -34,7 +34,8 @@ function App() {
                     path={PRIVATE_ROUTES.HOME}
                     element={
                       <PrivateRoute
-                        roles={[USER_ROLES.CLIENT, USER_ROLES.ADMIN, USER_ROLES.DRIVER]}>
+                        roles={[USER_ROLES.CLIENT, USER_ROLES.ADMIN, USER_ROLES.DRIVER]}
+                      >
                         <ClientHome />
                       </PrivateRoute>
                     }
