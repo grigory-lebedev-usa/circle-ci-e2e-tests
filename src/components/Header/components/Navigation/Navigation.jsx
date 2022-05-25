@@ -8,7 +8,7 @@ import useAuth from '../../../../shared/hooks/useAuth';
 
 import classes from './navigation.module.css';
 
-function Navigation({ isLogin }) {
+function Navigation({ isPrivatePage }) {
   const { logout } = useAuth();
   return (
     <div>
@@ -21,7 +21,7 @@ function Navigation({ isLogin }) {
           ]}
         />
       </div>
-      {isLogin && (
+      {isPrivatePage && (
         <div className={classes.logout__block}>
           <button className={classes.logout_btn} onClick={logout} type="button">
             Log out
@@ -33,7 +33,7 @@ function Navigation({ isLogin }) {
 }
 
 Navigation.propTypes = {
-  isLogin: PropTypes.bool.isRequired
+  isPrivatePage: PropTypes.bool.isRequired
 };
 
 export default Navigation;

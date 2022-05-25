@@ -25,8 +25,12 @@
     "prettier/prettier": [
       "error",
       {
-        "endOfLine": "auto",
-        "tabWidth": 2
+        "semi": true,
+        "tabWidth": 2,
+        "printWidth": 100,
+        "singleQuote": true,
+        "trailingComma": "none",
+        "endOfLine": "auto"
       }
     ],
     "react/react-in-jsx-scope": "off",

@@ -1,18 +1,12 @@
-import React from 'react';
-
 import PropTypes from 'prop-types';
 
-import classes from './progress-spinner.module.css';
+import { Backdrop, CircularProgress } from '@mui/material';
 
 function ProgressSpinner({ isVisible }) {
   return (
-    <div>
-      {isVisible && (
-        <div className={classes.spinner__container}>
-          <div className={classes.spinner} />
-        </div>
-      )}
-    </div>
+    <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} open={isVisible}>
+      <CircularProgress color="inherit" size={200} />
+    </Backdrop>
   );
 }
 

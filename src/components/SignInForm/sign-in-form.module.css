@@ -15,8 +15,8 @@
 
 .form__container {
   padding: 50px;
-  background: var(--form-background-color);
-  border-radius: 4px;
+  background: #fff;
+  border-radius: 8px;
   position: relative;
   display: flex;
   align-items: flex-end;
@@ -28,15 +28,17 @@
   font-size: 50px;
 }
 
-.button {
+.form__button {
+  width: 400px;
+  height: 80px;
   margin-top: 25px;
 }
 
-.input:first-child {
+.form__input:first-child {
   margin-top: 0px;
 }
 
-.input {
+.form__input {
   margin-top: 50px;
 }
 
@@ -64,4 +66,8 @@
   font-size: 25px;
   line-height: 29px;
   cursor: pointer;
+}
+
+.form__checkbox {
+  margin-top: 10px;
 }

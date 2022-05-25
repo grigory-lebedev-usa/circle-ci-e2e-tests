@@ -1,0 +1,28 @@
+@import url(/src/styles/colors.css);
+
+.refresh__btn {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  background-image: url(/public/img/refresh_arrow.png);
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.refresh__animation {
+  animation: refresh 2s
+}
+
+@keyframes refresh {
+  to {
+    transform: rotate(0deg);
+  }
+  from {
+    transform: rotate(-360deg);
+  }
+}

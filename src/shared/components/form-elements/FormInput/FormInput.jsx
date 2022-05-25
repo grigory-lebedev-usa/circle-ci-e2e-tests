@@ -1,74 +1,97 @@
 import React, { useState } from 'react';
 
+import {
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  OutlinedInput,
+  InputAdornment,
+  IconButton
+} from '@mui/material';
+
 import PropTypes from 'prop-types';
 
 import classes from './form-input.module.css';
-import { computedInputType, inputTypes } from './form-input.constants';
 
-const FormInput = React.forwardRef(
-  ({ id, type, label, placeholder, onChange, onBlur, name, className, error }, ref) => {
-    const [showPassword, setShowPassword] = useState(false);
+import { computedInputType, INPUT_TYPES } from './form-input.constants';
 
-    const handleShowPassword = () => {
-      setShowPassword(!showPassword);
-    };
+import VisibilityOff from './components/VisibilityOff/VisibilityOff';
+import Visibility from './components/Visibility/Visibility';
 
-    return (
-      <div className={`${className}`}>
-        <div className={classes.input__container}>
-          <input
-            id={id}
-            className={`${classes.input} ${error && classes.input_invalid}`}
-            type={computedInputType(type, showPassword)}
-            placeholder={placeholder}
-            onChange={onChange}
-            onBlur={onBlur}
-            ref={ref}
-            name={name}
-          />
-          <label htmlFor={id} className={classes.input__label}>
-            {label}
-          </label>
-          {type === inputTypes.password && (
-            <div className={classes.button__container}>
-              <button
-                type="button"
-                className={
-                  showPassword
-                    ? `${classes.password__button} ${classes.password__button_active}`
-                    : classes.password__button
-                }
-                onClick={handleShowPassword}
-              />
-            </div>
-          )}
-        </div>
-        {error && <span className={classes.error}>{error}</span>}
-      </div>
-    );
-  }
-);
+function FormInput({
+  id,
+  type,
+  label,
+  placeholder,
+  onChange,
+  value,
+  onBlur,
+  className,
+  error,
+  helperText
+}) {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  return (
+    <div className={`${classes.container} ${className}`}>
+      <FormControl variant="outlined" color="form">
+        <InputLabel htmlFor={id} error={error}>
+          {label}
+        </InputLabel>
+        <OutlinedInput
+          id={id}
+          error={error}
+          type={computedInputType(type, showPassword)}
+          onChange={onChange}
+          onBlur={onBlur}
+          value={value}
+          placeholder={placeholder}
+          endAdornment={
+            type === INPUT_TYPES.PASSWORD && (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  edge="end"
+                  onClick={handleShowPassword}
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            )
+          }
+          label={label}
+        />
+        <FormHelperText error={error}>{helperText}</FormHelperText>
+      </FormControl>
+    </div>
+  );
+}
 
 FormInput.propTypes = {
   id: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(Object.values(inputTypes)).isRequired,
+  type: PropTypes.oneOf(Object.values(INPUT_TYPES)).isRequired,
   label: PropTypes.string.isRequired,
-  placeholder: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  error: PropTypes.string,
   onChange: PropTypes.func,
+  value: PropTypes.string,
+  placeholder: PropTypes.string,
+  className: PropTypes.string,
   onBlur: PropTypes.func,
-  className: PropTypes.string
+  error: PropTypes.bool,
+  helperText: PropTypes.string
 };
 
 FormInput.defaultProps = {
+  onChange: () => {},
+  onBlur: () => {},
+  value: '',
   placeholder: '',
-  // eslint-disable-next-line prettier/prettier
-  onChange: () => { },
-  // eslint-disable-next-line prettier/prettier
-  onBlur: () => { },
   className: '',
-  error: ''
+  error: false,
+  helperText: ''
 };
 
 export default FormInput;

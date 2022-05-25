@@ -1,0 +1,85 @@
+@import url(/src/styles/colors.css);
+
+.container {
+  position: relative;
+}
+
+.block__text {
+  position: absolute;
+  top: 78px;
+  right: 0;
+  width: 763px;
+  height: 205px;
+}
+
+.text {
+  font-family: 'Rasa';
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 58px;
+  text-align: right;
+  color: #fff;
+  margin: 0;
+}
+
+.line {
+  margin-top: 70px;
+  position: absolute;
+  right: 0;
+  width: 390px;
+  border: 5px solid var(--primary-color);
+  background-color: var(--primary-color);
+}
+
+.form__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.form__container {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 50px 34px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 137px;
+}
+
+.decoration__container { 
+  position: fixed;
+  left: 36px;
+  bottom: 36px;
+  width: 461px;
+  height: 386px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.decoration__text {
+  position: absolute;
+  font-family: 'Rasa';
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 58px;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.decoration__text_top {
+  top: 0;
+  right: 0;
+}
+
+.decoration__text_bottom {
+  bottom: 0;
+  left: 30px;
+}
+
+.input {
+  margin-top: 43px;
+}
