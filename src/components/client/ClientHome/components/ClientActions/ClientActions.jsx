@@ -1,9 +1,9 @@
 import { PRIVATE_ROUTES } from '../../../../../constants/app.constants';
 import Button from '../../../../../shared/components/Button/Button';
 import {
-  buttonColors,
-  buttonSizes,
-  buttonTypes
+  BUTTON_COLORS,
+  BUTTON_SIZES,
+  BUTTON_VARIANTS
 } from '../../../../../shared/components/Button/button.constants';
 
 import Link from '../../../../../shared/components/Link/Link';
@@ -15,14 +15,19 @@ function ClientActions() {
     <div className={classes.block__buttons}>
       <Link to={PRIVATE_ROUTES.ORDER}>
         <Button
-          size={buttonSizes.big}
-          color={buttonColors.primary}
+          size={BUTTON_SIZES.BIG}
+          color={BUTTON_COLORS.PRIMARY}
+          variant={BUTTON_VARIANTS.CONTAINED}
           className={classes.button}
-          type={buttonTypes.button}>
+        >
           Create order
         </Button>
       </Link>
-      <Button size={buttonSizes.big} color={buttonColors.primary} type={buttonTypes.button}>
+      <Button
+        size={BUTTON_SIZES.BIG}
+        color={BUTTON_COLORS.PRIMARY}
+        variant={BUTTON_VARIANTS.CONTAINED}
+      >
         View history
       </Button>
     </div>

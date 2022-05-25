@@ -2,7 +2,11 @@ import React from 'react';
 
 import Button from '../../../shared/components/Button/Button';
 import Refresh from '../../../shared/components/Refresh/Refresh';
-import { buttonColors, buttonSizes } from '../../../shared/components/Button/button.constants';
+import {
+  BUTTON_COLORS,
+  BUTTON_SIZES,
+  BUTTON_VARIANTS
+} from '../../../shared/components/Button/button.constants';
 
 import { useOrder } from '../../../api/hooks/useOrder';
 
@@ -30,10 +34,12 @@ function ClientCurrentOrder() {
         </p>
       </div>
       <Button
-        size={buttonSizes.big}
-        color={buttonColors.primary}
+        size={BUTTON_SIZES.BIG}
+        color={BUTTON_COLORS.PRIMARY}
         onClick={handleCancelOrder}
-        className={classes.block__button}>
+        variant={BUTTON_VARIANTS.CONTAINED}
+        className={classes.block__button}
+      >
         Cancel order
       </Button>
       <Refresh className={classes.refresh} />

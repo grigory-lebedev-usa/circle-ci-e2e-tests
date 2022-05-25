@@ -1,40 +1,40 @@
-import React from 'react';
-
 import PropTypes from 'prop-types';
+import { Button as MuiButton } from '@mui/material';
 
-import classes from './button.module.css';
-import { buttonClasses, buttonSizes, buttonTypes } from './button.constants';
+import { BUTTON_SIZES, BUTTON_TYPES, BUTTON_VARIANTS } from './button.constants';
 
-function Button({ children, size, color, type, onClick, className, disabled }) {
+function Button({ children, size, color, type, onClick, className, disabled, variant }) {
   return (
-    <div className={`${classes.button__container} ${className}`}>
-      <button
-        disabled={disabled}
-        // eslint-disable-next-line react/button-has-type
-        type={type}
+    <div className={className}>
+      <MuiButton
+        variant={variant}
+        color={color}
         onClick={onClick}
-        style={{ backgroundColor: color }}
-        className={`${classes.button} ${buttonClasses[size]}`}>
+        type={type}
+        size={size}
+        disabled={disabled}
+      >
         {children}
-      </button>
+      </MuiButton>
     </div>
   );
 }
 
 Button.propTypes = {
-  disabled: PropTypes.bool,
   children: PropTypes.node.isRequired,
-  size: PropTypes.oneOf(Object.values(buttonSizes)).isRequired,
+  disabled: PropTypes.bool,
+  variant: PropTypes.oneOf(Object.values(BUTTON_VARIANTS)).isRequired,
+  size: PropTypes.oneOf(Object.values(BUTTON_SIZES)),
   color: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(Object.values(buttonTypes)),
+  type: PropTypes.oneOf(Object.values(BUTTON_TYPES)),
   onClick: PropTypes.func,
   className: PropTypes.string
 };
 
 Button.defaultProps = {
-  // eslint-disable-next-line prettier/prettier
-  onClick: () => { },
-  type: buttonTypes.button,
+  onClick: () => {},
+  size: BUTTON_SIZES.BIG,
+  type: BUTTON_TYPES.BUTTON,
   className: '',
   disabled: false
 };
