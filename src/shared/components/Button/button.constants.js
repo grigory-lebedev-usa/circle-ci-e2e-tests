@@ -14,7 +14,9 @@ export const BUTTON_VARIANTS = {
 export const BUTTON_COLORS = {
   FORM: 'form',
   PRIMARY: 'primary',
-  SECONDARY: 'secondary'
+  SECONDARY: 'secondary',
+  ERROR: 'error',
+  SUCCESS: 'success'
 };
 
 export const BUTTON_TYPES = {

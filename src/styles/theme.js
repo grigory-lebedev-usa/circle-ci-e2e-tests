@@ -15,6 +15,18 @@ const theme = createTheme({
     secondary: {
       main: COLORS.SECONDARY,
       contrastText: COLORS.WHITE
+    },
+    error: {
+      main: COLORS.ERROR,
+      contrastText: COLORS.WHITE
+    },
+    warning: {
+      main: COLORS.WARNING,
+      contrastText: COLORS.WHITE
+    },
+    success: {
+      main: COLORS.SUCCESS,
+      contrastText: COLORS.WHITE
     }
   },
   components: {

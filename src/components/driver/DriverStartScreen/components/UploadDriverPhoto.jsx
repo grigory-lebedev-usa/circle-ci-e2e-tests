@@ -88,7 +88,7 @@ function UploadDriverPhoto() {
             </Button>
             <Button
               size={BUTTON_SIZES.BIG}
-              color={BUTTON_COLORS.SECONDARY}
+              color={BUTTON_COLORS.SUCCESS}
               variant={BUTTON_VARIANTS.CONTAINED}
               onClick={handleFileSave}
               className={classes.button}
