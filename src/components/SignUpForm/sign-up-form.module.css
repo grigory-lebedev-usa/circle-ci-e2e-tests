@@ -1,10 +1,14 @@
-@import url(/src/styles/colors.css);
-
 .form__wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
+}
+
+.form__title {
+  color: #fff;
+  font-weight: 400;
+  font-size: 50px;
 }
 
 .form__content {
@@ -22,29 +26,6 @@
   align-items: flex-end;
 }
 
-.form__input {
-  margin-top: 20px;
-}
-
-.form__input:first-child {
-  margin-top: 0;
-}
-
-.form__title {
-  color: #fff;
-  font-weight: 400;
-  font-size: 50px;
-}
-
-.car__block {
-  margin-left: 25px;
-}
-
-.car__title {
-  font-size: 36px;
-  margin-left: 15px;
-}
-
 .form__button {
   position: absolute;
   bottom: 25px;
@@ -54,8 +35,4 @@
   right: 0;
   left: 0;
   text-align: center;
-}
-
-.form__select {
-  margin-top: 20px;
 }

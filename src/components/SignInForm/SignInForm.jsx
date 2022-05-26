@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import FormInput from '../../shared/components/form-elements/FormInput/FormInput';
 import FormCheckbox from '../../shared/components/form-elements/FormCheckbox/FormCheckbox';
@@ -16,6 +16,7 @@ import {
   BUTTON_VARIANTS
 } from '../../shared/components/Button/button.constants';
 
+import { defaultLoginValues } from './sign-in-form.constants';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 
 import classes from './sign-in-form.module.css';
@@ -27,7 +28,7 @@ function SignInForm() {
     handleSubmit,
     control,
     formState: { errors, isValid }
-  } = useForm({ mode: 'onTouched' });
+  } = useForm({ defaultValues: { defaultLoginValues }, mode: 'onTouched' });
 
   const showForgotPassword = () => {
     setIsOpenedForgotPassword(true);
@@ -49,37 +50,22 @@ function SignInForm() {
           <h1 className={classes.form__title}>Sign In</h1>
           <div className={classes.form__container}>
             <div>
-              <Controller
-                render={({ field }) => (
-                  <FormInput
-                    id="email"
-                    placeholder="Email"
-                    label="Email"
-                    type={INPUT_TYPES.EMAIL}
-                    error={!!errors.email}
-                    helperText={errors.email ? errors.email?.message : ''}
-                    {...field}
-                  />
-                )}
+              <FormInput
                 name="email"
+                placeholder="Email"
+                type={INPUT_TYPES.EMAIL}
                 control={control}
+                className={classes.form__input}
+                error={errors?.email}
                 rules={OPTIONS_VALIDATE.EMAIL}
               />
-              <Controller
-                render={({ field }) => (
-                  <FormInput
-                    id="password"
-                    placeholder="Password"
-                    label="Password"
-                    type={INPUT_TYPES.PASSWORD}
-                    className={classes.form__input}
-                    error={!!errors.password}
-                    helperText={errors.password ? errors.password?.message : ''}
-                    {...field}
-                  />
-                )}
+              <FormInput
                 name="password"
+                placeholder="Password"
+                type={INPUT_TYPES.PASSWORD}
                 control={control}
+                className={classes.form__input}
+                error={errors?.password}
                 rules={OPTIONS_VALIDATE.PASSWORD}
               />
               <FormCheckbox

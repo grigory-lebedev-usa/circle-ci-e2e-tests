@@ -18,15 +18,17 @@ export const USER_SELECT = [
   { id: CLIENT_ROLE_ID, value: 'Client' },
   { id: DRIVER_ROLE_ID, value: 'Driver' }
 ];
-export const defaultUserValues = {
+export const defaultRegisterValues = {
   email: '',
   password: '',
   confirmPassword: '',
   firstName: '',
   lastName: '',
   role: '',
-  make: '',
-  model: '',
-  year: '',
-  color: ''
+  car: {
+    make: '',
+    model: '',
+    year: '',
+    color: ''
+  }
 };

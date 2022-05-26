@@ -1,4 +1,4 @@
-export const initialFormState = {
+export const defaultLoginValues = {
   email: '',
   password: ''
 };
