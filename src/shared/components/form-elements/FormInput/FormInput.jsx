@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
 
-import { FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
+import { Controller } from 'react-hook-form';
+
+import {
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  OutlinedInput,
+  InputAdornment,
+  IconButton
+} from '@mui/material';
 
 import PropTypes from 'prop-types';
 
@@ -11,7 +20,7 @@ import { computedInputType, INPUT_TYPES } from './form-input.constants';
 import VisibilityOff from './components/VisibilityOff/VisibilityOff';
 import Visibility from './components/Visibility/Visibility';
 
-function FormInput({ id, type, label, placeholder, onChange, value, onBlur, className }) {
+function FormInput({ name, rules, type, className, error, placeholder, control }) {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = () => {
@@ -19,50 +28,66 @@ function FormInput({ id, type, label, placeholder, onChange, value, onBlur, clas
   };
 
   return (
-    <div className={`${classes.container} ${className}`}>
-      <FormControl variant="outlined" color="form">
-        <InputLabel htmlFor={id}>{label}</InputLabel>
-        <OutlinedInput
-          id={id}
-          type={computedInputType(type, showPassword)}
-          onChange={onChange}
-          onBlur={onBlur}
-          value={value}
-          placeholder={placeholder}
-          endAdornment={
-            type === INPUT_TYPES.PASSWORD && (
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  edge="end"
-                  onClick={handleShowPassword}
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            )
-          }
-          label={label}
-        />
-      </FormControl>
-    </div>
+    <Controller
+      render={({ field }) => (
+        <div className={`${classes.container} ${className}`}>
+          <FormControl variant="outlined" color="form">
+            <InputLabel htmlFor={name} error={!!error}>
+              {placeholder}
+            </InputLabel>
+            <OutlinedInput
+              id={name}
+              error={!!error}
+              value=""
+              type={computedInputType(type, showPassword)}
+              {...field}
+              inputRef={field.ref}
+              placeholder={placeholder}
+              endAdornment={
+                type === INPUT_TYPES.PASSWORD && (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      edge="end"
+                      onClick={handleShowPassword}
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }
+              label={placeholder}
+            />
+            <FormHelperText error={!!error}>{error ? error?.message : ''}</FormHelperText>
+          </FormControl>
+        </div>
+      )}
+      name={name}
+      control={control}
+      rules={rules}
+    />
   );
 }
 
 FormInput.propTypes = {
-  id: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  control: PropTypes.object,
+  // eslint-disable-next-line react/forbid-prop-types
+  rules: PropTypes.object,
   type: PropTypes.oneOf(Object.values(INPUT_TYPES)).isRequired,
-  label: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   placeholder: PropTypes.string,
   className: PropTypes.string,
-  onBlur: PropTypes.func.isRequired
+  name: PropTypes.string,
+  error: PropTypes.bool
 };
 
 FormInput.defaultProps = {
+  control: {},
+  rules: {},
   placeholder: '',
-  className: ''
+  className: '',
+  name: '',
+  error: false
 };
 
 export default FormInput;

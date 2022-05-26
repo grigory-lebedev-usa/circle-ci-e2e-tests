@@ -1,15 +1,4 @@
-export const initialFormState = {
+export const defaultLoginValues = {
   email: '',
   password: ''
-};
-
-export const initialErrors = {
-  email: {
-    valid: false,
-    errorMessage: ''
-  },
-  password: {
-    valid: false,
-    errorMessage: ''
-  }
 };

@@ -1,0 +1,11 @@
+.form__input {
+  margin-top: 25px;
+}
+
+.form__input:first-child {
+  margin-top: 0;
+}
+
+.form__select {
+  margin-top: 20px;
+}

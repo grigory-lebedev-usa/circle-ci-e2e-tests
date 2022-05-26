@@ -1,52 +1,66 @@
-import { useState } from 'react';
-
+import { Controller } from 'react-hook-form';
 import PropTypes from 'prop-types';
 
-import { FormControl, InputLabel, Select, OutlinedInput, MenuItem } from '@mui/material';
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  OutlinedInput,
+  MenuItem,
+  FormHelperText
+} from '@mui/material';
 
 import { DropDownPropType } from '../../../prop-types';
 
 import classes from './form-select.module.css';
 
-function FormSelect({ label, items, id, className }) {
-  const [selectedValue, setSelectedValue] = useState('');
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
-  };
+function FormSelect({ name, label, items, className, error, control, rules }) {
   return (
-    <div className={`${classes.container} ${className}`}>
-      <FormControl color="form">
-        <InputLabel id="demo-multiple-name-label">{label}</InputLabel>
-        <Select
-          id={id}
-          value={selectedValue}
-          onChange={handleChange}
-          input={<OutlinedInput label={label} />}
-        >
-          {items.map((item) => (
-            <MenuItem key={item.id} value={item.value}>
-              {item.value}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </div>
+    <Controller
+      render={({ field }) => (
+        <div className={`${classes.container} ${className}`}>
+          <FormControl color="form">
+            <InputLabel error={error}>{label}</InputLabel>
+            <Select
+              id={name}
+              error={error}
+              {...field}
+              input={<OutlinedInput label={name.toUpperCase()} />}
+            >
+              {items.map((item) => (
+                <MenuItem key={item.id} value={item.value}>
+                  {item.value}
+                </MenuItem>
+              ))}
+            </Select>
+            <FormHelperText error={!!error}>{error ? error?.message : ''}</FormHelperText>
+          </FormControl>
+        </div>
+      )}
+      name={name}
+      control={control}
+      rules={rules}
+    />
   );
 }
 
 FormSelect.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  control: PropTypes.object,
+  // eslint-disable-next-line react/forbid-prop-types
+  rules: PropTypes.object,
   label: PropTypes.string.isRequired,
   items: PropTypes.arrayOf(DropDownPropType).isRequired,
-  // onChange: PropTypes.func,
-  // value: PropTypes.string,
-  id: PropTypes.string.isRequired,
-  className: PropTypes.string
+  name: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  error: PropTypes.bool
 };
 
 FormSelect.defaultProps = {
-  // onChange: () => {},
-  // value: '',
-  className: ''
+  control: {},
+  rules: {},
+  className: '',
+  error: false
 };
 
 export default FormSelect;

@@ -27,9 +27,21 @@ const theme = createTheme({
     success: {
       main: COLORS.SUCCESS,
       contrastText: COLORS.WHITE
+    },
+    disabled: {
+      main: COLORS.DISABLED,
+      contrastText: COLORS.WHITE
     }
   },
   components: {
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          marginTop: 0,
+          fontSize: '16px'
+        }
+      }
+    },
     MuiBackdrop: {
       styleOverrides: {
         root: {
@@ -173,7 +185,7 @@ const theme = createTheme({
               transform: 'translateY(3px)'
             },
             '&:disabled': {
-              backgroundColor: COLORS.disabled,
+              backgroundColor: COLORS.DISABLED,
               cursor: 'not-allowed',
               color: COLORS.WHITE
             }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { INPUT_TYPES } from '../../../shared/components/form-elements/FormInput/form-input.constants';
 
@@ -12,32 +12,20 @@ import {
   BUTTON_TYPES
 } from '../../../shared/components/Button/button.constants';
 
-import { generateValidationError } from '../../helpers/generateValidationError';
-
 import { useOrder } from '../../../api/hooks/useOrder';
 
 import classes from './client-order.module.css';
-import { initialErrors, initialFormState } from './client-order.constants';
+import { initialFormState } from './client-order.constants';
 
 function ClientOrder() {
-  const [isFormValid, setIsFormValid] = useState(false);
+  // const [isFormValid, setIsFormValid] = useState(false);
   const [formState, setFormState] = useState(initialFormState);
   const { source, destination } = formState;
-  const [errors, setErrors] = useState(initialErrors);
   const { createOrder } = useOrder();
-
-  useEffect(() => {
-    setIsFormValid(errors.source.valid && errors.destination.valid);
-  }, [errors.destination.valid, errors.source.valid]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormState({ ...formState, [name]: value });
-  };
-
-  const handleInputBlur = (e) => {
-    const { name, value } = e.target;
-    setErrors(generateValidationError(name, value, errors));
   };
 
   const handleSubmit = async (e) => {
@@ -64,8 +52,6 @@ function ClientOrder() {
             name="source"
             value={source}
             onChange={handleInputChange}
-            onBlur={handleInputBlur}
-            errorMessage={errors.source.errorMessage}
           />
           <FormInput
             id="destination"
@@ -76,15 +62,12 @@ function ClientOrder() {
             className={classes.input}
             value={destination}
             onChange={handleInputChange}
-            onBlur={handleInputBlur}
-            errorMessage={errors.destination.errorMessage}
           />
         </div>
         <Button
           size={BUTTON_SIZES.BIG}
           color={BUTTON_COLORS.PRIMARY}
           variant={BUTTON_VARIANTS.CONTAINED}
-          disabled={!isFormValid}
           type={BUTTON_TYPES.SUBMIT}
         >
           Order
