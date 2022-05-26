@@ -9,7 +9,7 @@ import Link from '../../shared/components/Link/Link';
 import useAuth from '../../shared/hooks/useAuth';
 import { PUBLIC_ROUTES } from '../../constants/app.constants';
 import Button from '../../shared/components/Button/Button';
-
+import { optionsValidate } from '../helpers/optionsValidate';
 import {
   BUTTON_COLORS,
   BUTTON_TYPES,
@@ -63,7 +63,7 @@ function SignInForm() {
                 )}
                 name="email"
                 control={control}
-                rules={{ required: 'Email is required' }}
+                rules={optionsValidate.email}
               />
               <Controller
                 render={({ field }) => (
@@ -80,7 +80,7 @@ function SignInForm() {
                 )}
                 name="password"
                 control={control}
-                rules={{ required: 'Password is required' }}
+                rules={optionsValidate.password}
               />
               <FormCheckbox
                 id="checkbox"

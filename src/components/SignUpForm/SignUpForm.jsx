@@ -14,22 +14,57 @@ import {
 
 import Button from '../../shared/components/Button/Button';
 
+import { USER_ROLES } from '../../constants/user-roles.constants';
+
+import { optionsValidate } from '../helpers/optionsValidate';
+
+import { useRegistration } from '../../api/hooks/useRegistration';
+
 import classes from './sign-up-form.module.css';
-import { USER_SELECT } from './sign-up-form.constants';
+import { defaultUserValues, USER_SELECT } from './sign-up-form.constants';
 
 function SignUpForm() {
   const [isHasSectionDriver, setIsSectionDriver] = useState(false);
+  const { register } = useRegistration();
   const {
     handleSubmit,
     control,
+    watch,
     formState: { errors, isValid }
-  } = useForm({ mode: 'onTouched' });
+  } = useForm({ defaultValues: defaultUserValues, mode: 'onTouched' });
 
   useEffect(() => {
-    setIsSectionDriver(true);
-  }, []);
+    const subscribe = watch(({ role }) => {
+      setIsSectionDriver(role.toLowerCase() === USER_ROLES.DRIVER);
+    });
+    return () => subscribe.unsubscribe();
+  }, [watch]);
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = ({ email, password, firstName, lastName, role, make, model, year, color }) => {
+    if (isHasSectionDriver) {
+      register({
+        email: email.toLowerCase(),
+        password,
+        firstName,
+        lastName,
+        role: role.toLowerCase(),
+        car: {
+          make,
+          model,
+          year,
+          color
+        }
+      });
+    } else
+      register({
+        email: email.toLowerCase(),
+        password,
+        firstName,
+        lastName,
+        role: role.toLowerCase()
+      });
+  };
+
   return (
     <form className={classes.form__wrapper} onSubmit={handleSubmit(onSubmit)}>
       <div className={classes.form__content}>
@@ -50,7 +85,7 @@ function SignUpForm() {
               )}
               name="email"
               control={control}
-              rules={{ required: 'Email is required' }}
+              rules={optionsValidate.email}
             />
             <Controller
               render={({ field }) => (
@@ -67,7 +102,7 @@ function SignUpForm() {
               )}
               name="password"
               control={control}
-              rules={{ required: 'Password is required' }}
+              rules={optionsValidate.password}
             />
             <Controller
               render={({ field }) => (
