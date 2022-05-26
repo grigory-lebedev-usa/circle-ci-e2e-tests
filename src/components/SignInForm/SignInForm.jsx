@@ -9,7 +9,7 @@ import Link from '../../shared/components/Link/Link';
 import useAuth from '../../shared/hooks/useAuth';
 import { PUBLIC_ROUTES } from '../../constants/app.constants';
 import Button from '../../shared/components/Button/Button';
-import { optionsValidate } from '../helpers/optionsValidate';
+import { OPTIONS_VALIDATE } from '../helpers/OPTIONS_VALIDATE';
 import {
   BUTTON_COLORS,
   BUTTON_TYPES,
@@ -37,8 +37,8 @@ function SignInForm() {
     setIsOpenedForgotPassword(false);
   };
 
-  const onSubmit = async (data) => {
-    await login(data);
+  const onSubmit = async ({ email, password }) => {
+    await login({ email: email.toLowerCase(), password });
   };
 
   return (
@@ -63,7 +63,7 @@ function SignInForm() {
                 )}
                 name="email"
                 control={control}
-                rules={optionsValidate.email}
+                rules={OPTIONS_VALIDATE.EMAIL}
               />
               <Controller
                 render={({ field }) => (
@@ -80,7 +80,7 @@ function SignInForm() {
                 )}
                 name="password"
                 control={control}
-                rules={optionsValidate.password}
+                rules={OPTIONS_VALIDATE.PASSWORD}
               />
               <FormCheckbox
                 id="checkbox"

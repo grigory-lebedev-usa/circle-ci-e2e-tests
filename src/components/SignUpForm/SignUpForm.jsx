@@ -16,7 +16,7 @@ import Button from '../../shared/components/Button/Button';
 
 import { USER_ROLES } from '../../constants/user-roles.constants';
 
-import { optionsValidate } from '../helpers/optionsValidate';
+import { OPTIONS_VALIDATE } from '../helpers/OPTIONS_VALIDATE';
 
 import { useRegistration } from '../../api/hooks/useRegistration';
 
@@ -85,7 +85,7 @@ function SignUpForm() {
               )}
               name="email"
               control={control}
-              rules={optionsValidate.email}
+              rules={OPTIONS_VALIDATE.EMAIL}
             />
             <Controller
               render={({ field }) => (
@@ -102,7 +102,7 @@ function SignUpForm() {
               )}
               name="password"
               control={control}
-              rules={optionsValidate.password}
+              rules={OPTIONS_VALIDATE.PASSWORD}
             />
             <Controller
               render={({ field }) => (
@@ -119,7 +119,15 @@ function SignUpForm() {
               )}
               name="confirmPassword"
               control={control}
-              rules={{ required: 'Confirm password is required' }}
+              rules={{
+                required: 'Confirm password is required',
+                validate: (value) => {
+                  if (watch('password') !== value) {
+                    return 'Your passwords do no match';
+                  }
+                  return () => {};
+                }
+              }}
             />
             <Controller
               render={({ field }) => (
@@ -136,7 +144,7 @@ function SignUpForm() {
               )}
               name="firstName"
               control={control}
-              rules={{ required: 'First name is required' }}
+              rules={OPTIONS_VALIDATE.FIRST_NAME}
             />
             <Controller
               render={({ field }) => (
@@ -153,7 +161,7 @@ function SignUpForm() {
               )}
               name="lastName"
               control={control}
-              rules={{ required: 'Last name is required' }}
+              rules={OPTIONS_VALIDATE.LAST_NAME}
             />
             <Controller
               render={({ field }) => (
@@ -169,7 +177,7 @@ function SignUpForm() {
               )}
               name="role"
               control={control}
-              rules={{ required: 'Role is required' }}
+              rules={OPTIONS_VALIDATE.ROLE}
             />
           </div>
           {isHasSectionDriver && (
@@ -190,7 +198,7 @@ function SignUpForm() {
                 )}
                 name="make"
                 control={control}
-                rules={{ required: 'Make is required' }}
+                rules={OPTIONS_VALIDATE.MAKE}
               />
               <Controller
                 render={({ field }) => (
@@ -207,7 +215,7 @@ function SignUpForm() {
                 )}
                 name="model"
                 control={control}
-                rules={{ required: 'Model is required' }}
+                rules={OPTIONS_VALIDATE.MODEL}
               />
               <Controller
                 render={({ field }) => (
@@ -224,7 +232,7 @@ function SignUpForm() {
                 )}
                 name="year"
                 control={control}
-                rules={{ required: 'Year is required' }}
+                rules={OPTIONS_VALIDATE.YEAR}
               />
               <Controller
                 render={({ field }) => (
@@ -241,7 +249,7 @@ function SignUpForm() {
                 )}
                 name="color"
                 control={control}
-                rules={{ required: 'Color is required' }}
+                rules={OPTIONS_VALIDATE.COLOR}
               />
             </div>
           )}
