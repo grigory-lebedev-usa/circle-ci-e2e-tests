@@ -1,8 +1,8 @@
 import Button from '../../../../../shared/components/Button/Button';
 import {
-  buttonColors,
-  buttonSizes,
-  buttonTypes
+  BUTTON_COLORS,
+  BUTTON_SIZES,
+  BUTTON_TYPES
 } from '../../../../../shared/components/Button/button.constants';
 
 import classes from './admin-actions.module.css';
@@ -11,13 +11,14 @@ function AdminActions() {
   return (
     <div className={classes.block__buttons}>
       <Button
-        size={buttonSizes.big}
-        color={buttonColors.primary}
+        size={BUTTON_SIZES.BIG}
+        color={BUTTON_COLORS.PRIMARY}
+        type={BUTTON_TYPES.BUTTON}
         className={classes.button}
-        type={buttonTypes.button}>
+      >
         Reports
       </Button>
-      <Button size={buttonSizes.big} color={buttonColors.primary} type={buttonTypes.button}>
+      <Button size={BUTTON_SIZES.BIG} color={BUTTON_COLORS.PRIMARY} type={BUTTON_TYPES.BUTTON}>
         All users
       </Button>
     </div>

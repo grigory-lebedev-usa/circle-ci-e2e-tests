@@ -1,53 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import PropTypes from 'prop-types';
 
+import { useForm } from 'react-hook-form';
+
 import Button from '../../../../../shared/components/Button/Button';
 import {
-  buttonColors,
-  buttonSizes,
-  buttonTypes
+  BUTTON_COLORS,
+  BUTTON_SIZES,
+  BUTTON_TYPES,
+  BUTTON_VARIANTS
 } from '../../../../../shared/components/Button/button.constants';
 import Modal from '../../../../../shared/components/Modal/Modal';
 
 import FormInput from '../../../../../shared/components/form-elements/FormInput/FormInput';
-import { inputTypes } from '../../../../../shared/components/form-elements/FormInput/form-input.constants';
-
-import { generateValidationError } from '../../../../helpers/generateValidationError';
+import { INPUT_TYPES } from '../../../../../shared/components/form-elements/FormInput/form-input.constants';
 
 import { useOffer } from '../../../../../api/hooks/useOffer';
+
+import { OPTIONS_VALIDATE } from '../../../../helpers/OPTIONS_VALIDATE';
 
 import classes from './order.module.css';
 
 function Order({ order, offer: { id } }) {
   const [isOpenedModal, setIsOpenedModal] = useState(false);
-  const [isFormValid, setIsFormValid] = useState(false);
-  const [price, setPrice] = useState('');
-  const [isOffer, setIsOffer] = useState(false);
+
+  const {
+    handleSubmit,
+    control,
+    formState: { errors, isValid }
+  } = useForm({ defaultValues: { price: '' }, mode: 'onTouched' });
   const { createOffer, deleteOffer } = useOffer();
-  const [errors, setErrors] = useState({
-    price: {
-      valid: false,
-      errorMessage: ''
-    }
-  });
-
-  useEffect(() => {
-    setIsOffer(id);
-  }, [id]);
-
-  useEffect(() => {
-    setIsFormValid(errors.price.valid);
-  }, [errors.price.valid]);
-
-  const handlePriceChange = (e) => {
-    setPrice(e.target.value);
-  };
-
-  const handlePriceBlur = (e) => {
-    const { name, value } = e.target;
-    setErrors(generateValidationError(name, value));
-  };
 
   const closeModal = () => {
     setIsOpenedModal(false);
@@ -57,8 +40,7 @@ function Order({ order, offer: { id } }) {
     setIsOpenedModal(true);
   };
 
-  const handleOfferAccept = (e) => {
-    e.preventDefault();
+  const onSubmit = ({ price }) => {
     createOffer({ orderId: order?.id, price });
     closeModal();
   };
@@ -74,9 +56,8 @@ function Order({ order, offer: { id } }) {
           <div className={classes.modal__item}>
             <h5 className={classes.modal__title}>Who:</h5>
             <p
-              className={
-                classes.modal__text
-              }>{`${order?.client?.firstName} ${order?.client?.lastName}`}</p>
+              className={classes.modal__text}
+            >{`${order?.client?.firstName} ${order?.client?.lastName}`}</p>
           </div>
           <div className={classes.modal__item}>
             <h5 className={classes.modal__title}>From:</h5>
@@ -87,31 +68,33 @@ function Order({ order, offer: { id } }) {
             <p className={classes.modal__text}>{order?.destination}</p>
           </div>
           <p className={classes.offer__text}>Please offer your price for order</p>
-          <form className={classes.modal__form} onSubmit={handleOfferAccept}>
+          <form className={classes.modal__form} onSubmit={handleSubmit(onSubmit)}>
             <FormInput
-              type={inputTypes.number}
-              id="price"
+              type={INPUT_TYPES.NUMBER}
               name="price"
-              label="Price"
               placeholder="Price"
-              value={price}
-              onChange={handlePriceChange}
-              onBlur={handlePriceBlur}
+              control={control}
+              error={errors?.price}
+              rules={OPTIONS_VALIDATE.PRICE}
             />
             <div className={classes.modal__actions}>
               <Button
-                size={buttonSizes.small}
-                color={buttonColors.cancel}
+                size={BUTTON_SIZES.SMALL}
+                color={BUTTON_COLORS.ERROR}
+                variant={BUTTON_VARIANTS.CONTAINED}
+                type={BUTTON_TYPES.BUTTON}
                 onClick={closeModal}
-                type={buttonTypes.button}>
+              >
                 Cancel
               </Button>
               <Button
-                type={buttonTypes.submit}
-                size={buttonSizes.small}
-                color={buttonColors.accept}
+                type={BUTTON_TYPES.SUBMIT}
+                size={BUTTON_SIZES.SMALL}
+                color={BUTTON_COLORS.SUCCESS}
+                variant={BUTTON_VARIANTS.CONTAINED}
                 className={classes.modal__button}
-                disabled={!isFormValid}>
+                disabled={!isValid}
+              >
                 Ok
               </Button>
             </div>
@@ -120,19 +103,20 @@ function Order({ order, offer: { id } }) {
       </Modal>
       <h4 className={classes.order__title}>Who:</h4>
       <p
-        className={
-          classes.order__text
-        }>{`${order?.client?.firstName} ${order?.client?.lastName}`}</p>
+        className={classes.order__text}
+      >{`${order?.client?.firstName} ${order?.client?.lastName}`}</p>
       <h4 className={classes.order__title}>From:</h4>
       <p className={classes.order__text}>{order?.source}</p>
       <h4 className={classes.order__title}>To:</h4>
       <p className={classes.order__text}>{order?.destination}</p>
       <Button
-        color={isOffer ? buttonColors.cancel : buttonColors.accept}
-        size={buttonSizes.small}
+        color={id ? BUTTON_COLORS.ERROR : BUTTON_COLORS.SUCCESS}
+        size={BUTTON_SIZES.SMALL}
+        variant={BUTTON_VARIANTS.CONTAINED}
         className={classes.button__offer}
-        onClick={isOffer ? handleOfferCancel : openModal}>
-        {isOffer ? 'Cancel' : 'Offer'}
+        onClick={id ? handleOfferCancel : openModal}
+      >
+        {id ? 'Cancel' : 'Offer'}
       </Button>
     </div>
   );

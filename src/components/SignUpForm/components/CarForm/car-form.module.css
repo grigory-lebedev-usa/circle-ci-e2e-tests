@@ -1,0 +1,16 @@
+.car__block {
+  margin-left: 25px;
+}
+
+.car__title {
+  font-size: 36px;
+  margin-left: 15px;
+}
+
+.form__input {
+  margin-top: 25px;
+}
+
+.form__input:first-child {
+  margin-top: 0;
+}

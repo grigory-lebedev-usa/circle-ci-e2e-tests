@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
 
@@ -8,8 +10,12 @@ import NotFoundPage from '../../NotFoundPage/NotFoundPage';
 function PrivateRoute({ children, roles }) {
   const {
     isAuthenticated,
+    getUser,
     user: { role }
   } = useUser();
+  useEffect(() => {
+    getUser();
+  }, [getUser]);
   const hasPermissions = roles.includes(role);
   if (!isAuthenticated) {
     return <Navigate to={PUBLIC_ROUTES.LOGIN} replace />;

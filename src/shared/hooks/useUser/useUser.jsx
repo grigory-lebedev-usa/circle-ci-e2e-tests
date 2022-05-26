@@ -69,6 +69,22 @@ function useUser() {
     [user, showSpinner, showNotification, navigate, closeSpinner]
   );
 
+  const register = async (requestPayload) => {
+    try {
+      showSpinner();
+      await axiosService.post(API_ROUTES.REGISTER, requestPayload);
+      showNotification(
+        'We sent the activation link to email address. Please activate your account.',
+        notificationTypes.success
+      );
+      navigate(PUBLIC_ROUTES.LOGIN);
+    } catch (error) {
+      showNotification(error.response.data.message, notificationTypes.error);
+    } finally {
+      closeSpinner();
+    }
+  };
+
   const login = async (requestPayload) => {
     try {
       showSpinner();
@@ -96,7 +112,7 @@ function useUser() {
     navigate(PUBLIC_ROUTES.LOGIN);
   };
 
-  return { user, isAuthenticated, login, logout, uploadPhoto, getUser };
+  return { user, isAuthenticated, login, logout, uploadPhoto, getUser, register };
 }
 
 export function UserProvider({ children }) {

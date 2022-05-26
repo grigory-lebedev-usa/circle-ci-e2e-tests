@@ -6,7 +6,11 @@ import useUser from '../../../../shared/hooks/useUser/useUser';
 import { PRIVATE_ROUTES } from '../../../../constants/app.constants';
 
 import Button from '../../../../shared/components/Button/Button';
-import { buttonColors, buttonSizes } from '../../../../shared/components/Button/button.constants';
+import {
+  BUTTON_COLORS,
+  BUTTON_SIZES,
+  BUTTON_VARIANTS
+} from '../../../../shared/components/Button/button.constants';
 
 import { inputType, src } from './upload-driver-photo.constants';
 
@@ -74,15 +78,22 @@ function UploadDriverPhoto() {
               accept=".png, .jpeg, .jpg"
               ref={fileInput}
             />
-            <Button size={buttonSizes.big} color={buttonColors.general} onClick={handleFileUpload}>
+            <Button
+              size={BUTTON_SIZES.BIG}
+              variant={BUTTON_VARIANTS.CONTAINED}
+              color={BUTTON_COLORS.SECONDARY}
+              onClick={handleFileUpload}
+            >
               Upload photo
             </Button>
             <Button
-              size={buttonSizes.big}
-              color={buttonColors.accept}
+              size={BUTTON_SIZES.BIG}
+              color={BUTTON_COLORS.SUCCESS}
+              variant={BUTTON_VARIANTS.CONTAINED}
               onClick={handleFileSave}
               className={classes.button}
-              disabled={!isValid}>
+              disabled={!isValid}
+            >
               Save
             </Button>
           </div>

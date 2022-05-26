@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
 
+import { Controller } from 'react-hook-form';
+
+import {
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  OutlinedInput,
+  InputAdornment,
+  IconButton
+} from '@mui/material';
+
 import PropTypes from 'prop-types';
 
 import classes from './form-input.module.css';
-import { computedInputType, inputTypes } from './form-input.constants';
 
-function FormInput({
-  id,
-  type,
-  label,
-  placeholder,
-  onChange,
-  value,
-  name,
-  onBlur,
-  errorMessage,
-  className
-}) {
+import { computedInputType, INPUT_TYPES } from './form-input.constants';
+
+import VisibilityOff from './components/VisibilityOff/VisibilityOff';
+import Visibility from './components/Visibility/Visibility';
+
+function FormInput({ name, rules, type, className, error, placeholder, control }) {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = () => {
@@ -24,58 +28,67 @@ function FormInput({
   };
 
   return (
-    <div className={`${className}`}>
-      <div className={`${classes.input__container}`}>
-        <input
-          id={id}
-          className={`${classes.input} ${errorMessage && classes.input_invalid}`}
-          type={computedInputType(type, showPassword)}
-          placeholder={placeholder}
-          onChange={onChange}
-          value={value}
-          name={name}
-          onBlur={onBlur}
-        />
-        <label htmlFor={id} className={classes.input__label}>
-          {label}
-        </label>
-        {type === inputTypes.password && (
-          <div className={classes.button__container}>
-            <button
-              tabIndex="-1"
-              type="button"
-              className={
-                showPassword
-                  ? `${classes.password__button} ${classes.password__button_active}`
-                  : classes.password__button
+    <Controller
+      render={({ field }) => (
+        <div className={`${classes.container} ${className}`}>
+          <FormControl variant="outlined" color="form">
+            <InputLabel htmlFor={name} error={!!error}>
+              {placeholder}
+            </InputLabel>
+            <OutlinedInput
+              id={name}
+              error={!!error}
+              value=""
+              type={computedInputType(type, showPassword)}
+              {...field}
+              inputRef={field.ref}
+              placeholder={placeholder}
+              endAdornment={
+                type === INPUT_TYPES.PASSWORD && (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      edge="end"
+                      onClick={handleShowPassword}
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                )
               }
-              onClick={handleShowPassword}
+              label={placeholder}
             />
-          </div>
-        )}
-      </div>
-      {errorMessage && <span className={classes.error}>{errorMessage}</span>}
-    </div>
+            <FormHelperText error={!!error}>{error ? error?.message : ''}</FormHelperText>
+          </FormControl>
+        </div>
+      )}
+      name={name}
+      control={control}
+      rules={rules}
+    />
   );
 }
 
 FormInput.propTypes = {
-  id: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(Object.values(inputTypes)).isRequired,
-  label: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  control: PropTypes.object,
+  // eslint-disable-next-line react/forbid-prop-types
+  rules: PropTypes.object,
+  type: PropTypes.oneOf(Object.values(INPUT_TYPES)).isRequired,
   placeholder: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  onBlur: PropTypes.func.isRequired,
-  errorMessage: PropTypes.string,
-  className: PropTypes.string
+  className: PropTypes.string,
+  name: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
+  error: PropTypes.object
 };
 
 FormInput.defaultProps = {
+  control: {},
+  rules: {},
   placeholder: '',
-  errorMessage: '',
-  className: ''
+  className: '',
+  name: '',
+  error: null
 };
 
 export default FormInput;
