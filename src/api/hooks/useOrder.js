@@ -6,7 +6,7 @@ import { API_ROUTES } from '../../constants/api.constants';
 import { PRIVATE_ROUTES } from '../../constants/app.constants';
 import { axiosService } from '../../services/axios.service';
 import { notificationTypes } from '../../shared/components/Notifications/components/Notification/notification.constants';
-import useAppSpinner from '../../shared/hooks/useAppSpinner';
+import useAppSpinner from '../../shared/hooks/useAppSpinner/useAppSpinner';
 import useNotifications from '../../shared/hooks/useNotifications/useNotifications';
 
 export function useOrder() {

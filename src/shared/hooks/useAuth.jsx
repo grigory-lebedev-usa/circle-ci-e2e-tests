@@ -16,7 +16,7 @@ import LocalStorageService from '../../services/LocalStorageService';
 
 import useNotifications from './useNotifications/useNotifications';
 
-import useAppSpinner from './useAppSpinner';
+import useAppSpinner from './useAppSpinner/useAppSpinner';
 
 const authContext = React.createContext();
 

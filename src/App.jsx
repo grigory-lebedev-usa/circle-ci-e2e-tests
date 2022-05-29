@@ -7,7 +7,7 @@ import './App.css';
 
 import { AuthProvider } from './shared/hooks/useAuth';
 
-import { SpinnerProvider } from './shared/hooks/useAppSpinner';
+import { SpinnerProvider } from './shared/hooks/useAppSpinner/useAppSpinner';
 import { NotificationsProvider } from './shared/hooks/useNotifications/useNotifications';
 import SignUpForm from './components/SignUpForm/SignUpForm';
 import SignInForm from './components/SignInForm/SignInForm';

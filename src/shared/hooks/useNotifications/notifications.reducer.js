@@ -1,6 +1,7 @@
-import { ADD_NOTIFICATION, DELETE_NOTIFICATION } from './notifications.constants';
+import { ADD_NOTIFICATION, DELETE_NOTIFICATION, INITIAL_STATE } from './notifications.constants';
 
-export const notificationsReducer = (state, action) => {
+// eslint-disable-next-line default-param-last
+export const notificationsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADD_NOTIFICATION: {
       return [...state, action.payload].slice(-4);
@@ -9,7 +10,7 @@ export const notificationsReducer = (state, action) => {
       return state.filter(({ id }) => id !== action.payload);
     }
     default: {
-      throw new Error('Unknown action type');
+      return state;
     }
   }
 };

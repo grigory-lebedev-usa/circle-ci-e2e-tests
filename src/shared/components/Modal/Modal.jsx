@@ -13,7 +13,8 @@ function Modal({ children, isOpened, closeModal }) {
     <div
       role="alertdialog"
       className={`${classes.modal__container} ${isOpened ? classes.modal__container_active : ''}`}
-      onClick={closeModal}>
+      onClick={closeModal}
+    >
       <div role="alert" className={classes.modal__content} onClick={handleStopPropagation}>
         <button type="button" className={classes.modal__close} onClick={closeModal}>
           +

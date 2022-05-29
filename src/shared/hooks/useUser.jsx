@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import { useNavigate } from 'react-router-dom';
 
+import { useDispatch } from 'react-redux';
+
 import { axiosService } from '../../services/axios.service';
 
 import { notificationTypes } from '../components/Notifications/components/Notification/notification.constants';
@@ -15,28 +17,28 @@ import { API_ROUTES } from '../../constants/api.constants';
 import { PRIVATE_ROUTES } from '../../constants/app.constants';
 
 import useNotifications from './useNotifications/useNotifications';
-import useAppSpinner from './useAppSpinner';
+import { CLOSE_SPINNER, SHOW_SPINNER } from './useAppSpinner/app-spinner.constants';
 
 const userContext = React.createContext();
 
 function useUser() {
   const navigate = useNavigate();
-  const { showSpinner, closeSpinner } = useAppSpinner();
+  const dispatch = useDispatch();
   const { showNotification } = useNotifications();
   const [user, setUser] = useState(INITIAL_USER_STATE);
 
   const getUser = useCallback(async () => {
     try {
-      showSpinner();
+      dispatch({ type: SHOW_SPINNER });
       const { data: userInfo } = await axiosService.get(API_ROUTES.USER_ME);
       setUser(userInfo);
       LocalStorageService.role = userInfo.role;
     } catch (error) {
       showNotification(error.response.data.message, notificationTypes.error);
     } finally {
-      closeSpinner();
+      dispatch({ type: CLOSE_SPINNER });
     }
-  }, [closeSpinner, showNotification, showSpinner]);
+  }, [dispatch, showNotification]);
 
   const uploadPhoto = useCallback(
     async ({ file }) => {
@@ -44,17 +46,17 @@ function useUser() {
         const { id } = user;
         const formData = new FormData();
         formData.append('file', file);
-        showSpinner();
+        SHOW_SPINNER();
         await axiosService.post(`${API_ROUTES.USER}/${id}/${API_ROUTES.PHOTO}`, formData);
         showNotification('Upload successfully!', notificationTypes.success);
         navigate(PRIVATE_ROUTES.HOME);
       } catch (error) {
         showNotification(error.response.data.message, notificationTypes.error);
       } finally {
-        closeSpinner();
+        CLOSE_SPINNER();
       }
     },
-    [user, showSpinner, showNotification, navigate, closeSpinner]
+    [user, SHOW_SPINNER, showNotification, navigate, CLOSE_SPINNER]
   );
 
   return { getUser, user, uploadPhoto };
