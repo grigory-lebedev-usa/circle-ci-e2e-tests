@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import useUser from '../../../../shared/hooks/useUser';
+import useUser from '../../../../shared/hooks/useUser/useUser';
 import { PRIVATE_ROUTES } from '../../../../constants/app.constants';
 
 import Button from '../../../../shared/components/Button/Button';

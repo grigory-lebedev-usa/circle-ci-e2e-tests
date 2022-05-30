@@ -6,7 +6,7 @@ import FormInput from '../../shared/components/form-elements/FormInput/FormInput
 import FormCheckbox from '../../shared/components/form-elements/FormCheckbox/FormCheckbox';
 import { INPUT_TYPES } from '../../shared/components/form-elements/FormInput/form-input.constants';
 import Link from '../../shared/components/Link/Link';
-import useAuth from '../../shared/hooks/useAuth';
+import useAuth from '../../shared/hooks/useUser/useUser';
 import { PUBLIC_ROUTES } from '../../constants/app.constants';
 import Button from '../../shared/components/Button/Button';
 import { OPTIONS_VALIDATE } from '../helpers/OPTIONS_VALIDATE';

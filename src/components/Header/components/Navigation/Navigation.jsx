@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 
 import DropDown from '../../../../shared/components/DropDown/DropDown';
 
-import useAuth from '../../../../shared/hooks/useAuth';
+import useUser from '../../../../shared/hooks/useUser/useUser';
 
 import classes from './navigation.module.css';
 
 function Navigation({ isPrivatePage }) {
-  const { logout } = useAuth();
+  const { logout } = useUser();
   return (
     <div>
       <div className={classes.dropdown__block}>

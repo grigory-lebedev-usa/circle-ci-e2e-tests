@@ -11,7 +11,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import theme from './styles/theme';
 
 import App from './App';
-import store from './store';
+import store from './store/index';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import useUser from '../../shared/hooks/useUser';
+import useUser from '../../shared/hooks/useUser/useUser';
 
 import classes from './home.module.css';
 
@@ -8,6 +8,7 @@ function Home({ title, content, rightSide }) {
   const {
     user: { firstName, lastName }
   } = useUser();
+
   return (
     <div className={classes.container}>
       <div className={classes.block__greetings}>

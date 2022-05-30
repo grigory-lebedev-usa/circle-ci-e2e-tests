@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 
-import useUser from '../../../shared/hooks/useUser';
+import useUser from '../../../shared/hooks/useUser/useUser';
 import { PUBLIC_ROUTES } from '../../../constants/app.constants';
 
 import UploadDriverPhoto from './components/UploadDriverPhoto';
