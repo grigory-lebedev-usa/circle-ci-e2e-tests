@@ -16,9 +16,9 @@ import { API_ROUTES } from '../../../constants/api.constants';
 
 import LocalStorageService from '../../../services/LocalStorageService';
 
-import useNotifications from '../useNotifications/useNotifications';
+import { SPINNER_SHOW, SPINNER_HIDE } from '../../../actions/spinner/spinner.actions';
 
-import useAppSpinner from '../useAppSpinner/useAppSpinner';
+import { NOTIFICATION_ADD } from '../../../actions/notification/notification.actions';
 
 import { SET_USER } from './user.constants';
 
@@ -31,21 +31,19 @@ function useUser() {
   const [isAuthenticated, setIsAuthenticated] = useState(
     LocalStorageService.isAuthenticated || false
   );
-  const { showSpinner, closeSpinner } = useAppSpinner();
-  const { showNotification } = useNotifications();
 
   const getUser = useCallback(async () => {
     try {
-      showSpinner();
+      dispatch(SPINNER_SHOW);
       const { data: userInfo } = await axiosService.get(API_ROUTES.USER_ME);
       dispatch({ type: SET_USER, payload: userInfo });
       LocalStorageService.role = userInfo.role;
     } catch (error) {
-      showNotification(error.response.data.message, notificationTypes.error);
+      dispatch(NOTIFICATION_ADD(notificationTypes.error, error.response.data.message));
     } finally {
-      closeSpinner();
+      dispatch(SPINNER_HIDE);
     }
-  }, [closeSpinner, dispatch, showNotification, showSpinner]);
+  }, [dispatch]);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -59,27 +57,27 @@ function useUser() {
         const { id } = user;
         const formData = new FormData();
         formData.append('file', file);
-        showSpinner();
+        dispatch(SPINNER_SHOW);
         await axiosService.post(`${API_ROUTES.USER}/${id}/${API_ROUTES.PHOTO}`, formData);
-        showNotification('Upload successfully!', notificationTypes.success);
+        dispatch(NOTIFICATION_ADD(notificationTypes.success, 'Upload successfully!'));
         navigate(PRIVATE_ROUTES.HOME);
       } catch (error) {
-        showNotification(error.response.data.message, notificationTypes.error);
+        dispatch(NOTIFICATION_ADD(notificationTypes.error, error.response.data.message));
       } finally {
-        closeSpinner();
+        dispatch(SPINNER_HIDE);
       }
     },
-    [user, showSpinner, showNotification, navigate, closeSpinner]
+    [user, dispatch, navigate]
   );
 
   const login = async (requestPayload) => {
     try {
-      showSpinner();
+      dispatch(SPINNER_SHOW);
       LocalStorageService.user = USER_VALUES;
       const {
         data: { accessToken, refreshToken, expirationTime }
       } = await axiosService.post(API_ROUTES.LOGIN, requestPayload);
-      showNotification('You have successfully logged in', notificationTypes.success);
+      dispatch(NOTIFICATION_ADD(notificationTypes.success, 'You have successfully logged in'));
       LocalStorageService.isAuthenticated = true;
       LocalStorageService.accessToken = accessToken;
       LocalStorageService.refreshToken = refreshToken;
@@ -87,9 +85,9 @@ function useUser() {
       setIsAuthenticated(LocalStorageService.isAuthenticated);
       navigate(PRIVATE_ROUTES.HOME);
     } catch (error) {
-      showNotification(error.response.data.message, notificationTypes.error);
+      dispatch(NOTIFICATION_ADD(notificationTypes.error, error.response.data.message));
     } finally {
-      closeSpinner();
+      dispatch(SPINNER_HIDE);
     }
   };
 

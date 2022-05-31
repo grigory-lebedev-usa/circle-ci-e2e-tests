@@ -1,24 +1,27 @@
+import { useDispatch } from 'react-redux';
+
 import { notificationTypes } from '../../shared/components/Notifications/components/Notification/notification.constants';
-import useNotifications from '../../shared/hooks/useNotifications/useNotifications';
-import useAppSpinner from '../../shared/hooks/useAppSpinner/useAppSpinner';
 import { axiosService } from '../../services/axios.service';
 import { API_ROUTES } from '../../constants/api.constants';
+import { SPINNER_SHOW, SPINNER_HIDE } from '../../actions/spinner/spinner.actions';
+import { NOTIFICATION_ADD } from '../../actions/notification/notification.actions';
 
 export function useForgotPassword() {
-  const { showSpinner, closeSpinner } = useAppSpinner();
-  const { showNotification } = useNotifications();
+  const dispatch = useDispatch();
   const resetPassword = async (requestPayload) => {
     try {
-      showSpinner();
+      dispatch(SPINNER_SHOW);
       await axiosService.post(API_ROUTES.RESET_PASSWORD, requestPayload);
-      showNotification(
-        'We sent the link for reset password on your email address.',
-        notificationTypes.success
+      dispatch(
+        NOTIFICATION_ADD(
+          notificationTypes.success,
+          'We sent the link for reset password on your email address.'
+        )
       );
     } catch (error) {
-      showNotification(error.response.data.message, notificationTypes.error);
+      dispatch(NOTIFICATION_ADD(notificationTypes.error, error.response.data.message));
     } finally {
-      closeSpinner();
+      dispatch(SPINNER_HIDE);
     }
   };
   return { resetPassword };

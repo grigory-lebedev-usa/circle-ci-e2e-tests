@@ -28,7 +28,7 @@ function SignInForm() {
     handleSubmit,
     control,
     formState: { errors, isValid }
-  } = useForm({ defaultValues: { defaultLoginValues }, mode: 'onTouched' });
+  } = useForm({ defaultValues: defaultLoginValues, mode: 'onTouched' });
 
   const showForgotPassword = () => {
     setIsOpenedForgotPassword(true);

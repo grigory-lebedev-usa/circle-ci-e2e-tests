@@ -1,9 +1,9 @@
-import { DEFAULT_STATE, SET_USER } from './user.constants';
+const INITIAL_STATE = {};
 
 // eslint-disable-next-line default-param-last
-export const userReducer = (state = DEFAULT_STATE, action) => {
+export const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case SET_USER: {
+    case 'SET_USER': {
       return { ...state, ...action.payload };
     }
     default: {
