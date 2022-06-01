@@ -1,1 +1,3 @@
-export const USER_ACTION_TYPES = {};
+export const USER_ACTION_TYPES = {
+  SET: 'user/set'
+};

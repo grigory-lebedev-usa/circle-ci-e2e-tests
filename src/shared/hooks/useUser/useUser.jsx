@@ -1,10 +1,10 @@
-import React, { useContext, useState, useCallback, useEffect } from 'react';
+import React, { useContext, useState, useCallback } from 'react';
 
 import PropTypes from 'prop-types';
 
 import { useNavigate } from 'react-router-dom';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { axiosService } from '../../../services/axios.service';
 
@@ -20,36 +20,12 @@ import { SPINNER_SHOW, SPINNER_HIDE } from '../../../actions/spinner/spinner.act
 
 import { NOTIFICATION_ADD } from '../../../actions/notification/notification.actions';
 
-import { SET_USER } from './user.constants';
-
 const userContext = React.createContext();
 
 function useUser() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    LocalStorageService.isAuthenticated || false
-  );
-
-  const getUser = useCallback(async () => {
-    try {
-      dispatch(SPINNER_SHOW);
-      const { data: userInfo } = await axiosService.get(API_ROUTES.USER_ME);
-      dispatch({ type: SET_USER, payload: userInfo });
-      LocalStorageService.role = userInfo.role;
-    } catch (error) {
-      dispatch(NOTIFICATION_ADD(notificationTypes.error, error.response.data.message));
-    } finally {
-      dispatch(SPINNER_HIDE);
-    }
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      getUser();
-    }
-  }, [getUser, isAuthenticated]);
+  const [isAuthenticated, setIsAuthenticated] = useState(LocalStorageService.isAuthenticated);
 
   const uploadPhoto = useCallback(
     async ({ file }) => {
@@ -67,7 +43,7 @@ function useUser() {
         dispatch(SPINNER_HIDE);
       }
     },
-    [user, dispatch, navigate]
+    [dispatch, navigate]
   );
 
   const login = async (requestPayload) => {
@@ -96,7 +72,7 @@ function useUser() {
     navigate(PUBLIC_ROUTES.LOGIN);
   };
 
-  return { isAuthenticated, login, logout, getUser, uploadPhoto, user };
+  return { isAuthenticated, login, logout, uploadPhoto };
 }
 
 export function UserProvider({ children }) {

@@ -10,7 +10,7 @@ export default class LocalStorageService {
   }
 
   static get isAuthenticated() {
-    return this.user?.isAuthenticated;
+    return this.user?.isAuthenticated || false;
   }
 
   static set isAuthenticated(isAuthenticated) {
