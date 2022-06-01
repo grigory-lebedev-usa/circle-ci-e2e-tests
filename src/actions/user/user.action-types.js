@@ -1,3 +1,5 @@
 export const USER_ACTION_TYPES = {
-  SET: 'user/set'
+  GET_USER_SUCCESS: 'user/get-success',
+  LOGIN_SUCCESS: 'user/login-success',
+  LOGOUT: 'user/logout'
 };

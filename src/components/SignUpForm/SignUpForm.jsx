@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 
+import { useDispatch } from 'react-redux';
+
+import { useNavigate } from 'react-router-dom';
+
 import {
   BUTTON_TYPES,
   BUTTON_VARIANTS,
@@ -12,7 +16,9 @@ import Button from '../../shared/components/Button/Button';
 
 import { USER_ROLES } from '../../constants/user-roles.constants';
 
-import { useRegistration } from '../../api/hooks/useRegistration';
+import { USER_REGISTRATION } from '../../actions/user/user.actions';
+
+import { PUBLIC_ROUTES } from '../../constants/app.constants';
 
 import classes from './sign-up-form.module.css';
 import { defaultRegisterValues } from './sign-up-form.constants';
@@ -21,7 +27,8 @@ import GeneralForm from './components/GeneralForm/GeneralForm';
 
 function SignUpForm() {
   const [isHasSectionDriver, setIsSectionDriver] = useState(false);
-  const { register } = useRegistration();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     handleSubmit,
     control,
@@ -39,11 +46,12 @@ function SignUpForm() {
   const onSubmit = async (data) => {
     const { confirmPassword, ...driverState } = data;
     if (isHasSectionDriver) {
-      await register(driverState);
+      await dispatch(USER_REGISTRATION(driverState));
     } else {
       const { car, ...clientState } = driverState;
-      await register(clientState);
+      await dispatch(USER_REGISTRATION(clientState));
     }
+    navigate(PUBLIC_ROUTES.LOGIN);
   };
 
   return (

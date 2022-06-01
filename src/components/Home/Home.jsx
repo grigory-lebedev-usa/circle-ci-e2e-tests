@@ -5,8 +5,9 @@ import classes from './home.module.css';
 
 function Home({ title, content, rightSide }) {
   const {
-    data: { firstName, lastName }
+    userData: { firstName, lastName }
   } = useSelector((state) => state.user);
+
   return (
     <div className={classes.container}>
       <div className={classes.block__greetings}>
