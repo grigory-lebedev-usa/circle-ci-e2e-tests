@@ -1,31 +1,34 @@
-import { useEffect } from 'react';
-
 import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
 
-import useUser from '../../../hooks/useUser';
+import { useSelector } from 'react-redux';
 
 import { PUBLIC_ROUTES } from '../../../../constants/app.constants';
 
-import useAuth from '../../../hooks/useAuth';
 import NotFoundPage from '../../NotFoundPage/NotFoundPage';
 
 function PrivateRoute({ children, roles }) {
-  const { isAuthed } = useAuth();
+  const isLoading = useSelector((state) => state.spinner.isShowSpinner);
+
   const {
-    getUser,
-    user: { role }
-  } = useUser();
-  useEffect(() => {
-    getUser();
-  }, [getUser]);
+    userData: { role },
+    isAuthenticated
+  } = useSelector((state) => state.user);
+
   const hasPermissions = roles.includes(role);
-  if (!isAuthed) {
+
+  if (isLoading) {
+    return <div />;
+  }
+
+  if (!isAuthenticated) {
     return <Navigate to={PUBLIC_ROUTES.LOGIN} replace />;
   }
+
   if (!hasPermissions) {
     return <NotFoundPage />;
   }
+
   return children;
 }
 

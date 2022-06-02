@@ -2,7 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import useUser from '../../../../shared/hooks/useUser';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { PRIVATE_ROUTES } from '../../../../constants/app.constants';
 
 import Button from '../../../../shared/components/Button/Button';
@@ -12,25 +13,30 @@ import {
   BUTTON_VARIANTS
 } from '../../../../shared/components/Button/button.constants';
 
+import { USER_UPLOAD_PHOTO } from '../../../../actions/user/user.actions';
+
 import { inputType, src } from './upload-driver-photo.constants';
 
 import classes from './upload-driver-photo.module.css';
 
 function UploadDriverPhoto() {
+  const {
+    userData: { car, id }
+  } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isValid, setIsValid] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const image = selectedFile ? imagePreview : src.photo;
   const fileInput = useRef();
-  const { uploadPhoto, user } = useUser();
 
   useEffect(() => {
-    if (user.car?.photo) {
+    if (car?.photo) {
       return navigate(PRIVATE_ROUTES.HOME);
     }
     return () => false;
-  }, [navigate, user]);
+  }, [car?.photo, navigate]);
 
   useEffect(() => {
     if (!selectedFile) {
@@ -50,8 +56,9 @@ function UploadDriverPhoto() {
     fileInput.current.click();
   };
 
-  const handleFileSave = () => {
-    uploadPhoto({ file: selectedFile });
+  const handleFileSave = async () => {
+    await dispatch(USER_UPLOAD_PHOTO({ file: selectedFile, id }));
+    navigate(PRIVATE_ROUTES.HOME);
   };
 
   return (

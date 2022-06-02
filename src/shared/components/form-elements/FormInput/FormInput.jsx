@@ -87,7 +87,7 @@ FormInput.defaultProps = {
   placeholder: '',
   className: '',
   name: '',
-  error: false
+  error: null
 };
 
 export default FormInput;

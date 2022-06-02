@@ -4,18 +4,19 @@ import PropTypes from 'prop-types';
 
 import { Button } from '@mui/material';
 
-import { useForgotPassword } from '../../../../api/hooks/useForgotPassword';
+import { useDispatch } from 'react-redux';
 
 import { INPUT_TYPES } from '../../../../shared/components/form-elements/FormInput/form-input.constants';
 
 import FormInput from '../../../../shared/components/form-elements/FormInput/FormInput';
 
+import { USER_FORGOT_PASSWORD } from '../../../../actions/user/user.actions';
+
 import classes from './forgot-password.module.css';
 
 function ForgotPassword({ isOpened, onClose }) {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
-
-  const { resetPassword } = useForgotPassword();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -24,7 +25,7 @@ function ForgotPassword({ isOpened, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     onClose();
-    await resetPassword({ email: email.toLowerCase() });
+    await dispatch(USER_FORGOT_PASSWORD({ email: email.toLowerCase() }));
     setEmail('');
   };
 

@@ -9,13 +9,13 @@ export default class LocalStorageService {
     localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user));
   }
 
-  static get authed() {
-    return this.user?.authed;
+  static get isAuthenticated() {
+    return this.user?.isAuthenticated || false;
   }
 
-  static set authed(authed) {
+  static set isAuthenticated(isAuthenticated) {
     const { user } = this;
-    user.authed = authed;
+    user.isAuthenticated = isAuthenticated;
     localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user));
   }
 

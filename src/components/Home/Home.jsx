@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
-
-import useUser from '../../shared/hooks/useUser';
+import { useSelector } from 'react-redux';
 
 import classes from './home.module.css';
 
 function Home({ title, content, rightSide }) {
   const {
-    user: { firstName, lastName }
-  } = useUser();
+    userData: { firstName, lastName }
+  } = useSelector((state) => state.user);
+
   return (
     <div className={classes.container}>
       <div className={classes.block__greetings}>
