@@ -9,7 +9,9 @@ import { INPUT_TYPES } from '../../../../shared/components/form-elements/FormInp
 import FormInput from '../../../../shared/components/form-elements/FormInput/FormInput';
 import { OPTIONS_VALIDATE } from '../../../helpers/OPTIONS_VALIDATE';
 
-import { USER_FORGOT_PASSWORD } from '../../../../actions/user/user.actions';
+import { USER_RESET_PASSWORD } from '../../../../actions/user/user.actions';
+
+import { BUTTON_TYPES } from '../../../../shared/components/Button/button.constants';
 
 import classes from './forgot-password.module.css';
 
@@ -22,8 +24,8 @@ function ForgotPassword({ isOpened, onClose }) {
   } = useForm({ defaultValues: { email: '' }, mode: 'onTouched' });
 
   const onSubmit = async ({ email }) => {
+    await dispatch(USER_RESET_PASSWORD({ email: email.toLowerCase() }));
     onClose();
-    await dispatch(USER_FORGOT_PASSWORD({ email: email.toLowerCase() }));
   };
 
   return (
@@ -45,7 +47,13 @@ function ForgotPassword({ isOpened, onClose }) {
               error={errors?.email}
               rules={OPTIONS_VALIDATE.EMAIL}
             />
-            <Button variant="form" color="form" className={classes.button} disabled={!isValid}>
+            <Button
+              variant="form"
+              color="form"
+              className={classes.button}
+              type={BUTTON_TYPES.SUBMIT}
+              disabled={!isValid}
+            >
               Send
             </Button>
           </form>

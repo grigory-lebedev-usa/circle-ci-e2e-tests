@@ -20,6 +20,10 @@ import { USER_REGISTRATION } from '../../actions/user/user.actions';
 
 import { PUBLIC_ROUTES } from '../../constants/app.constants';
 
+import { NOTIFICATION_ADD } from '../../actions/notification/notification.actions';
+
+import { NOTIFICATION_TYPES } from '../../shared/components/Notifications/components/Notification/notification.constants';
+
 import classes from './sign-up-form.module.css';
 import { defaultRegisterValues } from './sign-up-form.constants';
 import CarForm from './components/CarForm/CarForm';
@@ -45,13 +49,17 @@ function SignUpForm() {
 
   const onSubmit = async (data) => {
     const { confirmPassword, ...driverState } = data;
-    if (isHasSectionDriver) {
-      await dispatch(USER_REGISTRATION(driverState));
-    } else {
-      const { car, ...clientState } = driverState;
-      await dispatch(USER_REGISTRATION(clientState));
+    try {
+      if (isHasSectionDriver) {
+        await dispatch(USER_REGISTRATION(driverState));
+      } else {
+        const { car, ...clientState } = driverState;
+        await dispatch(USER_REGISTRATION(clientState));
+      }
+      navigate(PUBLIC_ROUTES.LOGIN);
+    } catch (error) {
+      dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
     }
-    navigate(PUBLIC_ROUTES.LOGIN);
   };
 
   return (

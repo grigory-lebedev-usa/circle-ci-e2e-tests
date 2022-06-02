@@ -11,23 +11,23 @@ import { SPINNER_HIDE, SPINNER_SHOW } from '../../actions/spinner/spinner.action
 import { API_ROUTES } from '../../constants/api.constants';
 import { PRIVATE_ROUTES } from '../../constants/app.constants';
 import { axiosService } from '../../services/axios.service';
-import { notificationTypes } from '../../shared/components/Notifications/components/Notification/notification.constants';
+import { NOTIFICATION_TYPES } from '../../shared/components/Notifications/components/Notification/notification.constants';
 
 export function useOrder() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [orders, setOrders] = useState([{}]);
+  const [orders, setOrders] = useState([]);
 
   const createOrder = async (requestPayload) => {
     try {
       dispatch(SPINNER_SHOW);
       await axiosService.post(API_ROUTES.ORDER, requestPayload);
       dispatch(
-        NOTIFICATION_ADD(notificationTypes.success, 'You have successfully created an order')
+        NOTIFICATION_ADD(NOTIFICATION_TYPES.SUCCESS, 'You have successfully created an order')
       );
       navigate(PRIVATE_ROUTES.CURRENT_ORDER);
     } catch (error) {
-      dispatch(NOTIFICATION_ADD(notificationTypes.error, error.response.data.message));
+      dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
     } finally {
       dispatch(SPINNER_HIDE);
     }
@@ -38,11 +38,11 @@ export function useOrder() {
       dispatch(SPINNER_SHOW);
       await axiosService.delete(`${API_ROUTES.ORDER}/${id}`);
       dispatch(
-        NOTIFICATION_ADD(notificationTypes.success, 'You have successfully cancel an order')
+        NOTIFICATION_ADD(NOTIFICATION_TYPES.SUCCESS, 'You have successfully cancel an order')
       );
       navigate(PRIVATE_ROUTES.HOME);
     } catch (error) {
-      dispatch(NOTIFICATION_ADD(notificationTypes.error, error.response.data.message));
+      dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
     } finally {
       dispatch(SPINNER_HIDE);
     }
@@ -54,7 +54,7 @@ export function useOrder() {
       const { data: orderInfo } = await axiosService.get(API_ROUTES.ORDER);
       setOrders(orderInfo);
     } catch (error) {
-      dispatch(NOTIFICATION_ADD(notificationTypes.error, error.response.data.message));
+      dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
     } finally {
       dispatch(SPINNER_HIDE);
     }

@@ -2,6 +2,10 @@ import React from 'react';
 
 import { useForm } from 'react-hook-form';
 
+import { useNavigate } from 'react-router-dom';
+
+import { useDispatch } from 'react-redux';
+
 import { INPUT_TYPES } from '../../../shared/components/form-elements/FormInput/form-input.constants';
 
 import FormInput from '../../../shared/components/form-elements/FormInput/FormInput';
@@ -14,23 +18,27 @@ import {
   BUTTON_TYPES
 } from '../../../shared/components/Button/button.constants';
 
-import { useOrder } from '../../../api/hooks/useOrder';
-
 import { OPTIONS_VALIDATE } from '../../helpers/OPTIONS_VALIDATE';
+
+import { PRIVATE_ROUTES } from '../../../constants/app.constants';
+
+import { ORDER_CREATE } from '../../../actions/orders/orders.action';
 
 import classes from './client-order.module.css';
 import { defaultOrderValues } from './client-order.constants';
 
 function ClientOrder() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     handleSubmit,
     control,
     formState: { errors, isValid }
   } = useForm({ defaultValues: defaultOrderValues, mode: 'onTouched' });
-  const { createOrder } = useOrder();
 
   const onSubmit = async (data) => {
-    await createOrder(data);
+    await dispatch(ORDER_CREATE(data));
+    navigate(PRIVATE_ROUTES.CURRENT_ORDER);
   };
 
   return (

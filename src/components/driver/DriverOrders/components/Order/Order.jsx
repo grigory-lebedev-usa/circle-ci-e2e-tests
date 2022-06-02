@@ -17,8 +17,6 @@ import Modal from '../../../../../shared/components/Modal/Modal';
 import FormInput from '../../../../../shared/components/form-elements/FormInput/FormInput';
 import { INPUT_TYPES } from '../../../../../shared/components/form-elements/FormInput/form-input.constants';
 
-import { useOffer } from '../../../../../api/hooks/useOffer';
-
 import { OPTIONS_VALIDATE } from '../../../../helpers/OPTIONS_VALIDATE';
 
 import classes from './order.module.css';
@@ -31,7 +29,6 @@ function Order({ order, offer: { id } }) {
     control,
     formState: { errors, isValid }
   } = useForm({ defaultValues: { price: '' }, mode: 'onTouched' });
-  const { createOffer, deleteOffer } = useOffer();
 
   const closeModal = () => {
     setIsOpenedModal(false);
@@ -41,14 +38,11 @@ function Order({ order, offer: { id } }) {
     setIsOpenedModal(true);
   };
 
-  const onSubmit = ({ price }) => {
-    createOffer({ orderId: order?.id, price });
+  const onSubmit = () => {
     closeModal();
   };
 
-  const handleOfferCancel = () => {
-    deleteOffer(id);
-  };
+  const handleOfferCancel = () => {};
 
   return (
     <div className={classes.driver__order}>

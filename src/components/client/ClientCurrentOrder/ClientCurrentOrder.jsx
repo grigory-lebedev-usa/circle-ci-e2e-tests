@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useSelector } from 'react-redux';
+
 import Button from '../../../shared/components/Button/Button';
 import Refresh from '../../../shared/components/Refresh/Refresh';
 import {
@@ -8,18 +10,13 @@ import {
   BUTTON_VARIANTS
 } from '../../../shared/components/Button/button.constants';
 
-import { useOrder } from '../../../api/hooks/useOrder';
-
 import classes from './client-current-order.module.css';
 
 function ClientCurrentOrder() {
-  const {
-    deleteOrder,
-    orders: { id, source, destination }
-  } = useOrder();
+  const { source, destination, id } = useSelector((state) => state.orders);
 
   const handleCancelOrder = async () => {
-    await deleteOrder(id);
+    console.log(id);
   };
   return (
     <div className={classes.container}>

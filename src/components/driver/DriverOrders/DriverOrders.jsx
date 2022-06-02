@@ -1,5 +1,7 @@
-import { useOffer } from '../../../api/hooks/useOffer';
-import { useOrder } from '../../../api/hooks/useOrder';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { ORDERS_GET } from '../../../actions/orders/orders.action';
+
 import Refresh from '../../../shared/components/Refresh/Refresh';
 
 import Order from './components/Order/Order';
@@ -7,12 +9,11 @@ import Order from './components/Order/Order';
 import classes from './driver-orders.module.css';
 
 function DriverOrders() {
-  const { getOrder, orders } = useOrder();
-  const { getOffer, offers } = useOffer();
+  const dispatch = useDispatch();
+  const orders = useSelector((state) => state.orders);
 
   const handleRefresh = () => {
-    getOrder();
-    getOffer();
+    dispatch(ORDERS_GET());
   };
 
   return (
@@ -23,11 +24,7 @@ function DriverOrders() {
       <div className={classes.line} />
       <div className={classes.driver__orders}>
         {orders.map((order) => (
-          <Order
-            key={String(order?.id)}
-            order={order}
-            offer={offers.find(({ orderId }) => orderId === order.id)}
-          />
+          <Order key={order?.id} order={order} />
         ))}
       </div>
       <Refresh className={classes.refresh} onClick={handleRefresh} />

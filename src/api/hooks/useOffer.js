@@ -8,7 +8,7 @@ import { SPINNER_HIDE, SPINNER_SHOW } from '../../actions/spinner/spinner.action
 
 import { API_ROUTES } from '../../constants/api.constants';
 import { axiosService } from '../../services/axios.service';
-import { notificationTypes } from '../../shared/components/Notifications/components/Notification/notification.constants';
+import { NOTIFICATION_TYPES } from '../../shared/components/Notifications/components/Notification/notification.constants';
 
 export function useOffer() {
   const dispatch = useDispatch();
@@ -18,9 +18,9 @@ export function useOffer() {
     try {
       dispatch(SPINNER_SHOW);
       await axiosService.post(API_ROUTES.OFFER, requestPayload);
-      dispatch(NOTIFICATION_ADD(notificationTypes.success, 'Your offer was successfully sent'));
+      dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.SUCCESS, 'Your offer was successfully sent'));
     } catch (error) {
-      dispatch(NOTIFICATION_ADD(notificationTypes.error, error.response.data.message));
+      dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
     } finally {
       dispatch(SPINNER_HIDE);
     }
@@ -30,9 +30,9 @@ export function useOffer() {
     try {
       dispatch(SPINNER_SHOW);
       await axiosService.delete(`${API_ROUTES.OFFER}/${id}`);
-      dispatch(NOTIFICATION_ADD(notificationTypes.success, 'Your offer was cancel'));
+      dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.SUCCESS, 'Your offer was cancel'));
     } catch (error) {
-      dispatch(NOTIFICATION_ADD(notificationTypes.error, error.response.data.message));
+      dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
     } finally {
       dispatch(SPINNER_HIDE);
     }
@@ -44,7 +44,7 @@ export function useOffer() {
       const { data: offerInfo } = await axiosService.get(API_ROUTES.OFFER);
       setOffers(offerInfo);
     } catch (error) {
-      dispatch(NOTIFICATION_ADD(notificationTypes.error, error.response.data.message));
+      dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
     } finally {
       dispatch(SPINNER_HIDE);
     }

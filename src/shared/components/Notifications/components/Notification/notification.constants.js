@@ -1,13 +1,13 @@
 import classes from '../../notifications.module.css';
 
-export const notificationTypes = {
-  success: 'success',
-  warning: 'warning',
-  error: 'error'
+export const NOTIFICATION_TYPES = {
+  SUCCESS: 'success',
+  WARNING: 'warning',
+  ERROR: 'error'
 };
 
 export const notificationClasses = {
-  [notificationTypes.success]: classes.notification__success,
-  [notificationTypes.warning]: classes.notification__warning,
-  [notificationTypes.error]: classes.notification__error
+  [NOTIFICATION_TYPES.SUCCESS]: classes.notification__success,
+  [NOTIFICATION_TYPES.WARNING]: classes.notification__warning,
+  [NOTIFICATION_TYPES.ERROR]: classes.notification__error
 };
