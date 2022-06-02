@@ -1,14 +1,16 @@
+import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-import useUser from '../../../shared/hooks/useUser/useUser';
-import { PUBLIC_ROUTES } from '../../../constants/app.constants';
+import { PRIVATE_ROUTES } from '../../../constants/app.constants';
 
 import UploadDriverPhoto from './components/UploadDriverPhoto';
 
 function DriverStartScreen() {
-  const { user } = useUser;
-  const hasCarPhoto = Boolean(user?.car?.photo);
-  return hasCarPhoto ? <Navigate to={PUBLIC_ROUTES.HOME} replace /> : <UploadDriverPhoto />;
+  const {
+    userData: { car }
+  } = useSelector((state) => state.user);
+  const hasCarPhoto = Boolean(car?.photo);
+  return hasCarPhoto ? <Navigate to={PRIVATE_ROUTES.HOME} replace /> : <UploadDriverPhoto />;
 }
 
 export default DriverStartScreen;

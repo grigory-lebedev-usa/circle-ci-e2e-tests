@@ -1,25 +1,29 @@
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 
-import { useForgotPassword } from '../../../../api/hooks/useForgotPassword';
+import { useDispatch } from 'react-redux';
+
 import Button from '../../../../shared/components/Button/Button';
+
 import { INPUT_TYPES } from '../../../../shared/components/form-elements/FormInput/form-input.constants';
 import FormInput from '../../../../shared/components/form-elements/FormInput/FormInput';
 import { OPTIONS_VALIDATE } from '../../../helpers/OPTIONS_VALIDATE';
 
+import { USER_FORGOT_PASSWORD } from '../../../../actions/user/user.actions';
+
 import classes from './forgot-password.module.css';
 
 function ForgotPassword({ isOpened, onClose }) {
+  const dispatch = useDispatch();
   const {
     handleSubmit,
     control,
     formState: { errors, isValid }
   } = useForm({ defaultValues: { email: '' }, mode: 'onTouched' });
-  const { resetPassword } = useForgotPassword();
 
   const onSubmit = async ({ email }) => {
     onClose();
-    await resetPassword({ email: email.toLowerCase() });
+    await dispatch(USER_FORGOT_PASSWORD({ email: email.toLowerCase() }));
   };
 
   return (

@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import { useOffer } from '../../../api/hooks/useOffer';
 import { useOrder } from '../../../api/hooks/useOrder';
 import Refresh from '../../../shared/components/Refresh/Refresh';
@@ -11,11 +9,6 @@ import classes from './driver-orders.module.css';
 function DriverOrders() {
   const { getOrder, orders } = useOrder();
   const { getOffer, offers } = useOffer();
-
-  useEffect(() => {
-    getOrder();
-    getOffer();
-  }, [getOffer, getOrder]);
 
   const handleRefresh = () => {
     getOrder();

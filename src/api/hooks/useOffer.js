@@ -1,51 +1,54 @@
 import { useCallback, useState } from 'react';
 
+import { useDispatch } from 'react-redux';
+
+import { NOTIFICATION_ADD } from '../../actions/notification/notification.actions';
+
+import { SPINNER_HIDE, SPINNER_SHOW } from '../../actions/spinner/spinner.actions';
+
 import { API_ROUTES } from '../../constants/api.constants';
 import { axiosService } from '../../services/axios.service';
 import { notificationTypes } from '../../shared/components/Notifications/components/Notification/notification.constants';
-import useAppSpinner from '../../shared/hooks/useAppSpinner';
-import useNotifications from '../../shared/hooks/useNotifications/useNotifications';
 
 export function useOffer() {
-  const { showSpinner, closeSpinner } = useAppSpinner();
-  const { showNotification } = useNotifications();
+  const dispatch = useDispatch();
   const [offers, setOffers] = useState([{}]);
 
   const createOffer = async (requestPayload) => {
     try {
-      showSpinner();
+      dispatch(SPINNER_SHOW);
       await axiosService.post(API_ROUTES.OFFER, requestPayload);
-      showNotification('Your offer was successfully sent', notificationTypes.success);
+      dispatch(NOTIFICATION_ADD(notificationTypes.success, 'Your offer was successfully sent'));
     } catch (error) {
-      showNotification(error.response.data.message, notificationTypes.error);
+      dispatch(NOTIFICATION_ADD(notificationTypes.error, error.response.data.message));
     } finally {
-      closeSpinner();
+      dispatch(SPINNER_HIDE);
     }
   };
 
   const deleteOffer = async (id) => {
     try {
-      showSpinner();
+      dispatch(SPINNER_SHOW);
       await axiosService.delete(`${API_ROUTES.OFFER}/${id}`);
-      showNotification('Your offer was cancel', notificationTypes.success);
+      dispatch(NOTIFICATION_ADD(notificationTypes.success, 'Your offer was cancel'));
     } catch (error) {
-      showNotification(error.response.data.message, notificationTypes.error);
+      dispatch(NOTIFICATION_ADD(notificationTypes.error, error.response.data.message));
     } finally {
-      closeSpinner();
+      dispatch(SPINNER_HIDE);
     }
   };
 
   const getOffer = useCallback(async () => {
     try {
-      showSpinner();
+      dispatch(SPINNER_SHOW);
       const { data: offerInfo } = await axiosService.get(API_ROUTES.OFFER);
       setOffers(offerInfo);
     } catch (error) {
-      showNotification(error.response.data.message, notificationTypes.error);
+      dispatch(NOTIFICATION_ADD(notificationTypes.error, error.response.data.message));
     } finally {
-      closeSpinner();
+      dispatch(SPINNER_HIDE);
     }
-  }, [closeSpinner, showNotification, showSpinner]);
+  }, [dispatch]);
 
   return { createOffer, deleteOffer, getOffer, offers };
 }

@@ -2,20 +2,20 @@ import PropTypes from 'prop-types';
 
 import { Backdrop, CircularProgress } from '@mui/material';
 
-function ProgressSpinner({ isVisible }) {
+function ProgressSpinner({ isShow }) {
   return (
-    <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} open={isVisible}>
+    <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} open={isShow}>
       <CircularProgress color="inherit" size={200} />
     </Backdrop>
   );
 }
 
 ProgressSpinner.propTypes = {
-  isVisible: PropTypes.bool
+  isShow: PropTypes.bool
 };
 
 ProgressSpinner.defaultProps = {
-  isVisible: false
+  isShow: false
 };
 
 export default ProgressSpinner;

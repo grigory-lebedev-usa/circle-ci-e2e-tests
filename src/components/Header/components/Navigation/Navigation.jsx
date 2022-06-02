@@ -1,15 +1,25 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import DropDown from '../../../../shared/components/DropDown/DropDown';
-
-import useUser from '../../../../shared/hooks/useUser/useUser';
+import { PUBLIC_ROUTES } from '../../../../constants/app.constants';
+import { USER_LOGOUT } from '../../../../actions/user/user.actions';
 
 import classes from './navigation.module.css';
 
 function Navigation({ isPrivatePage }) {
-  const { logout } = useUser();
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(USER_LOGOUT());
+    navigate(PUBLIC_ROUTES.LOGIN);
+  };
+
   return (
     <div>
       <div className={classes.dropdown__block}>
@@ -23,7 +33,7 @@ function Navigation({ isPrivatePage }) {
       </div>
       {isPrivatePage && (
         <div className={classes.logout__block}>
-          <button className={classes.logout_btn} onClick={logout} type="button">
+          <button className={classes.logout_btn} onClick={handleLogout} type="button">
             Log out
           </button>
         </div>

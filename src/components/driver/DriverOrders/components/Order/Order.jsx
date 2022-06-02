@@ -11,6 +11,7 @@ import {
   BUTTON_TYPES,
   BUTTON_VARIANTS
 } from '../../../../../shared/components/Button/button.constants';
+
 import Modal from '../../../../../shared/components/Modal/Modal';
 
 import FormInput from '../../../../../shared/components/form-elements/FormInput/FormInput';

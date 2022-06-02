@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import Button from '../../../shared/components/Button/Button';
 import Refresh from '../../../shared/components/Refresh/Refresh';
@@ -15,13 +15,8 @@ import classes from './client-current-order.module.css';
 function ClientCurrentOrder() {
   const {
     deleteOrder,
-    getOrder,
     orders: { id, source, destination }
   } = useOrder();
-
-  useEffect(() => {
-    getOrder();
-  }, [getOrder]);
 
   const handleCancelOrder = async () => {
     await deleteOrder(id);
