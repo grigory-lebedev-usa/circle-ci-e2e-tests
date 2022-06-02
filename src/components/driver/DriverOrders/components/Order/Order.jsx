@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import { useForm } from 'react-hook-form';
 
+import { useDispatch } from 'react-redux';
+
 import Button from '../../../../../shared/components/Button/Button';
 import {
   BUTTON_COLORS,
@@ -18,15 +20,18 @@ import FormInput from '../../../../../shared/components/form-elements/FormInput/
 import { INPUT_TYPES } from '../../../../../shared/components/form-elements/FormInput/form-input.constants';
 
 import { OPTIONS_VALIDATE } from '../../../../helpers/OPTIONS_VALIDATE';
+import { OFFER_CREATE, OFFER_DELETE } from '../../../../../actions/offers/offers.action';
 
 import classes from './order.module.css';
 
 function Order({ order, offer: { id } }) {
+  const dispatch = useDispatch();
   const [isOpenedModal, setIsOpenedModal] = useState(false);
 
   const {
     handleSubmit,
     control,
+    watch,
     formState: { errors, isValid }
   } = useForm({ defaultValues: { price: '' }, mode: 'onTouched' });
 
@@ -38,11 +43,14 @@ function Order({ order, offer: { id } }) {
     setIsOpenedModal(true);
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
+    await dispatch(OFFER_CREATE({ orderId: order.id, price: watch('price') }));
     closeModal();
   };
 
-  const handleOfferCancel = () => {};
+  const handleOfferCancel = async () => {
+    await dispatch(OFFER_DELETE(id));
+  };
 
   return (
     <div className={classes.driver__order}>

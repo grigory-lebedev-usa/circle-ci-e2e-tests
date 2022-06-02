@@ -6,7 +6,7 @@ const INITIAL_STATE = [];
 export const ordersReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ORDERS_ACTION_TYPES.GET_SUCCESS: {
-      return [...state, ...action.payload];
+      return action.payload;
     }
     default: {
       return state;

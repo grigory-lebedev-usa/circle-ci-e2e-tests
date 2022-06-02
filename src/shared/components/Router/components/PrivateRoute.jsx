@@ -8,18 +8,12 @@ import { PUBLIC_ROUTES } from '../../../../constants/app.constants';
 import NotFoundPage from '../../NotFoundPage/NotFoundPage';
 
 function PrivateRoute({ children, roles }) {
-  const isLoading = useSelector((state) => state.spinner.isShowSpinner);
-
   const {
     userData: { role },
     isAuthenticated
   } = useSelector((state) => state.user);
 
   const hasPermissions = roles.includes(role);
-
-  if (isLoading) {
-    return <div />;
-  }
 
   if (!isAuthenticated) {
     return <Navigate to={PUBLIC_ROUTES.LOGIN} replace />;

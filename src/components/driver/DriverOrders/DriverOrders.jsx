@@ -1,4 +1,8 @@
+import { useEffect } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
+
+import { OFFERS_GET } from '../../../actions/offers/offers.action';
 
 import { ORDERS_GET } from '../../../actions/orders/orders.action';
 
@@ -11,9 +15,16 @@ import classes from './driver-orders.module.css';
 function DriverOrders() {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders);
+  const offers = useSelector((state) => state.offers);
+
+  useEffect(() => {
+    dispatch(ORDERS_GET());
+    dispatch(OFFERS_GET());
+  }, [dispatch]);
 
   const handleRefresh = () => {
     dispatch(ORDERS_GET());
+    dispatch(OFFERS_GET());
   };
 
   return (
@@ -24,7 +35,11 @@ function DriverOrders() {
       <div className={classes.line} />
       <div className={classes.driver__orders}>
         {orders.map((order) => (
-          <Order key={order?.id} order={order} />
+          <Order
+            key={order?.id}
+            order={order}
+            offer={offers.find(({ orderId }) => orderId === order.id)}
+          />
         ))}
       </div>
       <Refresh className={classes.refresh} onClick={handleRefresh} />

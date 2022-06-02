@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { useNavigate } from 'react-router-dom';
 
 import Button from '../../../shared/components/Button/Button';
 import Refresh from '../../../shared/components/Refresh/Refresh';
@@ -10,13 +12,20 @@ import {
   BUTTON_VARIANTS
 } from '../../../shared/components/Button/button.constants';
 
+import { PRIVATE_ROUTES } from '../../../constants/app.constants';
+
+import { ORDER_DELETE } from '../../../actions/orders/orders.action';
+
 import classes from './client-current-order.module.css';
 
 function ClientCurrentOrder() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { source, destination, id } = useSelector((state) => state.orders);
 
   const handleCancelOrder = async () => {
-    console.log(id);
+    await dispatch(ORDER_DELETE(id));
+    navigate(PRIVATE_ROUTES.HOME);
   };
   return (
     <div className={classes.container}>
