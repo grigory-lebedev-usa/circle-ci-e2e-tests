@@ -9,21 +9,26 @@ import NotFoundPage from '../../NotFoundPage/NotFoundPage';
 
 function PrivateRoute({ children, roles }) {
   const isLoading = useSelector((state) => state.spinner.isShowSpinner);
+
   const {
     userData: { role },
     isAuthenticated
   } = useSelector((state) => state.user);
 
+  const hasPermissions = roles.includes(role);
+
   if (isLoading) {
     return <div />;
   }
-  const hasPermissions = roles.includes(role);
+
   if (!isAuthenticated) {
     return <Navigate to={PUBLIC_ROUTES.LOGIN} replace />;
   }
+
   if (!hasPermissions) {
     return <NotFoundPage />;
   }
+
   return children;
 }
 

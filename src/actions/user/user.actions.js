@@ -8,8 +8,8 @@ import { SPINNER_HIDE, SPINNER_SHOW } from '../spinner/spinner.actions';
 
 import { USER_ACTION_TYPES } from './user.action-types';
 
-export const GET_USER_SUCCESS = (user) => {
-  return { type: USER_ACTION_TYPES.GET_USER_SUCCESS, payload: user };
+export const USER_GET_SUCCESS = (user) => {
+  return { type: USER_ACTION_TYPES.GET_SUCCESS, payload: user };
 };
 
 export const LOGIN_SUCCESS = {
@@ -20,12 +20,12 @@ export const LOGOUT = {
   type: USER_ACTION_TYPES.LOGOUT
 };
 
-export const GET_USER = () => {
+export const USER_GET = () => {
   return async (dispatch) => {
     try {
       dispatch(SPINNER_SHOW);
       const { data: userInfo } = await axiosService.get(API_ROUTES.USER_ME);
-      dispatch(GET_USER_SUCCESS(userInfo));
+      dispatch(USER_GET_SUCCESS(userInfo));
       LocalStorageService.role = userInfo.role;
     } catch (error) {
       dispatch(NOTIFICATION_ADD(notificationTypes.error, error.response.data.message));

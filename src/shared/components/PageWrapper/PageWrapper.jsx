@@ -10,7 +10,7 @@ import Header from '../../../components/Header/Header';
 
 import { PUBLIC_ROUTES } from '../../../constants/app.constants';
 
-import { GET_USER } from '../../../actions/user/user.actions';
+import { USER_GET } from '../../../actions/user/user.actions';
 
 import classes from './page-wrapper.module.css';
 
@@ -21,7 +21,7 @@ function PageWrapper({ children }) {
 
   useEffect(() => {
     if (isPrivatePage) {
-      dispatch(GET_USER());
+      dispatch(USER_GET());
     }
   }, [dispatch, isPrivatePage]);
 
