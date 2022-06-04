@@ -12,8 +12,6 @@ import { PUBLIC_ROUTES } from '../../../constants/app.constants';
 
 import { USER_GET } from '../../../actions/user/user.actions';
 
-import { ORDERS_GET } from '../../../actions/orders/orders.action';
-
 import classes from './page-wrapper.module.css';
 
 function PageWrapper({ children }) {
@@ -24,7 +22,6 @@ function PageWrapper({ children }) {
   useEffect(() => {
     if (isPrivatePage) {
       dispatch(USER_GET());
-      dispatch(ORDERS_GET());
     }
   }, [dispatch, isPrivatePage]);
 

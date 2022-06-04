@@ -18,13 +18,13 @@ function DriverOrders() {
   const offers = useSelector((state) => state.offers);
 
   useEffect(() => {
-    dispatch(ORDERS_GET());
     dispatch(OFFERS_GET());
+    dispatch(ORDERS_GET());
   }, [dispatch]);
 
   const handleRefresh = () => {
-    dispatch(ORDERS_GET());
     dispatch(OFFERS_GET());
+    dispatch(ORDERS_GET());
   };
 
   return (
