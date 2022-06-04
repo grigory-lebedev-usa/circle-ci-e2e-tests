@@ -1,42 +1,25 @@
-.modal__container {
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	right: 0;
-	left: 0;
-	display: none;
-	background: rgba(0, 0, 0, 0.5);
-	z-index: 1000;
-}
-
-.modal__container_active {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
 .modal__content {
-	position: relative;
-	background: #FFF;
-	min-width: 550px;
-	min-height: 235px;
-	border-radius: 4px;
-	box-shadow: 0px 4px 100px #000;
+  position: relative;
+  background: #fff;
+  min-width: 550px;
+  min-height: 235px;
+  border-radius: 4px;
+  box-shadow: 0px 4px 100px #000;
 }
 
 .modal__close {
-	position: absolute;
-	top: 0px;
-	right: 8px;
-	border: 0;
-	cursor: pointer;
-	background: none;
-	transform: rotate(45deg);
-	color: rgba(0, 0, 0, 0.8);
-	font-size: 40px;
-	transition: all 0.3s ease;
+  position: absolute;
+  top: 0px;
+  right: 8px;
+  border: 0;
+  cursor: pointer;
+  background: none;
+  transform: rotate(45deg);
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 40px;
+  transition: all 0.3s ease;
 }
 
 .modal__close:hover {
-	color: #000;
+  color: #000;
 }

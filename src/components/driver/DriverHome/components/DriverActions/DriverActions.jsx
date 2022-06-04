@@ -18,7 +18,8 @@ function DriverActions() {
           size={buttonSizes.big}
           color={buttonColors.primary}
           className={classes.button}
-          type={buttonTypes.button}>
+          type={buttonTypes.button}
+        >
           Start treep
         </Button>
       </Link>
