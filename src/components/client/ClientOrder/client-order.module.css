@@ -47,9 +47,10 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 137px;
+  z-index: 2;
 }
 
-.decoration__container { 
+.decoration__container {
   position: fixed;
   left: 36px;
   bottom: 36px;

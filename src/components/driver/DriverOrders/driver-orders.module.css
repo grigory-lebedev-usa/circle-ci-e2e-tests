@@ -1,0 +1,41 @@
+@import url(/src/styles/colors.css);
+
+.container {
+  position: relative;
+  margin: 0 auto;
+}
+
+.block__title {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  width: auto;
+}
+
+.title {
+  margin: 0;
+  font-family: 'Rasa';
+  font-weight: 300;
+  font-size: 96px;
+  line-height: 117px;
+  margin-left: 60px;  
+  color: #fff;
+  width: 500;
+}
+
+.line {
+  width: 268px;
+  border: 5px solid var(--primary-color);
+  background-color: var(--primary-color);
+}
+
+.driver__orders {
+  margin: 0 auto;
+  width: 1489px;
+  height: auto;
+}
+
+.refresh {
+  position: fixed;
+  right: 80px;
+  bottom: 93px;
+}

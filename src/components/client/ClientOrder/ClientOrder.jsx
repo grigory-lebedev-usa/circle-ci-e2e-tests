@@ -1,4 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
+
+import { useForm } from 'react-hook-form';
+
+import { useNavigate } from 'react-router-dom';
+
+import { useDispatch } from 'react-redux';
 
 import { INPUT_TYPES } from '../../../shared/components/form-elements/FormInput/form-input.constants';
 
@@ -12,25 +18,27 @@ import {
   BUTTON_TYPES
 } from '../../../shared/components/Button/button.constants';
 
-import { useOrder } from '../../../api/hooks/useOrder';
+import { OPTIONS_VALIDATE } from '../../helpers/OPTIONS_VALIDATE';
+
+import { PRIVATE_ROUTES } from '../../../constants/app.constants';
+
+import { ORDER_CREATE } from '../../../actions/orders/orders.action';
 
 import classes from './client-order.module.css';
-import { initialFormState } from './client-order.constants';
+import { defaultOrderValues } from './client-order.constants';
 
 function ClientOrder() {
-  // const [isFormValid, setIsFormValid] = useState(false);
-  const [formState, setFormState] = useState(initialFormState);
-  const { source, destination } = formState;
-  const { createOrder } = useOrder();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {
+    handleSubmit,
+    control,
+    formState: { errors, isValid }
+  } = useForm({ defaultValues: defaultOrderValues, mode: 'onTouched' });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormState({ ...formState, [name]: value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await createOrder({ source, destination });
+  const onSubmit = async (data) => {
+    await dispatch(ORDER_CREATE(data));
+    navigate(PRIVATE_ROUTES.CURRENT_ORDER);
   };
 
   return (
@@ -42,26 +50,24 @@ function ClientOrder() {
         </p>
         <div className={classes.line} />
       </div>
-      <form className={classes.form__wrapper} onSubmit={handleSubmit}>
+      <form className={classes.form__wrapper} onSubmit={handleSubmit(onSubmit)}>
         <div className={classes.form__container}>
           <FormInput
-            id="source"
-            type={INPUT_TYPES.TEXT}
-            label="Source"
-            placeholder="Source"
             name="source"
-            value={source}
-            onChange={handleInputChange}
+            placeholder="Source"
+            type={INPUT_TYPES.TEXT}
+            control={control}
+            error={errors?.source}
+            rules={OPTIONS_VALIDATE.SOURCE}
           />
           <FormInput
-            id="destination"
-            type={INPUT_TYPES.TEXT}
-            label="Destination"
-            placeholder="Destination"
             name="destination"
+            placeholder="Destination"
+            type={INPUT_TYPES.TEXT}
             className={classes.input}
-            value={destination}
-            onChange={handleInputChange}
+            control={control}
+            error={errors?.destination}
+            rules={OPTIONS_VALIDATE.DESTINATION}
           />
         </div>
         <Button
@@ -69,6 +75,7 @@ function ClientOrder() {
           color={BUTTON_COLORS.PRIMARY}
           variant={BUTTON_VARIANTS.CONTAINED}
           type={BUTTON_TYPES.SUBMIT}
+          disabled={!isValid}
         >
           Order
         </Button>

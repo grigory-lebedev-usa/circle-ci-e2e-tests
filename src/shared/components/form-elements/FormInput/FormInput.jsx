@@ -78,7 +78,8 @@ FormInput.propTypes = {
   placeholder: PropTypes.string,
   className: PropTypes.string,
   name: PropTypes.string,
-  error: PropTypes.bool
+  // eslint-disable-next-line react/forbid-prop-types
+  error: PropTypes.object
 };
 
 FormInput.defaultProps = {
