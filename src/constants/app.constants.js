@@ -22,3 +22,10 @@ export const USER_VALUES = {
   refreshToken: '',
   expirationTime: ''
 };
+
+export const REQUEST_STATUS = {
+  IDLE: 'idle',
+  LOADING: 'loading',
+  SUCCESS: 'success',
+  FAILED: 'failed'
+};

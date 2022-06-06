@@ -20,14 +20,24 @@ export const LOGOUT = {
   type: USER_ACTION_TYPES.LOGOUT
 };
 
+export const USER_REQUEST_START = {
+  type: USER_ACTION_TYPES.REQUEST_START
+};
+
+export const USER_REQUEST_FAILED = (payload) => {
+  return { type: USER_ACTION_TYPES.REQUEST_FAILED, payload };
+};
+
 export const USER_GET = () => {
   return async (dispatch) => {
     try {
       dispatch(SPINNER_SHOW);
+      dispatch(USER_REQUEST_START);
       const { data: userInfo } = await axiosService.get(API_ROUTES.USER_ME);
       dispatch(USER_GET_SUCCESS(userInfo));
       LocalStorageService.role = userInfo.role;
     } catch (error) {
+      dispatch(USER_REQUEST_FAILED(error));
       dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
     } finally {
       dispatch(SPINNER_HIDE);
@@ -39,6 +49,7 @@ export const USER_REGISTRATION = (requestPayload) => {
   return async (dispatch) => {
     try {
       dispatch(SPINNER_SHOW);
+      dispatch(USER_REQUEST_START);
       await axiosService.post(API_ROUTES.REGISTER, requestPayload);
       dispatch(
         NOTIFICATION_ADD(
@@ -56,6 +67,7 @@ export const USER_LOGIN = (requestPayload) => {
   return async (dispatch) => {
     try {
       dispatch(SPINNER_SHOW);
+      dispatch(USER_REQUEST_START);
       LocalStorageService.user = USER_VALUES;
       const {
         data: { accessToken, refreshToken, expirationTime }
@@ -67,6 +79,7 @@ export const USER_LOGIN = (requestPayload) => {
       dispatch(LOGIN_SUCCESS);
       dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.SUCCESS, 'You have successfully logged in'));
     } catch (error) {
+      dispatch(USER_REQUEST_FAILED(error));
       dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
     } finally {
       dispatch(SPINNER_HIDE);
@@ -78,6 +91,7 @@ export const USER_RESET_PASSWORD = (requestPayload) => {
   return async (dispatch) => {
     try {
       dispatch(SPINNER_SHOW);
+      dispatch(USER_REQUEST_START);
       await axiosService.post(API_ROUTES.RESET_PASSWORD, requestPayload);
       dispatch(
         NOTIFICATION_ADD(
@@ -86,6 +100,7 @@ export const USER_RESET_PASSWORD = (requestPayload) => {
         )
       );
     } catch (error) {
+      dispatch(USER_REQUEST_FAILED(error));
       dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
     } finally {
       dispatch(SPINNER_HIDE);
@@ -99,9 +114,11 @@ export const USER_UPLOAD_PHOTO = ({ file, id }) => {
       const formData = new FormData();
       formData.append('file', file);
       dispatch(SPINNER_SHOW);
+      dispatch(USER_REQUEST_START);
       await axiosService.post(`${API_ROUTES.USER}/${id}/${API_ROUTES.PHOTO}`, formData);
       dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.SUCCESS, 'Upload successfully!'));
     } catch (error) {
+      dispatch(USER_REQUEST_FAILED(error));
       dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
     } finally {
       dispatch(SPINNER_HIDE);

@@ -3,20 +3,26 @@ import { Navigate } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
 
-import { PUBLIC_ROUTES } from '../../../../constants/app.constants';
+import { PUBLIC_ROUTES, REQUEST_STATUS } from '../../../../constants/app.constants';
 
 import NotFoundPage from '../../NotFoundPage/NotFoundPage';
+import RootSpinner from '../../../../components/RootSpinner/RootSpinner';
 
 function PrivateRoute({ children, roles }) {
   const {
     userData: { role },
-    isAuthenticated
+    isAuthenticated,
+    status
   } = useSelector((state) => state.user);
 
   const hasPermissions = roles.includes(role);
 
   if (!isAuthenticated) {
     return <Navigate to={PUBLIC_ROUTES.LOGIN} replace />;
+  }
+
+  if (status === REQUEST_STATUS.LOADING) {
+    return <RootSpinner />;
   }
 
   if (!hasPermissions) {
