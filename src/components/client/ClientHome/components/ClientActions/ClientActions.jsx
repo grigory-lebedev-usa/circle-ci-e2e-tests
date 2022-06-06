@@ -7,7 +7,7 @@ import {
   BUTTON_SIZES,
   BUTTON_VARIANTS
 } from '../../../../../shared/components/Button/button.constants';
-import Confirmation from '../../../../../shared/components/Confirmation/Confirmation';
+import ConfirmationPopUp from '../../../../../shared/components/ConfirmationPopUp/ConfirmationPopUp';
 
 import Link from '../../../../../shared/components/Link/Link';
 import Modal from '../../../../../shared/components/Modal/Modal';
@@ -37,29 +37,11 @@ function ClientActions() {
     <div className={classes.block__buttons}>
       <Modal isOpened={isOpened} closeModal={closeModal}>
         <div>
-          <Confirmation isOpened={isOpenConfirmation}>
-            <h1 style={{ textAlign: 'center' }}>
-              Are you sure you want to accept the offer from Ivan Ivanov?
-            </h1>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <Button
-                size={BUTTON_SIZES.MEDIUM}
-                color={BUTTON_COLORS.ERROR}
-                variant={BUTTON_VARIANTS.CONTAINED}
-                className={classes.button}
-                onClick={closeConfirmation}
-              >
-                Cancel
-              </Button>
-              <Button
-                size={BUTTON_SIZES.MEDIUM}
-                color={BUTTON_COLORS.SUCCESS}
-                variant={BUTTON_VARIANTS.CONTAINED}
-              >
-                Ok
-              </Button>
-            </div>
-          </Confirmation>
+          <ConfirmationPopUp
+            isOpened={isOpenConfirmation}
+            onCancel={closeConfirmation}
+            text="Are you sure you want to accept the offer from Ivan Ivanov?"
+          />
           <h1 style={{ textAlign: 'center' }}>You open view history!</h1>
           <Button
             size={BUTTON_SIZES.BIG}
