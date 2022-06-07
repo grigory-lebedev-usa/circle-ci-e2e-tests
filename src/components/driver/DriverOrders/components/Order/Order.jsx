@@ -22,15 +22,20 @@ import { INPUT_TYPES } from '../../../../../shared/components/form-elements/Form
 import { OPTIONS_VALIDATE } from '../../../../helpers/OPTIONS_VALIDATE';
 import { OFFER_CREATE, OFFER_DELETE } from '../../../../../actions/offers/offers.action';
 
+import { MODAL_SIZE } from '../../../../../shared/components/Modal/modal.constants';
+
 import classes from './order.module.css';
+import OrderConfirmation from './components/OrderConfirmation';
 
 function Order({ order, offer: { id } }) {
   const dispatch = useDispatch();
   const [isOpenedModal, setIsOpenedModal] = useState(false);
+  const [isOpenedConfirmation, setIsOpenedConfirmation] = useState(false);
 
   const {
     handleSubmit,
     control,
+    reset,
     watch,
     formState: { errors, isValid }
   } = useForm({ defaultValues: { price: '' }, mode: 'onTouched' });
@@ -43,18 +48,34 @@ function Order({ order, offer: { id } }) {
     setIsOpenedModal(true);
   };
 
-  const onSubmit = async () => {
-    await dispatch(OFFER_CREATE({ orderId: order.id, price: watch('price') }));
-    closeModal();
+  const openConfirmation = () => {
+    setIsOpenedConfirmation(true);
   };
 
-  const handleOfferCancel = async () => {
+  const closeConfirmation = () => {
+    setIsOpenedConfirmation(false);
+  };
+
+  const onSubmit = async () => {
+    closeModal();
+    await dispatch(OFFER_CREATE({ orderId: order.id, price: watch('price') }));
+    reset({ price: '' });
+  };
+
+  const handleOfferDelete = async () => {
+    closeConfirmation();
     await dispatch(OFFER_DELETE(id));
   };
 
   return (
     <div className={classes.driver__order}>
-      <Modal isOpened={isOpenedModal} closeModal={closeModal} className={classes.modal__container}>
+      <OrderConfirmation
+        isOpened={isOpenedConfirmation}
+        onCancel={closeConfirmation}
+        onConfirm={handleOfferDelete}
+        text="Are you sure you want to cancel your offer?"
+      />
+      <Modal isOpened={isOpenedModal} closeModal={closeModal} size={MODAL_SIZE.MEDIUM}>
         <div className={classes.modal__content}>
           <div className={classes.modal__item}>
             <h5 className={classes.modal__title}>Who:</h5>
@@ -117,7 +138,7 @@ function Order({ order, offer: { id } }) {
         size={BUTTON_SIZES.SMALL}
         variant={BUTTON_VARIANTS.CONTAINED}
         className={classes.button__offer}
-        onClick={id ? handleOfferCancel : openModal}
+        onClick={id ? openConfirmation : openModal}
       >
         {id ? 'Cancel' : 'Offer'}
       </Button>

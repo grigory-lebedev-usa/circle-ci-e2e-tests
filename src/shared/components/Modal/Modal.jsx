@@ -1,31 +1,22 @@
-import React from 'react';
-
 import PropTypes from 'prop-types';
 
+import { Modal as MuiModal } from '@mui/material';
+
 import classes from './modal.module.css';
+import { MODAL_SIZE, modalClasses } from './modal.constants';
 
-function Modal({ children, isOpened, closeModal, className }) {
-  const handleStopPropagation = (e) => {
-    e.stopPropagation();
-  };
-
+function Modal({ children, isOpened, closeModal, size, hasCloseIcon }) {
   return (
-    <div
-      role="alertdialog"
-      className={`${classes.modal__container} ${isOpened ? classes.modal__container_active : ''}`}
-      onClick={closeModal}
-    >
-      <div
-        role="alert"
-        className={`${classes.modal__content} ${className}`}
-        onClick={handleStopPropagation}
-      >
-        <button type="button" className={classes.modal__close} onClick={closeModal}>
-          +
-        </button>
+    <MuiModal open={isOpened} onClose={closeModal}>
+      <div role="alert" className={`${classes.modal__container} ${modalClasses[size]}`}>
+        {hasCloseIcon && (
+          <button type="button" className={classes.modal__close} onClick={closeModal}>
+            +
+          </button>
+        )}
         {children}
       </div>
-    </div>
+    </MuiModal>
   );
 }
 
@@ -33,11 +24,13 @@ Modal.propTypes = {
   children: PropTypes.element.isRequired,
   isOpened: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
-  className: PropTypes.string
+  size: PropTypes.oneOf(Object.values(MODAL_SIZE)),
+  hasCloseIcon: PropTypes.bool
 };
 
 Modal.defaultProps = {
-  className: ''
+  size: MODAL_SIZE.MEDIUM,
+  hasCloseIcon: true
 };
 
 export default Modal;
