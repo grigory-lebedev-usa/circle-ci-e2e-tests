@@ -17,6 +17,7 @@ const theme = createTheme({
       contrastText: COLORS.WHITE
     },
     error: {
+      light: COLORS.ERROR_LIGHT,
       main: COLORS.ERROR,
       contrastText: COLORS.WHITE
     },

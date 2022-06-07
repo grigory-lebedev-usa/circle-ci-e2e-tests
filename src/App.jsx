@@ -17,6 +17,7 @@ import HomeRoutes from './shared/components/Router/components/HomeRoutes/HomeRou
 import NotFoundPage from './shared/components/NotFoundPage/NotFoundPage';
 import RootSpinner from './components/RootSpinner/RootSpinner';
 import RootNotifications from './components/RootNotifications/RootNotifications';
+import ActiveOrder from './guards/ActiveOrder';
 
 function App() {
   return (
@@ -29,7 +30,9 @@ function App() {
             path={PRIVATE_ROUTES.HOME}
             element={
               <PrivateRoute roles={[USER_ROLES.CLIENT, USER_ROLES.ADMIN, USER_ROLES.DRIVER]}>
-                <HomeRoutes />
+                <ActiveOrder>
+                  <HomeRoutes />
+                </ActiveOrder>
               </PrivateRoute>
             }
           />
@@ -37,7 +40,9 @@ function App() {
             path={PRIVATE_ROUTES.ORDER}
             element={
               <PrivateRoute roles={[USER_ROLES.CLIENT]}>
-                <ClientOrder />
+                <ActiveOrder>
+                  <ClientOrder />
+                </ActiveOrder>
               </PrivateRoute>
             }
           />
