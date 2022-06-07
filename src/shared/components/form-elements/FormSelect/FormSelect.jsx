@@ -28,7 +28,7 @@ function FormSelect({ name, label, items, className, error, control, rules }) {
               input={<OutlinedInput label={name.toUpperCase()} />}
             >
               {items.map((item) => (
-                <MenuItem key={item.id} value={item.value}>
+                <MenuItem key={item.id} value={item.value.toLowerCase()}>
                   {item.value}
                 </MenuItem>
               ))}

@@ -11,7 +11,7 @@
 }
 
 .modal__container_medium {
-  width: 800px;
+  min-width: 800px;
 }
 
 .modal__container_small {
@@ -27,7 +27,7 @@
   background: none;
   transform: rotate(45deg);
   color: rgba(0, 0, 0, 0.8);
-  font-size: 40px;
+  font-size: 60px;
   transition: all 0.3s ease;
 }
 

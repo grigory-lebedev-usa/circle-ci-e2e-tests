@@ -9,26 +9,28 @@ import classes from './confirmation-pop-up.module.css';
 
 function ConfirmationPopUp({ isOpened, text, onCancel, onConfirm }) {
   return (
-    <Modal isOpened={isOpened} size={MODAL_SIZE.LARGE} hasCloseIcon={false}>
-      <p className={classes.confirmation__text}>{text}</p>
-      <div className={classes.confirmation__buttons}>
-        <Button
-          size={BUTTON_SIZES.MEDIUM}
-          color={BUTTON_COLORS.ERROR}
-          variant={BUTTON_VARIANTS.CONTAINED}
-          className={classes.button}
-          onClick={onCancel}
-        >
-          Cancel
-        </Button>
-        <Button
-          size={BUTTON_SIZES.MEDIUM}
-          color={BUTTON_COLORS.SUCCESS}
-          variant={BUTTON_VARIANTS.CONTAINED}
-          onClick={onConfirm}
-        >
-          Ok
-        </Button>
+    <Modal isOpened={isOpened} size={MODAL_SIZE.LARGE} hasCloseIcon={false} closeModal={onCancel}>
+      <div>
+        <p className={classes.confirmation__text}>{text}</p>
+        <div className={classes.confirmation__buttons}>
+          <Button
+            size={BUTTON_SIZES.MEDIUM}
+            color={BUTTON_COLORS.ERROR}
+            variant={BUTTON_VARIANTS.CONTAINED}
+            className={classes.button}
+            onClick={onCancel}
+          >
+            Cancel
+          </Button>
+          <Button
+            size={BUTTON_SIZES.MEDIUM}
+            color={BUTTON_COLORS.SUCCESS}
+            variant={BUTTON_VARIANTS.CONTAINED}
+            onClick={onConfirm}
+          >
+            Ok
+          </Button>
+        </div>
       </div>
     </Modal>
   );

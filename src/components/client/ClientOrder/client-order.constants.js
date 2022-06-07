@@ -1,15 +1,4 @@
-export const initialFormState = {
+export const defaultOrderValues = {
   source: '',
   destination: ''
-};
-
-export const initialErrors = {
-  source: {
-    valid: false,
-    errorMessage: ''
-  },
-  destination: {
-    valid: false,
-    errorMessage: ''
-  }
 };

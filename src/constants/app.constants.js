@@ -20,6 +20,12 @@ export const USER_VALUES = {
   isAuthenticated: false,
   accessToken: '',
   refreshToken: '',
-  expirationTime: '',
-  role: ''
+  expirationTime: ''
+};
+
+export const REQUEST_STATUS = {
+  IDLE: 'idle',
+  LOADING: 'loading',
+  SUCCESS: 'success',
+  FAILED: 'failed'
 };

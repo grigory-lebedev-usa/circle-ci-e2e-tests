@@ -233,7 +233,12 @@ const theme = createTheme({
           fontWeight: 700,
           borderRadius: '50px',
           boxShadow: 'none',
-          textTransform: 'none'
+          textTransform: 'none',
+          '&:disabled': {
+            backgroundColor: COLORS.DISABLED,
+            cursor: 'not-allowed',
+            color: COLORS.WHITE
+          }
         }
       }
     }

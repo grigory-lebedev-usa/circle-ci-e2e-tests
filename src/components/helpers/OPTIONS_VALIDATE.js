@@ -46,5 +46,14 @@ export const OPTIONS_VALIDATE = {
   },
   COLOR: {
     required: 'Color is required'
+  },
+  SOURCE: {
+    required: 'Source is required'
+  },
+  DESTINATION: {
+    required: 'Destination is required'
+  },
+  PRICE: {
+    required: 'Price is required'
   }
 };
