@@ -17,6 +17,7 @@ import { PRIVATE_ROUTES } from '../../../constants/app.constants';
 import { ORDER_DELETE } from '../../../actions/orders/orders.action';
 
 import classes from './client-current-order.module.css';
+import CardDriver from './components/CardDriver/CardDriver';
 
 function ClientCurrentOrder() {
   const navigate = useNavigate();
@@ -34,13 +35,14 @@ function ClientCurrentOrder() {
         <div className={classes.line} />
         <p className={classes.description__text}>{`${source} - ${destination}`}</p>
       </div>
+      <CardDriver />
       <div className={classes.wrapper__message}>
         <p className={classes.message}>
           No drivers found at this time. Refresh the list to see driver‘s offers.
         </p>
       </div>
       <Button
-        size={BUTTON_SIZES.BIG}
+        size={BUTTON_SIZES.LARGE}
         color={BUTTON_COLORS.PRIMARY}
         onClick={handleCancelOrder}
         variant={BUTTON_VARIANTS.CONTAINED}

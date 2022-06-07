@@ -71,7 +71,7 @@ function ClientOrder() {
           />
         </div>
         <Button
-          size={BUTTON_SIZES.BIG}
+          size={BUTTON_SIZES.LARGE}
           color={BUTTON_COLORS.PRIMARY}
           variant={BUTTON_VARIANTS.CONTAINED}
           type={BUTTON_TYPES.SUBMIT}
