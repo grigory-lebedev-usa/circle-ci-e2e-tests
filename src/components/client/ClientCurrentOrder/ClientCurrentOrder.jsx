@@ -15,6 +15,8 @@ import { PRIVATE_ROUTES } from '../../../constants/app.constants';
 import { ORDERS_GET, ORDER_DELETE } from '../../../actions/orders/orders.actions';
 import { USER_GET } from '../../../actions/user/user.actions';
 
+import { OFFERS_GET } from '../../../actions/offers/offers.action';
+
 import classes from './client-current-order.module.css';
 
 function ClientCurrentOrder() {
@@ -30,7 +32,8 @@ function ClientCurrentOrder() {
       navigate(PRIVATE_ROUTES.HOME);
     }
     dispatch(ORDERS_GET());
-  }, [currentOrder, dispatch, navigate]);
+    dispatch(OFFERS_GET(currentOrder));
+  }, [currentOrder, dispatch, id, navigate]);
 
   const handleCancelOrder = async () => {
     await dispatch(ORDER_DELETE(id));

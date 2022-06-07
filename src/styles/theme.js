@@ -17,7 +17,6 @@ const theme = createTheme({
       contrastText: COLORS.WHITE
     },
     error: {
-      light: COLORS.ERROR_LIGHT,
       main: COLORS.ERROR,
       contrastText: COLORS.WHITE
     },
@@ -35,6 +34,15 @@ const theme = createTheme({
     }
   },
   components: {
+    MuiModal: {
+      styleOverrides: {
+        root: {
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }
+      }
+    },
     MuiFormHelperText: {
       styleOverrides: {
         root: {
@@ -200,9 +208,9 @@ const theme = createTheme({
             }),
           ...(ownerState.variant === 'contained' &&
             ownerState.size === 'medium' && {
-              fontSize: '36px',
-              lineHeight: '44px',
-              width: '300px',
+              fontSize: '30px',
+              lineHeight: '37px',
+              width: '200px',
               height: '60px'
             }),
           ...(ownerState.variant === 'contained' &&

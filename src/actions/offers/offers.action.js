@@ -10,11 +10,15 @@ const OFFERS_GET_SUCCESS = (offers) => {
   return { type: OFFERS_ACTION_TYPES.GET_SUCCESS, payload: offers };
 };
 
-export const OFFERS_GET = () => {
+export const OFFERS_GET = (id = '') => {
   return async (dispatch) => {
     try {
       dispatch(SPINNER_SHOW);
-      const { data: offersInfo } = await axiosService.get(API_ROUTES.OFFER);
+      const { data: offersInfo } = await axiosService.get(API_ROUTES.OFFER, {
+        params: {
+          orderId: id
+        }
+      });
       dispatch(OFFERS_GET_SUCCESS(offersInfo));
     } catch (error) {
       dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
