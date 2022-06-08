@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+
 import classes from './active-trip.module.css';
 
 function ActiveTrip({ bottomContent, bottomActions }) {
