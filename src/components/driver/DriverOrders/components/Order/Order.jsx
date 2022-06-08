@@ -73,7 +73,7 @@ function Order({ order, offer: { id } }) {
         isOpened={isOpenedConfirmation}
         onCancel={closeConfirmation}
         onConfirm={handleOfferDelete}
-        text={`Are you sure you want to cancel ${order?.source} - ${order?.destination} offer?`}
+        text={`Are you sure you want to cancel ${order.source} - ${order.destination} offer?`}
       />
       <Modal isOpened={isOpenedModal} closeModal={closeModal} size={MODAL_SIZE.MEDIUM}>
         <div className={classes.modal__content}>
