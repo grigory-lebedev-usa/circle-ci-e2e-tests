@@ -30,10 +30,11 @@ function ClientCurrentOrder() {
   useEffect(() => {
     if (!currentOrder) {
       navigate(PRIVATE_ROUTES.HOME);
+    } else {
+      dispatch(ORDERS_GET());
+      dispatch(OFFERS_GET(currentOrder));
     }
-    dispatch(ORDERS_GET());
-    dispatch(OFFERS_GET(currentOrder));
-  }, [currentOrder, dispatch, id, navigate]);
+  }, [currentOrder, dispatch, navigate]);
 
   const handleCancelOrder = async () => {
     await dispatch(ORDER_DELETE(id));

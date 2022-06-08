@@ -8,6 +8,9 @@ export const offersReducer = (state = INITIAL_STATE, action) => {
     case OFFERS_ACTION_TYPES.GET_SUCCESS: {
       return action.payload;
     }
+    case OFFERS_ACTION_TYPES.RESET: {
+      return INITIAL_STATE;
+    }
     default: {
       return state;
     }

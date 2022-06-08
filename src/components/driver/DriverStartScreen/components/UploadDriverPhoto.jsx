@@ -13,7 +13,7 @@ import {
   BUTTON_VARIANTS
 } from '../../../../shared/components/Button/button.constants';
 
-import { USER_UPLOAD_PHOTO } from '../../../../actions/user/user.actions';
+import { USER_GET, USER_UPLOAD_PHOTO } from '../../../../actions/user/user.actions';
 
 import { inputType, src } from './upload-driver-photo.constants';
 
@@ -58,6 +58,7 @@ function UploadDriverPhoto() {
 
   const handleFileSave = async () => {
     await dispatch(USER_UPLOAD_PHOTO({ file: selectedFile, id }));
+    await dispatch(USER_GET());
     navigate(PRIVATE_ROUTES.HOME);
   };
 
