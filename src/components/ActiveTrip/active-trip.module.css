@@ -1,0 +1,91 @@
+@import url(/src/styles/colors.css);
+
+.container {
+  position: relative;
+}
+
+.block__title {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.title {
+  margin: 0;
+  font-family: 'Rasa';
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 78px;
+  color: #fff;
+}
+
+.line {
+  width: 390px;
+  margin-left: 20px;
+  border: 5px solid var(--primary-color);
+  background-color: var(--primary-color);
+}
+
+.treep__wrapper {
+  margin-top: 65px;
+  display: flex;
+  justify-content: center;
+}
+
+.treep__container {
+  width: 1300px;
+  background-color: var(--primary-color-rgba);
+  border-radius: 8px;
+  padding: 92px 63px 37px 63px;
+}
+
+.treep__content {
+  display: flex;
+  align-items: center;
+}
+
+.car__img {
+  width: 444px;
+  height: 288px;
+  background-color: #aeaeae;
+  border-radius: 8px;
+}
+
+.block__info {
+  margin-left: 45px;
+}
+
+.info__item {
+  display: flex;
+  position: relative;
+  width: 660px;
+}
+
+.info__item:first-child {
+  margin-top: 0;
+}
+
+.info__title {
+  margin: 0;
+  font-family: 'Rubik';
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 43px;
+  color: #fff;
+}
+
+.info__text {
+  margin: 0;
+  font-family: 'Rubik';
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 43px;
+  color: #fff;
+  position: absolute;
+  margin-left: 140px;
+}
+
+.treep__button {
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+}

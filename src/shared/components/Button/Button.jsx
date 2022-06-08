@@ -33,7 +33,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
   onClick: () => {},
-  size: BUTTON_SIZES.BIG,
+  size: BUTTON_SIZES.LARGE,
   type: BUTTON_TYPES.BUTTON,
   className: '',
   disabled: false

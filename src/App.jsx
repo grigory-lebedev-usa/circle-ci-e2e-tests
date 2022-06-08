@@ -17,6 +17,7 @@ import HomeRoutes from './shared/components/Router/components/HomeRoutes/HomeRou
 import NotFoundPage from './shared/components/NotFoundPage/NotFoundPage';
 import RootSpinner from './components/RootSpinner/RootSpinner';
 import RootNotifications from './components/RootNotifications/RootNotifications';
+import ActiveTrip from './components/ActiveTrip/ActiveTrip';
 
 function App() {
   return (
@@ -62,6 +63,14 @@ function App() {
             element={
               <PrivateRoute roles={[USER_ROLES.DRIVER]}>
                 <DriverOrders />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={PRIVATE_ROUTES.TRIP}
+            element={
+              <PrivateRoute roles={[USER_ROLES.DRIVER, USER_ROLES.CLIENT]}>
+                <ActiveTrip />
               </PrivateRoute>
             }
           />
