@@ -4,7 +4,7 @@ import { Navigate } from 'react-router-dom';
 
 import { PRIVATE_ROUTES } from '../constants/app.constants';
 
-function ActiveOrder({ children }) {
+function ActiveOrderGuard({ children }) {
   const {
     userData: { currentOrder }
   } = useSelector((state) => state.user);
@@ -15,8 +15,8 @@ function ActiveOrder({ children }) {
   return children;
 }
 
-ActiveOrder.propTypes = {
+ActiveOrderGuard.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-export default ActiveOrder;
+export default ActiveOrderGuard;

@@ -17,7 +17,7 @@ import HomeRoutes from './shared/components/Router/components/HomeRoutes/HomeRou
 import NotFoundPage from './shared/components/NotFoundPage/NotFoundPage';
 import RootSpinner from './components/RootSpinner/RootSpinner';
 import RootNotifications from './components/RootNotifications/RootNotifications';
-import ActiveOrder from './guards/ActiveOrder';
+import ActiveOrder from './guards/ActiveOrderGuard';
 import UploadPhotoGuard from './guards/UploadPhotoGuard';
 
 function App() {

@@ -4,7 +4,7 @@ import { USER_ROLES } from '../../../../../constants/user-roles.constants';
 import ClientHome from '../../../../../components/client/ClientHome/ClientHome';
 import DriverHome from '../../../../../components/driver/DriverHome/DriverHome';
 import AdminHome from '../../../../../components/admin/AdminHome/AdminHome';
-import ActiveOrder from '../../../../../guards/ActiveOrder';
+import ActiveOrderGuard from '../../../../../guards/ActiveOrderGuard';
 import UploadPhotoGuard from '../../../../../guards/UploadPhotoGuard';
 
 function HomeRoutes() {
@@ -14,9 +14,9 @@ function HomeRoutes() {
 
   if (role === USER_ROLES.CLIENT) {
     return (
-      <ActiveOrder>
+      <ActiveOrderGuard>
         <ClientHome />
-      </ActiveOrder>
+      </ActiveOrderGuard>
     );
   }
 

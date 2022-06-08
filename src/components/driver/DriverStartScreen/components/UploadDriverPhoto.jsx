@@ -33,9 +33,8 @@ function UploadDriverPhoto() {
 
   useEffect(() => {
     if (car?.photo) {
-      return navigate(PRIVATE_ROUTES.HOME);
+      navigate(PRIVATE_ROUTES.HOME);
     }
-    return () => false;
   }, [car?.photo, navigate]);
 
   useEffect(() => {
