@@ -17,7 +17,7 @@ import { PRIVATE_ROUTES } from '../../../constants/app.constants';
 import { ORDER_DELETE } from '../../../actions/orders/orders.action';
 
 import classes from './client-current-order.module.css';
-import CardDriver from './components/CardDriver/CardDriver';
+import CardDriver from './components/DriverCard/DriverCard';
 
 function ClientCurrentOrder() {
   const navigate = useNavigate();

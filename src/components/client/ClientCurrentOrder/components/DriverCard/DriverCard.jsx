@@ -7,15 +7,13 @@ import {
   BUTTON_SIZES
 } from '../../../../../shared/components/Button/button.constants';
 
-import classes from './card-driver.module.css';
+import classes from './driver-card.module.css';
 
-function CardDriver() {
+function DriverCard() {
   return (
     <Card>
       <div className={classes.card__container}>
-        <div className={classes.img}>
-          <span>img</span>
-        </div>
+        <div className={classes.img} />
         <h3 className={classes.card__title_car}>Car Title</h3>
         <h3 className={classes.card__title_user}>User Title</h3>
         <div className={classes.card__information}>
@@ -41,4 +39,4 @@ function CardDriver() {
   );
 }
 
-export default CardDriver;
+export default DriverCard;
