@@ -1,27 +1,7 @@
-import { useEffect, useState } from 'react';
-
-import { useSelector } from 'react-redux';
-
-import { USER_ROLES } from '../../constants/user-roles.constants';
-
-import Button from '../../shared/components/Button/Button';
-import {
-  BUTTON_COLORS,
-  BUTTON_SIZES,
-  BUTTON_TYPES,
-  BUTTON_VARIANTS
-} from '../../shared/components/Button/button.constants';
-
+import PropTypes from 'prop-types';
 import classes from './active-trip.module.css';
 
-function ActiveTrip() {
-  const [isDriver, setIsDriver] = useState(false);
-  const {
-    userData: { role }
-  } = useSelector((state) => state.user);
-  useEffect(() => {
-    setIsDriver(role === USER_ROLES.DRIVER);
-  }, [role]);
+function ActiveTrip({ bottomContent, bottomActions }) {
   return (
     <div className={classes.container}>
       <div className={classes.block__title}>
@@ -54,30 +34,25 @@ function ActiveTrip() {
                   <p className={classes.info__title}>Car:</p>
                   <p className={classes.info__text}>yellow Chevrolet Camaro 2020</p>
                 </div>
-                {isDriver || (
-                  <div className={classes.info__item}>
-                    <p className={classes.info__title}>Rating:</p>
-                    <p className={classes.info__text}>4.8</p>
-                  </div>
-                )}
+                {bottomContent}
               </div>
             </div>
           </div>
-          {isDriver || (
-            <Button
-              variant={BUTTON_VARIANTS.CONTAINED}
-              color={BUTTON_COLORS.SECONDARY}
-              type={BUTTON_TYPES.BUTTON}
-              size={BUTTON_SIZES.MEDIUM_LONG}
-              className={classes.treep__button}
-            >
-              Finish treep
-            </Button>
-          )}
+          {bottomActions}
         </div>
       </div>
     </div>
   );
 }
+
+ActiveTrip.propTypes = {
+  bottomContent: PropTypes.node,
+  bottomActions: PropTypes.node
+};
+
+ActiveTrip.defaultProps = {
+  bottomContent: null,
+  bottomActions: null
+};
 
 export default ActiveTrip;

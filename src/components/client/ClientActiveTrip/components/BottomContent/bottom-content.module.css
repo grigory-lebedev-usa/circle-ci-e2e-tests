@@ -1,0 +1,25 @@
+.info__item {
+  display: flex;
+  position: relative;
+  width: 660px;
+}
+
+.info__title {
+  margin: 0;
+  font-family: 'Rubik';
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 43px;
+  color: #fff;
+}
+
+.info__text {
+  margin: 0;
+  font-family: 'Rubik';
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 43px;
+  color: #fff;
+  position: absolute;
+  margin-left: 140px;
+}
