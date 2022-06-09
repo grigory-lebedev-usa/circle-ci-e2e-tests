@@ -18,6 +18,7 @@ import { USER_GET } from '../../../actions/user/user.actions';
 import { OFFERS_GET } from '../../../actions/offers/offers.action';
 
 import classes from './client-current-order.module.css';
+import CardDriver from './components/DriverCard/DriverCard';
 
 function ClientCurrentOrder() {
   const navigate = useNavigate();
@@ -49,13 +50,14 @@ function ClientCurrentOrder() {
         <div className={classes.line} />
         <p className={classes.description__text}>{`${source} - ${destination}`}</p>
       </div>
+      <CardDriver />
       <div className={classes.wrapper__message}>
         <p className={classes.message}>
           No drivers found at this time. Refresh the list to see driver‘s offers.
         </p>
       </div>
       <Button
-        size={BUTTON_SIZES.BIG}
+        size={BUTTON_SIZES.LARGE}
         color={BUTTON_COLORS.PRIMARY}
         onClick={handleCancelOrder}
         variant={BUTTON_VARIANTS.CONTAINED}

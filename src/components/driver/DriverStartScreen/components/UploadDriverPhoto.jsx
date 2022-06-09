@@ -86,7 +86,7 @@ function UploadDriverPhoto() {
               ref={fileInput}
             />
             <Button
-              size={BUTTON_SIZES.BIG}
+              size={BUTTON_SIZES.LARGE}
               variant={BUTTON_VARIANTS.CONTAINED}
               color={BUTTON_COLORS.SECONDARY}
               onClick={handleFileUpload}

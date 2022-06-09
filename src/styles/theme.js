@@ -200,7 +200,7 @@ const theme = createTheme({
             }
           }),
           ...(ownerState.variant === 'contained' &&
-            ownerState.size === 'big' && {
+            ownerState.size === 'large' && {
               fontSize: '36px',
               lineHeight: '44px',
               width: '280px',
@@ -221,9 +221,9 @@ const theme = createTheme({
               height: '55px'
             }),
           ...(ownerState.variant === 'contained' &&
-            ownerState.size === 'large' && {
-              fontSize: '36px',
-              lineHeight: '44px',
+            ownerState.size === 'extra_small' && {
+              fontSize: '30px',
+              lineHeight: '37px',
               width: '130px',
               height: '45px'
             })
