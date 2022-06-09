@@ -17,6 +17,8 @@ import HomeRoutes from './shared/components/Router/components/HomeRoutes/HomeRou
 import NotFoundPage from './shared/components/NotFoundPage/NotFoundPage';
 import RootSpinner from './components/RootSpinner/RootSpinner';
 import RootNotifications from './components/RootNotifications/RootNotifications';
+import ActiveOrderGuard from './guards/ActiveOrderGuard';
+import UploadPhotoGuard from './guards/UploadPhotoGuard';
 
 function App() {
   return (
@@ -37,7 +39,9 @@ function App() {
             path={PRIVATE_ROUTES.ORDER}
             element={
               <PrivateRoute roles={[USER_ROLES.CLIENT]}>
-                <ClientOrder />
+                <ActiveOrderGuard>
+                  <ClientOrder />
+                </ActiveOrderGuard>
               </PrivateRoute>
             }
           />
@@ -61,7 +65,9 @@ function App() {
             path={PRIVATE_ROUTES.DRIVER_ORDERS}
             element={
               <PrivateRoute roles={[USER_ROLES.DRIVER]}>
-                <DriverOrders />
+                <UploadPhotoGuard>
+                  <DriverOrders />
+                </UploadPhotoGuard>
               </PrivateRoute>
             }
           />

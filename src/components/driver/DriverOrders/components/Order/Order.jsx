@@ -73,7 +73,7 @@ function Order({ order, offer: { id } }) {
         isOpened={isOpenedConfirmation}
         onCancel={closeConfirmation}
         onConfirm={handleOfferDelete}
-        text="Are you sure you want to cancel your offer?"
+        text={`Are you sure you want to cancel ${order.source} - ${order.destination} offer?`}
       />
       <Modal isOpened={isOpenedModal} closeModal={closeModal} size={MODAL_SIZE.MEDIUM}>
         <div className={classes.modal__content}>
@@ -81,15 +81,15 @@ function Order({ order, offer: { id } }) {
             <h5 className={classes.modal__title}>Who:</h5>
             <p
               className={classes.modal__text}
-            >{`${order?.client?.firstName} ${order?.client?.lastName}`}</p>
+            >{`${order.client.firstName} ${order.client.lastName}`}</p>
           </div>
           <div className={classes.modal__item}>
             <h5 className={classes.modal__title}>From:</h5>
-            <p className={classes.modal__text}>{order?.source}</p>
+            <p className={classes.modal__text}>{order.source}</p>
           </div>
           <div className={classes.modal__item}>
             <h5 className={classes.modal__title}>To:</h5>
-            <p className={classes.modal__text}>{order?.destination}</p>
+            <p className={classes.modal__text}>{order.destination}</p>
           </div>
           <p className={classes.offer__text}>Please offer your price for order</p>
           <form className={classes.modal__form} onSubmit={handleSubmit(onSubmit)}>
@@ -98,7 +98,7 @@ function Order({ order, offer: { id } }) {
               name="price"
               placeholder="Price"
               control={control}
-              error={errors?.price}
+              error={errors.price}
               rules={OPTIONS_VALIDATE.PRICE}
             />
             <div className={classes.modal__actions}>
@@ -126,13 +126,11 @@ function Order({ order, offer: { id } }) {
         </div>
       </Modal>
       <h4 className={classes.order__title}>Who:</h4>
-      <p
-        className={classes.order__text}
-      >{`${order?.client?.firstName} ${order?.client?.lastName}`}</p>
+      <p className={classes.order__text}>{`${order.client.firstName} ${order.client.lastName}`}</p>
       <h4 className={classes.order__title}>From:</h4>
-      <p className={classes.order__text}>{order?.source}</p>
+      <p className={classes.order__text}>{order.source}</p>
       <h4 className={classes.order__title}>To:</h4>
-      <p className={classes.order__text}>{order?.destination}</p>
+      <p className={classes.order__text}>{order.destination}</p>
       <Button
         color={id ? BUTTON_COLORS.ERROR : BUTTON_COLORS.SUCCESS}
         size={BUTTON_SIZES.SMALL}
