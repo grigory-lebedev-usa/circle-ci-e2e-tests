@@ -1,6 +1,7 @@
 export const BUTTON_SIZES = {
   LARGE: 'large',
   MEDIUM: 'medium',
+  MEDIUM_LONG: 'medium-long',
   SMALL: 'small',
   EXTRA_SMALL: 'extra_small'
 };

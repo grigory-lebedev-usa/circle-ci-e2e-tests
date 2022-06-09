@@ -214,6 +214,13 @@ const theme = createTheme({
               height: '60px'
             }),
           ...(ownerState.variant === 'contained' &&
+            ownerState.size === 'medium-long' && {
+              fontSize: '39px',
+              lineHeight: '48px',
+              width: '300px',
+              height: '60px'
+            }),
+          ...(ownerState.variant === 'contained' &&
             ownerState.size === 'small' && {
               fontSize: '36px',
               lineHeight: '44px',
