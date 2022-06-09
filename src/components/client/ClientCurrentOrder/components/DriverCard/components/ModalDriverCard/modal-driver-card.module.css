@@ -1,0 +1,64 @@
+@import url(/src/styles/colors.css);
+
+.modal__content {
+  padding: 40px 60px;
+  display: flex;
+  align-items: center;
+}
+
+.img {
+  width: 465px;
+  height: 305px;
+  background-color: #aeaeae;
+  border-radius: 8px;
+}
+
+.block {
+  margin-top: 40px;
+}
+
+.info__block {
+  width: 100%;
+  margin-left: 75px;
+  text-align: center;
+}
+
+.block__title {
+  font-family: 'Rasa';
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 78px;
+  color: var(--primary-color);
+  margin-top: 0px;
+  margin-bottom: 30px;
+}
+
+.info__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.item__title {
+  font-family: 'Rasa';
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 58px;
+  color: #000;
+  margin: 0;
+}
+
+.item__text {
+  font-family: 'Rasa';
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 58px;
+  color: #000;
+  margin: 0;
+  margin-left: 200px;
+  position: absolute;
+}
+
+.block__button {
+  margin-top: 25px;
+}

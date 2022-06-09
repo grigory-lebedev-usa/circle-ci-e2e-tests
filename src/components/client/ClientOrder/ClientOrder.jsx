@@ -22,7 +22,8 @@ import { OPTIONS_VALIDATE } from '../../helpers/OPTIONS_VALIDATE';
 
 import { PRIVATE_ROUTES } from '../../../constants/app.constants';
 
-import { ORDER_CREATE } from '../../../actions/orders/orders.action';
+import { ORDER_CREATE } from '../../../actions/orders/orders.actions';
+import { USER_GET } from '../../../actions/user/user.actions';
 
 import classes from './client-order.module.css';
 import { defaultOrderValues } from './client-order.constants';
@@ -38,6 +39,7 @@ function ClientOrder() {
 
   const onSubmit = async (data) => {
     await dispatch(ORDER_CREATE(data));
+    await dispatch(USER_GET());
     navigate(PRIVATE_ROUTES.CURRENT_ORDER);
   };
 
@@ -71,7 +73,7 @@ function ClientOrder() {
           />
         </div>
         <Button
-          size={BUTTON_SIZES.BIG}
+          size={BUTTON_SIZES.LARGE}
           color={BUTTON_COLORS.PRIMARY}
           variant={BUTTON_VARIANTS.CONTAINED}
           type={BUTTON_TYPES.SUBMIT}

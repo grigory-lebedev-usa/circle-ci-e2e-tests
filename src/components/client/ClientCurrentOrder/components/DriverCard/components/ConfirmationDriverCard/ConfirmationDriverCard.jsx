@@ -1,21 +1,21 @@
 import PropTypes from 'prop-types';
 
-import ConfirmationPopUp from '../../../../../../shared/components/ConfirmationPopUp/ConfirmationPopUp';
+import ConfirmationPopUp from '../../../../../../../shared/components/ConfirmationPopUp/ConfirmationPopUp';
 
-function OrderConfirmation(props) {
+function ConfirmationDriverCard(props) {
   return <ConfirmationPopUp {...props} />;
 }
 
-OrderConfirmation.propTypes = {
+ConfirmationDriverCard.propTypes = {
   text: PropTypes.string.isRequired,
   isOpened: PropTypes.bool.isRequired,
   onCancel: PropTypes.func,
   onConfirm: PropTypes.func
 };
 
-OrderConfirmation.defaultProps = {
+ConfirmationDriverCard.defaultProps = {
   onCancel: () => {},
   onConfirm: () => {}
 };
 
-export default OrderConfirmation;
+export default ConfirmationDriverCard;

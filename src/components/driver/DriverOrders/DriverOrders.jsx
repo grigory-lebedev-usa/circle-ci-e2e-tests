@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { OFFERS_GET } from '../../../actions/offers/offers.action';
 
-import { ORDERS_GET } from '../../../actions/orders/orders.action';
+import { ORDERS_GET } from '../../../actions/orders/orders.actions';
 
 import Refresh from '../../../shared/components/Refresh/Refresh';
 

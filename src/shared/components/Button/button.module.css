@@ -16,12 +16,12 @@
   opacity: 0.9;
 }
 
-.button:active:not(:disabled)  {
+.button:active:not(:disabled) {
   transform: translateY(3px);
 }
 
 .button:disabled {
-  background: #AEAEAE !important;
+  background: #aeaeae !important;
   cursor: not-allowed;
   opacity: 1;
 }
@@ -49,6 +49,3 @@
   width: 130px;
   height: 45px;
 }
-
-
-

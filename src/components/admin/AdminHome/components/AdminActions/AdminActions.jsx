@@ -12,7 +12,7 @@ function AdminActions() {
   return (
     <div className={classes.block__buttons}>
       <Button
-        size={BUTTON_SIZES.BIG}
+        size={BUTTON_SIZES.LARGE}
         color={BUTTON_COLORS.PRIMARY}
         variant={BUTTON_VARIANTS.CONTAINED}
         type={BUTTON_TYPES.BUTTON}
@@ -21,7 +21,7 @@ function AdminActions() {
         Reports
       </Button>
       <Button
-        size={BUTTON_SIZES.BIG}
+        size={BUTTON_SIZES.LARGE}
         color={BUTTON_COLORS.PRIMARY}
         variant={BUTTON_VARIANTS.CONTAINED}
         type={BUTTON_TYPES.BUTTON}

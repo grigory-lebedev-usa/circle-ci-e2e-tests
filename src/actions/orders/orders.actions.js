@@ -10,6 +10,10 @@ const ORDERS_GET_SUCCESS = (orders) => {
   return { type: ORDERS_ACTION_TYPES.GET_SUCCESS, payload: orders };
 };
 
+export const ORDERS_RESET = {
+  type: ORDERS_ACTION_TYPES.RESET
+};
+
 export const ORDERS_GET = () => {
   return async (dispatch) => {
     try {

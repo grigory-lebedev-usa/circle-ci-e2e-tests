@@ -15,7 +15,7 @@ function ClientActions() {
     <div className={classes.block__buttons}>
       <Link to={PRIVATE_ROUTES.ORDER}>
         <Button
-          size={BUTTON_SIZES.BIG}
+          size={BUTTON_SIZES.LARGE}
           color={BUTTON_COLORS.PRIMARY}
           variant={BUTTON_VARIANTS.CONTAINED}
           className={classes.button}
@@ -24,7 +24,7 @@ function ClientActions() {
         </Button>
       </Link>
       <Button
-        size={BUTTON_SIZES.BIG}
+        size={BUTTON_SIZES.LARGE}
         color={BUTTON_COLORS.PRIMARY}
         variant={BUTTON_VARIANTS.CONTAINED}
       >

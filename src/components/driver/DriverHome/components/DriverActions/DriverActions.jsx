@@ -16,7 +16,7 @@ function DriverActions() {
     <div className={classes.block__buttons}>
       <Link to={PRIVATE_ROUTES.DRIVER_ORDERS}>
         <Button
-          size={BUTTON_SIZES.BIG}
+          size={BUTTON_SIZES.LARGE}
           color={BUTTON_COLORS.PRIMARY}
           variant={BUTTON_VARIANTS.CONTAINED}
           type={BUTTON_TYPES.BUTTON}
@@ -26,7 +26,7 @@ function DriverActions() {
         </Button>
       </Link>
       <Button
-        size={BUTTON_SIZES.BIG}
+        size={BUTTON_SIZES.LARGE}
         color={BUTTON_COLORS.PRIMARY}
         variant={BUTTON_VARIANTS.CONTAINED}
         type={BUTTON_TYPES.BUTTON}

@@ -13,7 +13,7 @@ import {
   BUTTON_VARIANTS
 } from '../../../../shared/components/Button/button.constants';
 
-import { USER_UPLOAD_PHOTO } from '../../../../actions/user/user.actions';
+import { USER_GET, USER_UPLOAD_PHOTO } from '../../../../actions/user/user.actions';
 
 import { inputType, src } from './upload-driver-photo.constants';
 
@@ -33,9 +33,8 @@ function UploadDriverPhoto() {
 
   useEffect(() => {
     if (car?.photo) {
-      return navigate(PRIVATE_ROUTES.HOME);
+      navigate(PRIVATE_ROUTES.HOME);
     }
-    return () => false;
   }, [car?.photo, navigate]);
 
   useEffect(() => {
@@ -58,6 +57,7 @@ function UploadDriverPhoto() {
 
   const handleFileSave = async () => {
     await dispatch(USER_UPLOAD_PHOTO({ file: selectedFile, id }));
+    await dispatch(USER_GET());
     navigate(PRIVATE_ROUTES.HOME);
   };
 
@@ -86,7 +86,7 @@ function UploadDriverPhoto() {
               ref={fileInput}
             />
             <Button
-              size={BUTTON_SIZES.BIG}
+              size={BUTTON_SIZES.LARGE}
               variant={BUTTON_VARIANTS.CONTAINED}
               color={BUTTON_COLORS.SECONDARY}
               onClick={handleFileUpload}
