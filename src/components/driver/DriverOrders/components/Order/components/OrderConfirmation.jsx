@@ -2,10 +2,8 @@ import PropTypes from 'prop-types';
 
 import ConfirmationPopUp from '../../../../../../shared/components/ConfirmationPopUp/ConfirmationPopUp';
 
-function OrderConfirmation({ onCancel, onConfirm, text, isOpened }) {
-  return (
-    <ConfirmationPopUp text={text} onCancel={onCancel} onConfirm={onConfirm} isOpened={isOpened} />
-  );
+function OrderConfirmation(props) {
+  return <ConfirmationPopUp {...props} />;
 }
 
 OrderConfirmation.propTypes = {

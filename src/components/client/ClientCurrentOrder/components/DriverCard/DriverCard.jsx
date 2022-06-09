@@ -11,6 +11,7 @@ import {
 
 import classes from './driver-card.module.css';
 import ModalDriverCard from './components/ModalDriverCard/ModalDriverCard';
+import RatingAndPrice from './components/RatingAndPrice/RatingAndPrice';
 
 function DriverCard() {
   const [isOpenedModal, setIsOpenedModal] = useState(false);
@@ -29,16 +30,7 @@ function DriverCard() {
         <div className={classes.img} />
         <h3 className={classes.card__title_car}>Car Title</h3>
         <h3 className={classes.card__title_user}>User Title</h3>
-        <div className={classes.card__block}>
-          <div className={classes.block__rating}>
-            <p className={classes.rating__text}>4.8</p>
-            <span>star</span>
-          </div>
-          <div className={classes.line} />
-          <div className={classes.block__price}>
-            <p className={classes.price__text}>$5.3</p>
-          </div>
-        </div>
+        <RatingAndPrice rating="4.8" price="5.3" />
         <Button
           color={BUTTON_COLORS.SUCCESS}
           variant={BUTTON_VARIANTS.CONTAINED}

@@ -15,6 +15,8 @@ import {
 
 import ConfirmationDriverCard from '../ConfirmationDriverCard/ConfirmationDriverCard';
 
+import RatingAndPrice from '../RatingAndPrice/RatingAndPrice';
+
 import classes from './modal-driver-card.module.css';
 
 function ModalDriverCard({ isOpened, closeModal }) {
@@ -38,16 +40,7 @@ function ModalDriverCard({ isOpened, closeModal }) {
         <div className={classes.modal__content}>
           <div>
             <div className={classes.img} />
-            <div className={classes.card__block}>
-              <div className={classes.block__rating}>
-                <p className={classes.rating__text}>4.8</p>
-                <span>star</span>
-              </div>
-              <div className={classes.line} />
-              <div className={classes.block__price}>
-                <p className={classes.price__text}>$5.3</p>
-              </div>
-            </div>
+            <RatingAndPrice rating="4.8" price="5.3" className={classes.block} />
           </div>
 
           <div className={classes.info__block}>

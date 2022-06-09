@@ -2,10 +2,8 @@ import PropTypes from 'prop-types';
 
 import ConfirmationPopUp from '../../../../../../../shared/components/ConfirmationPopUp/ConfirmationPopUp';
 
-function ConfirmationDriverCard({ isOpened, text, onCancel, onConfirm }) {
-  return (
-    <ConfirmationPopUp isOpened={isOpened} text={text} onCancel={onCancel} onConfirm={onConfirm} />
-  );
+function ConfirmationDriverCard(props) {
+  return <ConfirmationPopUp {...props} />;
 }
 
 ConfirmationDriverCard.propTypes = {
