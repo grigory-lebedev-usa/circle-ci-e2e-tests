@@ -1,6 +1,6 @@
-import classes from './bottom-content.module.css';
+import classes from './client-active-trip-bottom-content.module.css';
 
-function BottomContent() {
+function ClientActiveTripBottomContent() {
   return (
     <div className={classes.info__item}>
       <p className={classes.info__title}>Rating:</p>
@@ -9,4 +9,4 @@ function BottomContent() {
   );
 }
 
-export default BottomContent;
+export default ClientActiveTripBottomContent;

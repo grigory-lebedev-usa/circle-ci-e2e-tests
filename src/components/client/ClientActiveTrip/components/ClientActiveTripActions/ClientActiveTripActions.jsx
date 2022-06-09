@@ -6,9 +6,9 @@ import {
   BUTTON_VARIANTS
 } from '../../../../../shared/components/Button/button.constants';
 
-import classes from './bottom-actions.module.css';
+import classes from './client-active-trip-actions.module.css';
 
-function BottomActions() {
+function ClientActiveTripActions() {
   return (
     <Button
       variant={BUTTON_VARIANTS.CONTAINED}
@@ -22,4 +22,4 @@ function BottomActions() {
   );
 }
 
-export default BottomActions;
+export default ClientActiveTripActions;

@@ -2,11 +2,16 @@ import React from 'react';
 
 import ActiveTrip from '../../ActiveTrip/ActiveTrip';
 
-import BottomActions from './components/BottomActions/BottomActions';
-import BottomContent from './components/BottomContent/BottomContent';
+import ClientActiveTripActions from './components/ClientActiveTripActions/ClientActiveTripActions';
+import ClientActiveTripBottomContent from './components/ClientActiveTripBottomContent/ClientActiveTripBottomContent';
 
 function ClientActiveTrip() {
-  return <ActiveTrip bottomContent={<BottomContent />} bottomActions={<BottomActions />} />;
+  return (
+    <ActiveTrip
+      bottomContent={<ClientActiveTripBottomContent />}
+      bottomActions={<ClientActiveTripActions />}
+    />
+  );
 }
 
 export default ClientActiveTrip;
