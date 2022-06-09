@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import PropTypes from 'prop-types';
+
 import { Card } from '@mui/material';
 
 import Button from '../../../../../shared/components/Button/Button';
@@ -9,13 +11,15 @@ import {
   BUTTON_SIZES
 } from '../../../../../shared/components/Button/button.constants';
 
+import ConfirmationDriverCard from './components/ConfirmationDriverCard/ConfirmationDriverCard';
+
 import classes from './driver-card.module.css';
 import ModalDriverCard from './components/ModalDriverCard/ModalDriverCard';
 import RatingAndPrice from './components/RatingAndPrice/RatingAndPrice';
 
-function DriverCard() {
+function DriverCard({ offer }) {
   const [isOpenedModal, setIsOpenedModal] = useState(false);
-
+  const [isOpenedConfirmation, setIsOpenedConfirmation] = useState(false);
   const openModal = () => {
     setIsOpenedModal(true);
   };
@@ -23,20 +27,43 @@ function DriverCard() {
   const closeModal = () => {
     setIsOpenedModal(false);
   };
+
+  const openConfirmation = (e) => {
+    e.stopPropagation();
+    setIsOpenedConfirmation(true);
+  };
+
+  const closeConfirmation = () => {
+    setIsOpenedConfirmation(false);
+  };
   return (
     <Card>
-      <ModalDriverCard isOpened={isOpenedModal} closeModal={closeModal} />
-      <div className={classes.card__container}>
-        <div className={classes.img} />
-        <h3 className={classes.card__title_car}>Car Title</h3>
-        <h3 className={classes.card__title_user}>User Title</h3>
-        <RatingAndPrice rating="4.8" price="5.3" />
+      <ConfirmationDriverCard
+        isOpened={isOpenedConfirmation}
+        onCancel={closeConfirmation}
+        text={`Are you sure you want to accept the offer from ${offer.driver.firstName} ${offer.driver.lastName}?`}
+      />
+      <ModalDriverCard
+        isOpened={isOpenedModal}
+        closeModal={closeModal}
+        onClick={openConfirmation}
+        offer={offer}
+      />
+      <div className={classes.card__container} role="button" tabIndex="0" onClick={openModal}>
+        <img className={classes.img} src={offer.driver.car.photo} alt="Car" />
+        <h3 className={classes.card__title_car}>
+          {offer.driver.car.make} {offer.driver.car.model}
+        </h3>
+        <h3 className={classes.card__title_user}>
+          {offer.driver.firstName} {offer.driver.lastName}
+        </h3>
+        <RatingAndPrice rating={offer.rating || '-'} price={offer.price} />
         <Button
           color={BUTTON_COLORS.SUCCESS}
           variant={BUTTON_VARIANTS.CONTAINED}
           size={BUTTON_SIZES.EXTRA_SMALL}
           className={classes.block__button}
-          onClick={openModal}
+          onClick={openConfirmation}
         >
           Accept
         </Button>
@@ -44,5 +71,10 @@ function DriverCard() {
     </Card>
   );
 }
+
+DriverCard.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  offer: PropTypes.object.isRequired
+};
 
 export default DriverCard;

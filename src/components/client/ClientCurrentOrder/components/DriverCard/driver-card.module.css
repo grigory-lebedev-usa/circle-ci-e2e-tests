@@ -3,14 +3,15 @@
   text-align: center;
 }
 
+.card__container:hover {
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
 .img {
   width: 220px;
   height: 143px;
-  background-color: #aeaeae;
+  object-fit: cover;
   border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .card__title_car {
@@ -35,4 +36,5 @@
 
 .block__button {
   margin-top: 10px;
+  z-index: 20;
 }
