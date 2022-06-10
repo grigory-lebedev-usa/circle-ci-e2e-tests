@@ -6,5 +6,6 @@ export const API_ROUTES = {
   ORDER: 'order',
   USER: 'user',
   PHOTO: 'photo',
-  OFFER: 'offer'
+  OFFER: 'offer',
+  TRIP: 'trip'
 };

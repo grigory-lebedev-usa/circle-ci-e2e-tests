@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 
 import { Card } from '@mui/material';
@@ -11,6 +13,10 @@ import {
   BUTTON_SIZES
 } from '../../../../../shared/components/Button/button.constants';
 
+import { useTrip } from '../../../../../api/hooks/useTrip';
+
+import { PRIVATE_ROUTES } from '../../../../../constants/app.constants';
+
 import ConfirmationDriverCard from './components/ConfirmationDriverCard/ConfirmationDriverCard';
 
 import classes from './driver-card.module.css';
@@ -20,6 +26,9 @@ import RatingAndPrice from './components/RatingAndPrice/RatingAndPrice';
 function DriverCard({ offer }) {
   const [isOpenedModal, setIsOpenedModal] = useState(false);
   const [isOpenedConfirmation, setIsOpenedConfirmation] = useState(false);
+  const { createTrip } = useTrip();
+  const navigate = useNavigate();
+
   const openModal = () => {
     setIsOpenedModal(true);
   };
@@ -36,11 +45,17 @@ function DriverCard({ offer }) {
   const closeConfirmation = () => {
     setIsOpenedConfirmation(false);
   };
+
+  const handleSubmitOffer = (id) => {
+    createTrip({ offerId: id });
+    navigate(PRIVATE_ROUTES.TRIP);
+  };
   return (
     <Card>
       <ConfirmationDriverCard
         isOpened={isOpenedConfirmation}
         onCancel={closeConfirmation}
+        onConfirm={handleSubmitOffer(offer.id)}
         text={`Are you sure you want to accept the offer from ${offer.driver.firstName} ${offer.driver.lastName}?`}
       />
       <ModalDriverCard
