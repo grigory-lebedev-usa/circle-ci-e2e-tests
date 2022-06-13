@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { Navigate } from 'react-router-dom';
 
-import { useTrip } from '../../api/hooks/useTrip/useTrip';
+import { useTrips } from '../../api/hooks/useTrips/useTrips';
 
 import { PRIVATE_ROUTES, REQUEST_STATUS } from '../../constants/app.constants';
 
@@ -13,16 +13,16 @@ import ProgressSpinner from '../../shared/components/ProgressSpinner/ProgressSpi
 import classes from './active-trip.module.css';
 
 function ActiveTrip({ bottomContent, bottomActions }) {
-  const { getTrips, trip, status } = useTrip();
+  const { getActiveTrip, activeTrip, status } = useTrips();
 
   useEffect(() => {
-    getTrips(true);
-  }, [getTrips]);
+    getActiveTrip();
+  }, [getActiveTrip]);
 
   if (status === REQUEST_STATUS.LOADING) {
     return <ProgressSpinner isShow />;
   }
-  if (trip.active === false) {
+  if (activeTrip.active === false) {
     return <Navigate to={PRIVATE_ROUTES.HOME} />;
   }
 
@@ -35,32 +35,32 @@ function ActiveTrip({ bottomContent, bottomActions }) {
       <div className={classes.treep__wrapper}>
         <div className={classes.treep__container}>
           <div className={classes.treep__content}>
-            <img className={classes.car__img} src={trip.driver.car.photo} alt="Car" />
+            <img className={classes.car__img} src={activeTrip.driver.car.photo} alt="Car" />
             <div className={classes.block__info}>
               <div className={classes.info__item}>
                 <p className={classes.info__title}>From:</p>
-                <p className={classes.info__text}>{trip.source}</p>
+                <p className={classes.info__text}>{activeTrip.source}</p>
               </div>
               <div className={classes.info__item}>
                 <p className={classes.info__title}>To:</p>
-                <p className={classes.info__text}>{trip.destination}</p>
+                <p className={classes.info__text}>{activeTrip.destination}</p>
               </div>
               <div style={{ marginTop: '50px' }}>
                 <div className={classes.info__item}>
                   <p className={classes.info__title}>Price:</p>
-                  <p className={classes.info__text}>${trip.price}</p>
+                  <p className={classes.info__text}>${activeTrip.price}</p>
                 </div>
                 <div className={classes.info__item}>
                   <p className={classes.info__title}>Driver:</p>
                   <p className={classes.info__text}>
-                    {trip.driver.firstName} {trip.driver.lastName}
+                    {activeTrip.driver.firstName} {activeTrip.driver.lastName}
                   </p>
                 </div>
                 <div className={classes.info__item}>
                   <p className={classes.info__title}>Car:</p>
                   <p className={classes.info__text}>
-                    {trip.driver.car.color} {trip.driver.car.make} {trip.driver.car.model}{' '}
-                    {trip.driver.car.year}
+                    {activeTrip.driver.car.color} {activeTrip.driver.car.make}
+                    {activeTrip.driver.car.model} {activeTrip.driver.car.year}
                   </p>
                 </div>
                 {bottomContent}

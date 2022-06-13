@@ -8,57 +8,39 @@ import { API_ROUTES } from '../../../constants/api.constants';
 import { axiosService } from '../../../services/axios.service';
 import { NOTIFICATION_TYPES } from '../../../shared/components/Notifications/components/Notification/notification.constants';
 
-import { REQUEST_STATUS } from '../../../constants/app.constants';
-
 import { tripsReducer } from './trips.reducer';
 
-import {
-  TRIPS_GET,
-  TRIPS_REQUEST_FAILED,
-  TRIPS_REQUEST_START,
-  TRIPS_REQUEST_SUCCESS
-} from './trips.actions';
+import { TRIPS_GET, ACTIVE_TRIP_REQUEST_START } from './trips.actions';
+import { INITIAL_STATE } from './trips.constants';
 
-export function useTrip() {
+export function useTrips() {
   const dispatch = useDispatch();
-  const [{ trip, status }, dispatchTrips] = useReducer(tripsReducer, {
-    trip: {
-      active: false,
-      driver: {
-        firstName: '',
-        lastName: '',
-        car: {
-          photo: ''
-        }
-      }
-    },
-    status: REQUEST_STATUS.IDLE
-  });
+  const [{ activeTrip, status }, dispatchTrips] = useReducer(tripsReducer, INITIAL_STATE);
 
   const getTrips = useCallback(
     async (isActive = false) => {
       try {
-        dispatchTrips(TRIPS_REQUEST_START);
+        dispatchTrips(ACTIVE_TRIP_REQUEST_START);
         const { data: tripInfo } = await axiosService.get(API_ROUTES.TRIP, {
           params: {
             active: isActive
           }
         });
-        dispatchTrips(TRIPS_GET(tripInfo[0]));
-        dispatchTrips(TRIPS_REQUEST_SUCCESS);
+        dispatchTrips(TRIPS_GET(tripInfo));
       } catch (error) {
-        dispatchTrips(TRIPS_REQUEST_FAILED(error));
         dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
       }
     },
     [dispatch, dispatchTrips]
   );
 
+  const getActiveTrip = useCallback(() => {
+    getTrips(true);
+  }, [getTrips]);
+
   const createTrip = async (requestPayload) => {
     try {
-      dispatchTrips(TRIPS_REQUEST_START);
       await axiosService.post(API_ROUTES.TRIP, requestPayload);
-      dispatchTrips(TRIPS_REQUEST_SUCCESS);
       dispatch(
         NOTIFICATION_ADD(NOTIFICATION_TYPES.SUCCESS, 'Offer was accepted. Your trip is started')
       );
@@ -67,5 +49,5 @@ export function useTrip() {
     }
   };
 
-  return { getTrips, trip, status, createTrip };
+  return { getTrips, activeTrip, status, createTrip, getActiveTrip };
 }

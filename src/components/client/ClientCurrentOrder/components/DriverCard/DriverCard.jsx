@@ -13,7 +13,7 @@ import {
   BUTTON_SIZES
 } from '../../../../../shared/components/Button/button.constants';
 
-import { useTrip } from '../../../../../api/hooks/useTrip/useTrip';
+import { useTrips } from '../../../../../api/hooks/useTrips/useTrips';
 
 import { PRIVATE_ROUTES } from '../../../../../constants/app.constants';
 
@@ -26,7 +26,7 @@ import RatingAndPrice from './components/RatingAndPrice/RatingAndPrice';
 function DriverCard({ offer }) {
   const [isOpenedModal, setIsOpenedModal] = useState(false);
   const [isOpenedConfirmation, setIsOpenedConfirmation] = useState(false);
-  const { createTrip } = useTrip();
+  const { createTrip } = useTrips();
   const navigate = useNavigate();
 
   const openModal = () => {
