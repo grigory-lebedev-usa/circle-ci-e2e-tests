@@ -6,6 +6,7 @@ import DriverHome from '../../../../../components/driver/DriverHome/DriverHome';
 import AdminHome from '../../../../../components/admin/AdminHome/AdminHome';
 import ActiveOrderGuard from '../../../../../guards/ActiveOrderGuard';
 import UploadPhotoGuard from '../../../../../guards/UploadPhotoGuard';
+import ActiveTripGuard from '../../../../../guards/ActiveTripGuard';
 
 function HomeRoutes() {
   const {
@@ -15,7 +16,9 @@ function HomeRoutes() {
   if (role === USER_ROLES.CLIENT) {
     return (
       <ActiveOrderGuard>
-        <ClientHome />
+        <ActiveTripGuard>
+          <ClientHome />
+        </ActiveTripGuard>
       </ActiveOrderGuard>
     );
   }
@@ -23,7 +26,9 @@ function HomeRoutes() {
   if (role === USER_ROLES.DRIVER) {
     return (
       <UploadPhotoGuard>
-        <DriverHome />
+        <ActiveTripGuard>
+          <DriverHome />
+        </ActiveTripGuard>
       </UploadPhotoGuard>
     );
   }

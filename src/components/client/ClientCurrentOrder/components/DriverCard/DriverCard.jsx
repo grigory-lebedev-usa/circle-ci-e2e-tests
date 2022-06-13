@@ -13,7 +13,7 @@ import {
   BUTTON_SIZES
 } from '../../../../../shared/components/Button/button.constants';
 
-import { useTrip } from '../../../../../api/hooks/useTrip';
+import { useTrip } from '../../../../../api/hooks/useTrip/useTrip';
 
 import { PRIVATE_ROUTES } from '../../../../../constants/app.constants';
 
@@ -46,8 +46,8 @@ function DriverCard({ offer }) {
     setIsOpenedConfirmation(false);
   };
 
-  const handleSubmitOffer = (id) => {
-    createTrip({ offerId: id });
+  const handleSubmitOffer = async (id) => {
+    await createTrip({ offerId: id });
     navigate(PRIVATE_ROUTES.TRIP);
   };
   return (
@@ -55,7 +55,7 @@ function DriverCard({ offer }) {
       <ConfirmationDriverCard
         isOpened={isOpenedConfirmation}
         onCancel={closeConfirmation}
-        onConfirm={handleSubmitOffer(offer.id)}
+        onConfirm={() => handleSubmitOffer(offer.id)}
         text={`Are you sure you want to accept the offer from ${offer.driver.firstName} ${offer.driver.lastName}?`}
       />
       <ModalDriverCard
