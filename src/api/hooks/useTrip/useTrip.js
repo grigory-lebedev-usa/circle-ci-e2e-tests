@@ -23,6 +23,7 @@ export function useTrip() {
   const dispatch = useDispatch();
   const [{ trip, status }, dispatchTrips] = useReducer(tripsReducer, {
     trip: {
+      active: false,
       driver: {
         firstName: '',
         lastName: '',

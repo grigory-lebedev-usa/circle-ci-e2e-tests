@@ -47,6 +47,8 @@ function DriverCard({ offer }) {
   };
 
   const handleSubmitOffer = async (id) => {
+    closeModal();
+    closeConfirmation();
     await createTrip({ offerId: id });
     navigate(PRIVATE_ROUTES.TRIP);
   };

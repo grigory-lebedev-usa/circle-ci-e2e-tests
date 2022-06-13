@@ -2,9 +2,11 @@ import { useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 
+import { Navigate } from 'react-router-dom';
+
 import { useTrip } from '../../api/hooks/useTrip/useTrip';
 
-import { REQUEST_STATUS } from '../../constants/app.constants';
+import { PRIVATE_ROUTES, REQUEST_STATUS } from '../../constants/app.constants';
 
 import ProgressSpinner from '../../shared/components/ProgressSpinner/ProgressSpinner';
 
@@ -19,6 +21,9 @@ function ActiveTrip({ bottomContent, bottomActions }) {
 
   if (status === REQUEST_STATUS.LOADING) {
     return <ProgressSpinner isShow />;
+  }
+  if (trip.active === false) {
+    return <Navigate to={PRIVATE_ROUTES.HOME} />;
   }
 
   return (
