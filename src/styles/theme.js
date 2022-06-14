@@ -34,6 +34,19 @@ const theme = createTheme({
     }
   },
   components: {
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          marginTop: '75px',
+          zIndex: 100,
+          transition: `0.3s`,
+          cursor: 'pointer',
+          '&:hover': {
+            transform: 'scale(1.1)'
+          }
+        }
+      }
+    },
     MuiModal: {
       styleOverrides: {
         root: {

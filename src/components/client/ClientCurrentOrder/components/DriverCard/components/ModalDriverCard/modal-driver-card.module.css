@@ -9,7 +9,7 @@
 .img {
   width: 465px;
   height: 305px;
-  background-color: #aeaeae;
+  object-fit: cover;
   border-radius: 8px;
 }
 

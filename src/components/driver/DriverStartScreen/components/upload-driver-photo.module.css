@@ -35,6 +35,7 @@
 .photo {
   width: 536px;
   height: 371px;
+  background-position: center;
   background-image: url(/public/img/wrapper_car_img.png);
   background-size: cover;
 }
@@ -50,4 +51,3 @@
 .button {
   margin-top: 50px;
 }
-

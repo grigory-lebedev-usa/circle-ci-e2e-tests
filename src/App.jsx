@@ -20,6 +20,7 @@ import RootNotifications from './components/RootNotifications/RootNotifications'
 import ActiveTripRoutes from './shared/components/Router/components/ActiveTripRoutes/ActiveTripRoutes';
 import ActiveOrderGuard from './guards/ActiveOrderGuard';
 import UploadPhotoGuard from './guards/UploadPhotoGuard';
+import ActiveTripGuard from './guards/ActiveTripGuard';
 
 function App() {
   return (
@@ -41,7 +42,9 @@ function App() {
             element={
               <PrivateRoute roles={[USER_ROLES.CLIENT]}>
                 <ActiveOrderGuard>
-                  <ClientOrder />
+                  <ActiveTripGuard>
+                    <ClientOrder />
+                  </ActiveTripGuard>
                 </ActiveOrderGuard>
               </PrivateRoute>
             }
@@ -67,7 +70,9 @@ function App() {
             element={
               <PrivateRoute roles={[USER_ROLES.DRIVER]}>
                 <UploadPhotoGuard>
-                  <DriverOrders />
+                  <ActiveTripGuard>
+                    <DriverOrders />
+                  </ActiveTripGuard>
                 </UploadPhotoGuard>
               </PrivateRoute>
             }

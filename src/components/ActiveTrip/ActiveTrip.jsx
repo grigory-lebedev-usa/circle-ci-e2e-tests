@@ -1,8 +1,31 @@
+import { useEffect } from 'react';
+
 import PropTypes from 'prop-types';
+
+import { Navigate } from 'react-router-dom';
+
+import { useTrips } from '../../api/hooks/useTrips/useTrips';
+
+import { PRIVATE_ROUTES, REQUEST_STATUS } from '../../constants/app.constants';
+
+import ProgressSpinner from '../../shared/components/ProgressSpinner/ProgressSpinner';
 
 import classes from './active-trip.module.css';
 
 function ActiveTrip({ bottomContent, bottomActions }) {
+  const { getActiveTrip, activeTrip, status } = useTrips();
+
+  useEffect(() => {
+    getActiveTrip();
+  }, [getActiveTrip]);
+
+  if (status === REQUEST_STATUS.LOADING) {
+    return <ProgressSpinner isShow />;
+  }
+  if (activeTrip.active === false) {
+    return <Navigate to={PRIVATE_ROUTES.HOME} />;
+  }
+
   return (
     <div className={classes.container}>
       <div className={classes.block__title}>
@@ -12,28 +35,33 @@ function ActiveTrip({ bottomContent, bottomActions }) {
       <div className={classes.treep__wrapper}>
         <div className={classes.treep__container}>
           <div className={classes.treep__content}>
-            <div className={classes.car__img} />
+            <img className={classes.car__img} src={activeTrip.driver.car.photo} alt="Car" />
             <div className={classes.block__info}>
               <div className={classes.info__item}>
                 <p className={classes.info__title}>From:</p>
-                <p className={classes.info__text}>Chkalova</p>
+                <p className={classes.info__text}>{activeTrip.source}</p>
               </div>
               <div className={classes.info__item}>
                 <p className={classes.info__title}>To:</p>
-                <p className={classes.info__text}>Lenina</p>
+                <p className={classes.info__text}>{activeTrip.destination}</p>
               </div>
               <div style={{ marginTop: '50px' }}>
                 <div className={classes.info__item}>
                   <p className={classes.info__title}>Price:</p>
-                  <p className={classes.info__text}>$5.3</p>
+                  <p className={classes.info__text}>${activeTrip.price}</p>
                 </div>
                 <div className={classes.info__item}>
                   <p className={classes.info__title}>Driver:</p>
-                  <p className={classes.info__text}>Ivan Ivanov</p>
+                  <p className={classes.info__text}>
+                    {activeTrip.driver.firstName} {activeTrip.driver.lastName}
+                  </p>
                 </div>
                 <div className={classes.info__item}>
                   <p className={classes.info__title}>Car:</p>
-                  <p className={classes.info__text}>yellow Chevrolet Camaro 2020</p>
+                  <p className={classes.info__text}>
+                    {activeTrip.driver.car.color} {activeTrip.driver.car.make}
+                    {activeTrip.driver.car.model} {activeTrip.driver.car.year}
+                  </p>
                 </div>
                 {bottomContent}
               </div>

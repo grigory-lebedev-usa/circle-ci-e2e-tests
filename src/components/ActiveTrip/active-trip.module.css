@@ -46,7 +46,7 @@
 .car__img {
   width: 444px;
   height: 288px;
-  background-color: #aeaeae;
+  object-fit: cover;
   border-radius: 8px;
 }
 

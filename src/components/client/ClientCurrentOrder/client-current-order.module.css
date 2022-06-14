@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 75vh;
+  height: 80vh;
 }
 
 .block__description {
@@ -43,23 +43,6 @@
   color: #fff;
 }
 
-.wrapper__message {
-  width: 835px;
-  padding: 10px 32px 10px 32px;
-  background: var(--primary-color-rgba);
-  border-radius: 8px;
-  text-align: center;
-}
-
-.message {
-  margin: 0;
-  font-family: 'Rubik', sans-serif;
-  font-weight: 400;
-  font-size: 40px;
-  line-height: 47px;
-  color: #fff;
-}
-
 .block__button {
   position: fixed;
   bottom: 80px;
@@ -70,4 +53,12 @@
   position: fixed;
   right: 80px;
   bottom: 93px;
+}
+
+.card__driver__container {
+  width: 1000px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
