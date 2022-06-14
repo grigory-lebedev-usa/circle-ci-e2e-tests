@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import ConfirmationPopUp from '../../../../../../shared/components/ConfirmationPopUp/ConfirmationPopUp';
+import ConfirmationPopUp from '../../../../../../../shared/components/ConfirmationPopUp/ConfirmationPopUp';
 
 function OrderConfirmation(props) {
   return <ConfirmationPopUp {...props} />;
