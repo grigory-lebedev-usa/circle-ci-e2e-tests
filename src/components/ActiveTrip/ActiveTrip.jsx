@@ -16,7 +16,8 @@ function ActiveTrip({ bottomContent, bottomActions }) {
   if (status === REQUEST_STATUS.LOADING) {
     return <ProgressSpinner isShow />;
   }
-  if (activeTrip.active === false) {
+
+  if (Object.keys(activeTrip).length === 0) {
     return <Navigate to={PRIVATE_ROUTES.HOME} />;
   }
 
