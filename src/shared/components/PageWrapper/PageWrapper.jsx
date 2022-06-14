@@ -16,9 +16,7 @@ import classes from './page-wrapper.module.css';
 
 function PageWrapper({ children }) {
   const dispatch = useDispatch();
-  const {
-    userData: { isAuthenticated }
-  } = useSelector((state) => state.user);
+  const { isAuthenticated } = useSelector((state) => state.user);
   const { pathname } = useLocation();
   const isPrivatePage = !Object.values(PUBLIC_ROUTES).includes(pathname);
 
