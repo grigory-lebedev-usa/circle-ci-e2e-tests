@@ -9,17 +9,13 @@ import {
   BUTTON_VARIANTS
 } from '../../../../../shared/components/Button/button.constants';
 
-import { useOffers } from '../../../../../api/hooks/useOffers/useOffers';
-
 import classes from './order.module.css';
-import OrderConfirmation from './components/OrderConfirmation/OrderConfirmation';
-import OrderModal from './components/OrderModal/OrderModal';
+import OrderModal from './components/CreateOfferModal/CreateOfferModal';
+import CancelOrderModal from './components/CancelOrderModal/CancelOrderModal';
 
 function Order({ order, offer: { id }, getOffers }) {
-  const { deleteOffer } = useOffers();
   const [isOpenedModal, setIsOpenedModal] = useState(false);
   const [isOpenedConfirmation, setIsOpenedConfirmation] = useState(false);
-
   const closeModal = () => {
     setIsOpenedModal(false);
   };
@@ -36,19 +32,14 @@ function Order({ order, offer: { id }, getOffers }) {
     setIsOpenedConfirmation(false);
   };
 
-  const handleOfferDelete = async () => {
-    closeConfirmation();
-    await deleteOffer(id);
-    await getOffers();
-  };
-
   return (
     <div className={classes.driver__order}>
-      <OrderConfirmation
+      <CancelOrderModal
         isOpened={isOpenedConfirmation}
         onCancel={closeConfirmation}
-        onConfirm={handleOfferDelete}
-        text={`Are you sure you want to cancel ${order.source} - ${order.destination} offer?`}
+        order={order}
+        offerId={id}
+        getOffers={getOffers}
       />
       <OrderModal
         isOpened={isOpenedModal}

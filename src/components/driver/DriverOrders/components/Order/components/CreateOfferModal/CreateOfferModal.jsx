@@ -21,9 +21,9 @@ import {
 
 import { useOffers } from '../../../../../../../api/hooks/useOffers/useOffers';
 
-import classes from './order-modal.module.css';
+import classes from './create-offer-modal.module.css';
 
-function OrderModal({ isOpened, closeModal, order, getOffers }) {
+function CreateOfferModal({ isOpened, closeModal, order, getOffers }) {
   const { createOffer } = useOffers();
   const {
     handleSubmit,
@@ -94,7 +94,7 @@ function OrderModal({ isOpened, closeModal, order, getOffers }) {
   );
 }
 
-OrderModal.propTypes = {
+CreateOfferModal.propTypes = {
   isOpened: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
   getOffers: PropTypes.func.isRequired,
@@ -107,8 +107,8 @@ OrderModal.propTypes = {
   })
 };
 
-OrderModal.defaultProps = {
+CreateOfferModal.defaultProps = {
   order: {}
 };
 
-export default OrderModal;
+export default CreateOfferModal;

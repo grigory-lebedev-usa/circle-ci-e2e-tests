@@ -5,9 +5,9 @@ import Button from '../Button/Button';
 import { MODAL_SIZE } from '../Modal/modal.constants';
 import { BUTTON_COLORS, BUTTON_SIZES, BUTTON_VARIANTS } from '../Button/button.constants';
 
-import classes from './confirmation-pop-up.module.css';
+import classes from './confirmation-modal.module.css';
 
-function ConfirmationPopUp({ isOpened, text, onCancel, onConfirm }) {
+function ConfirmationModal({ isOpened, text, onCancel, onConfirm }) {
   return (
     <Modal isOpened={isOpened} size={MODAL_SIZE.LARGE} hasCloseIcon={false} closeModal={onCancel}>
       <div>
@@ -36,16 +36,16 @@ function ConfirmationPopUp({ isOpened, text, onCancel, onConfirm }) {
   );
 }
 
-ConfirmationPopUp.propTypes = {
+ConfirmationModal.propTypes = {
   text: PropTypes.string.isRequired,
   isOpened: PropTypes.bool.isRequired,
   onCancel: PropTypes.func,
   onConfirm: PropTypes.func
 };
 
-ConfirmationPopUp.defaultProps = {
+ConfirmationModal.defaultProps = {
   onCancel: () => {},
   onConfirm: () => {}
 };
 
-export default ConfirmationPopUp;
+export default ConfirmationModal;
