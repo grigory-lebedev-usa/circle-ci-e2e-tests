@@ -1,0 +1,6 @@
+export const ORDERS_ACTION_TYPES = {
+  GET_SUCCESS: 'orders/get-success',
+  RESET: 'orders/reset',
+  REQUEST_START: 'orders/request-start',
+  REQUEST_FAILED: 'orders/request-failed'
+};

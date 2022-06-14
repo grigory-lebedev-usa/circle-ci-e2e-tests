@@ -3,28 +3,31 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { OFFERS_GET } from '../../../actions/offers/offers.action';
-
-import { ORDERS_GET } from '../../../actions/orders/orders.actions';
-
+import { useOrders } from '../../../api/hooks/useOrders/useOrders';
+import { REQUEST_STATUS } from '../../../constants/app.constants';
+import ProgressSpinner from '../../../shared/components/ProgressSpinner/ProgressSpinner';
 import Refresh from '../../../shared/components/Refresh/Refresh';
 
 import Order from './components/Order/Order';
-
 import classes from './driver-orders.module.css';
 
 function DriverOrders() {
+  const { getOrders, orders, status } = useOrders();
   const dispatch = useDispatch();
-  const orders = useSelector((state) => state.orders);
   const offers = useSelector((state) => state.offers);
 
   useEffect(() => {
     dispatch(OFFERS_GET());
-    dispatch(ORDERS_GET());
-  }, [dispatch]);
+    getOrders();
+  }, [dispatch, getOrders]);
+
+  if (status === REQUEST_STATUS.LOADING) {
+    return <ProgressSpinner isShow />;
+  }
 
   const handleRefresh = () => {
     dispatch(OFFERS_GET());
-    dispatch(ORDERS_GET());
+    getOrders();
   };
 
   return (
