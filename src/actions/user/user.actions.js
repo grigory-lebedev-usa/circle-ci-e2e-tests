@@ -4,9 +4,9 @@ import { axiosService } from '../../services/axios.service';
 import LocalStorageService from '../../services/LocalStorageService';
 import { NOTIFICATION_TYPES } from '../../shared/components/Notifications/components/Notification/notification.constants';
 import { NOTIFICATION_ADD } from '../notification/notification.actions';
-import { OFFERS_RESET } from '../offers/offers.action';
 import { ORDERS_RESET } from '../orders/orders.actions';
 import { SPINNER_HIDE, SPINNER_SHOW } from '../spinner/spinner.actions';
+import { TRIPS_RESET } from '../trips/trips.actions';
 
 import { USER_ACTION_TYPES } from './user.action-types';
 
@@ -131,8 +131,8 @@ export const USER_UPLOAD_PHOTO = ({ file, id }) => {
 export const USER_LOGOUT = () => {
   return async (dispatch) => {
     dispatch(LOGOUT);
+    dispatch(TRIPS_RESET);
     dispatch(ORDERS_RESET);
-    dispatch(OFFERS_RESET);
     LocalStorageService.clear();
   };
 };

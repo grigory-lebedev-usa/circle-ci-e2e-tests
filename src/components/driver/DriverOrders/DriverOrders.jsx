@@ -2,9 +2,8 @@ import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { OFFERS_GET } from '../../../actions/offers/offers.action';
-
 import { ORDERS_GET } from '../../../actions/orders/orders.actions';
+import { useOffers } from '../../../api/hooks/useOffers/useOffers';
 
 import Refresh from '../../../shared/components/Refresh/Refresh';
 
@@ -13,17 +12,17 @@ import Order from './components/Order/Order';
 import classes from './driver-orders.module.css';
 
 function DriverOrders() {
+  const { offers, getOffers } = useOffers();
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders);
-  const offers = useSelector((state) => state.offers);
 
   useEffect(() => {
-    dispatch(OFFERS_GET());
+    getOffers();
     dispatch(ORDERS_GET());
-  }, [dispatch]);
+  }, [dispatch, getOffers]);
 
   const handleRefresh = () => {
-    dispatch(OFFERS_GET());
+    getOffers();
     dispatch(ORDERS_GET());
   };
 

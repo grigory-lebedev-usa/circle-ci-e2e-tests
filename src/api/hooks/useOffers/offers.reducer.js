@@ -1,18 +1,17 @@
 import { REQUEST_STATUS } from '../../../constants/app.constants';
 
-import { TRIPS_ACTION_TYPES } from './trips.action-types';
+import { OFFERS_ACTION_TYPES } from './offers.action-types';
 
-export function tripsReducer(state, action) {
+export function offersReducer(state, action) {
   switch (action.type) {
-    case TRIPS_ACTION_TYPES.GET_SUCCESS: {
+    case OFFERS_ACTION_TYPES.GET_SUCCESS: {
       return {
         ...state,
-        activeTrip: { ...action.payload[0] },
-        inactiveTrips: { ...action.payload },
+        offers: action.payload,
         status: REQUEST_STATUS.SUCCESS
       };
     }
-    case TRIPS_ACTION_TYPES.REQUEST_START: {
+    case OFFERS_ACTION_TYPES.REQUEST_START: {
       return { ...state, status: REQUEST_STATUS.LOADING };
     }
     default:

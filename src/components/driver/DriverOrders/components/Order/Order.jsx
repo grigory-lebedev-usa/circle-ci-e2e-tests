@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 
 import { useForm } from 'react-hook-form';
 
-import { useDispatch } from 'react-redux';
-
 import Button from '../../../../../shared/components/Button/Button';
 import {
   BUTTON_COLORS,
@@ -20,15 +18,16 @@ import FormInput from '../../../../../shared/components/form-elements/FormInput/
 import { INPUT_TYPES } from '../../../../../shared/components/form-elements/FormInput/form-input.constants';
 
 import { OPTIONS_VALIDATE } from '../../../../helpers/OPTIONS_VALIDATE';
-import { OFFER_CREATE, OFFER_DELETE } from '../../../../../actions/offers/offers.action';
 
 import { MODAL_SIZE } from '../../../../../shared/components/Modal/modal.constants';
+
+import { useOffers } from '../../../../../api/hooks/useOffers/useOffers';
 
 import classes from './order.module.css';
 import OrderConfirmation from './components/OrderConfirmation';
 
 function Order({ order, offer: { id } }) {
-  const dispatch = useDispatch();
+  const { createOffer, deleteOffer } = useOffers();
   const [isOpenedModal, setIsOpenedModal] = useState(false);
   const [isOpenedConfirmation, setIsOpenedConfirmation] = useState(false);
 
@@ -58,13 +57,13 @@ function Order({ order, offer: { id } }) {
 
   const onSubmit = async () => {
     closeModal();
-    await dispatch(OFFER_CREATE({ orderId: order.id, price: watch('price') }));
+    await createOffer({ orderId: order.id, price: watch('price') });
     reset({ price: '' });
   };
 
   const handleOfferDelete = async () => {
     closeConfirmation();
-    await dispatch(OFFER_DELETE(id));
+    await deleteOffer(id);
   };
 
   return (

@@ -4,14 +4,14 @@ import { userReducer } from './user.reducer';
 import { spinnerReducer } from './spinner.reducer';
 import { notificationsReducer } from './notifications.reducer';
 import { ordersReducer } from './orders.reducer';
-import { offersReducer } from './offers.reducer';
+import { tripsReducer } from './trips.reducer';
 
 const rootReducer = combineReducers({
   notifications: notificationsReducer,
   spinner: spinnerReducer,
   user: userReducer,
   orders: ordersReducer,
-  offers: offersReducer
+  trips: tripsReducer
 });
 
 export default rootReducer;

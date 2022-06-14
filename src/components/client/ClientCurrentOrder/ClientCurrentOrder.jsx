@@ -15,7 +15,7 @@ import { PRIVATE_ROUTES } from '../../../constants/app.constants';
 import { ORDERS_GET, ORDER_DELETE } from '../../../actions/orders/orders.actions';
 import { USER_GET } from '../../../actions/user/user.actions';
 
-import { OFFERS_GET } from '../../../actions/offers/offers.action';
+import { useOffers } from '../../../api/hooks/useOffers/useOffers';
 
 import classes from './client-current-order.module.css';
 import NotFoundDriver from './components/NotFoundDrivers/NotFoundDriver';
@@ -24,22 +24,22 @@ import ConfirmationCancelOrder from './components/ConfirmationCancelOrder/Confir
 
 function ClientCurrentOrder() {
   const [isOpenedConfirmation, setIsOpenedConfirmation] = useState(false);
+  const { offers, getOffers } = useOffers();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {
     userData: { currentOrder }
   } = useSelector((state) => state.user);
   const { source, destination, id } = useSelector((state) => state.orders);
-  const offers = useSelector((state) => state.offers);
 
   useEffect(() => {
     if (!currentOrder) {
       navigate(PRIVATE_ROUTES.HOME);
     } else {
       dispatch(ORDERS_GET());
-      dispatch(OFFERS_GET(currentOrder));
+      getOffers(currentOrder);
     }
-  }, [currentOrder, dispatch, navigate]);
+  }, [currentOrder, dispatch, getOffers, navigate]);
 
   const openConfirmation = () => {
     setIsOpenedConfirmation(true);
