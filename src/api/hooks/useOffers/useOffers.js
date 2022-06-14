@@ -38,7 +38,6 @@ export function useOffers() {
     try {
       dispatchOffers(OFFERS_REQUEST_START);
       await axiosService.post(API_ROUTES.OFFER, requestPayload);
-      await getOffers();
       dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.SUCCESS, 'Your offer was successfully sent'));
     } catch (error) {
       dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
@@ -49,7 +48,6 @@ export function useOffers() {
     try {
       dispatchOffers(OFFERS_REQUEST_START);
       await axiosService.delete(`${API_ROUTES.OFFER}/${id}`);
-      await getOffers();
       dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.SUCCESS, 'Your offer was cancel'));
     } catch (error) {
       dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
