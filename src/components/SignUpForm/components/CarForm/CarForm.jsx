@@ -52,7 +52,7 @@ function CarForm({ control, errors }) {
 
 CarForm.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  control: PropTypes.object.isRequired,
+  control: PropTypes.objectOf(PropTypes.func).isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   errors: PropTypes.object.isRequired
 };

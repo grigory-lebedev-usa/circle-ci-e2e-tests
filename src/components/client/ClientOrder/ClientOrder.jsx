@@ -19,16 +19,17 @@ import {
 } from '../../../shared/components/Button/button.constants';
 
 import { OPTIONS_VALIDATE } from '../../helpers/OPTIONS_VALIDATE';
-
-import { PRIVATE_ROUTES } from '../../../constants/app.constants';
-
-import { ORDER_CREATE } from '../../../actions/orders/orders.actions';
+import { PRIVATE_ROUTES, REQUEST_STATUS } from '../../../constants/app.constants';
 import { USER_GET } from '../../../actions/user/user.actions';
+import { useOrders } from '../../../api/hooks/useOrders/useOrders';
+
+import ProgressSpinner from '../../../shared/components/ProgressSpinner/ProgressSpinner';
 
 import classes from './client-order.module.css';
 import { defaultOrderValues } from './client-order.constants';
 
 function ClientOrder() {
+  const { createOrder, status } = useOrders();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -37,8 +38,12 @@ function ClientOrder() {
     formState: { errors, isValid }
   } = useForm({ defaultValues: defaultOrderValues, mode: 'onTouched' });
 
+  if (status === REQUEST_STATUS.LOADING) {
+    return <ProgressSpinner isShow />;
+  }
+
   const onSubmit = async (data) => {
-    await dispatch(ORDER_CREATE(data));
+    await createOrder(data);
     await dispatch(USER_GET());
     navigate(PRIVATE_ROUTES.CURRENT_ORDER);
   };

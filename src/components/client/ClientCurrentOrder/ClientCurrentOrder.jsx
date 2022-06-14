@@ -11,11 +11,14 @@ import {
   BUTTON_SIZES,
   BUTTON_VARIANTS
 } from '../../../shared/components/Button/button.constants';
-import { PRIVATE_ROUTES } from '../../../constants/app.constants';
-import { ORDERS_GET, ORDER_DELETE } from '../../../actions/orders/orders.actions';
+import { PRIVATE_ROUTES, REQUEST_STATUS } from '../../../constants/app.constants';
 import { USER_GET } from '../../../actions/user/user.actions';
 
 import { useOffers } from '../../../api/hooks/useOffers/useOffers';
+
+import { useOrders } from '../../../api/hooks/useOrders/useOrders';
+
+import ProgressSpinner from '../../../shared/components/ProgressSpinner/ProgressSpinner';
 
 import classes from './client-current-order.module.css';
 import NotFoundDriver from './components/NotFoundDrivers/NotFoundDriver';
@@ -25,21 +28,30 @@ import ConfirmationCancelOrder from './components/ConfirmationCancelOrder/Confir
 function ClientCurrentOrder() {
   const [isOpenedConfirmation, setIsOpenedConfirmation] = useState(false);
   const { offers, getOffers } = useOffers();
+  const {
+    orders: { source, destination, id },
+    status,
+    getOrders,
+    deleteOrder
+  } = useOrders();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {
     userData: { currentOrder }
   } = useSelector((state) => state.user);
-  const { source, destination, id } = useSelector((state) => state.orders);
 
   useEffect(() => {
     if (!currentOrder) {
       navigate(PRIVATE_ROUTES.HOME);
     } else {
-      dispatch(ORDERS_GET());
+      getOrders();
       getOffers(currentOrder);
     }
-  }, [currentOrder, dispatch, getOffers, navigate]);
+  }, [currentOrder, getOffers, getOrders, navigate]);
+
+  if (status === REQUEST_STATUS.LOADING) {
+    return <ProgressSpinner isShow />;
+  }
 
   const openConfirmation = () => {
     setIsOpenedConfirmation(true);
@@ -51,7 +63,7 @@ function ClientCurrentOrder() {
 
   const handleCancelOrder = async () => {
     closeConfirmation();
-    await dispatch(ORDER_DELETE(id));
+    await deleteOrder(id);
     await dispatch(USER_GET());
     navigate(PRIVATE_ROUTES.HOME);
   };

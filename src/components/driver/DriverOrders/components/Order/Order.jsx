@@ -26,7 +26,7 @@ import { useOffers } from '../../../../../api/hooks/useOffers/useOffers';
 import classes from './order.module.css';
 import OrderConfirmation from './components/OrderConfirmation';
 
-function Order({ order, offer: { id } }) {
+function Order({ order, offer: { id }, getOffers }) {
   const { createOffer, deleteOffer } = useOffers();
   const [isOpenedModal, setIsOpenedModal] = useState(false);
   const [isOpenedConfirmation, setIsOpenedConfirmation] = useState(false);
@@ -58,12 +58,14 @@ function Order({ order, offer: { id } }) {
   const onSubmit = async () => {
     closeModal();
     await createOffer({ orderId: order.id, price: watch('price') });
+    await getOffers();
     reset({ price: '' });
   };
 
   const handleOfferDelete = async () => {
     closeConfirmation();
     await deleteOffer(id);
+    await getOffers();
   };
 
   return (
@@ -155,7 +157,8 @@ Order.propTypes = {
     client: PropTypes.objectOf(PropTypes.string),
     createdAt: PropTypes.number,
     id: PropTypes.string
-  })
+  }),
+  getOffers: PropTypes.func.isRequired
 };
 
 Order.defaultProps = {
