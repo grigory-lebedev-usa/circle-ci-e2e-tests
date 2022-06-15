@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 
-import ConfirmationPopUp from '../../../../../../../shared/components/ConfirmationPopUp/ConfirmationPopUp';
+import ConfirmationModal from '../../../../../../../shared/components/ConfirmationModal/ConfirmationModal';
 
 function ConfirmationDriverCard(props) {
-  return <ConfirmationPopUp {...props} />;
+  return <ConfirmationModal {...props} />;
 }
 
 ConfirmationDriverCard.propTypes = {

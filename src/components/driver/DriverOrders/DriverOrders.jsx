@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
-
-import { OFFERS_GET } from '../../../actions/offers/offers.action';
+import { useOffers } from '../../../api/hooks/useOffers/useOffers';
 import { useOrders } from '../../../api/hooks/useOrders/useOrders';
 import { REQUEST_STATUS } from '../../../constants/app.constants';
 import ProgressSpinner from '../../../shared/components/ProgressSpinner/ProgressSpinner';
@@ -12,23 +10,25 @@ import Order from './components/Order/Order';
 import classes from './driver-orders.module.css';
 
 function DriverOrders() {
-  const { getOrders, orders, status } = useOrders();
-  const dispatch = useDispatch();
-  const offers = useSelector((state) => state.offers);
+  const { getOffers, offers, status: offerRequestStatus } = useOffers();
+  const { getOrders, orders, status: orderRequestStatus } = useOrders();
 
   useEffect(() => {
-    dispatch(OFFERS_GET());
+    getOffers();
     getOrders();
-  }, [dispatch, getOrders]);
-
-  if (status === REQUEST_STATUS.LOADING) {
-    return <ProgressSpinner isShow />;
-  }
+  }, [getOffers, getOrders]);
 
   const handleRefresh = () => {
-    dispatch(OFFERS_GET());
+    getOffers();
     getOrders();
   };
+
+  if (
+    orderRequestStatus === REQUEST_STATUS.LOADING ||
+    offerRequestStatus === REQUEST_STATUS.LOADING
+  ) {
+    return <ProgressSpinner isShow />;
+  }
 
   return (
     <div className={classes.container}>
@@ -41,6 +41,7 @@ function DriverOrders() {
           <Order
             key={order?.id}
             order={order}
+            getOffers={getOffers}
             offer={offers.find(({ orderId }) => orderId === order.id)}
           />
         ))}

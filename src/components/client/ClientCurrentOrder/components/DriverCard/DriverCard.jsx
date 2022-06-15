@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 
 import { Card } from '@mui/material';
 
+import { useDispatch } from 'react-redux';
+
 import Button from '../../../../../shared/components/Button/Button';
 import {
   BUTTON_VARIANTS,
@@ -13,9 +15,9 @@ import {
   BUTTON_SIZES
 } from '../../../../../shared/components/Button/button.constants';
 
-import { useTrips } from '../../../../../api/hooks/useTrips/useTrips';
-
 import { PRIVATE_ROUTES } from '../../../../../constants/app.constants';
+
+import { TRIP_CREATE } from '../../../../../actions/trips/trips.actions';
 
 import ConfirmationDriverCard from './components/ConfirmationDriverCard/ConfirmationDriverCard';
 
@@ -24,9 +26,9 @@ import ModalDriverCard from './components/ModalDriverCard/ModalDriverCard';
 import RatingAndPrice from './components/RatingAndPrice/RatingAndPrice';
 
 function DriverCard({ offer }) {
+  const dispatch = useDispatch();
   const [isOpenedModal, setIsOpenedModal] = useState(false);
   const [isOpenedConfirmation, setIsOpenedConfirmation] = useState(false);
-  const { createTrip } = useTrips();
   const navigate = useNavigate();
 
   const openModal = () => {
@@ -49,7 +51,7 @@ function DriverCard({ offer }) {
   const handleSubmitOffer = async (id) => {
     closeModal();
     closeConfirmation();
-    await createTrip({ offerId: id });
+    await dispatch(TRIP_CREATE({ offerId: id }));
     navigate(PRIVATE_ROUTES.TRIP);
   };
   return (

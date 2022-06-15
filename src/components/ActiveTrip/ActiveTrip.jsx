@@ -1,10 +1,8 @@
-import { useEffect } from 'react';
-
 import PropTypes from 'prop-types';
 
 import { Navigate } from 'react-router-dom';
 
-import { useTrips } from '../../api/hooks/useTrips/useTrips';
+import { useSelector } from 'react-redux';
 
 import { PRIVATE_ROUTES, REQUEST_STATUS } from '../../constants/app.constants';
 
@@ -13,16 +11,13 @@ import ProgressSpinner from '../../shared/components/ProgressSpinner/ProgressSpi
 import classes from './active-trip.module.css';
 
 function ActiveTrip({ bottomContent, bottomActions }) {
-  const { getActiveTrip, activeTrip, status } = useTrips();
-
-  useEffect(() => {
-    getActiveTrip();
-  }, [getActiveTrip]);
+  const { activeTrip, status } = useSelector((state) => state.trips);
 
   if (status === REQUEST_STATUS.LOADING) {
     return <ProgressSpinner isShow />;
   }
-  if (activeTrip.active === false) {
+
+  if (Object.keys(activeTrip).length === 0) {
     return <Navigate to={PRIVATE_ROUTES.HOME} />;
   }
 

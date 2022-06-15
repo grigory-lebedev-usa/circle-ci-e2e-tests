@@ -1,9 +1,9 @@
-import { useTrips } from '../../../../../api/hooks/useTrips/useTrips';
+import { useSelector } from 'react-redux';
 
 import classes from './client-active-trip-bottom-content.module.css';
 
 function ClientActiveTripBottomContent() {
-  const { activeTrip } = useTrips();
+  const { activeTrip } = useSelector((state) => state.trips);
   return (
     <div className={classes.info__item}>
       <p className={classes.info__title}>Rating:</p>

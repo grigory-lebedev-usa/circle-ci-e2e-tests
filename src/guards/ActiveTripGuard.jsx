@@ -1,23 +1,13 @@
-import { useEffect } from 'react';
-
 import PropTypes from 'prop-types';
-
-import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { useTrips } from '../api/hooks/useTrips/useTrips';
+import { Navigate } from 'react-router-dom';
+
 import { PRIVATE_ROUTES, REQUEST_STATUS } from '../constants/app.constants';
 import ProgressSpinner from '../shared/components/ProgressSpinner/ProgressSpinner';
 
 function ActiveTripGuard({ children }) {
-  const { isAuthenticated } = useSelector((state) => state.user);
-  const { getActiveTrip, activeTrip, status } = useTrips();
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      getActiveTrip();
-    }
-  }, [getActiveTrip, isAuthenticated]);
+  const { activeTrip, status } = useSelector((state) => state.trips);
 
   if (status === REQUEST_STATUS.LOADING) {
     return <ProgressSpinner isShow />;

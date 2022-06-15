@@ -14,7 +14,7 @@ import {
 import { PRIVATE_ROUTES, REQUEST_STATUS } from '../../../constants/app.constants';
 import { USER_GET } from '../../../actions/user/user.actions';
 
-import { OFFERS_GET } from '../../../actions/offers/offers.action';
+import { useOffers } from '../../../api/hooks/useOffers/useOffers';
 
 import { useOrders } from '../../../api/hooks/useOrders/useOrders';
 
@@ -27,6 +27,7 @@ import ConfirmationCancelOrder from './components/ConfirmationCancelOrder/Confir
 
 function ClientCurrentOrder() {
   const [isOpenedConfirmation, setIsOpenedConfirmation] = useState(false);
+  const { offers, getOffers } = useOffers();
   const {
     orders: { source, destination, id },
     status,
@@ -38,16 +39,15 @@ function ClientCurrentOrder() {
   const {
     userData: { currentOrder }
   } = useSelector((state) => state.user);
-  const offers = useSelector((state) => state.offers);
 
   useEffect(() => {
     if (!currentOrder) {
       navigate(PRIVATE_ROUTES.HOME);
     } else {
       getOrders();
-      dispatch(OFFERS_GET(currentOrder));
+      getOffers(currentOrder);
     }
-  }, [currentOrder, dispatch, getOrders, navigate]);
+  }, [currentOrder, getOffers, getOrders, navigate]);
 
   if (status === REQUEST_STATUS.LOADING) {
     return <ProgressSpinner isShow />;
