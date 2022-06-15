@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { useLocation } from 'react-router-dom';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Header from '../../../components/Header/Header';
 
@@ -18,15 +18,16 @@ import classes from './page-wrapper.module.css';
 
 function PageWrapper({ children }) {
   const dispatch = useDispatch();
+  const { isAuthenticated } = useSelector((state) => state.user);
   const { pathname } = useLocation();
   const isPrivatePage = !Object.values(PUBLIC_ROUTES).includes(pathname);
 
   useEffect(() => {
-    if (isPrivatePage) {
+    if (isPrivatePage && isAuthenticated) {
       dispatch(USER_GET());
       dispatch(ACTIVE_TRIP_GET());
     }
-  }, [dispatch, isPrivatePage]);
+  }, [dispatch, isAuthenticated, isPrivatePage]);
 
   return (
     <div className={classes.wrapper}>
