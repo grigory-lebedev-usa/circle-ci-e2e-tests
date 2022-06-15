@@ -4,6 +4,10 @@ import { Rating } from '@mui/material';
 import PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';
 
+import { useDispatch, useSelector } from 'react-redux';
+
+import { useNavigate } from 'react-router-dom';
+
 import Button from '../../../../../shared/components/Button/Button';
 import {
   BUTTON_COLORS,
@@ -18,22 +22,47 @@ import Textarea from '../../../../../shared/components/Textarea/Textarea';
 
 import { OPTIONS_VALIDATE } from '../../../../helpers/OPTIONS_VALIDATE';
 
+import { USER_TRIP_FINISHED } from '../../../../../actions/user/user.actions';
+
+import { useReports } from '../../../../../api/hooks/useReports/useReports';
+
+import { TRIP_DELETE } from '../../../../../actions/trips/trips.actions';
+
+import { PRIVATE_ROUTES, REQUEST_STATUS } from '../../../../../constants/app.constants';
+
+import ProgressSpinner from '../../../../../shared/components/ProgressSpinner/ProgressSpinner';
+
 import classes from './rate-driver-modal.module.css';
 
 function RateDriverModal({ isOpened, closeModal }) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { createReport } = useReports();
+  const { activeTrip, status } = useSelector((state) => state.trips);
+  const userId = activeTrip.client.id;
+  const driverId = activeTrip.driver.id;
+  const tripId = activeTrip.id;
   const [isOpenedDriverReport, setIsOpenedDriverReport] = useState(false);
   const {
     handleSubmit,
     control,
     formState: { isValid }
-  } = useForm({ defaultValues: { rating: 0, report: '' }, mode: 'onTouched' });
+  } = useForm({ defaultValues: { rating: null, report: '' }, mode: 'onTouched' });
 
   const showDriverReport = () => {
     setIsOpenedDriverReport(true);
   };
 
-  // TODO: test submit (It place for request to server)
-  const onSubmit = () => {};
+  const onSubmit = async ({ rating, report }) => {
+    await dispatch(USER_TRIP_FINISHED(userId, Number(rating), tripId));
+    await createReport(report, tripId, driverId);
+    await dispatch(TRIP_DELETE(tripId));
+    navigate(PRIVATE_ROUTES.HOME);
+  };
+
+  if (status === REQUEST_STATUS.LOADING) {
+    return <ProgressSpinner isShow />;
+  }
 
   return (
     <Modal isOpened={isOpened} closeModal={closeModal}>

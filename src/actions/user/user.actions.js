@@ -134,3 +134,14 @@ export const USER_LOGOUT = () => {
     LocalStorageService.clear();
   };
 };
+
+export const USER_TRIP_FINISHED = (userId, rating, tripId) => {
+  return async (dispatch) => {
+    try {
+      dispatch(USER_REQUEST_START);
+      await axiosService.patch(`${API_ROUTES.USER}/${userId}`, { rating, tripId });
+    } finally {
+      dispatch(SPINNER_HIDE);
+    }
+  };
+};
