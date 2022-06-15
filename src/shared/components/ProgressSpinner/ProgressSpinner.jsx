@@ -5,7 +5,7 @@ import { Backdrop, CircularProgress } from '@mui/material';
 function ProgressSpinner({ isShow }) {
   return (
     <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} open={isShow}>
-      <CircularProgress color="inherit" size={200} />
+      <CircularProgress color="primary" size={200} />
     </Backdrop>
   );
 }

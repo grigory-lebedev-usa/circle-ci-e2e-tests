@@ -55,5 +55,8 @@ export const OPTIONS_VALIDATE = {
   },
   PRICE: {
     required: 'Price is required'
+  },
+  RATING: {
+    required: true
   }
 };

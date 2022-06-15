@@ -13,7 +13,7 @@ import classes from './order.module.css';
 import OrderModal from './components/CreateOfferModal/CreateOfferModal';
 import CancelOrderModal from './components/CancelOrderModal/CancelOrderModal';
 
-function Order({ order, offer: { id }, getOffers }) {
+function Order({ order, offer: { id = '' }, getOffers }) {
   const [isOpenedModal, setIsOpenedModal] = useState(false);
   const [isOpenedConfirmation, setIsOpenedConfirmation] = useState(false);
   const closeModal = () => {

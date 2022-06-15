@@ -17,7 +17,7 @@ import {
 
 import { PRIVATE_ROUTES } from '../../../../../constants/app.constants';
 
-import { TRIP_CREATE } from '../../../../../actions/trips/trips.actions';
+import { ACTIVE_TRIP_GET, TRIP_CREATE } from '../../../../../actions/trips/trips.actions';
 
 import ConfirmationDriverCard from './components/ConfirmationDriverCard/ConfirmationDriverCard';
 
@@ -52,6 +52,7 @@ function DriverCard({ offer }) {
     closeModal();
     closeConfirmation();
     await dispatch(TRIP_CREATE({ offerId: id }));
+    await dispatch(ACTIVE_TRIP_GET());
     navigate(PRIVATE_ROUTES.TRIP);
   };
   return (
