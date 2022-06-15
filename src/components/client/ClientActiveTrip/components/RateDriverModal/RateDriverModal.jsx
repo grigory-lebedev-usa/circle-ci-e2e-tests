@@ -26,16 +26,14 @@ function RateDriverModal({ isOpened, closeModal }) {
     handleSubmit,
     control,
     formState: { isValid }
-  } = useForm({ defaultValues: { rating: null, report: '' }, mode: 'onTouched' });
+  } = useForm({ defaultValues: { rating: 0, report: '' }, mode: 'onTouched' });
 
   const showDriverReport = () => {
     setIsOpenedDriverReport(true);
   };
 
   // TODO: test submit (It place for request to server)
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+  const onSubmit = () => {};
 
   return (
     <Modal isOpened={isOpened} closeModal={closeModal}>
@@ -61,7 +59,6 @@ function RateDriverModal({ isOpened, closeModal }) {
               className={classes.rate__driver__textarea}
             />
           )}
-
           <div className={classes.rate__driver__actions}>
             {isOpenedDriverReport || (
               <Button
