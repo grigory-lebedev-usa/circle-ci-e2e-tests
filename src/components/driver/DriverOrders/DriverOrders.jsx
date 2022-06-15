@@ -12,7 +12,6 @@ import classes from './driver-orders.module.css';
 function DriverOrders() {
   const { getOffers, offers, status: offerRequestStatus } = useOffers();
   const { getOrders, orders, status: orderRequestStatus } = useOrders();
-
   useEffect(() => {
     getOffers();
     getOrders();
@@ -24,7 +23,7 @@ function DriverOrders() {
   };
 
   if (
-    orderRequestStatus === REQUEST_STATUS.LOADING ||
+    orderRequestStatus === REQUEST_STATUS.LOADING &&
     offerRequestStatus === REQUEST_STATUS.LOADING
   ) {
     return <ProgressSpinner isShow />;
@@ -39,7 +38,7 @@ function DriverOrders() {
       <div className={classes.driver__orders}>
         {orders.map((order) => (
           <Order
-            key={order?.id}
+            key={order.id}
             order={order}
             getOffers={getOffers}
             offer={offers.find(({ orderId }) => orderId === order.id)}

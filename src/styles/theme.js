@@ -34,6 +34,16 @@ const theme = createTheme({
     }
   },
   components: {
+    MuiRating: {
+      styleOverrides: {
+        iconFilled: {
+          color: '#FFBC73'
+        },
+        sizeLarge: {
+          fontSize: '80px'
+        }
+      }
+    },
     MuiCard: {
       styleOverrides: {
         root: {
@@ -87,11 +97,6 @@ const theme = createTheme({
             color: COLORS.FORM
           }
         }
-      }
-    },
-    MuiSvgIcon: {
-      styleOverrides: {
-        root: { width: '33px', height: '33px' }
       }
     },
     MuiFormControl: {

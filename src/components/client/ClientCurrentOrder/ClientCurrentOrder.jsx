@@ -27,10 +27,10 @@ import ConfirmationCancelOrder from './components/ConfirmationCancelOrder/Confir
 
 function ClientCurrentOrder() {
   const [isOpenedConfirmation, setIsOpenedConfirmation] = useState(false);
-  const { offers, getOffers } = useOffers();
+  const { offers, getOffers, status: offerRequestStatus } = useOffers();
   const {
     orders: { source, destination, id },
-    status,
+    status: orderRequestStatus,
     getOrders,
     deleteOrder
   } = useOrders();
@@ -49,7 +49,10 @@ function ClientCurrentOrder() {
     }
   }, [currentOrder, getOffers, getOrders, navigate]);
 
-  if (status === REQUEST_STATUS.LOADING) {
+  if (
+    offerRequestStatus === REQUEST_STATUS.LOADING &&
+    orderRequestStatus === REQUEST_STATUS.LOADING
+  ) {
     return <ProgressSpinner isShow />;
   }
 
@@ -66,6 +69,11 @@ function ClientCurrentOrder() {
     await deleteOrder(id);
     await dispatch(USER_GET());
     navigate(PRIVATE_ROUTES.HOME);
+  };
+
+  const handleRefresh = () => {
+    getOrders();
+    getOffers(currentOrder);
   };
 
   return (
@@ -96,7 +104,7 @@ function ClientCurrentOrder() {
       >
         Cancel order
       </Button>
-      <Refresh className={classes.refresh} />
+      <Refresh className={classes.refresh} onClick={handleRefresh} />
     </div>
   );
 }

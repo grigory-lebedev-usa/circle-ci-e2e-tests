@@ -70,25 +70,24 @@ function FormInput({ name, rules, type, className, error, placeholder, control }
 }
 
 FormInput.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  control: PropTypes.object,
-  // eslint-disable-next-line react/forbid-prop-types
-  rules: PropTypes.object,
+  name: PropTypes.string.isRequired,
   type: PropTypes.oneOf(Object.values(INPUT_TYPES)).isRequired,
   placeholder: PropTypes.string,
   className: PropTypes.string,
-  name: PropTypes.string,
   // eslint-disable-next-line react/forbid-prop-types
-  error: PropTypes.object
+  error: PropTypes.object,
+  // eslint-disable-next-line react/forbid-prop-types
+  control: PropTypes.object,
+  // eslint-disable-next-line react/forbid-prop-types
+  rules: PropTypes.object
 };
 
 FormInput.defaultProps = {
   control: {},
   rules: {},
+  error: null,
   placeholder: '',
-  className: '',
-  name: '',
-  error: null
+  className: ''
 };
 
 export default FormInput;
