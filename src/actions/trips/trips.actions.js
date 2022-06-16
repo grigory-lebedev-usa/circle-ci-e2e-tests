@@ -51,3 +51,14 @@ export const TRIP_CREATE = (requestPayload) => {
     }
   };
 };
+
+export const TRIP_DELETE = (tripId) => {
+  return async (dispatch) => {
+    try {
+      await axiosService.patch(`${API_ROUTES.TRIP}/${tripId}`);
+      dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.SUCCESS, 'Your treep was finished'));
+    } catch (error) {
+      dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
+    }
+  };
+};

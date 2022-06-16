@@ -7,5 +7,6 @@ export const API_ROUTES = {
   USER: 'user',
   PHOTO: 'photo',
   OFFER: 'offer',
-  TRIP: 'trip'
+  TRIP: 'trip',
+  REPORT: 'report'
 };
