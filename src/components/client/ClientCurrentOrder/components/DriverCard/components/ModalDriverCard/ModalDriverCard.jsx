@@ -22,7 +22,7 @@ function ModalDriverCard({ isOpened, closeModal, onClick, offer }) {
         <div>
           <img className={classes.img} src={offer.driver.car.photo} alt="Car" />
           <RatingAndPrice
-            rating={offer.rating || '-'}
+            rating={offer.driver.rating}
             price={offer.price}
             className={classes.block}
           />

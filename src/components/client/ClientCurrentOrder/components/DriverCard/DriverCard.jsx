@@ -55,6 +55,7 @@ function DriverCard({ offer }) {
     await dispatch(ACTIVE_TRIP_GET());
     navigate(PRIVATE_ROUTES.TRIP);
   };
+
   return (
     <Card>
       <ConfirmationDriverCard
@@ -77,7 +78,7 @@ function DriverCard({ offer }) {
         <h3 className={classes.card__title_user}>
           {offer.driver.firstName} {offer.driver.lastName}
         </h3>
-        <RatingAndPrice rating={offer.rating || '-'} price={offer.price} />
+        <RatingAndPrice rating={offer.driver.rating} price={offer.price} />
         <Button
           color={BUTTON_COLORS.SUCCESS}
           variant={BUTTON_VARIANTS.CONTAINED}

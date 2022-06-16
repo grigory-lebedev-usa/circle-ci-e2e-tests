@@ -22,11 +22,11 @@ import Textarea from '../../../../../shared/components/Textarea/Textarea';
 
 import { OPTIONS_VALIDATE } from '../../../../helpers/OPTIONS_VALIDATE';
 
-import { USER_TRIP_FINISHED } from '../../../../../actions/user/user.actions';
+import { USER_GET, USER_TRIP_FINISHED } from '../../../../../actions/user/user.actions';
 
 import { useReports } from '../../../../../api/hooks/useReports/useReports';
 
-import { TRIP_DELETE } from '../../../../../actions/trips/trips.actions';
+import { ACTIVE_TRIP_GET, TRIP_DELETE } from '../../../../../actions/trips/trips.actions';
 
 import { PRIVATE_ROUTES, REQUEST_STATUS } from '../../../../../constants/app.constants';
 
@@ -39,7 +39,6 @@ function RateDriverModal({ isOpened, closeModal }) {
   const dispatch = useDispatch();
   const { createReport } = useReports();
   const { activeTrip, status } = useSelector((state) => state.trips);
-  const userId = activeTrip.client.id;
   const driverId = activeTrip.driver.id;
   const tripId = activeTrip.id;
   const [isOpenedDriverReport, setIsOpenedDriverReport] = useState(false);
@@ -54,9 +53,19 @@ function RateDriverModal({ isOpened, closeModal }) {
   };
 
   const onSubmit = async ({ rating, report }) => {
-    await dispatch(USER_TRIP_FINISHED(userId, Number(rating), tripId));
-    await createReport(report, tripId, driverId);
-    await dispatch(TRIP_DELETE(tripId));
+    const requests = [
+      dispatch(USER_TRIP_FINISHED(driverId, Number(rating * 2), tripId)),
+      dispatch(TRIP_DELETE(tripId)),
+      dispatch(USER_GET()),
+      dispatch(ACTIVE_TRIP_GET())
+    ];
+
+    if (report) {
+      requests.push(createReport(report, tripId, driverId));
+    }
+
+    await Promise.all(requests);
+
     navigate(PRIVATE_ROUTES.HOME);
   };
 
