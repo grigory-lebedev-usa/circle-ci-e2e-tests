@@ -55,9 +55,7 @@ function RateDriverModal({ isOpened, closeModal }) {
   const onSubmit = async ({ rating, report }) => {
     const requests = [
       dispatch(USER_TRIP_FINISHED(driverId, Number(rating * 2), tripId)),
-      dispatch(TRIP_DELETE(tripId)),
-      dispatch(USER_GET()),
-      dispatch(ACTIVE_TRIP_GET())
+      dispatch(TRIP_DELETE(tripId))
     ];
 
     if (report) {
@@ -65,6 +63,7 @@ function RateDriverModal({ isOpened, closeModal }) {
     }
 
     await Promise.all(requests);
+    await Promise.all([dispatch(USER_GET()), dispatch(ACTIVE_TRIP_GET())]);
 
     navigate(PRIVATE_ROUTES.HOME);
   };
