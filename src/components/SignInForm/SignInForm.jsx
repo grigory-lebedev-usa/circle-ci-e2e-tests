@@ -21,6 +21,8 @@ import {
 
 import { USER_LOGIN } from '../../actions/user/user.actions';
 
+import LocalStorageService from '../../services/LocalStorageService';
+
 import { defaultLoginValues } from './sign-in-form.constants';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 
@@ -28,6 +30,7 @@ import classes from './sign-in-form.module.css';
 
 function SignInForm() {
   const [isOpenedForgotPassword, setIsOpenedForgotPassword] = useState(false);
+  const [isLoggedInChecked, setIsLoggedInChecked] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -35,6 +38,10 @@ function SignInForm() {
     control,
     formState: { errors, isValid }
   } = useForm({ defaultValues: defaultLoginValues, mode: 'onTouched' });
+
+  const handleCheckboxChange = (e) => {
+    setIsLoggedInChecked(e.target.checked);
+  };
 
   const showForgotPassword = () => {
     setIsOpenedForgotPassword(true);
@@ -46,6 +53,9 @@ function SignInForm() {
 
   const onSubmit = async ({ email, password }) => {
     await dispatch(USER_LOGIN({ email: email.toLowerCase(), password }));
+    if (isLoggedInChecked) {
+      LocalStorageService.loggedIn = isLoggedInChecked;
+    }
     navigate(PRIVATE_ROUTES.HOME);
   };
 
@@ -78,6 +88,8 @@ function SignInForm() {
               <FormCheckbox
                 id="checkbox"
                 label="Keep me logged in"
+                checked={isLoggedInChecked}
+                onChange={handleCheckboxChange}
                 className={classes.form__checkbox}
               />
               <Button

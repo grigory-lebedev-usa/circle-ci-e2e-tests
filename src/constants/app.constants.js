@@ -19,6 +19,7 @@ export const STORAGE_KEYS = {
 
 export const USER_VALUES = {
   isAuthenticated: false,
+  loggedIn: false,
   accessToken: '',
   refreshToken: '',
   expirationTime: ''

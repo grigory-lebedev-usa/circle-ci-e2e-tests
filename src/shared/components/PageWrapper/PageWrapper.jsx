@@ -10,9 +10,16 @@ import Header from '../../../components/Header/Header';
 
 import { PUBLIC_ROUTES } from '../../../constants/app.constants';
 
-import { USER_GET } from '../../../actions/user/user.actions';
+import {
+  USER_AUTO_LOGOUT,
+  // USER_AUTO_LOGOUT,
+  USER_AUTO_REFRESH_TOKEN,
+  USER_GET
+} from '../../../actions/user/user.actions';
 
 import { ACTIVE_TRIP_GET } from '../../../actions/trips/trips.actions';
+
+import LocalStorageService from '../../../services/LocalStorageService';
 
 import classes from './page-wrapper.module.css';
 
@@ -20,7 +27,14 @@ function PageWrapper({ children }) {
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state) => state.user);
   const { pathname } = useLocation();
+  const { loggedIn, expirationTime, refreshToken } = LocalStorageService;
   const isPrivatePage = !Object.values(PUBLIC_ROUTES).includes(pathname);
+
+  useEffect(() => {
+    if (loggedIn) {
+      dispatch(USER_AUTO_REFRESH_TOKEN(refreshToken, expirationTime));
+    } else dispatch(USER_AUTO_LOGOUT(expirationTime));
+  }, [dispatch, expirationTime, loggedIn, refreshToken]);
 
   useEffect(() => {
     if (isPrivatePage && isAuthenticated) {
