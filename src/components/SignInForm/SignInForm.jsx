@@ -21,6 +21,10 @@ import {
 
 import { USER_LOGIN } from '../../actions/user/user.actions';
 
+import { NOTIFICATION_ADD } from '../../actions/notification/notification.actions';
+
+import { NOTIFICATION_TYPES } from '../../shared/components/Notifications/components/Notification/notification.constants';
+
 import { defaultLoginValues } from './sign-in-form.constants';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 
@@ -45,8 +49,12 @@ function SignInForm() {
   };
 
   const onSubmit = async ({ email, password }) => {
-    await dispatch(USER_LOGIN({ email: email.toLowerCase(), password }));
-    navigate(PRIVATE_ROUTES.HOME);
+    try {
+      await dispatch(USER_LOGIN({ email: email.toLowerCase(), password }));
+      navigate(PRIVATE_ROUTES.HOME);
+    } catch (error) {
+      dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
+    }
   };
 
   return (

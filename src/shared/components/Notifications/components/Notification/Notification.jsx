@@ -23,6 +23,7 @@ function Notification({ notification, onDelete }) {
 
   const handleClose = (id) => {
     setIsClickedClose(true);
+
     setTimeout(() => {
       clearTimeout(timeoutIdRef.current);
       onDelete(id);

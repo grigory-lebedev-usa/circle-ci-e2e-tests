@@ -81,7 +81,7 @@ export const USER_LOGIN = (requestPayload) => {
       dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.SUCCESS, 'You have successfully logged in'));
     } catch (error) {
       dispatch(USER_REQUEST_FAILED(error));
-      dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
+      throw error;
     } finally {
       dispatch(SPINNER_HIDE);
     }
