@@ -59,13 +59,13 @@ export default class LocalStorageService {
     localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user));
   }
 
-  static get loggedIn() {
-    return this.user.loggedIn;
+  static get isLoggedIn() {
+    return this.user.isLoggedIn;
   }
 
-  static set loggedIn(loggedIn) {
+  static set isLoggedIn(isLoggedIn) {
     const { user } = this;
-    user.loggedIn = loggedIn;
+    user.isLoggedIn = isLoggedIn;
     localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user));
   }
 

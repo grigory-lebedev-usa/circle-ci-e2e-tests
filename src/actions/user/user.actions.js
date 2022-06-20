@@ -81,7 +81,7 @@ export const USER_LOGIN = (requestPayload) => {
       dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.SUCCESS, 'You have successfully logged in'));
     } catch (error) {
       dispatch(USER_REQUEST_FAILED(error));
-      dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
+      throw error;
     } finally {
       dispatch(SPINNER_HIDE);
     }
@@ -146,7 +146,7 @@ export const USER_TRIP_FINISHED = (userId, rating, tripId) => {
   };
 };
 
-const USER_REFRESH_TOKEN = (token) => {
+export const USER_REFRESH_TOKEN = (token) => {
   return async (dispatch) => {
     try {
       const {
@@ -159,21 +159,5 @@ const USER_REFRESH_TOKEN = (token) => {
       dispatch(USER_REQUEST_FAILED(error));
       dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
     }
-  };
-};
-
-export const USER_AUTO_REFRESH_TOKEN = (refreshToken, expirationTime) => {
-  return async (dispatch) => {
-    setTimeout(() => {
-      dispatch(USER_REFRESH_TOKEN(refreshToken));
-    }, expirationTime - 120000);
-  };
-};
-
-export const USER_AUTO_LOGOUT = (expirationTime) => {
-  return async (dispatch) => {
-    setTimeout(() => {
-      dispatch(USER_LOGOUT());
-    }, expirationTime - 120000);
   };
 };

@@ -7,17 +7,10 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Header from '../../../components/Header/Header';
-
 import { PUBLIC_ROUTES } from '../../../constants/app.constants';
-
-import {
-  USER_AUTO_LOGOUT,
-  // USER_AUTO_LOGOUT,
-  USER_AUTO_REFRESH_TOKEN,
-  USER_GET
-} from '../../../actions/user/user.actions';
-
 import { ACTIVE_TRIP_GET } from '../../../actions/trips/trips.actions';
+
+import { USER_GET, USER_LOGOUT, USER_REFRESH_TOKEN } from '../../../actions/user/user.actions';
 
 import LocalStorageService from '../../../services/LocalStorageService';
 
@@ -27,14 +20,11 @@ function PageWrapper({ children }) {
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state) => state.user);
   const { pathname } = useLocation();
-  const { loggedIn, expirationTime, refreshToken } = LocalStorageService;
   const isPrivatePage = !Object.values(PUBLIC_ROUTES).includes(pathname);
-
-  useEffect(() => {
-    if (loggedIn) {
-      dispatch(USER_AUTO_REFRESH_TOKEN(refreshToken, expirationTime));
-    } else dispatch(USER_AUTO_LOGOUT(expirationTime));
-  }, [dispatch, expirationTime, loggedIn, refreshToken]);
+  const { isLoggedIn, refreshToken, expirationTime } = LocalStorageService;
+  const twoMinutes = 1000 * 60 * 2;
+  const date = new Date(expirationTime) - Date.now();
+  const isExpiredToken = date < twoMinutes;
 
   useEffect(() => {
     if (isPrivatePage && isAuthenticated) {
@@ -42,6 +32,14 @@ function PageWrapper({ children }) {
       dispatch(ACTIVE_TRIP_GET());
     }
   }, [dispatch, isAuthenticated, isPrivatePage]);
+
+  useEffect(() => {
+    if (isLoggedIn && isExpiredToken) {
+      dispatch(USER_REFRESH_TOKEN(refreshToken));
+    } else if (isExpiredToken) {
+      dispatch(USER_LOGOUT());
+    }
+  }, [dispatch, expirationTime, isExpiredToken, isLoggedIn, refreshToken]);
 
   return (
     <div className={classes.wrapper}>

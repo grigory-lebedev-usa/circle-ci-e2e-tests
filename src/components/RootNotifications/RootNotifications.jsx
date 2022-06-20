@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -10,9 +10,12 @@ function RootNotifications() {
   const notifications = useSelector((state) => state.notifications);
   const dispatch = useDispatch();
 
-  const notificationDelete = (id) => {
-    dispatch(NOTIFICATION_DELETE(id));
-  };
+  const notificationDelete = useCallback(
+    (id) => {
+      dispatch(NOTIFICATION_DELETE(id));
+    },
+    [dispatch]
+  );
 
   return <Notifications notifications={notifications} onDelete={notificationDelete} />;
 }
