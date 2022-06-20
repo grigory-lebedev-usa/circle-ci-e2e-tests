@@ -1,7 +1,8 @@
 export const PUBLIC_ROUTES = {
   REGISTER: '/register',
   LOGIN: '/login',
-  NOT_FOUND_PAGE: '/not-found-page'
+  NOT_FOUND_PAGE: '/not-found-page',
+  ORDERS_HISTORY: '/orders-history'
 };
 
 export const PRIVATE_ROUTES = {
