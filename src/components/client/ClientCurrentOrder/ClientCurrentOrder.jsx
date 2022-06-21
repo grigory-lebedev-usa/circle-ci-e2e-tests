@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -20,13 +20,20 @@ import { useOrders } from '../../../api/hooks/useOrders/useOrders';
 
 import ProgressSpinner from '../../../shared/components/ProgressSpinner/ProgressSpinner';
 
+import CancelOrderConfirmationModal from '../../../shared/components/ConfirmationModal/ConfirmationModal';
+
+import { useModal } from '../../../shared/hooks/useModal';
+
 import classes from './client-current-order.module.css';
 import NotFoundDriver from './components/NotFoundDrivers/NotFoundDriver';
 import DriverCard from './components/DriverCard/DriverCard';
-import ConfirmationCancelOrder from './components/ConfirmationCancelOrder/ConfirmationCancelOrder';
 
 function ClientCurrentOrder() {
-  const [isOpenedConfirmation, setIsOpenedConfirmation] = useState(false);
+  const {
+    isModalOpened: isConfirmationModalOpened,
+    openModal: openConfirmationModal,
+    closeModal: closeConfirmationModal
+  } = useModal();
   const { offers, getOffers, status: offerRequestStatus } = useOffers();
   const {
     orders: { source, destination, id },
@@ -56,16 +63,8 @@ function ClientCurrentOrder() {
     return <ProgressSpinner isShow />;
   }
 
-  const openConfirmation = () => {
-    setIsOpenedConfirmation(true);
-  };
-
-  const closeConfirmation = () => {
-    setIsOpenedConfirmation(false);
-  };
-
   const handleCancelOrder = async () => {
-    closeConfirmation();
+    closeConfirmationModal();
     await deleteOrder(id);
     await dispatch(USER_GET());
     navigate(PRIVATE_ROUTES.HOME);
@@ -78,9 +77,9 @@ function ClientCurrentOrder() {
 
   return (
     <div className={classes.container}>
-      <ConfirmationCancelOrder
-        isOpened={isOpenedConfirmation}
-        onCancel={closeConfirmation}
+      <CancelOrderConfirmationModal
+        isOpened={isConfirmationModalOpened}
+        onCancel={closeConfirmationModal}
         onConfirm={handleCancelOrder}
         text="Are you sure you want to cancel the order?"
       />
@@ -98,7 +97,7 @@ function ClientCurrentOrder() {
       <Button
         size={BUTTON_SIZES.LARGE}
         color={BUTTON_COLORS.PRIMARY}
-        onClick={openConfirmation}
+        onClick={openConfirmationModal}
         variant={BUTTON_VARIANTS.CONTAINED}
         className={classes.block__button}
       >

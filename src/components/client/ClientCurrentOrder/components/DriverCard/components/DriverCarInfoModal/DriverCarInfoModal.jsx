@@ -13,9 +13,9 @@ import {
 
 import RatingAndPrice from '../RatingAndPrice/RatingAndPrice';
 
-import classes from './modal-driver-card.module.css';
+import classes from './driver-car-info-modal.module.css';
 
-function ModalDriverCard({ isOpened, closeModal, onClick, offer }) {
+function DriverCarInfoModal({ isOpened, closeModal, onClick, offer }) {
   return (
     <Modal isOpened={isOpened} closeModal={closeModal} size={MODAL_SIZE.LARGE}>
       <div className={classes.modal__content}>
@@ -62,7 +62,7 @@ function ModalDriverCard({ isOpened, closeModal, onClick, offer }) {
   );
 }
 
-ModalDriverCard.propTypes = {
+DriverCarInfoModal.propTypes = {
   isOpened: PropTypes.bool,
   closeModal: PropTypes.func,
   onClick: PropTypes.func,
@@ -70,11 +70,11 @@ ModalDriverCard.propTypes = {
   offer: PropTypes.object
 };
 
-ModalDriverCard.defaultProps = {
+DriverCarInfoModal.defaultProps = {
   isOpened: false,
   closeModal: () => {},
   onClick: () => {},
   offer: {}
 };
 
-export default ModalDriverCard;
+export default DriverCarInfoModal;

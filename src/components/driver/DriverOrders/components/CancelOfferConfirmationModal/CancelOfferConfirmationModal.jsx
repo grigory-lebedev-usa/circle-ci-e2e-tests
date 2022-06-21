@@ -4,7 +4,7 @@ import { useOffers } from '../../../../../../../api/hooks/useOffers/useOffers';
 
 import ConfirmationModal from '../../../../../../../shared/components/ConfirmationModal/ConfirmationModal';
 
-function CancelOrderModal({ isOpened, onCancel, order, offerId, getOffers }) {
+function CancelOfferConfirmationModal({ isOpened, onCancel, order, offerId, getOffers }) {
   const { deleteOffer } = useOffers();
 
   const handleOfferDelete = async () => {
@@ -23,7 +23,7 @@ function CancelOrderModal({ isOpened, onCancel, order, offerId, getOffers }) {
   );
 }
 
-CancelOrderModal.propTypes = {
+CancelOfferConfirmationModal.propTypes = {
   isOpened: PropTypes.bool.isRequired,
   onCancel: PropTypes.func,
   order: PropTypes.shape({
@@ -37,9 +37,9 @@ CancelOrderModal.propTypes = {
   getOffers: PropTypes.func.isRequired
 };
 
-CancelOrderModal.defaultProps = {
+CancelOfferConfirmationModal.defaultProps = {
   onCancel: () => {},
   order: {}
 };
 
-export default CancelOrderModal;
+export default CancelOfferConfirmationModal;

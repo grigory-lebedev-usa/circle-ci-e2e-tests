@@ -2,24 +2,24 @@ import PropTypes from 'prop-types';
 
 import { useForm } from 'react-hook-form';
 
-import Modal from '../../../../../../../shared/components/Modal/Modal';
-import { MODAL_SIZE } from '../../../../../../../shared/components/Modal/modal.constants';
-import FormInput from '../../../../../../../shared/components/form-elements/FormInput/FormInput';
+import Modal from '../../../../../shared/components/Modal/Modal';
+import { MODAL_SIZE } from '../../../../../shared/components/Modal/modal.constants';
+import FormInput from '../../../../../shared/components/form-elements/FormInput/FormInput';
 
-import { INPUT_TYPES } from '../../../../../../../shared/components/form-elements/FormInput/form-input.constants';
+import { INPUT_TYPES } from '../../../../../shared/components/form-elements/FormInput/form-input.constants';
 
-import { OPTIONS_VALIDATE } from '../../../../../../helpers/OPTIONS_VALIDATE';
+import { OPTIONS_VALIDATE } from '../../../../helpers/OPTIONS_VALIDATE';
 
-import Button from '../../../../../../../shared/components/Button/Button';
+import Button from '../../../../../shared/components/Button/Button';
 
 import {
   BUTTON_COLORS,
   BUTTON_SIZES,
   BUTTON_TYPES,
   BUTTON_VARIANTS
-} from '../../../../../../../shared/components/Button/button.constants';
+} from '../../../../../shared/components/Button/button.constants';
 
-import { useOffers } from '../../../../../../../api/hooks/useOffers/useOffers';
+import { useOffers } from '../../../../../api/hooks/useOffers/useOffers';
 
 import classes from './create-offer-modal.module.css';
 
