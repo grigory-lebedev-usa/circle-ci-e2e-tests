@@ -1,8 +1,7 @@
 export const PUBLIC_ROUTES = {
   REGISTER: '/register',
   LOGIN: '/login',
-  NOT_FOUND_PAGE: '/not-found-page',
-  ORDERS_HISTORY: '/orders-history'
+  NOT_FOUND_PAGE: '/not-found-page'
 };
 
 export const PRIVATE_ROUTES = {
@@ -11,7 +10,8 @@ export const PRIVATE_ROUTES = {
   CURRENT_ORDER: '/current-order',
   DRIVER_START: '/driver-start',
   DRIVER_ORDERS: '/driver-orders',
-  TRIP: '/trip'
+  TRIP: '/trip',
+  ORDERS_HISTORY: '/orders-history'
 };
 
 export const STORAGE_KEYS = {

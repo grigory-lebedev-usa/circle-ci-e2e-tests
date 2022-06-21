@@ -17,13 +17,16 @@ export const TRIPS_RESET = {
   type: TRIPS_ACTION_TYPES.RESET
 };
 
-export const TRIPS_GET = (isActive = false) => {
+// eslint-disable-next-line default-param-last
+export const TRIPS_GET = (isActive = false, page, size) => {
   return async (dispatch) => {
     try {
       dispatch(ACTIVE_TRIP_REQUEST_START);
       const { data: tripInfo } = await axiosService.get(API_ROUTES.TRIP, {
         params: {
-          active: isActive
+          active: isActive,
+          page,
+          size
         }
       });
       dispatch(TRIPS_GET_SUCCESS(tripInfo));
