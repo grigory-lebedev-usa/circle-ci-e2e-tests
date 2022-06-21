@@ -5,21 +5,14 @@ import { useOrders } from '../../../api/hooks/useOrders/useOrders';
 import { REQUEST_STATUS } from '../../../constants/app.constants';
 import ProgressSpinner from '../../../shared/components/ProgressSpinner/ProgressSpinner';
 import Refresh from '../../../shared/components/Refresh/Refresh';
-// import { useModal } from '../../../shared/hooks/useModal';
 
-// import CancelOfferConfirmationModal from './components/CancelOfferConfirmationModal/CancelOfferConfirmationModal';
-// import CreateOfferModal from './components/CreateOfferModal/CreateOfferModal';
+import CancelOffer from './components/CancelOffer/CancelOffer';
+import CreateOffer from './components/CreateOffer/CreateOffer';
 
 import Order from './components/Order/Order';
 import classes from './driver-orders.module.css';
 
 function DriverOrders() {
-  // const { isModalOpened, openModal, closeModal } = useModal();
-  // const {
-  //   isModalOpened: isConfirmationModalOpened,
-  //   openModal: openConfirmationModal,
-  //   closeModal: closeConfirmationModal
-  // } = useModal();
   const { getOffers, offers, status: offerRequestStatus } = useOffers();
   const { getOrders, orders, status: orderRequestStatus } = useOrders();
   useEffect(() => {
@@ -41,21 +34,8 @@ function DriverOrders() {
 
   return (
     <div className={classes.container}>
-      {/* 
-        TODO: for next task      
-      <CancelOfferConfirmationModal
-        isOpened={isConfirmationModalOpened}
-        onCancel={closeConfirmationModal}
-        order={order}
-        offerId={id}
-        getOffers={getOffers}
-      />
-      <CreateOfferModal
-        isOpened={isModalOpened}
-        closeModal={closeModal}
-        order={order}
-        getOffers={getOffers}
-      /> */}
+      <CancelOffer getOffers={getOffers} />
+      <CreateOffer getOffers={getOffers} />
       <div className={classes.block__title}>
         <h2 className={classes.title}>Orders</h2>
       </div>

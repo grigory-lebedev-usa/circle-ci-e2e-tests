@@ -1,7 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 
-import PropTypes from 'prop-types';
-
 import { Card } from '@mui/material';
 
 import { useDispatch } from 'react-redux';
@@ -20,6 +18,8 @@ import { ACTIVE_TRIP_GET, TRIP_CREATE } from '../../../../../actions/trips/trips
 import { useModal } from '../../../../../shared/hooks/useModal';
 
 import AcceptOfferConfirmationModal from '../../../../../shared/components/ConfirmationModal/ConfirmationModal';
+
+import { OfferObjectPropType } from '../../../../../shared/prop-types';
 
 import classes from './driver-card.module.css';
 import RatingAndPrice from './components/RatingAndPrice/RatingAndPrice';
@@ -81,8 +81,7 @@ function DriverCard({ offer }) {
 }
 
 DriverCard.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  offer: PropTypes.object.isRequired
+  offer: OfferObjectPropType.isRequired
 };
 
 export default DriverCard;

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useOffers } from '../../../../../../../api/hooks/useOffers/useOffers';
 
 import ConfirmationModal from '../../../../../../../shared/components/ConfirmationModal/ConfirmationModal';
+import { OrderObjectPropType } from '../../../../../../../shared/prop-types';
 
 function CancelOfferConfirmationModal({ isOpened, onCancel, order, offerId, getOffers }) {
   const { deleteOffer } = useOffers();
@@ -26,13 +27,7 @@ function CancelOfferConfirmationModal({ isOpened, onCancel, order, offerId, getO
 CancelOfferConfirmationModal.propTypes = {
   isOpened: PropTypes.bool.isRequired,
   onCancel: PropTypes.func,
-  order: PropTypes.shape({
-    client: PropTypes.objectOf(PropTypes.string),
-    createdAt: PropTypes.number,
-    destination: PropTypes.string,
-    id: PropTypes.string,
-    source: PropTypes.string
-  }),
+  order: OrderObjectPropType,
   offerId: PropTypes.string.isRequired,
   getOffers: PropTypes.func.isRequired
 };

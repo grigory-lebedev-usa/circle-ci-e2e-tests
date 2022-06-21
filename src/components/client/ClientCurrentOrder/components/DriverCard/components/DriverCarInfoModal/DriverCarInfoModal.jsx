@@ -13,6 +13,8 @@ import {
 
 import RatingAndPrice from '../RatingAndPrice/RatingAndPrice';
 
+import { OfferObjectPropType } from '../../../../../../../shared/prop-types';
+
 import classes from './driver-car-info-modal.module.css';
 
 function DriverCarInfoModal({ isOpened, closeModal, onClick, offer }) {
@@ -66,8 +68,7 @@ DriverCarInfoModal.propTypes = {
   isOpened: PropTypes.bool,
   closeModal: PropTypes.func,
   onClick: PropTypes.func,
-  // eslint-disable-next-line react/forbid-prop-types
-  offer: PropTypes.object
+  offer: OfferObjectPropType
 };
 
 DriverCarInfoModal.defaultProps = {
