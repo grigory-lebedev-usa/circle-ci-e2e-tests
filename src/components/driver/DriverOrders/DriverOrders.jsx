@@ -6,9 +6,6 @@ import { REQUEST_STATUS } from '../../../constants/app.constants';
 import ProgressSpinner from '../../../shared/components/ProgressSpinner/ProgressSpinner';
 import Refresh from '../../../shared/components/Refresh/Refresh';
 
-import CancelOffer from './components/CancelOffer/CancelOffer';
-import CreateOffer from './components/CreateOffer/CreateOffer';
-
 import Order from './components/Order/Order';
 import classes from './driver-orders.module.css';
 
@@ -34,8 +31,6 @@ function DriverOrders() {
 
   return (
     <div className={classes.container}>
-      <CancelOffer getOffers={getOffers} />
-      <CreateOffer getOffers={getOffers} />
       <div className={classes.block__title}>
         <h2 className={classes.title}>Orders</h2>
       </div>

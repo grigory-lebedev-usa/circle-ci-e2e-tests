@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types';
 
-import { Button } from '@mui/material';
-
 import {
   BUTTON_COLORS,
   BUTTON_SIZES,
@@ -11,6 +9,8 @@ import {
 import { useModal } from '../../../../../shared/hooks/useModal';
 
 import { OrderObjectPropType } from '../../../../../shared/prop-types';
+
+import Button from '../../../../../shared/components/Button/Button';
 
 import CancelOfferConfirmationModal from './components/CancelOfferConfirmationModal/CancelOfferConfirmationModal';
 import classes from './cancel-offer.module.css';
