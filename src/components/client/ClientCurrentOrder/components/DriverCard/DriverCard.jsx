@@ -35,6 +35,11 @@ function DriverCard({ offer }) {
   } = useModal();
   const navigate = useNavigate();
 
+  const handleCardClick = (e) => {
+    e.stopPropagation();
+    openModal();
+  };
+
   const handleSubmitOffer = async (id) => {
     closeModal();
     closeAcceptOfferConfirmationModal();
@@ -57,7 +62,7 @@ function DriverCard({ offer }) {
         onClick={openAcceptOfferConfirmationModal}
         offer={offer}
       />
-      <div className={classes.card__container} role="button" tabIndex="0" onClick={openModal}>
+      <div className={classes.card__container} role="button" tabIndex="0" onClick={handleCardClick}>
         <img className={classes.img} src={offer.driver.car.photo} alt="Car" />
         <h3 className={classes.card__title_car}>
           {offer.driver.car.make} {offer.driver.car.model}
