@@ -19,7 +19,7 @@ export const STORAGE_KEYS = {
 
 export const USER_VALUES = {
   isAuthenticated: false,
-  isLoggedIn: false,
+  keepUserLoginIn: false,
   accessToken: '',
   refreshToken: '',
   expirationTime: ''
@@ -31,3 +31,5 @@ export const REQUEST_STATUS = {
   SUCCESS: 'success',
   FAILED: 'failed'
 };
+
+export const EXPIRATION_TOKEN_MARGIN = 1000 * 60 * 2;

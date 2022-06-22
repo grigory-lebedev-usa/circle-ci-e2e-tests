@@ -33,7 +33,7 @@ import classes from './sign-in-form.module.css';
 
 function SignInForm() {
   const [isOpenedForgotPassword, setIsOpenedForgotPassword] = useState(false);
-  const [isLoggedInChecked, setIsLoggedInChecked] = useState(false);
+  const [isKeepLoggedInChecked, setIsKeepLoggedInChecked] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -42,7 +42,7 @@ function SignInForm() {
     formState: { errors, isValid }
   } = useForm({ defaultValues: defaultLoginValues, mode: 'onTouched' });
   const handleCheckboxChange = (e) => {
-    setIsLoggedInChecked(e.target.checked);
+    setIsKeepLoggedInChecked(e.target.checked);
   };
 
   const showForgotPassword = () => {
@@ -56,8 +56,8 @@ function SignInForm() {
   const onSubmit = async ({ email, password }) => {
     try {
       await dispatch(USER_LOGIN({ email: email.toLowerCase(), password }));
-      if (isLoggedInChecked) {
-        LocalStorageService.isLoggedIn = isLoggedInChecked;
+      if (isKeepLoggedInChecked) {
+        LocalStorageService.keepUserLoginIn = isKeepLoggedInChecked;
       }
       navigate(PRIVATE_ROUTES.HOME);
     } catch (error) {
@@ -94,7 +94,7 @@ function SignInForm() {
               <FormCheckbox
                 id="checkbox"
                 label="Keep me logged in"
-                checked={isLoggedInChecked}
+                checked={isKeepLoggedInChecked}
                 onChange={handleCheckboxChange}
                 className={classes.form__checkbox}
               />

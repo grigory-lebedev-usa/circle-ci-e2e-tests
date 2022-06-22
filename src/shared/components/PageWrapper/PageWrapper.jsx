@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Header from '../../../components/Header/Header';
-import { PUBLIC_ROUTES } from '../../../constants/app.constants';
+import { EXPIRATION_TOKEN_MARGIN, PUBLIC_ROUTES } from '../../../constants/app.constants';
 import { ACTIVE_TRIP_GET } from '../../../actions/trips/trips.actions';
 
 import { USER_GET, USER_LOGOUT, USER_REFRESH_TOKEN } from '../../../actions/user/user.actions';
@@ -22,9 +22,8 @@ function PageWrapper({ children }) {
   const { pathname } = useLocation();
   const isPrivatePage = !Object.values(PUBLIC_ROUTES).includes(pathname);
   const { isLoggedIn, refreshToken, expirationTime } = LocalStorageService;
-  const twoMinutes = 1000 * 60 * 2;
-  const date = new Date(expirationTime) - Date.now();
-  const isExpiredToken = date < twoMinutes;
+  const remainingTokenTime = new Date(expirationTime) - Date.now();
+  const isExpiredToken = remainingTokenTime < EXPIRATION_TOKEN_MARGIN;
 
   useEffect(() => {
     if (isPrivatePage && isAuthenticated) {
