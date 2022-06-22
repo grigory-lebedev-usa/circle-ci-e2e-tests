@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
 
 import { PRIVATE_ROUTES } from '../constants/app.constants';
+import { userSelector } from '../selectors/user.selectors';
 
 function ActiveOrderGuard({ children }) {
   const {
     userData: { currentOrder }
-  } = useSelector((state) => state.user);
+  } = useSelector(userSelector);
 
   if (currentOrder) {
     return <Navigate to={PRIVATE_ROUTES.CURRENT_ORDER} replace />;

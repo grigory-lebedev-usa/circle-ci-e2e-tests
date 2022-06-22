@@ -3,11 +3,12 @@ import { Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { PRIVATE_ROUTES } from '../constants/app.constants';
+import { userSelector } from '../selectors/user.selectors';
 
 function UploadPhotoGuard({ children }) {
   const {
     userData: { car }
-  } = useSelector((state) => state.user);
+  } = useSelector(userSelector);
 
   if (!car?.photo) {
     return <Navigate to={PRIVATE_ROUTES.DRIVER_START} replace />;

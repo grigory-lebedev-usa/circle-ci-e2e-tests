@@ -25,14 +25,16 @@ function DriverActions() {
           Start treep
         </Button>
       </Link>
-      <Button
-        size={BUTTON_SIZES.LARGE}
-        color={BUTTON_COLORS.PRIMARY}
-        variant={BUTTON_VARIANTS.CONTAINED}
-        type={BUTTON_TYPES.BUTTON}
-      >
-        View history
-      </Button>
+      <Link to={PRIVATE_ROUTES.ORDERS_HISTORY}>
+        <Button
+          size={BUTTON_SIZES.LARGE}
+          color={BUTTON_COLORS.PRIMARY}
+          variant={BUTTON_VARIANTS.CONTAINED}
+          type={BUTTON_TYPES.BUTTON}
+        >
+          View history
+        </Button>
+      </Link>
     </div>
   );
 }

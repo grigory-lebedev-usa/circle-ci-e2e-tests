@@ -7,11 +7,12 @@ import AdminHome from '../../../../../components/admin/AdminHome/AdminHome';
 import ActiveOrderGuard from '../../../../../guards/ActiveOrderGuard';
 import UploadPhotoGuard from '../../../../../guards/UploadPhotoGuard';
 import ActiveTripGuard from '../../../../../guards/ActiveTripGuard';
+import { userSelector } from '../../../../../selectors/user.selectors';
 
 function HomeRoutes() {
   const {
     userData: { role }
-  } = useSelector((state) => state.user);
+  } = useSelector(userSelector);
 
   if (role === USER_ROLES.CLIENT) {
     return (

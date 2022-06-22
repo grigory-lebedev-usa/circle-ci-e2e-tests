@@ -20,6 +20,8 @@ import { useOrders } from '../../../api/hooks/useOrders/useOrders';
 
 import ProgressSpinner from '../../../shared/components/ProgressSpinner/ProgressSpinner';
 
+import { userSelector } from '../../../selectors/user.selectors';
+
 import classes from './client-current-order.module.css';
 import NotFoundDriver from './components/NotFoundDrivers/NotFoundDriver';
 import DriverCard from './components/DriverCard/DriverCard';
@@ -38,7 +40,7 @@ function ClientCurrentOrder() {
   const dispatch = useDispatch();
   const {
     userData: { currentOrder }
-  } = useSelector((state) => state.user);
+  } = useSelector(userSelector);
 
   useEffect(() => {
     if (!currentOrder) {

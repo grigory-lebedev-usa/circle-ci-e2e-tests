@@ -23,13 +23,15 @@ function ClientActions() {
           Create order
         </Button>
       </Link>
-      <Button
-        size={BUTTON_SIZES.LARGE}
-        color={BUTTON_COLORS.PRIMARY}
-        variant={BUTTON_VARIANTS.CONTAINED}
-      >
-        View history
-      </Button>
+      <Link to={PRIVATE_ROUTES.ORDERS_HISTORY}>
+        <Button
+          size={BUTTON_SIZES.LARGE}
+          color={BUTTON_COLORS.PRIMARY}
+          variant={BUTTON_VARIANTS.CONTAINED}
+        >
+          View history
+        </Button>
+      </Link>
     </div>
   );
 }

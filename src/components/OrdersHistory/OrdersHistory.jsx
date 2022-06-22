@@ -4,14 +4,15 @@ import { Pagination } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { TRIPS_GET } from '../../actions/trips/trips.actions';
+import { inactiveTripsSelector } from '../../selectors/trips.selectors';
 
 function OrdersHistory() {
   const dispatch = useDispatch();
-  const { items } = useSelector((state) => state.trips.inactiveTrips);
+  const { items } = useSelector(inactiveTripsSelector);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    dispatch(TRIPS_GET(false, page, 2));
+    dispatch(TRIPS_GET(page, 2));
   }, [dispatch, page]);
 
   const handleChange = async (event, value) => {
@@ -24,7 +25,7 @@ function OrdersHistory() {
   return (
     <div style={{ display: 'flex', justifyContent: 'center', marginTop: '250px' }}>
       <Pagination
-        count={10}
+        count={20}
         size="large"
         page={page}
         onChange={handleChange}
@@ -32,8 +33,8 @@ function OrdersHistory() {
         hidePrevButton
         hideNextButton
         defaultPage={1}
-        siblingCount={5}
-        boundaryCount={2}
+        siblingCount={3}
+        boundaryCount={1}
       />
     </div>
   );

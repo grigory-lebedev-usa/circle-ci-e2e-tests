@@ -9,6 +9,10 @@ const TRIPS_GET_SUCCESS = (payload) => {
   return { type: TRIPS_ACTION_TYPES.GET_SUCCESS, payload };
 };
 
+const ACTIVE_TRIP_GET_SUCCESS = (payload) => {
+  return { type: TRIPS_ACTION_TYPES.ACTIVE_GET_SUCCESS, payload };
+};
+
 const ACTIVE_TRIP_REQUEST_START = {
   type: TRIPS_ACTION_TYPES.REQUEST_START
 };
@@ -17,8 +21,7 @@ export const TRIPS_RESET = {
   type: TRIPS_ACTION_TYPES.RESET
 };
 
-// eslint-disable-next-line default-param-last
-export const TRIPS_GET = (isActive = false, page, size) => {
+export const TRIPS_GET = (page, size, isActive = false) => {
   return async (dispatch) => {
     try {
       dispatch(ACTIVE_TRIP_REQUEST_START);
@@ -36,9 +39,19 @@ export const TRIPS_GET = (isActive = false, page, size) => {
   };
 };
 
-export const ACTIVE_TRIP_GET = () => {
+export const ACTIVE_TRIP_GET = (isActive = true) => {
   return async (dispatch) => {
-    dispatch(TRIPS_GET(true));
+    try {
+      dispatch(ACTIVE_TRIP_REQUEST_START);
+      const { data: tripInfo } = await axiosService.get(API_ROUTES.TRIP, {
+        params: {
+          active: isActive
+        }
+      });
+      dispatch(ACTIVE_TRIP_GET_SUCCESS(tripInfo));
+    } catch (error) {
+      dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
+    }
   };
 };
 
