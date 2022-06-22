@@ -14,17 +14,17 @@ import classes from './driver-orders.module.css';
 import CancelOffer from './components/CancelOffer/CancelOffer';
 import CreateOffer from './components/CreateOffer/CreateOffer';
 
-const renderButtonCallback = (order, offerId, getOffers) => {
-  return offerId ? (
-    <CancelOffer order={order} offerId={offerId} getOffers={getOffers} />
-  ) : (
-    <CreateOffer order={order} getOffers={getOffers} />
-  );
-};
-
 function DriverOrders() {
   const { getOffers, offers, status: offerRequestStatus } = useOffers();
   const { getOrders, orders, status: orderRequestStatus } = useOrders();
+
+  const renderButtonCallback = (order, offerId) => {
+    return offerId ? (
+      <CancelOffer order={order} offerId={offerId} getOffers={getOffers} />
+    ) : (
+      <CreateOffer order={order} getOffers={getOffers} />
+    );
+  };
 
   useEffect(() => {
     getOffers();

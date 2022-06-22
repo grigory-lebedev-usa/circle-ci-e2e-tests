@@ -4,7 +4,7 @@ import { OrderObjectPropType } from '../../../../../shared/prop-types';
 
 import classes from './order-row.module.css';
 
-function OrderRow({ order, offerId, getOffers, renderButton }) {
+function OrderRow({ order, offerId, renderButton }) {
   return (
     <div className={classes.driver__order}>
       <h4 className={classes.order__title}>Who:</h4>
@@ -13,7 +13,7 @@ function OrderRow({ order, offerId, getOffers, renderButton }) {
       <p className={classes.order__text}>{order.source}</p>
       <h4 className={classes.order__title}>To:</h4>
       <p className={classes.order__text}>{order.destination}</p>
-      {renderButton(order, offerId, getOffers)}
+      {renderButton(order, offerId)}
     </div>
   );
 }
@@ -21,7 +21,6 @@ function OrderRow({ order, offerId, getOffers, renderButton }) {
 OrderRow.propTypes = {
   order: OrderObjectPropType,
   offerId: PropTypes.string,
-  getOffers: PropTypes.func.isRequired,
   renderButton: PropTypes.func.isRequired
 };
 
