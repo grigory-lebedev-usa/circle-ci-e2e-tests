@@ -21,6 +21,7 @@ import {
 
 import { USER_LOGIN } from '../../actions/user/user.actions';
 
+import LocalStorageService from '../../services/LocalStorageService';
 import { NOTIFICATION_ADD } from '../../actions/notification/notification.actions';
 
 import { NOTIFICATION_TYPES } from '../../shared/components/Notifications/components/Notification/notification.constants';
@@ -32,6 +33,7 @@ import classes from './sign-in-form.module.css';
 
 function SignInForm() {
   const [isOpenedForgotPassword, setIsOpenedForgotPassword] = useState(false);
+  const [isKeepLoggedInChecked, setIsKeepLoggedInChecked] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -39,6 +41,9 @@ function SignInForm() {
     control,
     formState: { errors, isValid }
   } = useForm({ defaultValues: defaultLoginValues, mode: 'onTouched' });
+  const handleCheckboxChange = (e) => {
+    setIsKeepLoggedInChecked(e.target.checked);
+  };
 
   const showForgotPassword = () => {
     setIsOpenedForgotPassword(true);
@@ -51,6 +56,9 @@ function SignInForm() {
   const onSubmit = async ({ email, password }) => {
     try {
       await dispatch(USER_LOGIN({ email: email.toLowerCase(), password }));
+      if (isKeepLoggedInChecked) {
+        LocalStorageService.keepUserLoginIn = isKeepLoggedInChecked;
+      }
       navigate(PRIVATE_ROUTES.HOME);
     } catch (error) {
       dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
@@ -86,6 +94,8 @@ function SignInForm() {
               <FormCheckbox
                 id="checkbox"
                 label="Keep me logged in"
+                checked={isKeepLoggedInChecked}
+                onChange={handleCheckboxChange}
                 className={classes.form__checkbox}
               />
               <Button

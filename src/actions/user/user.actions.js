@@ -145,3 +145,19 @@ export const USER_TRIP_FINISHED = (userId, rating, tripId) => {
     }
   };
 };
+
+export const USER_REFRESH_TOKEN = (token) => {
+  return async (dispatch) => {
+    try {
+      const {
+        data: { accessToken, refreshToken, expirationTime }
+      } = await axiosService.post(API_ROUTES.REFRESH, { refreshToken: token });
+      LocalStorageService.accessToken = accessToken;
+      LocalStorageService.refreshToken = refreshToken;
+      LocalStorageService.expirationTime = expirationTime;
+    } catch (error) {
+      dispatch(USER_REQUEST_FAILED(error));
+      dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
+    }
+  };
+};
