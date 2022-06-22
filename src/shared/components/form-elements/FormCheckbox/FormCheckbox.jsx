@@ -1,10 +1,21 @@
 import { FormControlLabel, Checkbox } from '@mui/material';
 import PropTypes from 'prop-types';
 
-function FormCheckbox({ id, label, className }) {
+function FormCheckbox({ id, label, className, checked, onChange }) {
   return (
     <div className={className}>
-      <FormControlLabel control={<Checkbox id={id} color="form" />} label={label} />
+      <FormControlLabel
+        control={
+          <Checkbox
+            sx={{ '& .MuiSvgIcon-root': { fontSize: 33 } }}
+            checked={checked}
+            onChange={onChange}
+            id={id}
+            color="form"
+          />
+        }
+        label={label}
+      />
     </div>
   );
 }
@@ -12,6 +23,8 @@ function FormCheckbox({ id, label, className }) {
 FormCheckbox.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  checked: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
   className: PropTypes.string
 };
 

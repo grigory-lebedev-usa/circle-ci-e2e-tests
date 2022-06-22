@@ -13,9 +13,11 @@ import {
 
 import RatingAndPrice from '../RatingAndPrice/RatingAndPrice';
 
-import classes from './modal-driver-card.module.css';
+import { OfferObjectPropType } from '../../../../../../../shared/prop-types';
 
-function ModalDriverCard({ isOpened, closeModal, onClick, offer }) {
+import classes from './driver-car-info-modal.module.css';
+
+function DriverCarInfoModal({ isOpened, closeModal, onClick, offer }) {
   return (
     <Modal isOpened={isOpened} closeModal={closeModal} size={MODAL_SIZE.LARGE}>
       <div className={classes.modal__content}>
@@ -62,19 +64,18 @@ function ModalDriverCard({ isOpened, closeModal, onClick, offer }) {
   );
 }
 
-ModalDriverCard.propTypes = {
+DriverCarInfoModal.propTypes = {
   isOpened: PropTypes.bool,
   closeModal: PropTypes.func,
   onClick: PropTypes.func,
-  // eslint-disable-next-line react/forbid-prop-types
-  offer: PropTypes.object
+  offer: OfferObjectPropType
 };
 
-ModalDriverCard.defaultProps = {
+DriverCarInfoModal.defaultProps = {
   isOpened: false,
   closeModal: () => {},
   onClick: () => {},
   offer: {}
 };
 
-export default ModalDriverCard;
+export default DriverCarInfoModal;

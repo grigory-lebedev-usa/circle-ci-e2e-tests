@@ -6,12 +6,26 @@ import { REQUEST_STATUS } from '../../../constants/app.constants';
 import ProgressSpinner from '../../../shared/components/ProgressSpinner/ProgressSpinner';
 import Refresh from '../../../shared/components/Refresh/Refresh';
 
-import Order from './components/Order/Order';
+import { getOfferId } from '../../helpers/helpers';
+
+import OrderRow from './components/OrderRow/OrderRow';
 import classes from './driver-orders.module.css';
+
+import CancelOffer from './components/CancelOffer/CancelOffer';
+import CreateOffer from './components/CreateOffer/CreateOffer';
 
 function DriverOrders() {
   const { getOffers, offers, status: offerRequestStatus } = useOffers();
   const { getOrders, orders, status: orderRequestStatus } = useOrders();
+
+  const renderButtonCallback = (order, offerId) => {
+    return offerId ? (
+      <CancelOffer order={order} offerId={offerId} getOffers={getOffers} />
+    ) : (
+      <CreateOffer order={order} getOffers={getOffers} />
+    );
+  };
+
   useEffect(() => {
     getOffers();
     getOrders();
@@ -37,11 +51,12 @@ function DriverOrders() {
       <div className={classes.line} />
       <div className={classes.driver__orders}>
         {orders.map((order) => (
-          <Order
+          <OrderRow
             key={order.id}
             order={order}
             getOffers={getOffers}
-            offer={offers.find(({ orderId }) => orderId === order.id)}
+            offerId={getOfferId(offers, order.id)}
+            renderButton={renderButtonCallback}
           />
         ))}
       </div>

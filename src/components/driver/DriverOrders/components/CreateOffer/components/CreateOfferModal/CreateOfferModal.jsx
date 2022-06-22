@@ -21,6 +21,8 @@ import {
 
 import { useOffers } from '../../../../../../../api/hooks/useOffers/useOffers';
 
+import { OrderObjectPropType } from '../../../../../../../shared/prop-types';
+
 import classes from './create-offer-modal.module.css';
 
 function CreateOfferModal({ isOpened, closeModal, order, getOffers }) {
@@ -98,13 +100,7 @@ CreateOfferModal.propTypes = {
   isOpened: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
   getOffers: PropTypes.func.isRequired,
-  order: PropTypes.shape({
-    client: PropTypes.objectOf(PropTypes.string),
-    createdAt: PropTypes.number,
-    destination: PropTypes.string,
-    id: PropTypes.string,
-    source: PropTypes.string
-  })
+  order: OrderObjectPropType
 };
 
 CreateOfferModal.defaultProps = {
