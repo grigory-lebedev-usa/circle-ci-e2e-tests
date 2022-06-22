@@ -1,8 +1,4 @@
-import { useState } from 'react';
-
 import { useNavigate } from 'react-router-dom';
-
-import PropTypes from 'prop-types';
 
 import { Card } from '@mui/material';
 
@@ -19,38 +15,34 @@ import { PRIVATE_ROUTES } from '../../../../../constants/app.constants';
 
 import { ACTIVE_TRIP_GET, TRIP_CREATE } from '../../../../../actions/trips/trips.actions';
 
-import ConfirmationDriverCard from './components/ConfirmationDriverCard/ConfirmationDriverCard';
+import { useModal } from '../../../../../shared/hooks/useModal';
+
+import AcceptOfferConfirmationModal from '../../../../../shared/components/ConfirmationModal/ConfirmationModal';
+
+import { OfferObjectPropType } from '../../../../../shared/prop-types';
 
 import classes from './driver-card.module.css';
-import ModalDriverCard from './components/ModalDriverCard/ModalDriverCard';
 import RatingAndPrice from './components/RatingAndPrice/RatingAndPrice';
+import DriverCarInfoModal from './components/DriverCarInfoModal/DriverCarInfoModal';
 
 function DriverCard({ offer }) {
   const dispatch = useDispatch();
-  const [isOpenedModal, setIsOpenedModal] = useState(false);
-  const [isOpenedConfirmation, setIsOpenedConfirmation] = useState(false);
+  const { isModalOpened, openModal, closeModal } = useModal();
+  const {
+    isModalOpened: isAcceptOfferConfirmationModalOpened,
+    openModal: openAcceptOfferConfirmationModal,
+    closeModal: closeAcceptOfferConfirmationModal
+  } = useModal();
   const navigate = useNavigate();
 
-  const openModal = () => {
-    setIsOpenedModal(true);
-  };
-
-  const closeModal = () => {
-    setIsOpenedModal(false);
-  };
-
-  const openConfirmation = (e) => {
+  const handleCardClick = (e) => {
     e.stopPropagation();
-    setIsOpenedConfirmation(true);
-  };
-
-  const closeConfirmation = () => {
-    setIsOpenedConfirmation(false);
+    openModal();
   };
 
   const handleSubmitOffer = async (id) => {
     closeModal();
-    closeConfirmation();
+    closeAcceptOfferConfirmationModal();
     await dispatch(TRIP_CREATE({ offerId: id }));
     await dispatch(ACTIVE_TRIP_GET());
     navigate(PRIVATE_ROUTES.TRIP);
@@ -58,19 +50,19 @@ function DriverCard({ offer }) {
 
   return (
     <Card>
-      <ConfirmationDriverCard
-        isOpened={isOpenedConfirmation}
-        onCancel={closeConfirmation}
+      <AcceptOfferConfirmationModal
+        isOpened={isAcceptOfferConfirmationModalOpened}
+        onCancel={closeAcceptOfferConfirmationModal}
         onConfirm={() => handleSubmitOffer(offer.id)}
         text={`Are you sure you want to accept the offer from ${offer.driver.firstName} ${offer.driver.lastName}?`}
       />
-      <ModalDriverCard
-        isOpened={isOpenedModal}
+      <DriverCarInfoModal
+        isOpened={isModalOpened}
         closeModal={closeModal}
-        onClick={openConfirmation}
+        onClick={openAcceptOfferConfirmationModal}
         offer={offer}
       />
-      <div className={classes.card__container} role="button" tabIndex="0" onClick={openModal}>
+      <div className={classes.card__container} role="button" tabIndex="0" onClick={handleCardClick}>
         <img className={classes.img} src={offer.driver.car.photo} alt="Car" />
         <h3 className={classes.card__title_car}>
           {offer.driver.car.make} {offer.driver.car.model}
@@ -84,7 +76,7 @@ function DriverCard({ offer }) {
           variant={BUTTON_VARIANTS.CONTAINED}
           size={BUTTON_SIZES.EXTRA_SMALL}
           className={classes.block__button}
-          onClick={openConfirmation}
+          onClick={openAcceptOfferConfirmationModal}
         >
           Accept
         </Button>
@@ -94,8 +86,7 @@ function DriverCard({ offer }) {
 }
 
 DriverCard.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  offer: PropTypes.object.isRequired
+  offer: OfferObjectPropType.isRequired
 };
 
 export default DriverCard;
