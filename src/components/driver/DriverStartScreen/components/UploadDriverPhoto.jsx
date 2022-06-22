@@ -15,6 +15,8 @@ import {
 
 import { USER_GET, USER_UPLOAD_PHOTO } from '../../../../actions/user/user.actions';
 
+import { userSelector } from '../../../../selectors/user.selectors';
+
 import { inputType, src } from './upload-driver-photo.constants';
 
 import classes from './upload-driver-photo.module.css';
@@ -22,7 +24,7 @@ import classes from './upload-driver-photo.module.css';
 function UploadDriverPhoto() {
   const {
     userData: { car, id }
-  } = useSelector((state) => state.user);
+  } = useSelector(userSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isValid, setIsValid] = useState(false);

@@ -14,11 +14,13 @@ import { USER_GET, USER_LOGOUT, USER_REFRESH_TOKEN } from '../../../actions/user
 
 import LocalStorageService from '../../../services/LocalStorageService';
 
+import { userSelector } from '../../../selectors/user.selectors';
+
 import classes from './page-wrapper.module.css';
 
 function PageWrapper({ children }) {
   const dispatch = useDispatch();
-  const { isAuthenticated } = useSelector((state) => state.user);
+  const { isAuthenticated } = useSelector(userSelector);
   const { pathname } = useLocation();
   const isPrivatePage = !Object.values(PUBLIC_ROUTES).includes(pathname);
   const { isLoggedIn, refreshToken, expirationTime } = LocalStorageService;

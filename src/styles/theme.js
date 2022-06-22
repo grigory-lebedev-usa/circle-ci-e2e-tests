@@ -34,6 +34,28 @@ const theme = createTheme({
     }
   },
   components: {
+    MuiPaginationItem: {
+      styleOverrides: {
+        root: {
+          width: '48px',
+          height: '40px',
+          border: `1px solid #fff`,
+          borderRadius: '50px',
+          backgroundColor: '#898199',
+          fontFamily: `Rasa, sans-serif`,
+          fontWeight: 700,
+          fontSize: '30px',
+          lineHeight: '37px',
+          color: COLORS.WHITE,
+          '&:hover': {
+            backgroundColor: '#746B85'
+          },
+          '&.Mui-selected': {
+            width: '70px'
+          }
+        }
+      }
+    },
     MuiRating: {
       styleOverrides: {
         iconFilled: {

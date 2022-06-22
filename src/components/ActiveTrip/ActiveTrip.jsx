@@ -8,10 +8,12 @@ import { PRIVATE_ROUTES, REQUEST_STATUS } from '../../constants/app.constants';
 
 import ProgressSpinner from '../../shared/components/ProgressSpinner/ProgressSpinner';
 
+import { tripsSelector } from '../../selectors/trips.selectors';
+
 import classes from './active-trip.module.css';
 
 function ActiveTrip({ bottomContent, bottomActions }) {
-  const { activeTrip, status } = useSelector((state) => state.trips);
+  const { activeTrip, status } = useSelector(tripsSelector);
 
   if (status === REQUEST_STATUS.LOADING) {
     return <ProgressSpinner isShow />;

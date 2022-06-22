@@ -21,8 +21,14 @@ export const tripsReducer = (state = INITIAL_STATE, action) => {
     case TRIPS_ACTION_TYPES.GET_SUCCESS: {
       return {
         ...state,
-        activeTrip: { ...action.payload[0] },
         inactiveTrips: { ...action.payload },
+        status: REQUEST_STATUS.SUCCESS
+      };
+    }
+    case TRIPS_ACTION_TYPES.ACTIVE_GET_SUCCESS: {
+      return {
+        ...state,
+        activeTrip: { ...action.payload[0] },
         status: REQUEST_STATUS.SUCCESS
       };
     }

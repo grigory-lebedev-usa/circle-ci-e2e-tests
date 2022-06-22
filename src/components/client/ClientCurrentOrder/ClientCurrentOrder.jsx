@@ -20,6 +20,7 @@ import { useOrders } from '../../../api/hooks/useOrders/useOrders';
 
 import ProgressSpinner from '../../../shared/components/ProgressSpinner/ProgressSpinner';
 
+import { userSelector } from '../../../selectors/user.selectors';
 import CancelOrderConfirmationModal from '../../../shared/components/ConfirmationModal/ConfirmationModal';
 
 import { useModal } from '../../../shared/hooks/useModal';
@@ -45,7 +46,7 @@ function ClientCurrentOrder() {
   const dispatch = useDispatch();
   const {
     userData: { currentOrder }
-  } = useSelector((state) => state.user);
+  } = useSelector(userSelector);
 
   useEffect(() => {
     if (!currentOrder) {

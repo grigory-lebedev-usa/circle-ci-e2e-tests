@@ -6,11 +6,12 @@ import ClientActiveTrip from '../../../../../components/client/ClientActiveTrip/
 import DriverActiveTrip from '../../../../../components/driver/DriverActiveTrip/DriverActiveTrip';
 import { PUBLIC_ROUTES } from '../../../../../constants/app.constants';
 import { USER_ROLES } from '../../../../../constants/user-roles.constants';
+import { userSelector } from '../../../../../selectors/user.selectors';
 
 function ActiveTripRoutes() {
   const {
     userData: { role }
-  } = useSelector((state) => state.user);
+  } = useSelector(userSelector);
 
   if (role === USER_ROLES.DRIVER) {
     return <DriverActiveTrip />;

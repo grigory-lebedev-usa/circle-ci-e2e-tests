@@ -7,13 +7,14 @@ import { PUBLIC_ROUTES, REQUEST_STATUS } from '../../../../constants/app.constan
 
 import NotFoundPage from '../../NotFoundPage/NotFoundPage';
 import RootSpinner from '../../../../components/RootSpinner/RootSpinner';
+import { userSelector } from '../../../../selectors/user.selectors';
 
 function PrivateRoute({ children, roles }) {
   const {
     userData: { role },
     isAuthenticated,
     status
-  } = useSelector((state) => state.user);
+  } = useSelector(userSelector);
 
   const hasPermissions = roles.includes(role);
 

@@ -10,7 +10,8 @@ export const PRIVATE_ROUTES = {
   CURRENT_ORDER: '/current-order',
   DRIVER_START: '/driver-start',
   DRIVER_ORDERS: '/driver-orders',
-  TRIP: '/trip'
+  TRIP: '/trip',
+  ORDERS_HISTORY: '/orders-history'
 };
 
 export const STORAGE_KEYS = {

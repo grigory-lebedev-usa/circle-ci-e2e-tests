@@ -32,13 +32,15 @@ import { PRIVATE_ROUTES, REQUEST_STATUS } from '../../../../../constants/app.con
 
 import ProgressSpinner from '../../../../../shared/components/ProgressSpinner/ProgressSpinner';
 
+import { tripsSelector } from '../../../../../selectors/trips.selectors';
+
 import classes from './rate-driver-modal.module.css';
 
 function RateDriverModal({ isOpened, closeModal }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { createReport } = useReports();
-  const { activeTrip, status } = useSelector((state) => state.trips);
+  const { activeTrip, status } = useSelector(tripsSelector);
   const driverId = activeTrip.driver.id;
   const tripId = activeTrip.id;
   const [isOpenedDriverReport, setIsOpenedDriverReport] = useState(false);
