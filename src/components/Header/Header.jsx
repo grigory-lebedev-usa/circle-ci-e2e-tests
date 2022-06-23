@@ -8,7 +8,7 @@ import classes from './header.module.css';
 
 function Header({ isPrivatePage }) {
   return (
-    <div>
+    <div className={classes.header__wrapper}>
       <Navigation isPrivatePage={isPrivatePage} />
       {isPrivatePage && (
         <div className={classes.header}>
