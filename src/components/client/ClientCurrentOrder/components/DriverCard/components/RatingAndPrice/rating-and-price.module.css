@@ -12,10 +12,18 @@
 .rating__text {
   font-family: 'Rasa';
   font-weight: 700;
-  font-size: 30px;
-  line-height: 37px;
   color: #000;
   margin: 0;
+}
+
+.small {
+  font-size: 30px;
+  line-height: 37px;
+}
+
+.medium {
+  font-size: 43px;
+  line-height: 52px;
 }
 
 .line {
@@ -27,8 +35,6 @@
 .price__text {
   font-family: 'Rasa';
   font-weight: 700;
-  font-size: 30px;
-  line-height: 37px;
   color: #000;
   margin: 0;
 }
