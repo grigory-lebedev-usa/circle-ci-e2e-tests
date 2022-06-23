@@ -1,9 +1,20 @@
+import React from 'react';
+
 import PropTypes from 'prop-types';
 import { Button as MuiButton } from '@mui/material';
 
 import { BUTTON_SIZES, BUTTON_TYPES, BUTTON_VARIANTS } from './button.constants';
 
-function Button({ children, size, color, type, onClick, className, disabled, variant }) {
+const Button = React.memo(function Button({
+  children,
+  size,
+  color,
+  type,
+  onClick,
+  className,
+  disabled,
+  variant
+}) {
   return (
     <div className={className}>
       <MuiButton
@@ -18,7 +29,7 @@ function Button({ children, size, color, type, onClick, className, disabled, var
       </MuiButton>
     </div>
   );
-}
+});
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
