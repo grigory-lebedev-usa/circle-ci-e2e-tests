@@ -27,6 +27,8 @@ import classes from './driver-card.module.css';
 
 import RatingAndPrice from './components/RatingAndPrice/RatingAndPrice';
 
+import { RATING_AND_PRICE_SIZES } from './components/RatingAndPrice/rating-and-price.constants';
+
 function DriverCard({ offer }) {
   const dispatch = useDispatch();
   const { isModalOpened, openModal, closeModal } = useModal();
@@ -72,7 +74,11 @@ function DriverCard({ offer }) {
         <h3 className={classes.card__title_user}>
           {offer.driver.firstName} {offer.driver.lastName}
         </h3>
-        <RatingAndPrice rating={offer.driver.rating} price={offer.price} />
+        <RatingAndPrice
+          rating={offer.driver.rating}
+          price={offer.price}
+          size={RATING_AND_PRICE_SIZES.SMALL}
+        />
         <Button
           color={BUTTON_COLORS.SUCCESS}
           variant={BUTTON_VARIANTS.CONTAINED}
