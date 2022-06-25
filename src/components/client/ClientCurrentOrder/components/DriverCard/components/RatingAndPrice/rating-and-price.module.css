@@ -1,0 +1,40 @@
+.block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.block__rating {
+  display: flex;
+  align-items: center;
+}
+
+.rating__text {
+  font-family: 'Rasa';
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+}
+
+.small {
+  font-size: 30px;
+  line-height: 37px;
+}
+
+.medium {
+  font-size: 43px;
+  line-height: 52px;
+}
+
+.line {
+  width: 43px;
+  border: 1px solid #000;
+  transform: rotate(-90deg);
+}
+
+.price__text {
+  font-family: 'Rasa';
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+}

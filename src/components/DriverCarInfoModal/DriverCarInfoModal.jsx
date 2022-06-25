@@ -15,6 +15,8 @@ import RatingAndPrice from '../client/ClientCurrentOrder/components/DriverCard/c
 
 import { OfferObjectPropType } from '../../shared/prop-types';
 
+import { RATING_AND_PRICE_SIZES } from '../client/ClientCurrentOrder/components/DriverCard/components/RatingAndPrice/rating-and-price.constants';
+
 import classes from './driver-car-info-modal.module.css';
 
 function DriverCarInfoModal({ isOpened, closeModal, onClick, info, isRatingAndPrice, isButton }) {
@@ -28,6 +30,7 @@ function DriverCarInfoModal({ isOpened, closeModal, onClick, info, isRatingAndPr
               rating={info.driver.rating}
               price={info.price}
               className={classes.block}
+              size={RATING_AND_PRICE_SIZES.MEDIUM}
             />
           )}
         </div>
