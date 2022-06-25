@@ -1,8 +1,15 @@
 @import url(/src/styles/colors.css);
 
+.header__wrapper {
+  position: sticky;
+  top: 50px;
+  z-index: 110;
+}
+
 .header {
   margin-top: 50px;
   width: 100%;
+  opacity: 0.9;
   background: #241d1e;
 }
 

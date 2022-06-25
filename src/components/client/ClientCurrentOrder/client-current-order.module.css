@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 80vh;
+  height: 100vh;
 }
 
 .block__description {
@@ -61,4 +61,6 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  position: absolute;
+  top: 200px;
 }
