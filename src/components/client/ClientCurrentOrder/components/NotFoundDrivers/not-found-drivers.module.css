@@ -1,5 +1,6 @@
 .wrapper__message {
-  position: fixed;
+  position: absolute;
+  top: 35%;
   width: 835px;
   padding: 10px 32px 10px 32px;
   background: var(--primary-color-rgba);
