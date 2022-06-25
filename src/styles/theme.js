@@ -63,7 +63,9 @@ const theme = createTheme({
         },
         sizeLarge: {
           fontSize: '80px'
-        }
+        },
+        sizeMedium: { fontSize: '45px' },
+        sizeSmall: { fontSize: '30px' }
       }
     },
     MuiCard: {
