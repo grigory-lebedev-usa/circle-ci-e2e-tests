@@ -56,9 +56,9 @@
 }
 
 .card__driver__container {
-  width: 1000px;
+  width: 990px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
