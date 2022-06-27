@@ -21,7 +21,7 @@ function Navigation({ isPrivatePage }) {
   };
 
   return (
-    <div>
+    <div className={classes.navigation__wrapper}>
       <div className={classes.dropdown__block}>
         <DropDown
           items={[
