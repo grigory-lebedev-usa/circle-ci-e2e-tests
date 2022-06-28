@@ -2,11 +2,11 @@ import React from 'react';
 
 import OrdersHistory from '../../OrdersHistory/OrdersHistory';
 
-import TableOrdersHistory from './components/TableOrdersHistory/TableOrdersHistory';
+import OrdersHistoryTable from './components/OrdersHistoryTable/OrdersHistoryTable';
 
 function DriverOrdersHistory() {
   const renderTableCallback = (items) => {
-    return <TableOrdersHistory items={items} />;
+    return <OrdersHistoryTable items={items} />;
   };
   return <OrdersHistory renderTable={renderTableCallback} />;
 }

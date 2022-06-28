@@ -19,13 +19,20 @@ import { RATING_AND_PRICE_SIZES } from '../client/ClientCurrentOrder/components/
 
 import classes from './driver-car-info-modal.module.css';
 
-function DriverCarInfoModal({ isOpened, closeModal, onClick, info, isRatingAndPrice, isButton }) {
+function DriverCarInfoModal({
+  isOpened,
+  closeModal,
+  onClick,
+  info,
+  hasRatingAndPrice,
+  hasAcceptButton
+}) {
   return (
     <Modal isOpened={isOpened} closeModal={closeModal} size={MODAL_SIZE.LARGE}>
       <div className={classes.modal__content}>
         <div>
           <img className={classes.img} src={info.driver.car.photo} alt="Car" />
-          {isRatingAndPrice && (
+          {hasRatingAndPrice && (
             <RatingAndPrice
               rating={info.driver.rating}
               price={info.price}
@@ -52,7 +59,7 @@ function DriverCarInfoModal({ isOpened, closeModal, onClick, info, isRatingAndPr
             <h4 className={classes.item__title}>Color:</h4>
             <p className={classes.item__text}>{info.driver.car.color}</p>
           </div>
-          {isButton && (
+          {hasAcceptButton && (
             <Button
               size={BUTTON_SIZES.MEDIUM}
               color={BUTTON_COLORS.SUCCESS}
@@ -75,8 +82,8 @@ DriverCarInfoModal.propTypes = {
   closeModal: PropTypes.func,
   onClick: PropTypes.func,
   info: OfferObjectPropType,
-  isRatingAndPrice: PropTypes.bool,
-  isButton: PropTypes.bool
+  hasRatingAndPrice: PropTypes.bool,
+  hasAcceptButton: PropTypes.bool
 };
 
 DriverCarInfoModal.defaultProps = {
@@ -84,8 +91,8 @@ DriverCarInfoModal.defaultProps = {
   closeModal: () => {},
   onClick: () => {},
   info: {},
-  isRatingAndPrice: true,
-  isButton: true
+  hasRatingAndPrice: true,
+  hasAcceptButton: true
 };
 
 export default DriverCarInfoModal;

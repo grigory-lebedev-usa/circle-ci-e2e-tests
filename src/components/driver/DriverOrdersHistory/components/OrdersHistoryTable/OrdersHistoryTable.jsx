@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { formatDate } from '../../../../helpers/helpers';
 
-function TableOrdersHistory({ items }) {
+function OrdersHistoryTable({ items }) {
   return (
     <Table sx={{ minWidth: '1100px', marginTop: '60px' }}>
       <TableHead>
@@ -32,9 +32,9 @@ function TableOrdersHistory({ items }) {
   );
 }
 
-TableOrdersHistory.propTypes = {
+OrdersHistoryTable.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   items: PropTypes.object.isRequired
 };
 
-export default TableOrdersHistory;
+export default OrdersHistoryTable;

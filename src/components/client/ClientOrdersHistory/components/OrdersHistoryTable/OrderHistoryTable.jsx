@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 import { formatDate } from '../../../../helpers/helpers';
 
-import ArrowButton from './components/ArrowButton/ArrowButton';
+import ArrowButtonReport from './components/ArrowButtonReport/ArrowButtonReport';
 
 import DriverCar from './components/DriverCar/DriverCar';
 
-function TableOrdersHistory({ items }) {
+function OrdersHistoryTable({ items }) {
   return (
     <Table sx={{ minWidth: '1100px', marginTop: '60px' }}>
       <TableHead>
@@ -32,7 +32,7 @@ function TableOrdersHistory({ items }) {
             </TableCell>
             <TableCell>{item.rating}</TableCell>
             <TableCell>${item.price}</TableCell>
-            <TableCell>{item.report ? <ArrowButton report={item.report} /> : ''}</TableCell>
+            <TableCell>{item.report ? <ArrowButtonReport report={item.report} /> : ''}</TableCell>
           </TableRow>
         ))}
       </TableBody>
@@ -40,9 +40,9 @@ function TableOrdersHistory({ items }) {
   );
 }
 
-TableOrdersHistory.propTypes = {
+OrdersHistoryTable.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   items: PropTypes.object.isRequired
 };
 
-export default TableOrdersHistory;
+export default OrdersHistoryTable;

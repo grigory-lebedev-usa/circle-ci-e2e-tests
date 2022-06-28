@@ -21,8 +21,8 @@ function DriverCar({ info }) {
         isOpened={isModalOpened}
         closeModal={closeModal}
         info={info}
-        isRatingAndPrice={false}
-        isButton={false}
+        hasRatingAndPrice={false}
+        hasButton={false}
       />
       {info.driver.firstName} {info.driver.lastName}
       <Button
