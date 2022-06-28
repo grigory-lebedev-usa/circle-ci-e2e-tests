@@ -1,11 +1,11 @@
-import React from 'react';
+import { memo } from 'react';
 
 import PropTypes from 'prop-types';
 import { Button as MuiButton } from '@mui/material';
 
 import { BUTTON_SIZES, BUTTON_TYPES, BUTTON_VARIANTS } from './button.constants';
 
-const Button = React.memo(function Button({
+const Button = memo(function Button({
   children,
   size,
   color,

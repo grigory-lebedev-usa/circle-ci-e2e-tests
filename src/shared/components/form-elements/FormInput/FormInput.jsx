@@ -20,15 +20,7 @@ import { computedInputType, INPUT_TYPES } from './form-input.constants';
 import VisibilityOff from './components/VisibilityOff/VisibilityOff';
 import Visibility from './components/Visibility/Visibility';
 
-const FormInput = React.memo(function FormInput({
-  name,
-  rules,
-  type,
-  className,
-  error,
-  placeholder,
-  control
-}) {
+function FormInput({ name, rules, type, className, error, placeholder, control }) {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = () => {
@@ -75,7 +67,7 @@ const FormInput = React.memo(function FormInput({
       rules={rules}
     />
   );
-});
+}
 
 FormInput.propTypes = {
   name: PropTypes.string.isRequired,

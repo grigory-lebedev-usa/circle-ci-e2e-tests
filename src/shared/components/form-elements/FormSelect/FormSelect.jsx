@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 
 import { Controller } from 'react-hook-form';
 import PropTypes from 'prop-types';
@@ -16,7 +16,7 @@ import { DropDownPropType } from '../../../prop-types';
 
 import classes from './form-select.module.css';
 
-const FormSelect = React.memo(function FormSelect({
+const FormSelect = memo(function FormSelect({
   name,
   label,
   items,
