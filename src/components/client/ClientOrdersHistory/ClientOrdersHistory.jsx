@@ -2,11 +2,11 @@ import React from 'react';
 
 import OrdersHistory from '../../OrdersHistory/OrdersHistory';
 
-import OrderHistoryTable from './components/OrdersHistoryTable/OrderHistoryTable';
+import OrdersHistoryTable from './components/OrdersHistoryTable/OrdersHistoryTable';
 
 function ClientOrdersHistory() {
   const renderTableCallback = (items) => {
-    return <OrderHistoryTable items={items} />;
+    return <OrdersHistoryTable items={items} />;
   };
   return <OrdersHistory renderTable={renderTableCallback} />;
 }
