@@ -2,8 +2,8 @@ import { useReducer } from 'react';
 
 import { useDispatch } from 'react-redux';
 
-import { NOTIFICATION_ADD } from '../../../actions/notification/notification.actions';
 import { API_ROUTES } from '../../../constants/api.constants';
+import { addNotification } from '../../../reducers/notifications.slice';
 import { axiosService } from '../../../services/axios.service';
 import { NOTIFICATION_TYPES } from '../../../shared/components/Notifications/components/Notification/notification.constants';
 
@@ -20,7 +20,9 @@ export function useReports() {
       dispatchReports(REPORTS_REQUEST_START);
       await axiosService.post(API_ROUTES.REPORT, { comment, tripId, driverId });
     } catch (error) {
-      dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
+      dispatch(
+        addNotification({ type: NOTIFICATION_TYPES.ERROR, message: error.response.data.message })
+      );
     }
   };
 
@@ -35,7 +37,9 @@ export function useReports() {
       });
       dispatchReports(REPORTS_GET_SUCCESS(reportsInfo));
     } catch (error) {
-      dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
+      dispatch(
+        addNotification({ type: NOTIFICATION_TYPES.ERROR, message: error.response.data.message })
+      );
     }
   };
 

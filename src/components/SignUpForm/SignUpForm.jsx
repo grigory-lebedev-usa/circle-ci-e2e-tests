@@ -16,13 +16,13 @@ import Button from '../../shared/components/Button/Button';
 
 import { USER_ROLES } from '../../constants/user-roles.constants';
 
-import { USER_REGISTRATION } from '../../actions/user/user.actions';
-
 import { PUBLIC_ROUTES } from '../../constants/app.constants';
 
-import { NOTIFICATION_ADD } from '../../actions/notification/notification.actions';
-
 import { NOTIFICATION_TYPES } from '../../shared/components/Notifications/components/Notification/notification.constants';
+
+import { registrationUser } from '../../reducers/user.slice';
+
+import { addNotification } from '../../reducers/notifications.slice';
 
 import classes from './sign-up-form.module.css';
 import { defaultRegisterValues } from './sign-up-form.constants';
@@ -51,14 +51,16 @@ function SignUpForm() {
     const { confirmPassword, ...driverState } = data;
     try {
       if (isHasSectionDriver) {
-        await dispatch(USER_REGISTRATION(driverState));
+        await dispatch(registrationUser(driverState));
       } else {
         const { car, ...clientState } = driverState;
-        await dispatch(USER_REGISTRATION(clientState));
+        await dispatch(registrationUser(clientState));
       }
       navigate(PUBLIC_ROUTES.LOGIN);
     } catch (error) {
-      dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
+      dispatch(
+        addNotification({ type: NOTIFICATION_TYPES.ERROR, message: error.response.data.message })
+      );
     }
   };
 

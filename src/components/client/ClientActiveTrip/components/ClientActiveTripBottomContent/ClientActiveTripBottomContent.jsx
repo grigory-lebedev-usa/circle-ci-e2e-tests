@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-import { tripsSelector } from '../../../../../selectors/trips.selectors';
+import { tripsSelector } from '../../../../../reducers/trips.slice';
 
 import classes from './client-active-trip-bottom-content.module.css';
 

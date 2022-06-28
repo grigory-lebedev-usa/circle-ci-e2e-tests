@@ -3,8 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Pagination } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { TRIPS_GET } from '../../actions/trips/trips.actions';
-import { inactiveTripsSelector } from '../../selectors/trips.selectors';
+import { getTrips, inactiveTripsSelector } from '../../reducers/trips.slice';
 
 function OrdersHistory() {
   const dispatch = useDispatch();
@@ -12,7 +11,7 @@ function OrdersHistory() {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    dispatch(TRIPS_GET(page, 2));
+    dispatch(getTrips(page, 2));
   }, [dispatch, page]);
 
   const handleChange = async (event, value) => {

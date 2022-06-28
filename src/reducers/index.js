@@ -1,15 +1,13 @@
 import { combineReducers } from 'redux';
 
-import { userReducer } from './user.reducer';
-import { spinnerReducer } from './spinner.reducer';
-import { notificationsReducer } from './notifications.reducer';
-import { tripsReducer } from './trips.reducer';
+import notificationsSlice from './notifications.slice';
+import tripsSlice from './trips.slice';
+import userSlice from './user.slice';
 
 const rootReducer = combineReducers({
-  notifications: notificationsReducer,
-  spinner: spinnerReducer,
-  user: userReducer,
-  trips: tripsReducer
+  notifications: notificationsSlice,
+  user: userSlice,
+  trips: tripsSlice
 });
 
 export default rootReducer;

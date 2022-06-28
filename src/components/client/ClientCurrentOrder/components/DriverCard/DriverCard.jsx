@@ -13,13 +13,13 @@ import {
 
 import { PRIVATE_ROUTES } from '../../../../../constants/app.constants';
 
-import { ACTIVE_TRIP_GET, TRIP_CREATE } from '../../../../../actions/trips/trips.actions';
-
 import { useModal } from '../../../../../shared/hooks/useModal';
 
 import AcceptOfferConfirmationModal from '../../../../../shared/components/ConfirmationModal/ConfirmationModal';
 
 import { OfferObjectPropType } from '../../../../../shared/prop-types';
+
+import { getActiveTrip, createTrip } from '../../../../../reducers/trips.slice';
 
 import classes from './driver-card.module.css';
 import RatingAndPrice from './components/RatingAndPrice/RatingAndPrice';
@@ -44,8 +44,8 @@ function DriverCard({ offer }) {
   const handleSubmitOffer = async (id) => {
     closeModal();
     closeAcceptOfferConfirmationModal();
-    await dispatch(TRIP_CREATE({ offerId: id }));
-    await dispatch(ACTIVE_TRIP_GET());
+    await dispatch(createTrip({ offerId: id }));
+    await dispatch(getActiveTrip());
     navigate(PRIVATE_ROUTES.TRIP);
   };
 

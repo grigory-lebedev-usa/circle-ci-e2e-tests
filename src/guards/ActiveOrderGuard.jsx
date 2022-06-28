@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
 
 import { PRIVATE_ROUTES } from '../constants/app.constants';
-import { userSelector } from '../selectors/user.selectors';
+import { userSelector } from '../reducers/user.slice';
 
 function ActiveOrderGuard({ children }) {
   const {

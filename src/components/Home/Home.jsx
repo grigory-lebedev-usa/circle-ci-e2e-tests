@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
-import { userSelector } from '../../selectors/user.selectors';
+import { userSelector } from '../../reducers/user.slice';
 
 import classes from './home.module.css';
 

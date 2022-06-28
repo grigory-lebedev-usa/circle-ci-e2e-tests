@@ -8,7 +8,7 @@ import { PRIVATE_ROUTES, REQUEST_STATUS } from '../../constants/app.constants';
 
 import ProgressSpinner from '../../shared/components/ProgressSpinner/ProgressSpinner';
 
-import { tripsSelector } from '../../selectors/trips.selectors';
+import { tripsSelector } from '../../reducers/trips.slice';
 
 import classes from './active-trip.module.css';
 

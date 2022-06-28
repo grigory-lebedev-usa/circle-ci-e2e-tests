@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -10,7 +10,7 @@ import FormInput from '../../shared/components/form-elements/FormInput/FormInput
 import FormCheckbox from '../../shared/components/form-elements/FormCheckbox/FormCheckbox';
 import { INPUT_TYPES } from '../../shared/components/form-elements/FormInput/form-input.constants';
 import Link from '../../shared/components/Link/Link';
-import { PRIVATE_ROUTES, PUBLIC_ROUTES } from '../../constants/app.constants';
+import { PRIVATE_ROUTES, PUBLIC_ROUTES, REQUEST_STATUS } from '../../constants/app.constants';
 import Button from '../../shared/components/Button/Button';
 import { OPTIONS_VALIDATE } from '../helpers/OPTIONS_VALIDATE';
 import {
@@ -19,12 +19,15 @@ import {
   BUTTON_VARIANTS
 } from '../../shared/components/Button/button.constants';
 
-import { USER_LOGIN } from '../../actions/user/user.actions';
-
 import LocalStorageService from '../../services/LocalStorageService';
-import { NOTIFICATION_ADD } from '../../actions/notification/notification.actions';
 
 import { NOTIFICATION_TYPES } from '../../shared/components/Notifications/components/Notification/notification.constants';
+
+import { loginUser, userSelector } from '../../reducers/user.slice';
+
+import { addNotification } from '../../reducers/notifications.slice';
+
+import ProgressSpinner from '../../shared/components/ProgressSpinner/ProgressSpinner';
 
 import { defaultLoginValues } from './sign-in-form.constants';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
@@ -35,6 +38,7 @@ function SignInForm() {
   const [isOpenedForgotPassword, setIsOpenedForgotPassword] = useState(false);
   const [isKeepLoggedInChecked, setIsKeepLoggedInChecked] = useState(false);
   const dispatch = useDispatch();
+  const { status } = useSelector(userSelector);
   const navigate = useNavigate();
   const {
     handleSubmit,
@@ -53,17 +57,21 @@ function SignInForm() {
     setIsOpenedForgotPassword(false);
   };
 
-  const onSubmit = async ({ email, password }) => {
-    try {
-      await dispatch(USER_LOGIN({ email: email.toLowerCase(), password }));
-      if (isKeepLoggedInChecked) {
-        LocalStorageService.keepUserLoginIn = isKeepLoggedInChecked;
-      }
-      navigate(PRIVATE_ROUTES.HOME);
-    } catch (error) {
-      dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
+  const onSubmit = ({ email, password }) => {
+    dispatch(loginUser({ email: email.toLowerCase(), password }))
+      .unwrap()
+      .then(() => navigate(PRIVATE_ROUTES.HOME))
+      .catch(({ message }) =>
+        dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }))
+      );
+    if (isKeepLoggedInChecked) {
+      LocalStorageService.keepUserLoginIn = isKeepLoggedInChecked;
     }
   };
+
+  if (status === REQUEST_STATUS.LOADING) {
+    return <ProgressSpinner isShow />;
+  }
 
   return (
     <div>

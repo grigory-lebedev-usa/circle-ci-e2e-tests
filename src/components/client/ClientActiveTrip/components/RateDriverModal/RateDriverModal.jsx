@@ -22,17 +22,15 @@ import Textarea from '../../../../../shared/components/Textarea/Textarea';
 
 import { OPTIONS_VALIDATE } from '../../../../helpers/OPTIONS_VALIDATE';
 
-import { USER_GET, USER_TRIP_FINISHED } from '../../../../../actions/user/user.actions';
-
 import { useReports } from '../../../../../api/hooks/useReports/useReports';
-
-import { ACTIVE_TRIP_GET, TRIP_DELETE } from '../../../../../actions/trips/trips.actions';
 
 import { PRIVATE_ROUTES, REQUEST_STATUS } from '../../../../../constants/app.constants';
 
 import ProgressSpinner from '../../../../../shared/components/ProgressSpinner/ProgressSpinner';
 
-import { tripsSelector } from '../../../../../selectors/trips.selectors';
+import { finishedUserTrip, getUser } from '../../../../../reducers/user.slice';
+
+import { tripsSelector, getActiveTrip, deleteTrip } from '../../../../../reducers/trips.slice';
 
 import classes from './rate-driver-modal.module.css';
 
@@ -56,8 +54,8 @@ function RateDriverModal({ isOpened, closeModal }) {
 
   const onSubmit = async ({ rating, report }) => {
     const requests = [
-      dispatch(USER_TRIP_FINISHED(driverId, Number(rating * 2), tripId)),
-      dispatch(TRIP_DELETE(tripId))
+      dispatch(finishedUserTrip(driverId, Number(rating * 2), tripId)),
+      dispatch(deleteTrip(tripId))
     ];
 
     if (report) {
@@ -65,7 +63,7 @@ function RateDriverModal({ isOpened, closeModal }) {
     }
 
     await Promise.all(requests);
-    await Promise.all([dispatch(USER_GET()), dispatch(ACTIVE_TRIP_GET())]);
+    await Promise.all([dispatch(getUser()), dispatch(getActiveTrip())]);
 
     navigate(PRIVATE_ROUTES.HOME);
   };

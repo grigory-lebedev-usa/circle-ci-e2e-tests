@@ -15,7 +15,6 @@ import { USER_ROLES } from './constants/user-roles.constants';
 import DriverOrders from './components/driver/DriverOrders/DriverOrders';
 import HomeRoutes from './shared/components/Router/components/HomeRoutes/HomeRoutes';
 import NotFoundPage from './shared/components/NotFoundPage/NotFoundPage';
-import RootSpinner from './components/RootSpinner/RootSpinner';
 import RootNotifications from './components/RootNotifications/RootNotifications';
 import ActiveTripRoutes from './shared/components/Router/components/ActiveTripRoutes/ActiveTripRoutes';
 import ActiveOrderGuard from './guards/ActiveOrderGuard';
@@ -26,7 +25,6 @@ import OrdersHistory from './components/OrdersHistory/OrdersHistory';
 function App() {
   return (
     <div>
-      <RootSpinner />
       <RootNotifications />
       <PageWrapper>
         <Routes>

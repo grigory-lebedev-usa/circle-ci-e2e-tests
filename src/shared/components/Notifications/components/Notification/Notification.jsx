@@ -35,7 +35,7 @@ function Notification({ notification, onDelete }) {
       className={`${classes.notification} ${notificationClasses[notification.type]} 
       ${isClickedClose ? classes.notification_closed : ''}`}
     >
-      <p className={classes.notification__text}>{notification.text}</p>
+      <p className={classes.notification__text}>{notification.message}</p>
       <button
         type="button"
         className={classes.notification__close}
