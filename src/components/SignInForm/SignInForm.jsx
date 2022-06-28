@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -23,7 +23,7 @@ import LocalStorageService from '../../services/LocalStorageService';
 
 import { NOTIFICATION_TYPES } from '../../shared/components/Notifications/components/Notification/notification.constants';
 
-import { loginUser, userSelector } from '../../reducers/user.slice';
+import { loginUser } from '../../reducers/user.slice';
 
 import { addNotification } from '../../reducers/notifications.slice';
 
@@ -35,10 +35,10 @@ import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import classes from './sign-in-form.module.css';
 
 function SignInForm() {
+  const [loginRequestStatus, setLoginRequestStatus] = useState(REQUEST_STATUS.IDLE);
   const [isOpenedForgotPassword, setIsOpenedForgotPassword] = useState(false);
   const [isKeepLoggedInChecked, setIsKeepLoggedInChecked] = useState(false);
   const dispatch = useDispatch();
-  const { status } = useSelector(userSelector);
   const navigate = useNavigate();
   const {
     handleSubmit,
@@ -58,18 +58,23 @@ function SignInForm() {
   };
 
   const onSubmit = ({ email, password }) => {
+    setLoginRequestStatus(REQUEST_STATUS.LOADING);
     dispatch(loginUser({ email: email.toLowerCase(), password }))
       .unwrap()
-      .then(() => navigate(PRIVATE_ROUTES.HOME))
-      .catch(({ message }) =>
-        dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }))
-      );
+      .then(() => {
+        setLoginRequestStatus(REQUEST_STATUS.SUCCESS);
+        navigate(PRIVATE_ROUTES.HOME);
+      })
+      .catch(({ message }) => {
+        setLoginRequestStatus(REQUEST_STATUS.FAILED);
+        dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }));
+      });
     if (isKeepLoggedInChecked) {
       LocalStorageService.keepUserLoginIn = isKeepLoggedInChecked;
     }
   };
 
-  if (status === REQUEST_STATUS.LOADING) {
+  if (loginRequestStatus === REQUEST_STATUS.LOADING) {
     return <ProgressSpinner isShow />;
   }
 

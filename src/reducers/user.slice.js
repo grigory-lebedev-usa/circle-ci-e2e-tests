@@ -53,8 +53,8 @@ export const registrationUser = createAsyncThunk(
 
 export const finishedUserTrip = createAsyncThunk(
   'user/finished-trip',
-  async ({ userId, rating, tripId }) => {
-    await axiosService.patch(`${API_ROUTES.USER}/${userId}`, { rating, tripId });
+  async ({ driverId, rating, tripId }) => {
+    await axiosService.patch(`${API_ROUTES.USER}/${driverId}`, { rating, tripId });
   }
 );
 
@@ -124,19 +124,11 @@ const userSlice = createSlice({
       })
 
       .addCase(loginUser.fulfilled, (state) => {
-        state.status = REQUEST_STATUS.SUCCESS;
         state.isAuthenticated = true;
       })
 
       .addMatcher(
-        isPending(
-          getUser,
-          loginUser,
-          registrationUser,
-          resetUserPassword,
-          uploadUserPhoto,
-          finishedUserTrip
-        ),
+        isPending(getUser, registrationUser, resetUserPassword, uploadUserPhoto, finishedUserTrip),
         (state) => {
           state.status = REQUEST_STATUS.LOADING;
         }

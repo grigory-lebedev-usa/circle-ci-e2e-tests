@@ -11,7 +11,7 @@ function OrdersHistory() {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    dispatch(getTrips(page, 2));
+    dispatch(getTrips({ page, size: 2 }));
   }, [dispatch, page]);
 
   const handleChange = async (event, value) => {

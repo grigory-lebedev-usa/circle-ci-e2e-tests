@@ -54,7 +54,7 @@ function RateDriverModal({ isOpened, closeModal }) {
 
   const onSubmit = async ({ rating, report }) => {
     const requests = [
-      dispatch(finishedUserTrip(driverId, Number(rating * 2), tripId)),
+      dispatch(finishedUserTrip({ driverId, rating: Number(rating * 2), tripId })),
       dispatch(deleteTrip(tripId))
     ];
 

@@ -58,7 +58,7 @@ function ClientCurrentOrder() {
   }, [currentOrder, getOffers, getOrders, navigate]);
 
   if (
-    offerRequestStatus === REQUEST_STATUS.LOADING &&
+    offerRequestStatus === REQUEST_STATUS.LOADING ||
     orderRequestStatus === REQUEST_STATUS.LOADING
   ) {
     return <ProgressSpinner isShow />;

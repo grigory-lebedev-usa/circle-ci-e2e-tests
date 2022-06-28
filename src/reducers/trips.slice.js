@@ -30,12 +30,12 @@ export const INITIAL_STATE = {
 
 export const getTrips = createAsyncThunk(
   'trips/get',
-  // eslint-disable-next-line consistent-return
-  async ({ page, size, isActive = false }, { dispatch }) => {
+
+  async ({ page, size }, { dispatch, rejectWithValue }) => {
     try {
       const { data: tripInfo } = await axiosService.get(API_ROUTES.TRIP, {
         params: {
-          active: isActive,
+          active: false,
           page,
           size
         }
@@ -45,18 +45,18 @@ export const getTrips = createAsyncThunk(
       dispatch(
         addNotification({ type: NOTIFICATION_TYPES.ERROR, message: error.response.data.message })
       );
+      return rejectWithValue(error.response.data);
     }
   }
 );
 
 export const getActiveTrip = createAsyncThunk(
   'trips/get-active-trip',
-  // eslint-disable-next-line consistent-return
-  async ({ isActive = true }, { dispatch }) => {
+  async (_, { dispatch, rejectWithValue }) => {
     try {
       const { data: tripInfo } = await axiosService.get(API_ROUTES.TRIP, {
         params: {
-          active: isActive
+          active: true
         }
       });
       return tripInfo;
@@ -64,6 +64,7 @@ export const getActiveTrip = createAsyncThunk(
       dispatch(
         addNotification({ type: NOTIFICATION_TYPES.ERROR, message: error.response.data.message })
       );
+      return rejectWithValue(error.response.data);
     }
   }
 );
@@ -129,7 +130,7 @@ const tripsSlice = createSlice({
         state.status = REQUEST_STATUS.SUCCESS;
       })
 
-      .addMatcher(isRejected(getActiveTrip), (state) => {
+      .addMatcher(isRejected(getTrips, getActiveTrip, createTrip, deleteTrip), (state) => {
         state.status = REQUEST_STATUS.FAILED;
       })
 });

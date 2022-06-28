@@ -20,7 +20,7 @@ function PrivateRoute({ children, roles }) {
     return <Navigate to={PUBLIC_ROUTES.LOGIN} replace />;
   }
 
-  if (status === REQUEST_STATUS.LOADING) {
+  if (status === REQUEST_STATUS.LOADING || status === REQUEST_STATUS.IDLE) {
     return <ProgressSpinner isShow />;
   }
 
