@@ -34,6 +34,83 @@ const theme = createTheme({
     }
   },
   components: {
+    MuiTablePagination: {
+      styleOverrides: {
+        root: {
+          borderRight: 'none',
+          borderBottom: 'none'
+        },
+        displayedRows: {
+          display: 'none'
+        },
+        actions: {
+          display: 'none'
+        },
+        selectLabel: {
+          margin: 0,
+          fontFamily: 'Rasa, sans-serif',
+          fontWeight: 400,
+          fontSize: '30px',
+          lineHeight: '37px',
+          color: COLORS.WHITE
+        },
+        select: {
+          fontFamily: 'Rasa, sans-serif',
+          fontWeight: 400,
+          fontSize: '28px',
+          lineHeight: '34px',
+          color: COLORS.WHITE
+        },
+        selectIcon: {
+          color: COLORS.WHITE
+        }
+      }
+    },
+    MuiTableRow: {
+      styleOverrides: {
+        root: {
+          '&:last-child': {
+            '.MuiTableCell-root': {
+              borderBottom: 'none'
+            }
+          }
+        },
+        head: {
+          borderBottom: '1px solid #000'
+        }
+      }
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          fontWeight: 400,
+          fontSize: '28px',
+          lineHeight: '33px',
+          color: COLORS.WHITE,
+          textAlign: 'center',
+          borderBottom: '1px solid #000',
+          borderRight: '1px solid #000',
+          '&:last-child': {
+            borderRight: 'none'
+          }
+        },
+        head: {
+          fontWeight: 400,
+          fontSize: '36px',
+          lineHeight: '42px',
+          color: COLORS.WHITE,
+          textAlign: 'center'
+        }
+      }
+    },
+    MuiTable: {
+      styleOverrides: {
+        root: {
+          backgroundColor: 'rgba(196, 162, 103, 0.7)',
+          borderRadius: '8px'
+        }
+      }
+    },
     MuiPaginationItem: {
       styleOverrides: {
         root: {
@@ -202,10 +279,17 @@ const theme = createTheme({
         }
       }
     },
+    MuiSvgIcon: {
+      styleOverrides: {
+        fontSizeLarge: {
+          fontSize: '3rem'
+        }
+      }
+    },
     MuiIconButton: {
       styleOverrides: {
         root: {
-          marginRight: '-6px'
+          color: COLORS.WHITE
         }
       }
     },
