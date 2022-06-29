@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { PUBLIC_ROUTES, REQUEST_STATUS } from '../../../../constants/app.constants';
 import NotFoundPage from '../../NotFoundPage/NotFoundPage';
 import ProgressSpinner from '../../ProgressSpinner/ProgressSpinner';
-import { userSelector } from '../../../../reducers/user.slice';
+import { userSelector } from '../../../../slices/user.slice';
 
 function PrivateRoute({ children, roles }) {
   const {

@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 import { PRIVATE_ROUTES } from '../../../constants/app.constants';
-import { userSelector } from '../../../reducers/user.slice';
+import { userSelector } from '../../../slices/user.slice';
 
 import UploadDriverPhoto from './components/UploadDriverPhoto';
 

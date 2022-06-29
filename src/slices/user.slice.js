@@ -28,15 +28,19 @@ const INITIAL_STATE = {
   isAuthenticated: LocalStorageService.isAuthenticated
 };
 
-export const getUser = createAsyncThunk('user/get', async () => {
-  const { data: userInfo } = await axiosService.get(API_ROUTES.USER_ME);
-  LocalStorageService.role = userInfo.role;
-  return userInfo;
+export const getUser = createAsyncThunk('user/get', async (_, { rejectWithValue }) => {
+  try {
+    const { data: userInfo } = await axiosService.get(API_ROUTES.USER_ME);
+    LocalStorageService.role = userInfo.role;
+    return userInfo;
+  } catch (error) {
+    return rejectWithValue(error.response.data);
+  }
 });
 
 export const registrationUser = createAsyncThunk(
   'user/registration',
-  async (requestPayload, { dispatch }) => {
+  async (requestPayload, { dispatch, rejectWithValue }) => {
     try {
       await axiosService.post(API_ROUTES.REGISTER, requestPayload);
       dispatch(
@@ -46,7 +50,7 @@ export const registrationUser = createAsyncThunk(
         })
       );
     } catch (error) {
-      dispatch(addNotification(NOTIFICATION_TYPES.ERROR, error.response.data.message));
+      throw rejectWithValue(error.response.data);
     }
   }
 );

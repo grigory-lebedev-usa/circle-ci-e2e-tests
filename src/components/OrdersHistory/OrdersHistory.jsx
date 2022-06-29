@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { REQUEST_STATUS } from '../../constants/app.constants';
 import ProgressSpinner from '../../shared/components/ProgressSpinner/ProgressSpinner';
 
-import { getTrips, tripsSelector } from '../../reducers/trips.slice';
+import { getTrips, tripsSelector } from '../../slices/trips.slice';
 
 import classes from './orders-history.module.css';
 

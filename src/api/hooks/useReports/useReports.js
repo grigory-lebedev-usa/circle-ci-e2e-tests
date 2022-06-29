@@ -3,7 +3,7 @@ import { useReducer } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { API_ROUTES } from '../../../constants/api.constants';
-import { addNotification } from '../../../reducers/notifications.slice';
+import { addNotification } from '../../../slices/notifications.slice';
 import { axiosService } from '../../../services/axios.service';
 import { NOTIFICATION_TYPES } from '../../../shared/components/Notifications/components/Notification/notification.constants';
 

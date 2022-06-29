@@ -13,7 +13,7 @@ import {
   BUTTON_VARIANTS
 } from '../../../../shared/components/Button/button.constants';
 
-import { getUser, uploadUserPhoto, userSelector } from '../../../../reducers/user.slice';
+import { getUser, uploadUserPhoto, userSelector } from '../../../../slices/user.slice';
 
 import { inputType, src } from './upload-driver-photo.constants';
 

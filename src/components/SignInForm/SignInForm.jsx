@@ -23,9 +23,9 @@ import LocalStorageService from '../../services/LocalStorageService';
 
 import { NOTIFICATION_TYPES } from '../../shared/components/Notifications/components/Notification/notification.constants';
 
-import { loginUser } from '../../reducers/user.slice';
+import { loginUser } from '../../slices/user.slice';
 
-import { addNotification } from '../../reducers/notifications.slice';
+import { addNotification } from '../../slices/notifications.slice';
 
 import ProgressSpinner from '../../shared/components/ProgressSpinner/ProgressSpinner';
 
@@ -69,6 +69,7 @@ function SignInForm() {
         setLoginRequestStatus(REQUEST_STATUS.FAILED);
         dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }));
       });
+
     if (isKeepLoggedInChecked) {
       LocalStorageService.keepUserLoginIn = isKeepLoggedInChecked;
     }

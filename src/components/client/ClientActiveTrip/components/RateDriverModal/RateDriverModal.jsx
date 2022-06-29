@@ -28,9 +28,13 @@ import { PRIVATE_ROUTES, REQUEST_STATUS } from '../../../../../constants/app.con
 
 import ProgressSpinner from '../../../../../shared/components/ProgressSpinner/ProgressSpinner';
 
-import { finishedUserTrip, getUser } from '../../../../../reducers/user.slice';
+import { finishedUserTrip, getUser } from '../../../../../slices/user.slice';
 
-import { tripsSelector, getActiveTrip, deleteTrip } from '../../../../../reducers/trips.slice';
+import { tripsSelector, getActiveTrip, deleteTrip } from '../../../../../slices/trips.slice';
+
+import { addNotification } from '../../../../../slices/notifications.slice';
+
+import { NOTIFICATION_TYPES } from '../../../../../shared/components/Notifications/components/Notification/notification.constants';
 
 import classes from './rate-driver-modal.module.css';
 
@@ -53,17 +57,22 @@ function RateDriverModal({ isOpened, closeModal }) {
   };
 
   const onSubmit = async ({ rating, report }) => {
-    const requests = [
+    const finishTripRequests = [
       dispatch(finishedUserTrip({ driverId, rating: Number(rating * 2), tripId })),
       dispatch(deleteTrip(tripId))
     ];
 
     if (report) {
-      requests.push(createReport(report, tripId, driverId));
+      finishTripRequests.push(createReport(report, tripId, driverId));
     }
-
-    await Promise.all(requests);
-    await Promise.all([dispatch(getUser()), dispatch(getActiveTrip())]);
+    try {
+      await Promise.all(finishTripRequests);
+      await Promise.all([dispatch(getUser()), dispatch(getActiveTrip())]);
+    } catch (error) {
+      dispatch(
+        addNotification({ type: NOTIFICATION_TYPES.ERROR, message: error.response.data.message })
+      );
+    }
 
     navigate(PRIVATE_ROUTES.HOME);
   };

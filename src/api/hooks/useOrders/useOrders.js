@@ -6,7 +6,7 @@ import { NOTIFICATION_TYPES } from '../../../shared/components/Notifications/com
 import { API_ROUTES } from '../../../constants/api.constants';
 import { axiosService } from '../../../services/axios.service';
 
-import { addNotification } from '../../../reducers/notifications.slice';
+import { addNotification } from '../../../slices/notifications.slice';
 
 import { ORDERS_REQUEST_START, ORDERS_GET_SUCCESS } from './orders.actions';
 import { INITIAL_STATE } from './orders.constants';

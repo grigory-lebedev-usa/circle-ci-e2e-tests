@@ -24,7 +24,7 @@ import { useOrders } from '../../../api/hooks/useOrders/useOrders';
 
 import ProgressSpinner from '../../../shared/components/ProgressSpinner/ProgressSpinner';
 
-import { getUser } from '../../../reducers/user.slice';
+import { getUser } from '../../../slices/user.slice';
 
 import classes from './client-order.module.css';
 import { defaultOrderValues } from './client-order.constants';

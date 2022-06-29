@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import DropDown from '../../../../shared/components/DropDown/DropDown';
 import { PUBLIC_ROUTES } from '../../../../constants/app.constants';
 
-import { logoutUser } from '../../../../reducers/user.slice';
+import { logoutUser } from '../../../../slices/user.slice';
 
 import LocalStorageService from '../../../../services/LocalStorageService';
 

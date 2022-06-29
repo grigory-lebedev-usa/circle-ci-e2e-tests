@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { deleteNotification, notificationsSelector } from '../../reducers/notifications.slice';
+import { deleteNotification, notificationsSelector } from '../../slices/notifications.slice';
 
 import Notifications from '../../shared/components/Notifications/Notifications';
 

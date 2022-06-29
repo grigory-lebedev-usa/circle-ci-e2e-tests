@@ -30,7 +30,6 @@ export const INITIAL_STATE = {
 
 export const getTrips = createAsyncThunk(
   'trips/get',
-
   async ({ page, size }, { dispatch, rejectWithValue }) => {
     try {
       const { data: tripInfo } = await axiosService.get(API_ROUTES.TRIP, {
@@ -117,7 +116,7 @@ const tripsSlice = createSlice({
         state.inactiveTrips = { ...action.payload };
       })
 
-      .addCase(getActiveTrip.fulfilled, (state, action) => {
+      .addMatcher(isFulfilled(getActiveTrip), (state, action) => {
         state.status = REQUEST_STATUS.SUCCESS;
         state.activeTrip = { ...action.payload[0] };
       })

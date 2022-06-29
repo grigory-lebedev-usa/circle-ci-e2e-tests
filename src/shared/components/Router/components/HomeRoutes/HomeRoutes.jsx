@@ -7,7 +7,7 @@ import AdminHome from '../../../../../components/admin/AdminHome/AdminHome';
 import ActiveOrderGuard from '../../../../../guards/ActiveOrderGuard';
 import UploadPhotoGuard from '../../../../../guards/UploadPhotoGuard';
 import ActiveTripGuard from '../../../../../guards/ActiveTripGuard';
-import { userSelector } from '../../../../../reducers/user.slice';
+import { userSelector } from '../../../../../slices/user.slice';
 
 function HomeRoutes() {
   const {

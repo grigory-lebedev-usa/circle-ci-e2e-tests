@@ -11,7 +11,7 @@ import { OPTIONS_VALIDATE } from '../../../helpers/OPTIONS_VALIDATE';
 
 import { BUTTON_TYPES } from '../../../../shared/components/Button/button.constants';
 
-import { resetUserPassword } from '../../../../reducers/user.slice';
+import { resetUserPassword } from '../../../../slices/user.slice';
 
 import classes from './forgot-password.module.css';
 

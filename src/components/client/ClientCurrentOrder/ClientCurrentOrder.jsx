@@ -23,7 +23,11 @@ import CancelOrderConfirmationModal from '../../../shared/components/Confirmatio
 
 import { useModal } from '../../../shared/hooks/useModal';
 
-import { getUser, userSelector } from '../../../reducers/user.slice';
+import { getUser, userSelector } from '../../../slices/user.slice';
+
+import { addNotification } from '../../../slices/notifications.slice';
+
+import { NOTIFICATION_TYPES } from '../../../shared/components/Notifications/components/Notification/notification.constants';
 
 import classes from './client-current-order.module.css';
 import NotFoundDriver from './components/NotFoundDrivers/NotFoundDriver';
@@ -66,8 +70,15 @@ function ClientCurrentOrder() {
 
   const handleCancelOrder = async () => {
     closeConfirmationModal();
-    await deleteOrder(id);
-    await dispatch(getUser());
+    try {
+      await deleteOrder(id);
+      await dispatch(getUser());
+    } catch (error) {
+      dispatch(
+        addNotification({ type: NOTIFICATION_TYPES.ERROR, message: error.response.data.message })
+      );
+    }
+
     navigate(PRIVATE_ROUTES.HOME);
   };
 

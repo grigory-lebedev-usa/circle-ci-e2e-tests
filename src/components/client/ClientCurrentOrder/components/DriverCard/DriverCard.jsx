@@ -19,8 +19,12 @@ import AcceptOfferConfirmationModal from '../../../../../shared/components/Confi
 
 import { OfferObjectPropType } from '../../../../../shared/prop-types';
 
-import { getActiveTrip, createTrip } from '../../../../../reducers/trips.slice';
+import { getActiveTrip, createTrip } from '../../../../../slices/trips.slice';
 import DriverCarInfoModal from '../../../../DriverCarInfoModal/DriverCarInfoModal';
+
+import { addNotification } from '../../../../../slices/notifications.slice';
+
+import { NOTIFICATION_TYPES } from '../../../../../shared/components/Notifications/components/Notification/notification.constants';
 
 import classes from './driver-card.module.css';
 
@@ -46,8 +50,15 @@ function DriverCard({ offer }) {
   const handleSubmitOffer = async (id) => {
     closeModal();
     closeAcceptOfferConfirmationModal();
-    await dispatch(createTrip({ offerId: id }));
-    await dispatch(getActiveTrip());
+    try {
+      await dispatch(createTrip({ offerId: id }));
+      await dispatch(getActiveTrip());
+    } catch (error) {
+      dispatch(
+        addNotification({ type: NOTIFICATION_TYPES.ERROR, message: error.response.data.message })
+      );
+    }
+
     navigate(PRIVATE_ROUTES.TRIP);
   };
 
