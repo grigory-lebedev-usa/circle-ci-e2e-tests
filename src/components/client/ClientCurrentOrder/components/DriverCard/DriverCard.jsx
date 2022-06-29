@@ -20,10 +20,12 @@ import AcceptOfferConfirmationModal from '../../../../../shared/components/Confi
 import { OfferObjectPropType } from '../../../../../shared/prop-types';
 
 import { getActiveTrip, createTrip } from '../../../../../reducers/trips.slice';
+import DriverCarInfoModal from '../../../../DriverCarInfoModal/DriverCarInfoModal';
 
 import classes from './driver-card.module.css';
+
 import RatingAndPrice from './components/RatingAndPrice/RatingAndPrice';
-import DriverCarInfoModal from './components/DriverCarInfoModal/DriverCarInfoModal';
+
 import { RATING_AND_PRICE_SIZES } from './components/RatingAndPrice/rating-and-price.constants';
 
 function DriverCard({ offer }) {
@@ -36,9 +38,9 @@ function DriverCard({ offer }) {
   } = useModal();
   const navigate = useNavigate();
 
-  const handleCardClick = (e) => {
+  const handleAcceptOfferClick = (e) => {
     e.stopPropagation();
-    openModal();
+    openAcceptOfferConfirmationModal();
   };
 
   const handleSubmitOffer = async (id) => {
@@ -61,9 +63,9 @@ function DriverCard({ offer }) {
         isOpened={isModalOpened}
         closeModal={closeModal}
         onClick={openAcceptOfferConfirmationModal}
-        offer={offer}
+        info={offer}
       />
-      <div className={classes.card__container} role="button" tabIndex="0" onClick={handleCardClick}>
+      <div className={classes.card__container} role="button" tabIndex="0" onClick={openModal}>
         <img className={classes.img} src={offer.driver.car.photo} alt="Car" />
         <h3 className={classes.card__title_car}>
           {offer.driver.car.make} {offer.driver.car.model}
@@ -81,7 +83,7 @@ function DriverCard({ offer }) {
           variant={BUTTON_VARIANTS.CONTAINED}
           size={BUTTON_SIZES.EXTRA_SMALL}
           className={classes.block__button}
-          onClick={openAcceptOfferConfirmationModal}
+          onClick={handleAcceptOfferClick}
         >
           Accept
         </Button>

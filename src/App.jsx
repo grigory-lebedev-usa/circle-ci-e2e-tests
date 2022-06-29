@@ -20,7 +20,7 @@ import ActiveTripRoutes from './shared/components/Router/components/ActiveTripRo
 import ActiveOrderGuard from './guards/ActiveOrderGuard';
 import UploadPhotoGuard from './guards/UploadPhotoGuard';
 import ActiveTripGuard from './guards/ActiveTripGuard';
-import OrdersHistory from './components/OrdersHistory/OrdersHistory';
+import OrdersHistoryRoutes from './shared/components/Router/components/OrdersHistoryRoutes/OrdersHistoryRoutes';
 
 function App() {
   return (
@@ -88,7 +88,7 @@ function App() {
             path={PRIVATE_ROUTES.ORDERS_HISTORY}
             element={
               <PrivateRoute roles={[USER_ROLES.DRIVER, USER_ROLES.CLIENT]}>
-                <OrdersHistory />
+                <OrdersHistoryRoutes />
               </PrivateRoute>
             }
           />

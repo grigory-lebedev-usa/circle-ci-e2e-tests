@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import { Controller } from 'react-hook-form';
 import PropTypes from 'prop-types';
 
@@ -14,7 +16,15 @@ import { DropDownPropType } from '../../../prop-types';
 
 import classes from './form-select.module.css';
 
-function FormSelect({ name, label, items, className, error, control, rules }) {
+const FormSelect = memo(function FormSelect({
+  name,
+  label,
+  items,
+  className,
+  error,
+  control,
+  rules
+}) {
   return (
     <Controller
       render={({ field }) => (
@@ -42,7 +52,7 @@ function FormSelect({ name, label, items, className, error, control, rules }) {
       rules={rules}
     />
   );
-}
+});
 
 FormSelect.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types

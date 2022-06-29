@@ -56,7 +56,7 @@ function ActiveTrip({ bottomContent, bottomActions }) {
                 <div className={classes.info__item}>
                   <p className={classes.info__title}>Car:</p>
                   <p className={classes.info__text}>
-                    {activeTrip.driver.car.color} {activeTrip.driver.car.make}
+                    {activeTrip.driver.car.color} {activeTrip.driver.car.make}{' '}
                     {activeTrip.driver.car.model} {activeTrip.driver.car.year}
                   </p>
                 </div>
