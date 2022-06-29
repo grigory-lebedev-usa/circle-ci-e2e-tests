@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 
-import { Pagination, TablePagination } from '@mui/material';
+import { Pagination } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { REQUEST_STATUS } from '../../constants/app.constants';
 import ProgressSpinner from '../../shared/components/ProgressSpinner/ProgressSpinner';
 
 import { getTrips, tripsSelector } from '../../slices/trips.slice';
+import DropDown from '../../shared/components/DropDown/DropDown';
+
+import { computedCount } from '../helpers/helpers';
 
 import classes from './orders-history.module.css';
 
@@ -23,7 +26,7 @@ function OrdersHistory({ renderTable }) {
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   useEffect(() => {
-    setCount(Math.round(total / rowsPerPage));
+    setCount(computedCount(total, rowsPerPage));
     dispatch(getTrips({ page: page - 1, size: rowsPerPage }));
   }, [dispatch, page, rowsPerPage, total]);
 
@@ -35,8 +38,8 @@ function OrdersHistory({ renderTable }) {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+  const handleChangeRowsPerPage = (item) => {
+    setRowsPerPage(item.value);
     setPage(1);
   };
 
@@ -46,12 +49,20 @@ function OrdersHistory({ renderTable }) {
         <h2 className={classes.title}>Order’s History</h2>
       </div>
       <div className={classes.line} />
-      <TablePagination
-        sx={{ position: 'absolute', right: 0, top: 0 }}
-        rowsPerPageOptions={[5, 10, 15, 20]}
-        rowsPerPage={rowsPerPage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
+      <div className={classes.dropdown__block}>
+        <div className={classes.dropdown__title}>Items per page</div>
+        <DropDown
+          value={rowsPerPage}
+          onListItemClick={handleChangeRowsPerPage}
+          items={[
+            { id: 1, value: 5 },
+            { id: 2, value: 10 },
+            { id: 3, value: 15 },
+            { id: 4, value: 20 }
+          ]}
+        />
+      </div>
+
       {renderTable(items)}
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
         <Pagination

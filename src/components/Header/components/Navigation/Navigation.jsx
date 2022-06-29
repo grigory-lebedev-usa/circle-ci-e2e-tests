@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
@@ -15,8 +15,13 @@ import LocalStorageService from '../../../../services/LocalStorageService';
 import classes from './navigation.module.css';
 
 function Navigation({ isPrivatePage }) {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [valueDropDown, setValueDropDown] = useState('English');
+
+  const handleDropDownChange = (item) => {
+    setValueDropDown(item.value);
+  };
 
   const handleLogout = () => {
     dispatch(logoutUser());
@@ -28,6 +33,8 @@ function Navigation({ isPrivatePage }) {
     <div className={classes.navigation__wrapper}>
       <div className={classes.dropdown__block}>
         <DropDown
+          value={valueDropDown}
+          onListItemClick={handleDropDownChange}
           items={[
             { id: 1, value: 'English' },
             { id: 2, value: 'Russian' },

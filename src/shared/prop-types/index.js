@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 export const DropDownPropType = PropTypes.shape({
   id: PropTypes.number,
-  value: PropTypes.string
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 });
 
 export const OrderObjectPropType = PropTypes.shape({

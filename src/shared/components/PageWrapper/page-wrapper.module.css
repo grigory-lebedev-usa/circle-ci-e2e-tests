@@ -1,5 +1,6 @@
 .wrapper {
   overflow: auto;
+  overflow-x: hidden;
   position: absolute;
   left: 0;
   right: 0;

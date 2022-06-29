@@ -24,3 +24,21 @@
   border: 5px solid var(--primary-color);
   background-color: var(--primary-color);
 }
+
+.dropdown__block {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.dropdown__title {
+  font-family: 'Rasa';
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 37px;
+  color: #fff;
+  margin-right: 10px;
+}
