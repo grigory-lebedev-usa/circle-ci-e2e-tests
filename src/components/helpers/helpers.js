@@ -15,3 +15,13 @@ export const formatDate = (createdAt) => {
 
   return `${day}.${month}.${year}`;
 };
+
+export const computedCount = (total, rowsPerPage) => {
+  if (Number.isNaN(Math.round(total / rowsPerPage))) {
+    return 0;
+  }
+  if (Math.round(total / rowsPerPage) < 1) {
+    return 1;
+  }
+  return Math.round(total / rowsPerPage);
+};

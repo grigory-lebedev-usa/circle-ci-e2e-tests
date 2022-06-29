@@ -34,7 +34,7 @@ function OrdersHistoryTable({ items }) {
 
 OrdersHistoryTable.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  items: PropTypes.object.isRequired
+  items: PropTypes.array.isRequired
 };
 
 export default OrdersHistoryTable;
