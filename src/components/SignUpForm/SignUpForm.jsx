@@ -61,7 +61,12 @@ function SignUpForm() {
         .unwrap()
         .then(() => navigate(PUBLIC_ROUTES.LOGIN))
         .catch(({ message }) =>
-          dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }))
+          dispatch(
+            addNotification({
+              type: NOTIFICATION_TYPES.ERROR,
+              message
+            })
+          )
         );
     } else {
       const { car, ...clientState } = driverState;
@@ -69,7 +74,12 @@ function SignUpForm() {
         .unwrap()
         .then(() => navigate(PUBLIC_ROUTES.LOGIN))
         .catch(({ message }) =>
-          dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }))
+          dispatch(
+            addNotification({
+              type: NOTIFICATION_TYPES.ERROR,
+              message
+            })
+          )
         );
     }
   };

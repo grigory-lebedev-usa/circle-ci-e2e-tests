@@ -50,7 +50,9 @@ export const registrationUser = createAsyncThunk(
         })
       );
     } catch (error) {
-      throw rejectWithValue(error.response.data);
+      if (error.response) {
+        throw rejectWithValue(error.response.data);
+      }
     }
   }
 );
