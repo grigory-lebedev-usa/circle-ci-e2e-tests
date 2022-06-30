@@ -10,7 +10,7 @@ import FormInput from '../../shared/components/form-elements/FormInput/FormInput
 import FormCheckbox from '../../shared/components/form-elements/FormCheckbox/FormCheckbox';
 import { INPUT_TYPES } from '../../shared/components/form-elements/FormInput/form-input.constants';
 import Link from '../../shared/components/Link/Link';
-import { PRIVATE_ROUTES, PUBLIC_ROUTES } from '../../constants/app.constants';
+import { PRIVATE_ROUTES, PUBLIC_ROUTES, REQUEST_STATUS } from '../../constants/app.constants';
 import Button from '../../shared/components/Button/Button';
 import { OPTIONS_VALIDATE } from '../helpers/OPTIONS_VALIDATE';
 import {
@@ -19,12 +19,15 @@ import {
   BUTTON_VARIANTS
 } from '../../shared/components/Button/button.constants';
 
-import { USER_LOGIN } from '../../actions/user/user.actions';
-
 import LocalStorageService from '../../services/LocalStorageService';
-import { NOTIFICATION_ADD } from '../../actions/notification/notification.actions';
 
 import { NOTIFICATION_TYPES } from '../../shared/components/Notifications/components/Notification/notification.constants';
+
+import { loginUser } from '../../slices/user.slice';
+
+import { addNotification } from '../../slices/notifications.slice';
+
+import ProgressSpinner from '../../shared/components/ProgressSpinner/ProgressSpinner';
 
 import { defaultLoginValues } from './sign-in-form.constants';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
@@ -32,6 +35,7 @@ import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import classes from './sign-in-form.module.css';
 
 function SignInForm() {
+  const [loginRequestStatus, setLoginRequestStatus] = useState(REQUEST_STATUS.IDLE);
   const [isOpenedForgotPassword, setIsOpenedForgotPassword] = useState(false);
   const [isKeepLoggedInChecked, setIsKeepLoggedInChecked] = useState(false);
   const dispatch = useDispatch();
@@ -53,17 +57,27 @@ function SignInForm() {
     setIsOpenedForgotPassword(false);
   };
 
-  const onSubmit = async ({ email, password }) => {
-    try {
-      await dispatch(USER_LOGIN({ email: email.toLowerCase(), password }));
-      if (isKeepLoggedInChecked) {
-        LocalStorageService.keepUserLoginIn = isKeepLoggedInChecked;
-      }
-      navigate(PRIVATE_ROUTES.HOME);
-    } catch (error) {
-      dispatch(NOTIFICATION_ADD(NOTIFICATION_TYPES.ERROR, error.response.data.message));
+  const onSubmit = ({ email, password }) => {
+    setLoginRequestStatus(REQUEST_STATUS.LOADING);
+    dispatch(loginUser({ email: email.toLowerCase(), password }))
+      .unwrap()
+      .then(() => {
+        setLoginRequestStatus(REQUEST_STATUS.SUCCESS);
+        navigate(PRIVATE_ROUTES.HOME);
+      })
+      .catch(({ message }) => {
+        setLoginRequestStatus(REQUEST_STATUS.FAILED);
+        dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }));
+      });
+
+    if (isKeepLoggedInChecked) {
+      LocalStorageService.keepUserLoginIn = isKeepLoggedInChecked;
     }
   };
+
+  if (loginRequestStatus === REQUEST_STATUS.LOADING) {
+    return <ProgressSpinner isShow />;
+  }
 
   return (
     <div>

@@ -5,14 +5,16 @@ import PropTypes from 'prop-types';
 import { Pagination } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { TRIPS_GET } from '../../actions/trips/trips.actions';
-import { tripsSelector } from '../../selectors/trips.selectors';
 import { REQUEST_STATUS } from '../../constants/app.constants';
 import ProgressSpinner from '../../shared/components/ProgressSpinner/ProgressSpinner';
 
+import { getTrips, tripsSelector } from '../../slices/trips.slice';
 import DropDown from '../../shared/components/DropDown/DropDown';
 
 import { computedCount } from '../helpers/helpers';
+
+import { addNotification } from '../../slices/notifications.slice';
+import { NOTIFICATION_TYPES } from '../../shared/components/Notifications/components/Notification/notification.constants';
 
 import classes from './orders-history.module.css';
 
@@ -28,7 +30,11 @@ function OrdersHistory({ renderTable }) {
 
   useEffect(() => {
     setCount(computedCount(total, rowsPerPage));
-    dispatch(TRIPS_GET(page - 1, rowsPerPage));
+    dispatch(getTrips({ page: page - 1, size: rowsPerPage }))
+      .unwrap()
+      .catch(({ message }) =>
+        dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }))
+      );
   }, [dispatch, page, rowsPerPage, total]);
 
   if (status === REQUEST_STATUS.LOADING) {

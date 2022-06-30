@@ -52,7 +52,7 @@ DropDown.propTypes = {
 
 DropDown.defaultProps = {
   onListItemClick: () => {},
-  value: [0, 'English']
+  value: 0
 };
 
 export default DropDown;

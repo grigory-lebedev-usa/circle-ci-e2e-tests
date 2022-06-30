@@ -12,7 +12,6 @@ import {
   BUTTON_VARIANTS
 } from '../../../shared/components/Button/button.constants';
 import { PRIVATE_ROUTES, REQUEST_STATUS } from '../../../constants/app.constants';
-import { USER_GET } from '../../../actions/user/user.actions';
 
 import { useOffers } from '../../../api/hooks/useOffers/useOffers';
 
@@ -20,10 +19,15 @@ import { useOrders } from '../../../api/hooks/useOrders/useOrders';
 
 import ProgressSpinner from '../../../shared/components/ProgressSpinner/ProgressSpinner';
 
-import { userSelector } from '../../../selectors/user.selectors';
 import CancelOrderConfirmationModal from '../../../shared/components/ConfirmationModal/ConfirmationModal';
 
 import { useModal } from '../../../shared/hooks/useModal';
+
+import { getUser, userSelector } from '../../../slices/user.slice';
+
+import { addNotification } from '../../../slices/notifications.slice';
+
+import { NOTIFICATION_TYPES } from '../../../shared/components/Notifications/components/Notification/notification.constants';
 
 import classes from './client-current-order.module.css';
 import NotFoundDriver from './components/NotFoundDrivers/NotFoundDriver';
@@ -58,7 +62,7 @@ function ClientCurrentOrder() {
   }, [currentOrder, getOffers, getOrders, navigate]);
 
   if (
-    offerRequestStatus === REQUEST_STATUS.LOADING &&
+    offerRequestStatus === REQUEST_STATUS.LOADING ||
     orderRequestStatus === REQUEST_STATUS.LOADING
   ) {
     return <ProgressSpinner isShow />;
@@ -66,8 +70,14 @@ function ClientCurrentOrder() {
 
   const handleCancelOrder = async () => {
     closeConfirmationModal();
+
     await deleteOrder(id);
-    await dispatch(USER_GET());
+    await dispatch(getUser())
+      .unwrap()
+      .catch(({ message }) => {
+        dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }));
+      });
+
     navigate(PRIVATE_ROUTES.HOME);
   };
 

@@ -7,8 +7,7 @@ import DriverOrdersHistory from '../../../../../components/driver/DriverOrdersHi
 import { PUBLIC_ROUTES } from '../../../../../constants/app.constants';
 
 import { USER_ROLES } from '../../../../../constants/user-roles.constants';
-
-import { userSelector } from '../../../../../selectors/user.selectors';
+import { userSelector } from '../../../../../slices/user.slice';
 
 function OrdersHistoryRoutes() {
   const {

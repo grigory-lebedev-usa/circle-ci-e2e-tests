@@ -1,12 +1,16 @@
 import { useState } from 'react';
 
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
+import { useDispatch } from 'react-redux';
 
 import DropDown from '../../../../shared/components/DropDown/DropDown';
 import { PUBLIC_ROUTES } from '../../../../constants/app.constants';
-import { USER_LOGOUT } from '../../../../actions/user/user.actions';
+
+import { logoutUser } from '../../../../slices/user.slice';
+
+import LocalStorageService from '../../../../services/LocalStorageService';
 
 import classes from './navigation.module.css';
 
@@ -20,7 +24,8 @@ function Navigation({ isPrivatePage }) {
   };
 
   const handleLogout = () => {
-    dispatch(USER_LOGOUT());
+    dispatch(logoutUser());
+    LocalStorageService.clear();
     navigate(PUBLIC_ROUTES.LOGIN);
   };
 

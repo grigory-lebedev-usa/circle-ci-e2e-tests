@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 import { PRIVATE_ROUTES, REQUEST_STATUS } from '../constants/app.constants';
-import { tripsSelector } from '../selectors/trips.selectors';
+import { tripsSelector } from '../slices/trips.slice';
 import ProgressSpinner from '../shared/components/ProgressSpinner/ProgressSpinner';
 
 function ActiveTripGuard({ children }) {

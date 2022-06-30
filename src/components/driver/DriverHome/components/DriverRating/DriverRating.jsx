@@ -1,7 +1,7 @@
 import { Rating } from '@mui/material';
 import { useSelector } from 'react-redux';
 
-import { userSelector } from '../../../../../selectors/user.selectors';
+import { userSelector } from '../../../../../slices/user.slice';
 
 import classes from './driver-rating.module.css';
 

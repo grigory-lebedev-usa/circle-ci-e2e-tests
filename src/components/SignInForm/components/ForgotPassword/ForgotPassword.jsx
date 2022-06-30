@@ -9,9 +9,12 @@ import { INPUT_TYPES } from '../../../../shared/components/form-elements/FormInp
 import FormInput from '../../../../shared/components/form-elements/FormInput/FormInput';
 import { OPTIONS_VALIDATE } from '../../../helpers/OPTIONS_VALIDATE';
 
-import { USER_RESET_PASSWORD } from '../../../../actions/user/user.actions';
-
 import { BUTTON_TYPES } from '../../../../shared/components/Button/button.constants';
+
+import { resetUserPassword } from '../../../../slices/user.slice';
+
+import { addNotification } from '../../../../slices/notifications.slice';
+import { NOTIFICATION_TYPES } from '../../../../shared/components/Notifications/components/Notification/notification.constants';
 
 import classes from './forgot-password.module.css';
 
@@ -24,7 +27,11 @@ function ForgotPassword({ isOpened, onClose }) {
   } = useForm({ defaultValues: { email: '' }, mode: 'onTouched' });
 
   const onSubmit = async ({ email }) => {
-    await dispatch(USER_RESET_PASSWORD({ email: email.toLowerCase() }));
+    await dispatch(resetUserPassword({ email: email.toLowerCase() }))
+      .unwrap()
+      .catch(({ message }) => {
+        dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }));
+      });
     onClose();
   };
 

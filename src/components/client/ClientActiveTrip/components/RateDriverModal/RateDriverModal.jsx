@@ -22,17 +22,19 @@ import Textarea from '../../../../../shared/components/Textarea/Textarea';
 
 import { OPTIONS_VALIDATE } from '../../../../helpers/OPTIONS_VALIDATE';
 
-import { USER_GET, USER_TRIP_FINISHED } from '../../../../../actions/user/user.actions';
-
 import { useReports } from '../../../../../api/hooks/useReports/useReports';
-
-import { ACTIVE_TRIP_GET, TRIP_DELETE } from '../../../../../actions/trips/trips.actions';
 
 import { PRIVATE_ROUTES, REQUEST_STATUS } from '../../../../../constants/app.constants';
 
 import ProgressSpinner from '../../../../../shared/components/ProgressSpinner/ProgressSpinner';
 
-import { tripsSelector } from '../../../../../selectors/trips.selectors';
+import { finishedUserTrip, getUser } from '../../../../../slices/user.slice';
+
+import { tripsSelector, getActiveTrip, deleteTrip } from '../../../../../slices/trips.slice';
+
+import { addNotification } from '../../../../../slices/notifications.slice';
+
+import { NOTIFICATION_TYPES } from '../../../../../shared/components/Notifications/components/Notification/notification.constants';
 
 import classes from './rate-driver-modal.module.css';
 
@@ -55,17 +57,22 @@ function RateDriverModal({ isOpened, closeModal }) {
   };
 
   const onSubmit = async ({ rating, report }) => {
-    const requests = [
-      dispatch(USER_TRIP_FINISHED(driverId, Number(rating * 2), tripId)),
-      dispatch(TRIP_DELETE(tripId))
+    const finishTripRequests = [
+      dispatch(finishedUserTrip({ driverId, rating: Number(rating * 2), tripId })),
+      dispatch(deleteTrip(tripId))
     ];
 
     if (report) {
-      requests.push(createReport(report, tripId, driverId));
+      finishTripRequests.push(createReport(report, tripId, driverId));
     }
-
-    await Promise.all(requests);
-    await Promise.all([dispatch(USER_GET()), dispatch(ACTIVE_TRIP_GET())]);
+    try {
+      await Promise.all(finishTripRequests);
+      await Promise.all([dispatch(getUser()), dispatch(getActiveTrip())]);
+    } catch (error) {
+      dispatch(
+        addNotification({ type: NOTIFICATION_TYPES.ERROR, message: error.response.data.message })
+      );
+    }
 
     navigate(PRIVATE_ROUTES.HOME);
   };

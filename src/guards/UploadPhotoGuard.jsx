@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { PRIVATE_ROUTES } from '../constants/app.constants';
-import { userSelector } from '../selectors/user.selectors';
+import { userSelector } from '../slices/user.slice';
 
 function UploadPhotoGuard({ children }) {
   const {

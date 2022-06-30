@@ -1,13 +1,11 @@
 import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
-
 import { useSelector } from 'react-redux';
 
 import { PUBLIC_ROUTES, REQUEST_STATUS } from '../../../../constants/app.constants';
-
 import NotFoundPage from '../../NotFoundPage/NotFoundPage';
-import RootSpinner from '../../../../components/RootSpinner/RootSpinner';
-import { userSelector } from '../../../../selectors/user.selectors';
+import ProgressSpinner from '../../ProgressSpinner/ProgressSpinner';
+import { userSelector } from '../../../../slices/user.slice';
 
 function PrivateRoute({ children, roles }) {
   const {
@@ -22,8 +20,8 @@ function PrivateRoute({ children, roles }) {
     return <Navigate to={PUBLIC_ROUTES.LOGIN} replace />;
   }
 
-  if (status === REQUEST_STATUS.LOADING) {
-    return <RootSpinner />;
+  if (status === REQUEST_STATUS.LOADING || status === REQUEST_STATUS.IDLE) {
+    return <ProgressSpinner isShow />;
   }
 
   if (!hasPermissions) {

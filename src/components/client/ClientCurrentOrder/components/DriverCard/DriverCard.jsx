@@ -13,15 +13,18 @@ import {
 
 import { PRIVATE_ROUTES } from '../../../../../constants/app.constants';
 
-import { ACTIVE_TRIP_GET, TRIP_CREATE } from '../../../../../actions/trips/trips.actions';
-
 import { useModal } from '../../../../../shared/hooks/useModal';
 
 import AcceptOfferConfirmationModal from '../../../../../shared/components/ConfirmationModal/ConfirmationModal';
 
 import { OfferObjectPropType } from '../../../../../shared/prop-types';
 
+import { getActiveTrip, createTrip } from '../../../../../slices/trips.slice';
 import DriverCarInfoModal from '../../../../DriverCarInfoModal/DriverCarInfoModal';
+
+import { addNotification } from '../../../../../slices/notifications.slice';
+
+import { NOTIFICATION_TYPES } from '../../../../../shared/components/Notifications/components/Notification/notification.constants';
 
 import classes from './driver-card.module.css';
 
@@ -47,8 +50,17 @@ function DriverCard({ offer }) {
   const handleSubmitOffer = async (id) => {
     closeModal();
     closeAcceptOfferConfirmationModal();
-    await dispatch(TRIP_CREATE({ offerId: id }));
-    await dispatch(ACTIVE_TRIP_GET());
+    await dispatch(createTrip({ offerId: id }))
+      .unwrap()
+      .catch(({ message }) => {
+        dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }));
+      });
+    await dispatch(getActiveTrip())
+      .unwrap()
+      .catch(({ message }) => {
+        dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }));
+      });
+
     navigate(PRIVATE_ROUTES.TRIP);
   };
 

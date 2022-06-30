@@ -20,10 +20,15 @@ import {
 
 import { OPTIONS_VALIDATE } from '../../helpers/OPTIONS_VALIDATE';
 import { PRIVATE_ROUTES, REQUEST_STATUS } from '../../../constants/app.constants';
-import { USER_GET } from '../../../actions/user/user.actions';
 import { useOrders } from '../../../api/hooks/useOrders/useOrders';
 
 import ProgressSpinner from '../../../shared/components/ProgressSpinner/ProgressSpinner';
+
+import { getUser } from '../../../slices/user.slice';
+
+import { addNotification } from '../../../slices/notifications.slice';
+
+import { NOTIFICATION_TYPES } from '../../../shared/components/Notifications/components/Notification/notification.constants';
 
 import classes from './client-order.module.css';
 import { defaultOrderValues } from './client-order.constants';
@@ -44,7 +49,11 @@ function ClientOrder() {
 
   const onSubmit = async (data) => {
     await createOrder(data);
-    await dispatch(USER_GET());
+    await dispatch(getUser())
+      .unwrap()
+      .catch(({ message }) => {
+        dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }));
+      });
     navigate(PRIVATE_ROUTES.CURRENT_ORDER);
   };
 

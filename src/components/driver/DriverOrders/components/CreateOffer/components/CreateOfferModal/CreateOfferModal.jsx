@@ -23,10 +23,14 @@ import { useOffers } from '../../../../../../../api/hooks/useOffers/useOffers';
 
 import { OrderObjectPropType } from '../../../../../../../shared/prop-types';
 
+import { REQUEST_STATUS } from '../../../../../../../constants/app.constants';
+
+import ProgressSpinner from '../../../../../../../shared/components/ProgressSpinner/ProgressSpinner';
+
 import classes from './create-offer-modal.module.css';
 
 function CreateOfferModal({ isOpened, closeModal, order, getOffers }) {
-  const { createOffer } = useOffers();
+  const { createOffer, status } = useOffers();
   const {
     handleSubmit,
     control,
@@ -42,6 +46,9 @@ function CreateOfferModal({ isOpened, closeModal, order, getOffers }) {
     reset({ price: '' });
   };
 
+  if (status === REQUEST_STATUS.LOADING) {
+    return <ProgressSpinner isShow />;
+  }
   return (
     <Modal isOpened={isOpened} closeModal={closeModal} size={MODAL_SIZE.MEDIUM}>
       <div className={classes.modal__content}>

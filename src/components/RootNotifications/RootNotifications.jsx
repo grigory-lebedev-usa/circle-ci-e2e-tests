@@ -2,8 +2,7 @@ import React, { useCallback } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { NOTIFICATION_DELETE } from '../../actions/notification/notification.actions';
-import { notificationsSelector } from '../../selectors/notifications.selectors';
+import { deleteNotification, notificationsSelector } from '../../slices/notifications.slice';
 
 import Notifications from '../../shared/components/Notifications/Notifications';
 
@@ -13,7 +12,7 @@ function RootNotifications() {
 
   const notificationDelete = useCallback(
     (id) => {
-      dispatch(NOTIFICATION_DELETE(id));
+      dispatch(deleteNotification(id));
     },
     [dispatch]
   );
