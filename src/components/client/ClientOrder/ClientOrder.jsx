@@ -26,10 +26,12 @@ import ProgressSpinner from '../../../shared/components/ProgressSpinner/Progress
 
 import { getUser } from '../../../slices/user.slice';
 
+import { addNotification } from '../../../slices/notifications.slice';
+
+import { NOTIFICATION_TYPES } from '../../../shared/components/Notifications/components/Notification/notification.constants';
+
 import classes from './client-order.module.css';
 import { defaultOrderValues } from './client-order.constants';
-import { addNotification } from '../../../slices/notifications.slice';
-import { NOTIFICATION_TYPES } from '../../../shared/components/Notifications/components/Notification/notification.constants';
 
 function ClientOrder() {
   const { createOrder, status } = useOrders();
