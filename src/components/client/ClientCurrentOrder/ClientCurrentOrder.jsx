@@ -70,14 +70,13 @@ function ClientCurrentOrder() {
 
   const handleCancelOrder = async () => {
     closeConfirmationModal();
-    try {
-      await deleteOrder(id);
-      await dispatch(getUser());
-    } catch (error) {
-      dispatch(
-        addNotification({ type: NOTIFICATION_TYPES.ERROR, message: error.response.data.message })
-      );
-    }
+
+    await deleteOrder(id);
+    await dispatch(getUser())
+      .unwrap()
+      .catch(({ message }) => {
+        dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }));
+      });
 
     navigate(PRIVATE_ROUTES.HOME);
   };

@@ -15,6 +15,10 @@ import {
 
 import { getUser, uploadUserPhoto, userSelector } from '../../../../slices/user.slice';
 
+import { addNotification } from '../../../../slices/notifications.slice';
+
+import { NOTIFICATION_TYPES } from '../../../../shared/components/Notifications/components/Notification/notification.constants';
+
 import { inputType, src } from './upload-driver-photo.constants';
 
 import classes from './upload-driver-photo.module.css';
@@ -56,8 +60,16 @@ function UploadDriverPhoto() {
   };
 
   const handleFileSave = async () => {
-    await dispatch(uploadUserPhoto({ file: selectedFile, id }));
-    await dispatch(getUser());
+    await dispatch(uploadUserPhoto({ file: selectedFile, id }))
+      .unwrap()
+      .catch(({ message }) => {
+        dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }));
+      });
+    await dispatch(getUser())
+      .unwrap()
+      .catch(({ message }) => {
+        dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }));
+      });
     navigate(PRIVATE_ROUTES.HOME);
   };
 

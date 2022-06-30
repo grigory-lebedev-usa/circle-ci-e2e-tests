@@ -88,7 +88,7 @@ export const loginUser = createAsyncThunk(
 
 export const resetUserPassword = createAsyncThunk(
   'user/reset-password',
-  async (requestPayload, { dispatch }) => {
+  async (requestPayload, { dispatch, rejectWithValue }) => {
     try {
       await axiosService.post(API_ROUTES.RESET_PASSWORD, requestPayload);
       dispatch(
@@ -98,9 +98,7 @@ export const resetUserPassword = createAsyncThunk(
         })
       );
     } catch (error) {
-      dispatch(
-        addNotification({ type: NOTIFICATION_TYPES.ERROR, message: error.response.data.message })
-      );
+      throw rejectWithValue(error.response.message);
     }
   }
 );

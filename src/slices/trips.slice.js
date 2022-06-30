@@ -70,7 +70,7 @@ export const getActiveTrip = createAsyncThunk(
 
 export const createTrip = createAsyncThunk(
   'trips/create-trip',
-  async (requestPayload, { dispatch }) => {
+  async (requestPayload, { dispatch, rejectWithValue }) => {
     try {
       await axiosService.post(API_ROUTES.TRIP, requestPayload);
       dispatch(
@@ -80,25 +80,24 @@ export const createTrip = createAsyncThunk(
         })
       );
     } catch (error) {
-      dispatch(
-        addNotification({ type: NOTIFICATION_TYPES.ERROR, message: error.response.data.message })
-      );
+      throw rejectWithValue(error.response.message);
     }
   }
 );
 
-export const deleteTrip = createAsyncThunk('trips/delete-trip', async (tripId, { dispatch }) => {
-  try {
-    await axiosService.patch(`${API_ROUTES.TRIP}/${tripId}`);
-    dispatch(
-      addNotification({ type: NOTIFICATION_TYPES.SUCCESS, message: 'Your treep was finished' })
-    );
-  } catch (error) {
-    dispatch(
-      addNotification({ type: NOTIFICATION_TYPES.ERROR, message: error.response.data.message })
-    );
+export const deleteTrip = createAsyncThunk(
+  'trips/delete-trip',
+  async (tripId, { dispatch, rejectWithValue }) => {
+    try {
+      await axiosService.patch(`${API_ROUTES.TRIP}/${tripId}`);
+      dispatch(
+        addNotification({ type: NOTIFICATION_TYPES.SUCCESS, message: 'Your treep was finished' })
+      );
+    } catch (error) {
+      throw rejectWithValue(error.response.message);
+    }
   }
-});
+);
 
 const tripsSlice = createSlice({
   name: 'trips',

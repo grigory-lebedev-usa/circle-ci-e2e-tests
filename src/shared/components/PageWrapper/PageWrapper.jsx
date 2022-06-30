@@ -13,6 +13,10 @@ import { getUser, userSelector } from '../../../slices/user.slice';
 
 import { getActiveTrip } from '../../../slices/trips.slice';
 
+import { addNotification } from '../../../slices/notifications.slice';
+
+import { NOTIFICATION_TYPES } from '../Notifications/components/Notification/notification.constants';
+
 import classes from './page-wrapper.module.css';
 
 function PageWrapper({ children }) {
@@ -23,8 +27,16 @@ function PageWrapper({ children }) {
 
   useEffect(() => {
     if (isPrivatePage && isAuthenticated) {
-      dispatch(getUser());
-      dispatch(getActiveTrip());
+      dispatch(getUser())
+        .unwrap()
+        .catch(({ message }) => {
+          dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }));
+        });
+      dispatch(getActiveTrip())
+        .unwrap()
+        .catch(({ message }) => {
+          dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }));
+        });
     }
   }, [dispatch, isAuthenticated, isPrivatePage]);
 

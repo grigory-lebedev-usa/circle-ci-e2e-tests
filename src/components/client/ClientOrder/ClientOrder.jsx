@@ -28,6 +28,8 @@ import { getUser } from '../../../slices/user.slice';
 
 import classes from './client-order.module.css';
 import { defaultOrderValues } from './client-order.constants';
+import { addNotification } from '../../../slices/notifications.slice';
+import { NOTIFICATION_TYPES } from '../../../shared/components/Notifications/components/Notification/notification.constants';
 
 function ClientOrder() {
   const { createOrder, status } = useOrders();
@@ -45,7 +47,11 @@ function ClientOrder() {
 
   const onSubmit = async (data) => {
     await createOrder(data);
-    await dispatch(getUser());
+    await dispatch(getUser())
+      .unwrap()
+      .catch(({ message }) => {
+        dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }));
+      });
     navigate(PRIVATE_ROUTES.CURRENT_ORDER);
   };
 

@@ -50,14 +50,16 @@ function DriverCard({ offer }) {
   const handleSubmitOffer = async (id) => {
     closeModal();
     closeAcceptOfferConfirmationModal();
-    try {
-      await dispatch(createTrip({ offerId: id }));
-      await dispatch(getActiveTrip());
-    } catch (error) {
-      dispatch(
-        addNotification({ type: NOTIFICATION_TYPES.ERROR, message: error.response.data.message })
-      );
-    }
+    await dispatch(createTrip({ offerId: id }))
+      .unwrap()
+      .catch(({ message }) => {
+        dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }));
+      });
+    await dispatch(getActiveTrip())
+      .unwrap()
+      .catch(({ message }) => {
+        dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }));
+      });
 
     navigate(PRIVATE_ROUTES.TRIP);
   };

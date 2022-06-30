@@ -13,6 +13,9 @@ import { BUTTON_TYPES } from '../../../../shared/components/Button/button.consta
 
 import { resetUserPassword } from '../../../../slices/user.slice';
 
+import { addNotification } from '../../../../slices/notifications.slice';
+import { NOTIFICATION_TYPES } from '../../../../shared/components/Notifications/components/Notification/notification.constants';
+
 import classes from './forgot-password.module.css';
 
 function ForgotPassword({ isOpened, onClose }) {
@@ -24,7 +27,11 @@ function ForgotPassword({ isOpened, onClose }) {
   } = useForm({ defaultValues: { email: '' }, mode: 'onTouched' });
 
   const onSubmit = async ({ email }) => {
-    await dispatch(resetUserPassword({ email: email.toLowerCase() }));
+    await dispatch(resetUserPassword({ email: email.toLowerCase() }))
+      .unwrap()
+      .catch(({ message }) => {
+        dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }));
+      });
     onClose();
   };
 

@@ -13,6 +13,9 @@ import DropDown from '../../shared/components/DropDown/DropDown';
 
 import { computedCount } from '../helpers/helpers';
 
+import { addNotification } from '../../slices/notifications.slice';
+import { NOTIFICATION_TYPES } from '../../shared/components/Notifications/components/Notification/notification.constants';
+
 import classes from './orders-history.module.css';
 
 function OrdersHistory({ renderTable }) {
@@ -27,7 +30,11 @@ function OrdersHistory({ renderTable }) {
 
   useEffect(() => {
     setCount(computedCount(total, rowsPerPage));
-    dispatch(getTrips({ page: page - 1, size: rowsPerPage }));
+    dispatch(getTrips({ page: page - 1, size: rowsPerPage }))
+      .unwrup()
+      .catch(({ message }) =>
+        dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }))
+      );
   }, [dispatch, page, rowsPerPage, total]);
 
   if (status === REQUEST_STATUS.LOADING) {
