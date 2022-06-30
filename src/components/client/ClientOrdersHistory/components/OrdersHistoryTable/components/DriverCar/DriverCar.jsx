@@ -22,7 +22,7 @@ function DriverCar({ info }) {
         closeModal={closeModal}
         info={info}
         hasRatingAndPrice={false}
-        hasButton={false}
+        hasAcceptButton={false}
       />
       {info.driver.firstName} {info.driver.lastName}
       <Button
