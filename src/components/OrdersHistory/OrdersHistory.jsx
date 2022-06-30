@@ -31,7 +31,7 @@ function OrdersHistory({ renderTable }) {
   useEffect(() => {
     setCount(computedCount(total, rowsPerPage));
     dispatch(getTrips({ page: page - 1, size: rowsPerPage }))
-      .unwrup()
+      .unwrap()
       .catch(({ message }) =>
         dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }))
       );
