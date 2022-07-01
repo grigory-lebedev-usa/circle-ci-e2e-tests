@@ -103,42 +103,6 @@ function ClientCurrentOrder() {
         {offers.map((offer) => (
           <DriverCard key={offer.id} offer={offer} />
         ))}
-        {offers.map((offer) => (
-          <DriverCard key={offer.id} offer={offer} />
-        ))}
-
-        {offers.map((offer) => (
-          <DriverCard key={offer.id} offer={offer} />
-        ))}
-        {offers.map((offer) => (
-          <DriverCard key={offer.id} offer={offer} />
-        ))}
-
-        {offers.map((offer) => (
-          <DriverCard key={offer.id} offer={offer} />
-        ))}
-        {offers.map((offer) => (
-          <DriverCard key={offer.id} offer={offer} />
-        ))}
-        {offers.map((offer) => (
-          <DriverCard key={offer.id} offer={offer} />
-        ))}
-
-        {offers.map((offer) => (
-          <DriverCard key={offer.id} offer={offer} />
-        ))}
-        {offers.map((offer) => (
-          <DriverCard key={offer.id} offer={offer} />
-        ))}
-        {offers.map((offer) => (
-          <DriverCard key={offer.id} offer={offer} />
-        ))}
-        {offers.map((offer) => (
-          <DriverCard key={offer.id} offer={offer} />
-        ))}
-        {offers.map((offer) => (
-          <DriverCard key={offer.id} offer={offer} />
-        ))}
       </div>
       {offers.length === 0 ? <NotFoundDriver /> : null}
       <Button
