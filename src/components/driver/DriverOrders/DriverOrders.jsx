@@ -59,6 +59,24 @@ function DriverOrders() {
             renderButton={renderButtonCallback}
           />
         ))}
+        {orders.map((order) => (
+          <OrderRow
+            key={order.id}
+            order={order}
+            getOffers={getOffers}
+            offerId={getOfferId(offers, order.id)}
+            renderButton={renderButtonCallback}
+          />
+        ))}
+        {orders.map((order) => (
+          <OrderRow
+            key={order.id}
+            order={order}
+            getOffers={getOffers}
+            offerId={getOfferId(offers, order.id)}
+            renderButton={renderButtonCallback}
+          />
+        ))}
       </div>
       <Refresh className={classes.refresh} onClick={handleRefresh} />
     </div>
