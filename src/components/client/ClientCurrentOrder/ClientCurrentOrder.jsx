@@ -29,8 +29,9 @@ import { addNotification } from '../../../slices/notifications.slice';
 
 import { NOTIFICATION_TYPES } from '../../../shared/components/Notifications/components/Notification/notification.constants';
 
+import NotFoundData from '../../../shared/components/NotFoundData/NotFoundData';
+
 import classes from './client-current-order.module.css';
-import NotFoundDriver from './components/NotFoundDrivers/NotFoundDriver';
 import DriverCard from './components/DriverCard/DriverCard';
 
 function ClientCurrentOrder() {
@@ -104,7 +105,9 @@ function ClientCurrentOrder() {
           <DriverCard key={offer.id} offer={offer} />
         ))}
       </div>
-      {offers.length === 0 ? <NotFoundDriver /> : null}
+      {offers.length === 0 ? (
+        <NotFoundData text="No drivers found at this time. Refresh the list to see driver‘s offers." />
+      ) : null}
       <Button
         size={BUTTON_SIZES.LARGE}
         color={BUTTON_COLORS.PRIMARY}
