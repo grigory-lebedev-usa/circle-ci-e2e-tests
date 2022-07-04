@@ -9,9 +9,9 @@
 }
 
 .block__description {
-  position: absolute;
-  right: 0;
-  top: 15px;
+  position: fixed;
+  right: 250px;
+  top: 230px;
   width: 530px;
   text-align: right;
 }
