@@ -71,7 +71,14 @@ function OrdersHistory({ renderTable }) {
       </div>
 
       {renderTable(items)}
-      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          marginTop: '40px',
+          marginBottom: '40px'
+        }}
+      >
         <Pagination
           count={count}
           size="large"
