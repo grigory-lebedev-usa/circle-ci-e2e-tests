@@ -8,6 +8,8 @@ import Refresh from '../../../shared/components/Refresh/Refresh';
 
 import { getOfferId } from '../../helpers/helpers';
 
+import NotFoundData from '../../../shared/components/NotFoundData/NotFoundData';
+
 import OrderRow from './components/OrderRow/OrderRow';
 import classes from './driver-orders.module.css';
 
@@ -59,6 +61,9 @@ function DriverOrders() {
             renderButton={renderButtonCallback}
           />
         ))}
+        {orders.length === 0 ? (
+          <NotFoundData text="No orders... Please refresh the list to see orders" />
+        ) : null}
       </div>
       <Refresh className={classes.refresh} onClick={handleRefresh} />
     </div>
