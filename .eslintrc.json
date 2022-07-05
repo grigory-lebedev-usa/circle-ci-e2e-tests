@@ -46,11 +46,13 @@
     "jsx-a11y/control-has-associated-label": "off",
     "react/jsx-props-no-spreading": "off",
     "react/jsx-filename-extension": [
-      1,
+      2,
       {
         "extensions": [
           "index.js",
-          ".jsx"
+          ".jsx",
+          ".ts",
+          ".tsx"
         ]
       }
     ],

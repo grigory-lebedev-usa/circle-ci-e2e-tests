@@ -1,5 +1,3 @@
-import React from 'react';
-
 import AdminActions from '../AdminActions/AdminActions';
 
 function AdminContent() {
