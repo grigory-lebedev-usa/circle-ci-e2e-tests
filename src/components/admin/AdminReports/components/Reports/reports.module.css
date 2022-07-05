@@ -1,0 +1,44 @@
+@import url(/src/styles/colors.css);
+
+.container {
+  position: relative;
+}
+
+.block__title {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.title {
+  margin: 0;
+  font-family: 'Rasa';
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 78px;
+  color: #fff;
+}
+
+.line {
+  width: 390px;
+  margin-left: 40px;
+  border: 5px solid var(--primary-color);
+  background-color: var(--primary-color);
+}
+
+.dropdown__block {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.dropdown__title {
+  font-family: 'Rasa';
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 37px;
+  color: #fff;
+  margin-right: 10px;
+}

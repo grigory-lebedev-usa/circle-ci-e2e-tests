@@ -41,7 +41,7 @@ function OrdersHistory({ renderTable }) {
     return <ProgressSpinner isShow />;
   }
 
-  const handleChangePage = async (event, newPage) => {
+  const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 

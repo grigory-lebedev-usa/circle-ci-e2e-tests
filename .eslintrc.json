@@ -45,13 +45,9 @@
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "jsx-a11y/control-has-associated-label": "off",
     "react/jsx-props-no-spreading": "off",
-    "react/jsx-filename-extension": [
-      1,
-      {
-        "extensions": [
-          "index.js",
-          ".jsx"
-        ]
+    "react/jsx-filename-extension": [2, 
+      { 
+        "extensions": [".js", ".jsx", ".ts", ".tsx"] 
       }
     ],
     "import/prefer-default-export": "off",

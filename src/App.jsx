@@ -21,6 +21,7 @@ import ActiveOrderGuard from './guards/ActiveOrderGuard';
 import UploadPhotoGuard from './guards/UploadPhotoGuard';
 import ActiveTripGuard from './guards/ActiveTripGuard';
 import OrdersHistoryRoutes from './shared/components/Router/components/OrdersHistoryRoutes/OrdersHistoryRoutes';
+import AdminReports from './components/admin/AdminReports/AdminReports.tsx';
 
 function App() {
   return (
@@ -92,6 +93,7 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route path={PRIVATE_ROUTES.REPORTS} element={<AdminReports />} />
           <Route path="*" element={<Navigate to={PUBLIC_ROUTES.NOT_FOUND_PAGE} replace />} />
           <Route path={PUBLIC_ROUTES.NOT_FOUND_PAGE} element={<NotFoundPage />} />
           <Route path={PUBLIC_ROUTES.REGISTER} element={<SignUpForm />} />
