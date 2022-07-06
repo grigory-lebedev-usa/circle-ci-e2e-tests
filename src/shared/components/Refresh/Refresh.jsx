@@ -31,8 +31,8 @@ Refresh.propTypes = {
 
 Refresh.defaultProps = {
   className: '',
-  // eslint-disable-next-line prettier/prettier
-  onClick: () => { }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onClick: () => {}
 };
 
 export default Refresh;
