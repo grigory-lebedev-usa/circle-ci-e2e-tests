@@ -12,6 +12,9 @@ import theme from './styles/theme';
 
 import App from './App';
 import store from './store/index';
+import { registerInterceptors } from './services/axios.service';
+
+registerInterceptors();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
