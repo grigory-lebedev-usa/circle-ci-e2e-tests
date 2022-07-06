@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { formatDate } from '../../../../helpers/helpers';
 
-import ArrowButtonReport from './components/ArrowButtonReport/ArrowButtonReport';
+import ArrowButtonReport from '../../../../../shared/components/ArrowButtonReport/ArrowButtonReport';
 
 import DriverCar from './components/DriverCar/DriverCar';
 

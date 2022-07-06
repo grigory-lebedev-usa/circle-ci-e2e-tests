@@ -9,8 +9,15 @@
     "plugin:react-hooks/recommended",
     "airbnb",
     "plugin:import/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended"
   ],
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
+  },
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -19,9 +26,13 @@
     "sourceType": "module"
   },
   "plugins": [
-    "react"
+    "react",
+    "@typescript-eslint"
   ],
+  "parser": "@typescript-eslint/parser",
   "rules": {
+    "no-empty-function": "off",
+    "@typescript-eslint/no-empty-function": ["error"],
     "prettier/prettier": [
       "error",
       {
@@ -31,6 +42,16 @@
         "singleQuote": true,
         "trailingComma": "none",
         "endOfLine": "auto"
+      }
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
       }
     ],
     "no-param-reassign": [
@@ -45,9 +66,15 @@
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "jsx-a11y/control-has-associated-label": "off",
     "react/jsx-props-no-spreading": "off",
-    "react/jsx-filename-extension": [2, 
-      { 
-        "extensions": [".js", ".jsx", ".ts", ".tsx"] 
+    "react/jsx-filename-extension": [
+      2,
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
       }
     ],
     "import/prefer-default-export": "off",

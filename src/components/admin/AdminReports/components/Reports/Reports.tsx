@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 
 import { Pagination } from '@mui/material';
 
@@ -10,20 +10,26 @@ import DropDown from '../../../../../shared/components/DropDown/DropDown';
 
 import ProgressSpinner from '../../../../../shared/components/ProgressSpinner/ProgressSpinner';
 
+import { computedCount } from '../../../../helpers/helpers';
+
 import { DropDownItem, ReportsProps } from './reports-types';
 
 import classes from './reports.module.css';
 
-
-const Reports: FC<ReportsProps> = ({ renderTable }) => {
-  const { getReports, status, reports: {total, items} }  = useReports();
+function Reports({ renderTable }: ReportsProps) {
+  const {
+    getReports,
+    status,
+    reports: { total, items = [] }
+  } = useReports();
   const [count, setCount] = useState<number>(0);
   const [page, setPage] = useState<number>(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(5);
 
   useEffect(() => {
+    setCount(computedCount(total, rowsPerPage));
     getReports(page - 1, rowsPerPage);
-  }, []);
+  }, [getReports, page, rowsPerPage, total]);
 
   if (status === REQUEST_STATUS.LOADING) {
     return <ProgressSpinner isShow />;
@@ -39,7 +45,7 @@ const Reports: FC<ReportsProps> = ({ renderTable }) => {
   };
 
   return (
-  <div className={classes.container}>
+    <div className={classes.container}>
       <div className={classes.block__title}>
         <h2 className={classes.title}>Reports</h2>
       </div>
@@ -80,6 +86,6 @@ const Reports: FC<ReportsProps> = ({ renderTable }) => {
       </div>
     </div>
   );
-};
+}
 
 export default Reports;
