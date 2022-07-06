@@ -24,7 +24,6 @@ function PageWrapper({ children }) {
   const { isAuthenticated } = useSelector(userSelector);
   const { pathname } = useLocation();
   const isPrivatePage = !Object.values(PUBLIC_ROUTES).includes(pathname);
-
   useEffect(() => {
     if (isPrivatePage && isAuthenticated) {
       dispatch(getUser())
