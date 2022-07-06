@@ -11,7 +11,7 @@ import { PUBLIC_ROUTES } from '../../../constants/app.constants';
 
 import { getUser, userSelector } from '../../../slices/user.slice';
 
-// import { getActiveTrip } from '../../../slices/trips.slice';
+import { getActiveTrip } from '../../../slices/trips.slice';
 
 import { addNotification } from '../../../slices/notifications.slice';
 

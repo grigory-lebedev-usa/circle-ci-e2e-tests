@@ -28,7 +28,7 @@ function OrdersHistoryTable({ items }) {
             <TableCell>{item.source}</TableCell>
             <TableCell>{item.destination}</TableCell>
             <TableCell>
-              <DriverCar info={item} />
+              <DriverCar info={item} hasDriverName />
             </TableCell>
             <TableCell>{item.rating}</TableCell>
             <TableCell>${item.price}</TableCell>
