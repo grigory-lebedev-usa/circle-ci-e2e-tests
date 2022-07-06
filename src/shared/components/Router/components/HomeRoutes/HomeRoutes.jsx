@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { USER_ROLES } from '../../../../../constants/user-roles.constants';
 import ClientHome from '../../../../../components/client/ClientHome/ClientHome';
 import DriverHome from '../../../../../components/driver/DriverHome/DriverHome';
-import AdminHome from '../../../../../components/admin/AdminHome/AdminHome.tsx';
+import AdminHome from '../../../../../components/admin/AdminHome/AdminHome';
 import ActiveOrderGuard from '../../../../../guards/ActiveOrderGuard';
 import UploadPhotoGuard from '../../../../../guards/UploadPhotoGuard';
 import ActiveTripGuard from '../../../../../guards/ActiveTripGuard';
