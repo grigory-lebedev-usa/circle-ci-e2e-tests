@@ -16,6 +16,8 @@ import { computedCount } from '../helpers/helpers';
 import { addNotification } from '../../slices/notifications.slice';
 import { NOTIFICATION_TYPES } from '../../shared/components/Notifications/components/Notification/notification.constants';
 
+import NotFoundData from '../../shared/components/NotFoundData/NotFoundData';
+
 import classes from './orders-history.module.css';
 
 function OrdersHistory({ renderTable }) {
@@ -56,41 +58,37 @@ function OrdersHistory({ renderTable }) {
         <h2 className={classes.title}>Order’s History</h2>
       </div>
       <div className={classes.line} />
-      <div className={classes.dropdown__block}>
-        <div className={classes.dropdown__title}>Items per page</div>
-        <DropDown
-          value={rowsPerPage}
-          onListItemClick={handleChangeRowsPerPage}
-          items={[
-            { id: 1, value: 5 },
-            { id: 2, value: 10 },
-            { id: 3, value: 15 },
-            { id: 4, value: 20 }
-          ]}
-        />
-      </div>
-
-      {renderTable(items)}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          marginTop: '40px',
-          marginBottom: '40px'
-        }}
-      >
-        <Pagination
-          count={count}
-          size="large"
-          page={page}
-          onChange={handleChangePage}
-          color="secondary"
-          hidePrevButton
-          hideNextButton
-          siblingCount={3}
-          boundaryCount={1}
-        />
-      </div>
+      {total !== 0 ? (
+        <div className={classes.dropdown__block}>
+          <div className={classes.dropdown__title}>Items per page</div>
+          <DropDown
+            value={rowsPerPage}
+            onListItemClick={handleChangeRowsPerPage}
+            items={[
+              { id: 1, value: 5 },
+              { id: 2, value: 10 },
+              { id: 3, value: 15 },
+              { id: 4, value: 20 }
+            ]}
+          />
+        </div>
+      ) : null}
+      {total === 0 ? <NotFoundData text="You don't have any trips yet" /> : renderTable(items)}
+      {total !== 0 ? (
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
+          <Pagination
+            count={count}
+            size="large"
+            page={page}
+            onChange={handleChangePage}
+            color="secondary"
+            hidePrevButton
+            hideNextButton
+            siblingCount={3}
+            boundaryCount={1}
+          />
+        </div>
+      ) : null}
     </div>
   );
 }

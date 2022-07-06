@@ -31,8 +31,10 @@
   ],
   "parser": "@typescript-eslint/parser",
   "rules": {
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "off",
     "no-empty-function": "off",
-    "@typescript-eslint/no-empty-function": ["error"],
+    "@typescript-eslint/no-empty-function": ["error", { "allow": ["arrowFunctions"] }],
     "prettier/prettier": [
       "error",
       {

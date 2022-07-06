@@ -98,7 +98,7 @@ function ClientOrder() {
       </form>
       <div className={classes.decoration__container}>
         <p className={`${classes.decoration__text} ${classes.decoration__text_top}`}>Destination</p>
-        <img src="/img/navigate.png" alt="Navigation" />
+        <img src="/img/navigate.png" alt="NavigationImage" />
         <p className={`${classes.decoration__text} ${classes.decoration__text_bottom}`}>Source</p>
       </div>
     </div>
