@@ -1,7 +1,7 @@
-import { RenderReport } from '../../admin-reports.types';
+import { Report } from '../../admin-reports.types';
 
 export interface ReportsProps {
-  renderTable: (items: RenderReport[]) => JSX.Element;
+  renderTable: (items: Report[]) => JSX.Element;
 }
 
 export type DropDownItem = {

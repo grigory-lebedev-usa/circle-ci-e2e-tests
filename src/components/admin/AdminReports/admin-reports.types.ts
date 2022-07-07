@@ -1,28 +1,7 @@
-interface IClient {
-  firstName: string;
-  lastName: string;
-  id: string;
-}
+import { IClient } from '../../../interfaces/Client/client.interface';
+import { IDriver } from '../../../interfaces/Driver/driver.interface';
 
-interface ICar {
-  make: string;
-  model: string;
-  year: number;
-  color: string;
-  photo: string;
-}
-
-interface IDriver {
-  firstName: string;
-  lastName: string;
-  role: string;
-  createdAt: number;
-  email: string;
-  id: string;
-  car: ICar;
-}
-
-export type RenderReport = {
+export type Report = {
   id: string;
   comment: string;
   createdAt: number;

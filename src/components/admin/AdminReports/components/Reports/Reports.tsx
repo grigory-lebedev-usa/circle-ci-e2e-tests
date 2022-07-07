@@ -4,13 +4,20 @@ import { Pagination } from '@mui/material';
 
 import { useReports } from '../../../../../api/hooks/useReports/useReports';
 
-import { REQUEST_STATUS } from '../../../../../constants/app.constants';
+import {
+  PAGINATION_VARIANTS_NUMBERS,
+  REQUEST_STATUS,
+  START_BOUNDARY_COUNT,
+  START_ITEM_PAGE,
+  START_PAGE,
+  START_SUBLING_COUNT
+} from '../../../../../constants/app.constants';
 
 import DropDown from '../../../../../shared/components/DropDown/DropDown';
 
 import ProgressSpinner from '../../../../../shared/components/ProgressSpinner/ProgressSpinner';
 
-import { computedCount } from '../../../../helpers/helpers';
+import { calculatePagesCount } from '../../../../helpers/helpers';
 
 import { DropDownItem, ReportsProps } from './reports-types';
 
@@ -23,12 +30,12 @@ function Reports({ renderTable }: ReportsProps) {
     reports: { total, items = [] }
   } = useReports();
   const [count, setCount] = useState<number>(0);
-  const [page, setPage] = useState<number>(1);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(5);
+  const [page, setPage] = useState<number>(START_PAGE);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(START_ITEM_PAGE);
 
   useEffect(() => {
-    setCount(computedCount(total, rowsPerPage));
-    getReports(page - 1, rowsPerPage);
+    setCount(calculatePagesCount(total, rowsPerPage));
+    getReports(page - START_PAGE, rowsPerPage);
   }, [getReports, page, rowsPerPage, total]);
 
   if (status === REQUEST_STATUS.LOADING) {
@@ -55,23 +62,11 @@ function Reports({ renderTable }: ReportsProps) {
         <DropDown
           value={rowsPerPage}
           onListItemClick={handleChangeRowsPerPage}
-          items={[
-            { id: 1, value: 5 },
-            { id: 2, value: 10 },
-            { id: 3, value: 15 },
-            { id: 4, value: 20 }
-          ]}
+          items={PAGINATION_VARIANTS_NUMBERS}
         />
       </div>
       {renderTable(items)}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          marginTop: '40px',
-          marginBottom: '40px'
-        }}
-      >
+      <div className={classes.pagination__block}>
         <Pagination
           count={count}
           size="large"
@@ -80,8 +75,8 @@ function Reports({ renderTable }: ReportsProps) {
           color="secondary"
           hidePrevButton
           hideNextButton
-          siblingCount={3}
-          boundaryCount={1}
+          siblingCount={START_SUBLING_COUNT}
+          boundaryCount={START_BOUNDARY_COUNT}
         />
       </div>
     </div>

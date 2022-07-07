@@ -7,6 +7,7 @@ import DriverCar from '../../../../client/ClientOrdersHistory/components/OrdersH
 import { formatDate } from '../../../../helpers/helpers';
 
 import { ReportsTableProps } from './reports-table.types';
+import { PAGINATION_ACTIONS } from './reports.constants';
 
 function ReportsTable({ items }: ReportsTableProps) {
   return (
@@ -36,14 +37,7 @@ function ReportsTable({ items }: ReportsTableProps) {
               <DriverCar info={item} />
             </TableCell>
             <TableCell>
-              <DropDown
-                hasAction
-                value={null}
-                items={[
-                  { id: 1, value: 'Block driver' },
-                  { id: 2, value: 'Block client' }
-                ]}
-              />
+              <DropDown hasAction value={null} items={PAGINATION_ACTIONS} />
             </TableCell>
           </TableRow>
         ))}
