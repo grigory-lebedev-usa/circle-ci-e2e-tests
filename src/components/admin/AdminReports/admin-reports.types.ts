@@ -1,10 +1,10 @@
-import { IClient } from '../../../interfaces/Client/client.interface';
-import { IDriver } from '../../../interfaces/Driver/driver.interface';
+import { Client } from '../../../@types/Client/client.types';
+import { Driver } from '../../../@types/Driver/driver.types';
 
 export type Report = {
   id: string;
   comment: string;
   createdAt: number;
-  client: IClient;
-  driver: IDriver;
+  client: Client;
+  driver: Driver;
 };

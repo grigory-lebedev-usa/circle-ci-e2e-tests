@@ -1,8 +1,8 @@
 import { Report } from '../../admin-reports.types';
 
-export interface ReportsProps {
+export type ReportsProps = {
   renderTable: (items: Report[]) => JSX.Element;
-}
+};
 
 export type DropDownItem = {
   id: number;

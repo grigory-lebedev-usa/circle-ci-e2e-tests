@@ -1,5 +1,5 @@
 import { Report } from '../../admin-reports.types';
 
-export interface ReportsTableProps {
+export type ReportsTableProps = {
   items: Report[];
-}
+};
