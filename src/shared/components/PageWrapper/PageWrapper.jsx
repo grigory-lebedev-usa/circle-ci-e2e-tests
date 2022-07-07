@@ -31,11 +31,11 @@ function PageWrapper({ children }) {
         .catch(({ message }) => {
           dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }));
         });
-      dispatch(getActiveTrip())
-        .unwrap()
-        .catch(({ message }) => {
-          dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }));
-        });
+      // dispatch(getActiveTrip())
+      //   .unwrap()
+      //   .catch(({ message }) => {
+      //     dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }));
+      //   });
     }
   }, [dispatch, isAuthenticated, isPrivatePage]);
 

@@ -21,6 +21,7 @@ import ActiveOrderGuard from './guards/ActiveOrderGuard';
 import UploadPhotoGuard from './guards/UploadPhotoGuard';
 import ActiveTripGuard from './guards/ActiveTripGuard';
 import OrdersHistoryRoutes from './shared/components/Router/components/OrdersHistoryRoutes/OrdersHistoryRoutes';
+import AdminReports from './components/admin/AdminReports/AdminReports';
 
 function App() {
   return (
@@ -89,6 +90,14 @@ function App() {
             element={
               <PrivateRoute roles={[USER_ROLES.DRIVER, USER_ROLES.CLIENT]}>
                 <OrdersHistoryRoutes />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={PRIVATE_ROUTES.REPORTS}
+            element={
+              <PrivateRoute roles={[USER_ROLES.ADMIN]}>
+                <AdminReports />
               </PrivateRoute>
             }
           />

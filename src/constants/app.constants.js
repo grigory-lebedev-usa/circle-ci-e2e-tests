@@ -11,7 +11,8 @@ export const PRIVATE_ROUTES = {
   DRIVER_START: '/driver-start',
   DRIVER_ORDERS: '/driver-orders',
   TRIP: '/trip',
-  ORDERS_HISTORY: '/orders-history'
+  ORDERS_HISTORY: '/orders-history',
+  REPORTS: '/reports'
 };
 
 export const STORAGE_KEYS = {
@@ -33,4 +34,17 @@ export const REQUEST_STATUS = {
   FAILED: 'failed'
 };
 
-export const EXPIRATION_TOKEN_MARGIN = 1000 * 60 * 2;
+export const START_PAGE = 1;
+
+export const START_ITEM_PAGE = 5;
+
+export const START_SUBLING_COUNT = 3;
+
+export const START_BOUNDARY_COUNT = 1;
+
+export const PAGINATION_VARIANTS_NUMBERS = [
+  { id: 1, value: 5 },
+  { id: 2, value: 10 },
+  { id: 3, value: 15 },
+  { id: 4, value: 20 }
+];
