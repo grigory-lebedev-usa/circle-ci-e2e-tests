@@ -1,5 +1,3 @@
-import React from 'react';
-
 import OrdersHistory from '../../OrdersHistory/OrdersHistory';
 
 import OrdersHistoryTable from './components/OrdersHistoryTable/OrdersHistoryTable';

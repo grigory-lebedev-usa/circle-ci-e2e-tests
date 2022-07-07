@@ -21,6 +21,8 @@ import ActiveOrderGuard from './guards/ActiveOrderGuard';
 import UploadPhotoGuard from './guards/UploadPhotoGuard';
 import ActiveTripGuard from './guards/ActiveTripGuard';
 import OrdersHistoryRoutes from './shared/components/Router/components/OrdersHistoryRoutes/OrdersHistoryRoutes';
+import AdminUsersDrivers from './components/admin/AdminUsers/components/AdminUsersDrivers/AdminUsersDrivers';
+import AdminUsersClients from './components/admin/AdminUsers/components/AdminUsersClients/AdminUsersClients';
 
 function App() {
   return (
@@ -96,6 +98,22 @@ function App() {
           <Route path={PUBLIC_ROUTES.NOT_FOUND_PAGE} element={<NotFoundPage />} />
           <Route path={PUBLIC_ROUTES.REGISTER} element={<SignUpForm />} />
           <Route path={PUBLIC_ROUTES.LOGIN} element={<SignInForm />} />
+          <Route
+            path={PRIVATE_ROUTES.USERS_CLIENTS}
+            element={
+              <PrivateRoute roles={[USER_ROLES.ADMIN]}>
+                <AdminUsersClients />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={PRIVATE_ROUTES.USERS_DRIVERS}
+            element={
+              <PrivateRoute roles={[USER_ROLES.ADMIN]}>
+                <AdminUsersDrivers />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </PageWrapper>
     </div>

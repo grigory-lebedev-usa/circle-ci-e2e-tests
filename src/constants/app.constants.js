@@ -11,7 +11,9 @@ export const PRIVATE_ROUTES = {
   DRIVER_START: '/driver-start',
   DRIVER_ORDERS: '/driver-orders',
   TRIP: '/trip',
-  ORDERS_HISTORY: '/orders-history'
+  ORDERS_HISTORY: '/orders-history',
+  USERS_CLIENTS: '/users/clients',
+  USERS_DRIVERS: '/users/drivers'
 };
 
 export const STORAGE_KEYS = {
