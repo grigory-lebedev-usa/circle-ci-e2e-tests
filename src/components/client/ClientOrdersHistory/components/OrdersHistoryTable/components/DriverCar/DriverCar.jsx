@@ -13,10 +13,10 @@ import DriverCarInfoModal from '../../../../../../DriverCarInfoModal/DriverCarIn
 
 import classes from './driver-car.module.css';
 
-function DriverCar({ info }) {
+function DriverCar({ info, hasDriverName }) {
   const { isModalOpened, openModal, closeModal } = useModal(false);
   return (
-    <div className={classes.container}>
+    <div className={`${hasDriverName ? classes.container : null}`}>
       <DriverCarInfoModal
         isOpened={isModalOpened}
         closeModal={closeModal}
@@ -24,7 +24,7 @@ function DriverCar({ info }) {
         hasRatingAndPrice={false}
         hasAcceptButton={false}
       />
-      {info.driver.firstName} {info.driver.lastName}
+      {hasDriverName ? `${info.driver.firstName} ${info.driver.lastName}` : null}
       <Button
         variant={BUTTON_VARIANTS.CONTAINED}
         size={BUTTON_SIZES.EXTRA_SMALL}
@@ -41,7 +41,12 @@ function DriverCar({ info }) {
 
 DriverCar.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  info: PropTypes.object.isRequired
+  info: PropTypes.object.isRequired,
+  hasDriverName: PropTypes.bool
+};
+
+DriverCar.defaultProps = {
+  hasDriverName: false
 };
 
 export default DriverCar;

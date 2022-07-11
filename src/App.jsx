@@ -23,6 +23,7 @@ import ActiveTripGuard from './guards/ActiveTripGuard';
 import OrdersHistoryRoutes from './shared/components/Router/components/OrdersHistoryRoutes/OrdersHistoryRoutes';
 import AdminUsersDrivers from './components/admin/AdminUsers/components/AdminUsersDrivers/AdminUsersDrivers';
 import AdminUsersClients from './components/admin/AdminUsers/components/AdminUsersClients/AdminUsersClients';
+import AdminReports from './components/admin/AdminReports/AdminReports';
 
 function App() {
   return (
@@ -91,6 +92,14 @@ function App() {
             element={
               <PrivateRoute roles={[USER_ROLES.DRIVER, USER_ROLES.CLIENT]}>
                 <OrdersHistoryRoutes />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={PRIVATE_ROUTES.REPORTS}
+            element={
+              <PrivateRoute roles={[USER_ROLES.ADMIN]}>
+                <AdminReports />
               </PrivateRoute>
             }
           />

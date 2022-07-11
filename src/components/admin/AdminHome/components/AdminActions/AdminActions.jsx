@@ -13,15 +13,17 @@ import classes from './admin-actions.module.css';
 function AdminActions() {
   return (
     <div className={classes.block__buttons}>
-      <Button
-        size={BUTTON_SIZES.LARGE}
-        color={BUTTON_COLORS.PRIMARY}
-        variant={BUTTON_VARIANTS.CONTAINED}
-        type={BUTTON_TYPES.BUTTON}
-        className={classes.button}
-      >
-        Reports
-      </Button>
+      <Link to={PRIVATE_ROUTES.REPORTS}>
+        <Button
+          size={BUTTON_SIZES.LARGE}
+          color={BUTTON_COLORS.PRIMARY}
+          variant={BUTTON_VARIANTS.CONTAINED}
+          type={BUTTON_TYPES.BUTTON}
+          className={classes.button}
+        >
+          Reports
+        </Button>
+      </Link>
       <Link to={PRIVATE_ROUTES.USERS_CLIENTS}>
         <Button
           size={BUTTON_SIZES.LARGE}

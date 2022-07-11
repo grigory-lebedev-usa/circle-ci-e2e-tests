@@ -1,17 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 
 import { Pagination } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { REQUEST_STATUS } from '../../constants/app.constants';
+import {
+  PAGINATION_VARIANTS_NUMBERS,
+  REQUEST_STATUS,
+  START_BOUNDARY_COUNT,
+  START_ITEM_PAGE,
+  START_PAGE,
+  START_SUBLING_COUNT
+} from '../../constants/app.constants';
 import ProgressSpinner from '../../shared/components/ProgressSpinner/ProgressSpinner';
 
 import { getTrips, tripsSelector } from '../../slices/trips.slice';
 import DropDown from '../../shared/components/DropDown/DropDown';
 
-import { computedCount } from '../helpers/helpers';
+import { calculatePagesCount } from '../helpers/helpers';
 
 import { addNotification } from '../../slices/notifications.slice';
 import { NOTIFICATION_TYPES } from '../../shared/components/Notifications/components/Notification/notification.constants';
@@ -27,12 +34,12 @@ function OrdersHistory({ renderTable }) {
     status
   } = useSelector(tripsSelector);
   const [count, setCount] = useState(0);
-  const [page, setPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [page, setPage] = useState(START_PAGE);
+  const [rowsPerPage, setRowsPerPage] = useState(START_ITEM_PAGE);
 
   useEffect(() => {
-    setCount(computedCount(total, rowsPerPage));
-    dispatch(getTrips({ page: page - 1, size: rowsPerPage }))
+    setCount(calculatePagesCount(total, rowsPerPage));
+    dispatch(getTrips({ page: page - START_PAGE, size: rowsPerPage }))
       .unwrap()
       .catch(({ message }) =>
         dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }))
@@ -43,13 +50,13 @@ function OrdersHistory({ renderTable }) {
     return <ProgressSpinner isShow />;
   }
 
-  const handleChangePage = async (event, newPage) => {
+  const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (item) => {
     setRowsPerPage(item.value);
-    setPage(1);
+    setPage(START_PAGE);
   };
 
   return (
@@ -64,18 +71,13 @@ function OrdersHistory({ renderTable }) {
           <DropDown
             value={rowsPerPage}
             onListItemClick={handleChangeRowsPerPage}
-            items={[
-              { id: 1, value: 5 },
-              { id: 2, value: 10 },
-              { id: 3, value: 15 },
-              { id: 4, value: 20 }
-            ]}
+            items={PAGINATION_VARIANTS_NUMBERS}
           />
         </div>
       ) : null}
       {total === 0 ? <NotFoundData text="You don't have any trips yet" /> : renderTable(items)}
       {total !== 0 ? (
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
+        <div className={classes.pagination__block}>
           <Pagination
             count={count}
             size="large"
@@ -84,8 +86,8 @@ function OrdersHistory({ renderTable }) {
             color="secondary"
             hidePrevButton
             hideNextButton
-            siblingCount={3}
-            boundaryCount={1}
+            siblingCount={START_SUBLING_COUNT}
+            boundaryCount={START_BOUNDARY_COUNT}
           />
         </div>
       ) : null}

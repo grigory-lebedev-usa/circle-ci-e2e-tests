@@ -10,7 +10,7 @@ import { DropDownPropType } from '../../prop-types';
 
 import classes from './drop-down.module.css';
 
-function DropDown({ items, onListItemClick, value }) {
+function DropDown({ items, onListItemClick, value, hasAction }) {
   const [opened, setOpened] = useState(false);
   const handleToggle = () => setOpened(!opened);
 
@@ -23,19 +23,33 @@ function DropDown({ items, onListItemClick, value }) {
     <div className={classes.dropdown__container} ref={useClickOutside(() => setOpened(false))}>
       <div role="listbox" tabIndex="0" className={classes.dropdown__content} onClick={handleToggle}>
         <div className={classes.dropdown__text}>{value}</div>
-        <Box sx={{ color: '#fff' }}>
-          {opened ? <ArrowDropUp color="inherit" /> : <ArrowDropDown color="inherit" />}
-        </Box>
+        {hasAction ? (
+          <img src="/img/action_icon.svg" alt="action_icon" />
+        ) : (
+          <Box sx={{ color: '#fff' }}>
+            {opened ? <ArrowDropUp color="inherit" /> : <ArrowDropDown color="inherit" />}
+          </Box>
+        )}
       </div>
       {opened && (
-        <ul className={classes.dropdown__list}>
+        <ul
+          className={
+            hasAction
+              ? `${classes.dropdown__list} ${classes.dropdown__list_action}`
+              : classes.dropdown__list
+          }
+        >
           {items.map((item) => (
             <li
-              className={classes.dropdown__item}
+              className={
+                hasAction
+                  ? `${classes.dropdown__item} ${classes.dropdown__item_action}`
+                  : classes.dropdown__item
+              }
               key={item.id}
               onClick={() => handleListItemClick(item)}
             >
-              <span className={classes.dropdown__value}>{item.value}</span>
+              <span className={classes.dropdown__text}>{item.value}</span>
             </li>
           ))}
         </ul>
@@ -47,12 +61,14 @@ function DropDown({ items, onListItemClick, value }) {
 DropDown.propTypes = {
   items: PropTypes.arrayOf(DropDownPropType).isRequired,
   onListItemClick: PropTypes.func,
-  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  hasAction: PropTypes.bool
 };
 
 DropDown.defaultProps = {
   onListItemClick: () => {},
-  value: 0
+  value: 0,
+  hasAction: false
 };
 
 export default DropDown;

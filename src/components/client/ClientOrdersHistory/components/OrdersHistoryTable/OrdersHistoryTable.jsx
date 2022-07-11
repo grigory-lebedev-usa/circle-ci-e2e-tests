@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { formatDate } from '../../../../helpers/helpers';
 
-import ArrowButtonReport from './components/ArrowButtonReport/ArrowButtonReport';
+import ArrowButtonReport from '../../../../../shared/components/ArrowButtonReport/ArrowButtonReport';
 
 import DriverCar from './components/DriverCar/DriverCar';
 
@@ -28,7 +28,7 @@ function OrdersHistoryTable({ items }) {
             <TableCell>{item.source}</TableCell>
             <TableCell>{item.destination}</TableCell>
             <TableCell>
-              <DriverCar info={item} />
+              <DriverCar info={item} hasDriverName />
             </TableCell>
             <TableCell>{item.rating}</TableCell>
             <TableCell>${item.price}</TableCell>

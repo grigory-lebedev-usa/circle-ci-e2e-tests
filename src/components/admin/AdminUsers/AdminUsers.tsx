@@ -1,14 +1,86 @@
+import { ChangeEvent, useEffect, useState } from 'react';
+
+import { Pagination } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 
-import { PRIVATE_ROUTES } from '../../../constants/app.constants';
+import { useDispatch, useSelector } from 'react-redux';
+
+import {
+  PAGINATION_VARIANTS_NUMBERS,
+  PRIVATE_ROUTES,
+  PUBLIC_ROUTES,
+  REQUEST_STATUS,
+  START_BOUNDARY_COUNT,
+  START_ITEM_PAGE,
+  START_PAGE,
+  START_SUBLING_COUNT
+} from '../../../constants/app.constants';
 import DropDown from '../../../shared/components/DropDown/DropDown';
 import Link from '../../../shared/components/Link/Link';
 
-import classes from './admin-users.module.css';
-import { AdminUsersRenderTableProps } from './admin-users.types';
+import ProgressSpinner from '../../../shared/components/ProgressSpinner/ProgressSpinner';
 
-function AdminUsers({ renderTable }: AdminUsersRenderTableProps) {
+import { DropDownItem } from '../../../@types/Shared/shared.types';
+
+import { userSelector } from '../../../slices/user.slice';
+
+import { NOTIFICATION_TYPES } from '../../../shared/components/Notifications/components/Notification/notification.constants';
+
+import { addNotification } from '../../../slices/notifications.slice';
+
+import { AppDispatch } from '../../../store/store.types';
+
+import { USER_ROLES } from '../../../constants/user-roles.constants';
+
+import { getUsers } from '../../../api/hooks/useUsers/users.actions';
+
+import { calculatePagesCount } from '../../helpers/helpers';
+
+import classes from './admin-users.module.css';
+import { AdminUsersProps } from './admin-users.types';
+
+function AdminUsers({ renderTable }: AdminUsersProps) {
   const { pathname } = useLocation();
+  const dispatch = useDispatch<AppDispatch>();
+  const {
+    users: { items = [], total },
+    status,
+    isAuthenticated
+  } = useSelector(userSelector);
+  const [count, setCount] = useState<number>(0);
+  const [page, setPage] = useState<number>(START_PAGE);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(START_ITEM_PAGE);
+  const isPrivatePage = !Object.values(PUBLIC_ROUTES).includes(pathname);
+
+  useEffect(() => {
+    setCount(calculatePagesCount(total, rowsPerPage));
+    if (isAuthenticated && isPrivatePage) {
+      dispatch(
+        getUsers({
+          page: page - START_PAGE,
+          size: rowsPerPage,
+          role: pathname === PRIVATE_ROUTES.USERS_CLIENTS ? USER_ROLES.CLIENT : USER_ROLES.DRIVER
+        })
+      )
+        .unwrap()
+        .catch(({ message }) => {
+          dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }));
+        });
+    }
+  }, [dispatch, isAuthenticated, isPrivatePage, page, pathname, rowsPerPage, total]);
+
+  if (status === REQUEST_STATUS.LOADING) {
+    return <ProgressSpinner isShow />;
+  }
+
+  const handleChangePage = (event: ChangeEvent<unknown>, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (item: DropDownItem) => {
+    setRowsPerPage(item.value);
+    setPage(START_PAGE);
+  };
 
   return (
     <div className={classes.container}>
@@ -39,12 +111,23 @@ function AdminUsers({ renderTable }: AdminUsersRenderTableProps) {
       <div className={classes.dropdown__block}>
         <div className={classes.dropdown__title}>Items per page</div>
         <DropDown
-          items={[
-            { id: 1, value: 5 },
-            { id: 2, value: 10 },
-            { id: 3, value: 15 },
-            { id: 4, value: 20 }
-          ]}
+          value={rowsPerPage}
+          onListItemClick={handleChangeRowsPerPage}
+          items={PAGINATION_VARIANTS_NUMBERS}
+        />
+      </div>
+      {renderTable(items)}
+      <div className={classes.pagination__block}>
+        <Pagination
+          count={count}
+          size="large"
+          page={page}
+          onChange={handleChangePage}
+          color="secondary"
+          hidePrevButton
+          hideNextButton
+          siblingCount={START_SUBLING_COUNT}
+          boundaryCount={START_BOUNDARY_COUNT}
         />
       </div>
     </div>

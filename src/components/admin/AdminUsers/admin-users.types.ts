@@ -1,4 +1,6 @@
-export type AdminUsersType = {
+import { Car } from '../../../@types/Driver/driver.types';
+
+export type Users = {
   blocked: boolean;
   blockedUntil: number;
   email: string;
@@ -8,19 +10,13 @@ export type AdminUsersType = {
   lastName: string;
   rating: number;
   role: string;
-  car: {
-    color: string;
-    make: string;
-    model: string;
-    year: number;
-    photo: string;
-  };
+  car: Car;
 };
 
-export interface AdminUsersRenderTableProps {
-  renderTable: (items: AdminUsersType[]) => JSX.Element;
-}
+export type AdminUsersProps = {
+  renderTable: (items: Users[]) => JSX.Element;
+};
 
-export interface AdminUsersTableProps {
-  items: AdminUsersType[];
-}
+export type AdminUsersTableProps = {
+  items: Users[];
+};
