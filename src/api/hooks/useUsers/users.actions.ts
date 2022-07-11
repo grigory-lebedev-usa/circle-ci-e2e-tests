@@ -3,11 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { API_ROUTES } from '../../../constants/api.constants';
 import { axiosService } from '../../../services/axios.service';
 
-type UsersProps = {
-  page: number;
-  size: number;
-  role: string;
-};
+import { UsersProps } from './users.types';
 
 export const getUsers = createAsyncThunk(
   'user/get-users',

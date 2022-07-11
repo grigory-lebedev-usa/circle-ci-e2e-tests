@@ -20,8 +20,6 @@ import Link from '../../../shared/components/Link/Link';
 
 import ProgressSpinner from '../../../shared/components/ProgressSpinner/ProgressSpinner';
 
-import { DropDownItem } from '../../../@types/Shared/shared.types';
-
 import { userSelector } from '../../../slices/user.slice';
 
 import { NOTIFICATION_TYPES } from '../../../shared/components/Notifications/components/Notification/notification.constants';
@@ -36,6 +34,8 @@ import { getUsers } from '../../../api/hooks/useUsers/users.actions';
 
 import { calculatePagesCount } from '../../helpers/helpers';
 
+import { DropDownItem } from '../../../shared/components/DropDown/drop-down.types';
+
 import classes from './admin-users.module.css';
 import { AdminUsersProps } from './admin-users.types';
 
@@ -47,9 +47,9 @@ function AdminUsers({ renderTable }: AdminUsersProps) {
     status,
     isAuthenticated
   } = useSelector(userSelector);
-  const [count, setCount] = useState<number>(0);
-  const [page, setPage] = useState<number>(START_PAGE);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(START_ITEM_PAGE);
+  const [count, setCount] = useState(0);
+  const [page, setPage] = useState(START_PAGE);
+  const [rowsPerPage, setRowsPerPage] = useState(START_ITEM_PAGE);
   const isPrivatePage = !Object.values(PUBLIC_ROUTES).includes(pathname);
 
   useEffect(() => {

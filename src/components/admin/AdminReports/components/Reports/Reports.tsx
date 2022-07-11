@@ -19,7 +19,7 @@ import ProgressSpinner from '../../../../../shared/components/ProgressSpinner/Pr
 
 import { calculatePagesCount } from '../../../../helpers/helpers';
 
-import { DropDownItem } from '../../../../../@types/Shared/shared.types';
+import { DropDownItem } from '../../../../../shared/components/DropDown/drop-down.types';
 
 import { ReportsProps } from './reports-types';
 
@@ -31,9 +31,9 @@ function Reports({ renderTable }: ReportsProps) {
     status,
     reports: { total, items = [] }
   } = useReports();
-  const [count, setCount] = useState<number>(0);
-  const [page, setPage] = useState<number>(START_PAGE);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(START_ITEM_PAGE);
+  const [count, setCount] = useState(0);
+  const [page, setPage] = useState(START_PAGE);
+  const [rowsPerPage, setRowsPerPage] = useState(START_ITEM_PAGE);
 
   useEffect(() => {
     setCount(calculatePagesCount(total, rowsPerPage));
