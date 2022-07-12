@@ -52,3 +52,9 @@
   color: #fff;
   margin-right: 10px;
 }
+
+.pagination__block {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}

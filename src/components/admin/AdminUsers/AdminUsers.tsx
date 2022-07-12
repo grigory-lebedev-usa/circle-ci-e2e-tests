@@ -41,20 +41,22 @@ import { AdminUsersProps } from './admin-users.types';
 
 function AdminUsers({ renderTable }: AdminUsersProps) {
   const { pathname } = useLocation();
+  const [status, setStatus] = useState(REQUEST_STATUS.IDLE);
   const dispatch = useDispatch<AppDispatch>();
   const {
     users: { items = [], total },
-    status,
     isAuthenticated
   } = useSelector(userSelector);
   const [count, setCount] = useState(0);
   const [page, setPage] = useState(START_PAGE);
   const [rowsPerPage, setRowsPerPage] = useState(START_ITEM_PAGE);
   const isPrivatePage = !Object.values(PUBLIC_ROUTES).includes(pathname);
+  console.log(count);
 
   useEffect(() => {
     setCount(calculatePagesCount(total, rowsPerPage));
     if (isAuthenticated && isPrivatePage) {
+      setStatus(REQUEST_STATUS.LOADING);
       dispatch(
         getUsers({
           page: page - START_PAGE,
@@ -63,7 +65,9 @@ function AdminUsers({ renderTable }: AdminUsersProps) {
         })
       )
         .unwrap()
+        .then(() => setStatus(REQUEST_STATUS.SUCCESS))
         .catch(({ message }) => {
+          setStatus(REQUEST_STATUS.FAILED);
           dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }));
         });
     }

@@ -140,14 +140,7 @@ const userSlice = createSlice({
       })
 
       .addMatcher(
-        isPending(
-          getUser,
-          registrationUser,
-          resetUserPassword,
-          uploadUserPhoto,
-          finishedUserTrip,
-          getUsers
-        ),
+        isPending(getUser, registrationUser, resetUserPassword, uploadUserPhoto, finishedUserTrip),
         (state) => {
           state.status = REQUEST_STATUS.LOADING;
         }

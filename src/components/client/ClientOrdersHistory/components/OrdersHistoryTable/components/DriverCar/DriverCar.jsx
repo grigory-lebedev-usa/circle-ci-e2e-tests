@@ -9,11 +9,12 @@ import {
 } from '../../../../../../../shared/components/Button/button.constants';
 
 import { useModal } from '../../../../../../../shared/hooks/useModal';
+import { CarObjectPropType } from '../../../../../../../shared/prop-types';
 import DriverCarInfoModal from '../../../../../../DriverCarInfoModal/DriverCarInfoModal';
 
 import classes from './driver-car.module.css';
 
-function DriverCar({ info, hasDriverName }) {
+function DriverCar({ info, hasDriverName, car }) {
   const { isModalOpened, openModal, closeModal } = useModal(false);
   return (
     <div className={`${hasDriverName ? classes.container : null}`}>
@@ -21,6 +22,7 @@ function DriverCar({ info, hasDriverName }) {
         isOpened={isModalOpened}
         closeModal={closeModal}
         info={info}
+        car={car}
         hasRatingAndPrice={false}
         hasAcceptButton={false}
       />
@@ -41,12 +43,15 @@ function DriverCar({ info, hasDriverName }) {
 
 DriverCar.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  info: PropTypes.object.isRequired,
+  info: PropTypes.object,
+  car: CarObjectPropType,
   hasDriverName: PropTypes.bool
 };
 
 DriverCar.defaultProps = {
-  hasDriverName: false
+  info: {},
+  hasDriverName: false,
+  car: {}
 };
 
 export default DriverCar;

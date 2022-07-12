@@ -13,7 +13,7 @@ import {
 
 import RatingAndPrice from '../client/ClientCurrentOrder/components/DriverCard/components/RatingAndPrice/RatingAndPrice';
 
-import { OfferObjectPropType } from '../../shared/prop-types';
+import { CarObjectPropType, OfferObjectPropType } from '../../shared/prop-types';
 
 import { RATING_AND_PRICE_SIZES } from '../client/ClientCurrentOrder/components/DriverCard/components/RatingAndPrice/rating-and-price.constants';
 
@@ -24,6 +24,7 @@ function DriverCarInfoModal({
   closeModal,
   onClick,
   info,
+  car,
   hasRatingAndPrice,
   hasAcceptButton
 }) {
@@ -31,7 +32,7 @@ function DriverCarInfoModal({
     <Modal isOpened={isOpened} closeModal={closeModal} size={MODAL_SIZE.LARGE}>
       <div className={classes.modal__content}>
         <div>
-          <img className={classes.img} src={info.driver.car.photo} alt="Car" />
+          <img className={classes.img} src={car.photo} alt="Car" />
           {hasRatingAndPrice && (
             <RatingAndPrice
               rating={info.driver.rating}
@@ -45,19 +46,19 @@ function DriverCarInfoModal({
           <h3 className={classes.block__title}>Info</h3>
           <div className={classes.info__item}>
             <h4 className={classes.item__title}>Make:</h4>
-            <p className={classes.item__text}>{info.driver.car.make}</p>
+            <p className={classes.item__text}>{car.make}</p>
           </div>
           <div className={classes.info__item}>
             <h4 className={classes.item__title}>Model:</h4>
-            <p className={classes.item__text}>{info.driver.car.model}</p>
+            <p className={classes.item__text}>{car.model}</p>
           </div>
           <div className={classes.info__item}>
             <h4 className={classes.item__title}>Year:</h4>
-            <p className={classes.item__text}>{info.driver.car.year}</p>
+            <p className={classes.item__text}>{car.year}</p>
           </div>
           <div className={classes.info__item}>
             <h4 className={classes.item__title}>Color:</h4>
-            <p className={classes.item__text}>{info.driver.car.color}</p>
+            <p className={classes.item__text}>{car.color}</p>
           </div>
           {hasAcceptButton && (
             <Button
@@ -82,6 +83,7 @@ DriverCarInfoModal.propTypes = {
   closeModal: PropTypes.func,
   onClick: PropTypes.func,
   info: OfferObjectPropType,
+  car: CarObjectPropType,
   hasRatingAndPrice: PropTypes.bool,
   hasAcceptButton: PropTypes.bool
 };
@@ -91,6 +93,7 @@ DriverCarInfoModal.defaultProps = {
   closeModal: () => {},
   onClick: () => {},
   info: {},
+  car: {},
   hasRatingAndPrice: true,
   hasAcceptButton: true
 };
