@@ -34,7 +34,7 @@ function ReportsTable({ items }: ReportsTableProps) {
               {item.client?.firstName} {item.client?.lastName}
             </TableCell>
             <TableCell>
-              <DriverCar info={item} />
+              <DriverCar car={item.driver.car} />
             </TableCell>
             <TableCell>
               <DropDown hasAction value={null} items={PAGINATION_ACTIONS} />

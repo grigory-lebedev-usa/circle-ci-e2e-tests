@@ -1,0 +1,60 @@
+@import url(/src/styles/colors.css);
+
+.container {
+  position: relative;
+}
+
+.block__title {
+  display: flex;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.title__item {
+  position: relative;
+  margin-right: 30px;
+}
+
+.title__item_active::after {
+  background-color: var(--primary-color);
+  content: '';
+  height: 5px;
+  left: 0;
+  position: absolute;
+  top: calc(100% - 10px);
+  transition: 0.3s ease-in-out;
+  width: 100%;
+}
+
+.title {
+  margin: 0;
+  font-family: 'Rasa';
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 78px;
+  color: #fff;
+}
+
+.dropdown__block {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.dropdown__title {
+  font-family: 'Rasa';
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 37px;
+  color: #fff;
+  margin-right: 10px;
+}
+
+.pagination__block {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
