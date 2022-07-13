@@ -18,3 +18,11 @@ export const OfferObjectPropType = PropTypes.shape({
   createdAt: PropTypes.number,
   id: PropTypes.string
 });
+
+export const CarObjectPropType = PropTypes.shape({
+  photo: PropTypes.string,
+  make: PropTypes.string,
+  model: PropTypes.string,
+  year: PropTypes.number,
+  color: PropTypes.string
+});

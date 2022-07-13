@@ -12,7 +12,9 @@ export const PRIVATE_ROUTES = {
   DRIVER_ORDERS: '/driver-orders',
   TRIP: '/trip',
   ORDERS_HISTORY: '/orders-history',
-  REPORTS: '/reports'
+  REPORTS: '/reports',
+  USERS_CLIENTS: '/users/clients',
+  USERS_DRIVERS: '/users/drivers'
 };
 
 export const STORAGE_KEYS = {

@@ -371,6 +371,9 @@ const theme = createTheme({
             backgroundColor: COLORS.DISABLED,
             cursor: 'not-allowed',
             color: COLORS.WHITE
+          },
+          '&.MuiButton-containedError': {
+            backgroundColor: COLORS.ERROR_LIGHT
           }
         }
       }
