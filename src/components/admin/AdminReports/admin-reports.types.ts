@@ -1,5 +1,5 @@
-import { Client } from '../../../@types/Client/client.types';
-import { Driver } from '../../../@types/Driver/driver.types';
+import { Client } from '../../client/ClientTypes/client.types';
+import { Driver } from '../../driver/DriverTypes/driver.types';
 
 export type Report = {
   id: string;

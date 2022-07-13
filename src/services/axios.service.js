@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import { APP_CONFIG } from '../config/index';
 import { API_ROUTES } from '../constants/api.constants';
+import { PUBLIC_ROUTES } from '../constants/app.constants';
 
 import LocalStorageService from './LocalStorageService';
 
@@ -39,6 +40,7 @@ export function registerInterceptors() {
         return axiosService(storedRequest);
       }
       LocalStorageService.clear();
+      window.location.replace(PUBLIC_ROUTES.LOGIN);
       return Promise.reject(error);
     }
   );
