@@ -1,0 +1,28 @@
+.modal__content {
+  padding: 40px 100px 30px 100px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.modal__title {
+  margin: 0;
+  font-family: 'Rasa';
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 78px;
+  color: var(--primary-color);
+}
+
+.modal__date_picker {
+  margin-top: 20px;
+}
+
+.modal__actions {
+  margin-top: 40px;
+  display: flex;
+}
+
+.button {
+  margin-left: 90px;
+}

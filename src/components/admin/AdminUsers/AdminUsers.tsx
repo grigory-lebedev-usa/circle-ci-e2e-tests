@@ -3,7 +3,7 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { Pagination } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import {
   PAGINATION_VARIANTS_NUMBERS,

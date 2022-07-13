@@ -286,13 +286,13 @@ const theme = createTheme({
         }
       }
     },
-    MuiIconButton: {
-      styleOverrides: {
-        root: {
-          color: COLORS.WHITE
-        }
-      }
-    },
+    // MuiIconButton: {
+    //   styleOverrides: {
+    //     root: {
+    //       color: COLORS.WHITE
+    //     }
+    //   }
+    // },
     MuiTextField: {
       styleOverrides: {
         root: {
@@ -340,9 +340,9 @@ const theme = createTheme({
               height: '60px'
             }),
           ...(ownerState.variant === 'contained' &&
-            ownerState.size === 'medium-long' && {
-              fontSize: '39px',
-              lineHeight: '48px',
+            ownerState.size === 'medium_long' && {
+              fontSize: '30px',
+              lineHeight: '37px',
               width: '300px',
               height: '60px'
             }),

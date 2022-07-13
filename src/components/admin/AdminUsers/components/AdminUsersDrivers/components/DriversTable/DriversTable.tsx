@@ -10,6 +10,7 @@ import Hint from '../../../../../../../shared/components/Hint/Hint';
 
 import DriverCar from '../../../../../../client/ClientOrdersHistory/components/OrdersHistoryTable/components/DriverCar/DriverCar';
 import { formatDateHint } from '../../../../../../helpers/helpers';
+import AdminBlock from '../../../../../AdminActions/components/AdminBlock/AdminBlock';
 
 import { AdminUsersTableProps } from '../../../../admin-users.types';
 
@@ -52,13 +53,7 @@ function DriversTable({ items }: AdminUsersTableProps) {
               <DriverCar car={item.car} />
             </TableCell>
             <TableCell>
-              <Button
-                variant={BUTTON_VARIANTS.CONTAINED}
-                size={BUTTON_SIZES.EXTRA_SMALL}
-                color={BUTTON_COLORS.ERROR}
-              >
-                Block
-              </Button>
+              <AdminBlock userInfo={item} title="Block driver" />
             </TableCell>
           </TableRow>
         ))}

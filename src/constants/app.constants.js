@@ -5,7 +5,7 @@ export const PUBLIC_ROUTES = {
 };
 
 export const PRIVATE_ROUTES = {
-  HOME: '/',
+  HOME: '/home',
   ORDER: '/order',
   CURRENT_ORDER: '/current-order',
   DRIVER_START: '/driver-start',
