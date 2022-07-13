@@ -1,4 +1,4 @@
-import { Car } from '../../../@types/Driver/driver.types';
+import { Car } from '../../driver/DriverTypes/driver.types';
 
 export type Users = {
   blocked: boolean;

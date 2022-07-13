@@ -26,8 +26,6 @@ import { NOTIFICATION_TYPES } from '../../../shared/components/Notifications/com
 
 import { addNotification } from '../../../slices/notifications.slice';
 
-import { AppDispatch } from '../../../store/store.types';
-
 import { USER_ROLES } from '../../../constants/user-roles.constants';
 
 import { getUsers } from '../../../api/hooks/useUsers/users.actions';
@@ -36,13 +34,15 @@ import { calculatePagesCount } from '../../helpers/helpers';
 
 import { DropDownItem } from '../../../shared/components/DropDown/drop-down.types';
 
+import { useAppDispatch } from '../../../store';
+
 import classes from './admin-users.module.css';
 import { AdminUsersProps } from './admin-users.types';
 
 function AdminUsers({ renderTable }: AdminUsersProps) {
   const { pathname } = useLocation();
   const [status, setStatus] = useState(REQUEST_STATUS.IDLE);
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const {
     users: { items = [], total },
     isAuthenticated
@@ -51,7 +51,6 @@ function AdminUsers({ renderTable }: AdminUsersProps) {
   const [page, setPage] = useState(START_PAGE);
   const [rowsPerPage, setRowsPerPage] = useState(START_ITEM_PAGE);
   const isPrivatePage = !Object.values(PUBLIC_ROUTES).includes(pathname);
-  console.log(count);
 
   useEffect(() => {
     setCount(calculatePagesCount(total, rowsPerPage));
