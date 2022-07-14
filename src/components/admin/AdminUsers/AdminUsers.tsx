@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 
 import { Pagination } from '@mui/material';
 import { useLocation } from 'react-router-dom';
@@ -52,25 +52,38 @@ function AdminUsers({ renderTable }: AdminUsersProps) {
   const [rowsPerPage, setRowsPerPage] = useState(START_ITEM_PAGE);
   const isPrivatePage = !Object.values(PUBLIC_ROUTES).includes(pathname);
 
+  const getUsersCallback = useCallback(() => {
+    dispatch(
+      getUsers({
+        page: page - START_PAGE,
+        size: rowsPerPage,
+        role: pathname === PRIVATE_ROUTES.USERS_CLIENTS ? USER_ROLES.CLIENT : USER_ROLES.DRIVER
+      })
+    )
+      .unwrap()
+      .then(() => setStatus(REQUEST_STATUS.SUCCESS))
+      .catch(({ message }) => {
+        setStatus(REQUEST_STATUS.FAILED);
+        dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }));
+      });
+  }, [dispatch, page, pathname, rowsPerPage]);
+
   useEffect(() => {
     setCount(calculatePagesCount(total, rowsPerPage));
     if (isAuthenticated && isPrivatePage) {
       setStatus(REQUEST_STATUS.LOADING);
-      dispatch(
-        getUsers({
-          page: page - START_PAGE,
-          size: rowsPerPage,
-          role: pathname === PRIVATE_ROUTES.USERS_CLIENTS ? USER_ROLES.CLIENT : USER_ROLES.DRIVER
-        })
-      )
-        .unwrap()
-        .then(() => setStatus(REQUEST_STATUS.SUCCESS))
-        .catch(({ message }) => {
-          setStatus(REQUEST_STATUS.FAILED);
-          dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }));
-        });
+      getUsersCallback();
     }
-  }, [dispatch, isAuthenticated, isPrivatePage, page, pathname, rowsPerPage, total]);
+  }, [
+    dispatch,
+    getUsersCallback,
+    isAuthenticated,
+    isPrivatePage,
+    page,
+    pathname,
+    rowsPerPage,
+    total
+  ]);
 
   if (status === REQUEST_STATUS.LOADING) {
     return <ProgressSpinner isShow />;
@@ -119,7 +132,7 @@ function AdminUsers({ renderTable }: AdminUsersProps) {
           items={PAGINATION_VARIANTS_NUMBERS}
         />
       </div>
-      {renderTable(items)}
+      {renderTable(items, getUsersCallback)}
       <div className={classes.pagination__block}>
         <Pagination
           count={count}

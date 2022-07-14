@@ -18,14 +18,16 @@ import AdminBlockModal from './components/AdminBlockModal/AdminBlockModal';
 type AdminBlockProps = {
   title: string;
   userInfo: Users;
+  getUsers: () => void;
 };
 
-function AdminBlock({ title, userInfo }: AdminBlockProps) {
-  const { isModalOpened, closeModal, openModal, toggleModal } = useModal();
+function AdminBlock({ title, userInfo, getUsers }: AdminBlockProps) {
+  const { isModalOpened, closeModal, openModal, toggleModal: toggleBlockModal } = useModal();
   return (
     <>
       <AdminBlockModal
         userInfo={userInfo}
+        getUsers={getUsers}
         isOpened={isModalOpened}
         closeModal={closeModal}
         title={title}

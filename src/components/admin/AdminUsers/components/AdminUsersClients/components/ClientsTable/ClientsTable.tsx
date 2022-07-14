@@ -8,7 +8,7 @@ import { AdminUsersTableProps } from '../../../../admin-users.types';
 
 import classes from './clients-table.module.css';
 
-function ClientsTable({ items }: AdminUsersTableProps) {
+function ClientsTable({ items, getUsers }: AdminUsersTableProps) {
   return (
     <Table sx={{ minWidth: '1100px', marginTop: '60px' }}>
       <TableHead>
@@ -41,7 +41,7 @@ function ClientsTable({ items }: AdminUsersTableProps) {
             <TableCell>{item.lastName}</TableCell>
             <TableCell>{item.email}</TableCell>
             <TableCell>
-              <AdminBlock userInfo={item} title="Block client" />
+              <AdminBlock getUsers={getUsers} userInfo={item} title="Block client" />
             </TableCell>
           </TableRow>
         ))}

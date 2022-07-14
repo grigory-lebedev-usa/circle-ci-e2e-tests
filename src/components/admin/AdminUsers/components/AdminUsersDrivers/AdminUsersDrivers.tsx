@@ -6,8 +6,8 @@ import AdminUsers from '../../AdminUsers';
 import DriversTable from './components/DriversTable/DriversTable';
 
 function AdminUsersDrivers() {
-  const renderTableCallback = useCallback((items: Users[]) => {
-    return <DriversTable items={items} />;
+  const renderTableCallback = useCallback((items: Users[], getUsers: () => void) => {
+    return <DriversTable getUsers={getUsers} items={items} />;
   }, []);
   return <AdminUsers renderTable={renderTableCallback} />;
 }

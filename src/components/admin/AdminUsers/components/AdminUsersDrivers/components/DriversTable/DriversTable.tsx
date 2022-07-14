@@ -16,7 +16,7 @@ import { AdminUsersTableProps } from '../../../../admin-users.types';
 
 import classes from './drivers-table.module.css';
 
-function DriversTable({ items }: AdminUsersTableProps) {
+function DriversTable({ items, getUsers }: AdminUsersTableProps) {
   return (
     <Table sx={{ minWidth: '1100px', marginTop: '60px' }}>
       <TableHead>
@@ -53,7 +53,7 @@ function DriversTable({ items }: AdminUsersTableProps) {
               <DriverCar car={item.car} />
             </TableCell>
             <TableCell>
-              <AdminBlock userInfo={item} title="Block driver" />
+              <AdminBlock getUsers={getUsers} userInfo={item} title="Block driver" />
             </TableCell>
           </TableRow>
         ))}
