@@ -1,10 +1,9 @@
-import { Client } from '../../client/ClientTypes/client.types';
-import { Driver } from '../../driver/DriverTypes/driver.types';
+import { Users } from '../AdminUsers/admin-users.types';
 
 export type Report = {
   id: string;
   comment: string;
   createdAt: number;
-  client: Client;
-  driver: Driver;
+  client: Users;
+  driver: Users;
 };

@@ -6,7 +6,7 @@ import {
   isRejectedWithValue
 } from '@reduxjs/toolkit';
 
-import { getUsers } from '../api/hooks/useUsers/users.actions';
+import { getUsers, userBlocked } from '../api/hooks/useUsers/users.actions';
 
 import { API_ROUTES } from '../constants/api.constants';
 import { REQUEST_STATUS, USER_VALUES } from '../constants/app.constants';
@@ -140,21 +140,34 @@ const userSlice = createSlice({
       })
 
       .addMatcher(
-        isPending(getUser, registrationUser, resetUserPassword, uploadUserPhoto, finishedUserTrip),
+        isPending(
+          getUser,
+          registrationUser,
+          resetUserPassword,
+          uploadUserPhoto,
+          finishedUserTrip,
+          userBlocked
+        ),
         (state) => {
           state.status = REQUEST_STATUS.LOADING;
         }
       )
 
       .addMatcher(
-        isFulfilled(registrationUser, resetUserPassword, uploadUserPhoto, finishedUserTrip),
+        isFulfilled(
+          registrationUser,
+          resetUserPassword,
+          uploadUserPhoto,
+          finishedUserTrip,
+          userBlocked
+        ),
         (state) => {
           state.status = REQUEST_STATUS.SUCCESS;
         }
       )
 
       .addMatcher(
-        isRejectedWithValue(getUser, loginUser, registrationUser, getUsers),
+        isRejectedWithValue(getUser, loginUser, registrationUser, getUsers, userBlocked),
         (state, action) => {
           state.status = REQUEST_STATUS.FAILED;
           state.error = action.error.message;

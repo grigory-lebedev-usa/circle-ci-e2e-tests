@@ -6,6 +6,6 @@ export type UsersProps = {
 
 export type UserBlockedProps = {
   blocked: boolean;
-  blockedUntil?: number;
+  blockedUntil?: number | null;
   userId: string;
 };

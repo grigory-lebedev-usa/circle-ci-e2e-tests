@@ -9,8 +9,9 @@ import {
 import Hint from '../../../../../../../shared/components/Hint/Hint';
 
 import DriverCar from '../../../../../../client/ClientOrdersHistory/components/OrdersHistoryTable/components/DriverCar/DriverCar';
-import { formatDateHint } from '../../../../../../helpers/helpers';
+import { formatDateAndTime } from '../../../../../../helpers/helpers';
 import AdminBlock from '../../../../../AdminActions/components/AdminBlock/AdminBlock';
+import AdminUnblock from '../../../../../AdminActions/components/AdminUnblock/AdminUnblock';
 
 import { AdminUsersTableProps } from '../../../../admin-users.types';
 
@@ -37,7 +38,7 @@ function DriversTable({ items, getUsers }: AdminUsersTableProps) {
                   <Hint
                     content={
                       item.blockedUntil
-                        ? `User is blocked until ${formatDateHint(item.blockedUntil)}`
+                        ? `User is blocked until ${formatDateAndTime(item.blockedUntil)}`
                         : 'User is blocked permanently'
                     }
                   >
@@ -53,7 +54,11 @@ function DriversTable({ items, getUsers }: AdminUsersTableProps) {
               <DriverCar car={item.car} />
             </TableCell>
             <TableCell>
-              <AdminBlock getUsers={getUsers} userInfo={item} title="Block driver" />
+              {item.blocked ? (
+                <AdminUnblock getUsers={getUsers} userInfo={item} />
+              ) : (
+                <AdminBlock getUsers={getUsers} userInfo={item} title="Block driver" />
+              )}
             </TableCell>
           </TableRow>
         ))}

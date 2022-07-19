@@ -4,16 +4,15 @@ import DropDown from '../../../../../../../shared/components/DropDown/DropDown';
 import { useModal } from '../../../../../../../shared/hooks/useModal';
 
 import AdminBlockModal from '../../../../../AdminActions/components/AdminBlock/components/AdminBlockModal/AdminBlockModal';
-import { Users } from '../../../../../AdminUsers/admin-users.types';
 import { Report } from '../../../../admin-reports.types';
-import { PAGINATION_ACTIONS } from '../../reports.constants';
+import { PAGINATION_ACTIONS, PAGINATION_USER_ROLE } from '../../reports.constants';
 
 type ListItemProps = {
   value: string;
 };
 
 type DropDownActionsProps = {
-  userInfo: Report | Users;
+  userInfo: Report;
 };
 
 function DropDownActions({ userInfo }: DropDownActionsProps) {
@@ -23,17 +22,14 @@ function DropDownActions({ userInfo }: DropDownActionsProps) {
     openModal();
     setUserRoleInfo(listItem.value);
   };
+
+  const key = userRoleInfo === PAGINATION_USER_ROLE.BLOCK_DRIVER ? 'driver' : 'client';
+
   return (
     <>
       <AdminBlockModal
-        userInfo={
-          // eslint-disable-next-line no-nested-ternary
-          userRoleInfo === PAGINATION_ACTIONS[0].value
-            ? userInfo.driver
-            : userRoleInfo === PAGINATION_ACTIONS[1].value
-            ? userInfo.client
-            : null
-        }
+        getUsers={() => {}}
+        userInfo={userInfo[key]}
         isOpened={isModalOpened}
         closeModal={closeModal}
         title={userRoleInfo}

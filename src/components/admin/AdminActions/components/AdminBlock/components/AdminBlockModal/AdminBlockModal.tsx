@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 
 import { TextField } from '@mui/material';
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
@@ -16,18 +16,23 @@ import Modal from '../../../../../../../shared/components/Modal/Modal';
 import { MODAL_SIZE } from '../../../../../../../shared/components/Modal/modal.constants';
 import { Users } from '../../../../../AdminUsers/admin-users.types';
 
-import { Report } from '../../../../../AdminReports/admin-reports.types';
+import ConfirmationModal from '../../../../../../../shared/components/ConfirmationModal/ConfirmationModal';
 
-import classes from './admin-block-modal.module.css';
+import { useModal } from '../../../../../../../shared/hooks/useModal';
+
+import { formatDateAndTime, toUpperFirstLetter } from '../../../../../../helpers/helpers';
+
+import { useAppDispatch } from '../../../../../../../store';
+
+import { userBlocked } from '../../../../../../../api/hooks/useUsers/users.actions';
+
+import { addNotification } from '../../../../../../../slices/notifications.slice';
+
+import { NOTIFICATION_TYPES } from '../../../../../../../shared/components/Notifications/components/Notification/notification.constants';
+
 import BlockPermanently from './components/BlockPermanently/BlockPermanently';
-
-type AdminBlockModalProps = {
-  isOpened: boolean;
-  closeModal: () => void;
-  title: string;
-  userInfo: Users;
-  getUsers: () => void;
-};
+import classes from './admin-block-modal.module.css';
+import { AdminBlockModalProps } from './admin-block-modal.types';
 
 function AdminBlockModal({
   isOpened,
@@ -36,8 +41,14 @@ function AdminBlockModal({
   userInfo,
   getUsers
 }: AdminBlockModalProps) {
+  const {
+    isModalOpened: isConfirmationModalOpened,
+    openModal: openConfirmationModal,
+    closeModal: closeConfirmationModal
+  } = useModal();
   const [isBlockUntil, setIsBlockUntil] = useState(false);
-  const [value, setValue] = useState(null);
+  const [dateTimePickerValue, setDateTimePickerValue] = useState(null);
+  const dispatch = useAppDispatch();
 
   const handleOpenBlockUntil = () => {
     setIsBlockUntil(true);
@@ -45,6 +56,38 @@ function AdminBlockModal({
 
   const handleCloseBlockUntil = () => {
     setIsBlockUntil(false);
+  };
+
+  const handleDateTimePickerRef = () => {
+    document.querySelector('input')?.setAttribute('disabled', 'true');
+  };
+
+  const handleBlockUntilAccept = () => {
+    dispatch(
+      userBlocked({
+        blocked: true,
+        blockedUntil: Date.parse(String(dateTimePickerValue)),
+        userId: userInfo.id
+      })
+    )
+      .unwrap()
+      .then(async () => {
+        await getUsers();
+        dispatch(
+          addNotification({
+            type: NOTIFICATION_TYPES.SUCCESS,
+            message: `${toUpperFirstLetter(userInfo.role)} successfully blocked`
+          })
+        );
+      })
+      .catch(({ message }) =>
+        dispatch(
+          addNotification({
+            type: NOTIFICATION_TYPES.ERROR,
+            message
+          })
+        )
+      );
   };
 
   return (
@@ -73,13 +116,15 @@ function AdminBlockModal({
           <>
             <div className={classes.modal__date_picker_until}>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <DatePicker
+                <DateTimePicker
                   label="Block until"
-                  value={value}
+                  disablePast
+                  value={dateTimePickerValue}
+                  ref={handleDateTimePickerRef}
                   onChange={(newValue) => {
-                    setValue(newValue);
+                    setDateTimePickerValue(newValue);
                   }}
-                  renderInput={(params) => <TextField color="form" {...params} />}
+                  renderInput={(params) => <TextField {...params} />}
                 />
               </LocalizationProvider>
             </div>
@@ -92,11 +137,21 @@ function AdminBlockModal({
               >
                 Back
               </Button>
+              <ConfirmationModal
+                isOpened={isConfirmationModalOpened}
+                onCancel={closeConfirmationModal}
+                onConfirm={handleBlockUntilAccept}
+                text={`Are you sure you want to block ${userInfo.firstName} ${
+                  userInfo.lastName
+                } until ${formatDateAndTime(dateTimePickerValue)}`}
+              />
               <Button
                 variant={BUTTON_VARIANTS.CONTAINED}
                 size={BUTTON_SIZES.MEDIUM_LONG}
                 color={BUTTON_COLORS.SUCCESS}
                 className={classes.button_until}
+                onClick={openConfirmationModal}
+                disabled={!dateTimePickerValue}
               >
                 Accept
               </Button>

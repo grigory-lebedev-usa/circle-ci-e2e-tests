@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 
 import { Pagination } from '@mui/material';
 
@@ -21,6 +21,8 @@ import { calculatePagesCount } from '../../../../helpers/helpers';
 
 import { DropDownItem } from '../../../../../shared/components/DropDown/drop-down.types';
 
+import { getUsers } from '../../../../../api/hooks/useUsers/users.actions';
+
 import { ReportsProps } from './reports-types';
 
 import classes from './reports.module.css';
@@ -35,10 +37,14 @@ function Reports({ renderTable }: ReportsProps) {
   const [page, setPage] = useState(START_PAGE);
   const [rowsPerPage, setRowsPerPage] = useState(START_ITEM_PAGE);
 
+  const getReportsCallback = useCallback(() => {
+    getReports(page - START_PAGE, rowsPerPage);
+  }, [getReports, page, rowsPerPage]);
+
   useEffect(() => {
     setCount(calculatePagesCount(total, rowsPerPage));
-    getReports(page - START_PAGE, rowsPerPage);
-  }, [getReports, page, rowsPerPage, total]);
+    getReportsCallback();
+  }, [getReportsCallback, rowsPerPage, total]);
 
   if (status === REQUEST_STATUS.LOADING) {
     return <ProgressSpinner isShow />;

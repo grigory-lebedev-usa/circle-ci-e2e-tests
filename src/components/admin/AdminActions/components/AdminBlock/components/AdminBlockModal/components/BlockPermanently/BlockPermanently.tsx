@@ -1,4 +1,9 @@
+import { useState } from 'react';
+
+import { useSelector } from 'react-redux';
+
 import { userBlocked } from '../../../../../../../../../api/hooks/useUsers/users.actions';
+import { REQUEST_STATUS } from '../../../../../../../../../constants/app.constants';
 import Button from '../../../../../../../../../shared/components/Button/Button';
 import {
   BUTTON_VARIANTS,
@@ -7,27 +12,33 @@ import {
 } from '../../../../../../../../../shared/components/Button/button.constants';
 import ConfirmationModal from '../../../../../../../../../shared/components/ConfirmationModal/ConfirmationModal';
 import { NOTIFICATION_TYPES } from '../../../../../../../../../shared/components/Notifications/components/Notification/notification.constants';
+import ProgressSpinner from '../../../../../../../../../shared/components/ProgressSpinner/ProgressSpinner';
 import { useModal } from '../../../../../../../../../shared/hooks/useModal';
 import { addNotification } from '../../../../../../../../../slices/notifications.slice';
+import { userSelector } from '../../../../../../../../../slices/user.slice';
 import { useAppDispatch } from '../../../../../../../../../store';
-import { Report } from '../../../../../../../AdminReports/admin-reports.types';
-import { Users } from '../../../../../../../AdminUsers/admin-users.types';
+import { toUpperFirstLetter } from '../../../../../../../../helpers/helpers';
 
-type BlockPermanentlyProps = {
-  userInfo: Users;
-  closeAdminBlockModal: () => void;
-  getUsers: () => void;
-};
+import { BlockPermanentlyProps } from './block-permanently.types';
 
 function BlockPermanently({ userInfo, closeAdminBlockModal, getUsers }: BlockPermanentlyProps) {
   const { isModalOpened, openModal, closeModal } = useModal();
   const dispatch = useAppDispatch();
+  const { status } = useSelector(userSelector);
 
   const handleBlockPermanentlyAccept = () => {
-    closeModal();
-    closeAdminBlockModal();
     dispatch(userBlocked({ blocked: true, userId: userInfo.id }))
       .unwrap()
+      .then(async () => {
+        await getUsers();
+        closeAdminBlockModal();
+        dispatch(
+          addNotification({
+            type: NOTIFICATION_TYPES.SUCCESS,
+            message: `${toUpperFirstLetter(userInfo.role)} successfully blocked`
+          })
+        );
+      })
       .catch(({ message }) =>
         dispatch(
           addNotification({
@@ -36,8 +47,12 @@ function BlockPermanently({ userInfo, closeAdminBlockModal, getUsers }: BlockPer
           })
         )
       );
-    getUsers();
   };
+
+  if (status === REQUEST_STATUS.LOADING) {
+    return <ProgressSpinner isShow />;
+  }
+
   return (
     <>
       <ConfirmationModal

@@ -286,13 +286,6 @@ const theme = createTheme({
         }
       }
     },
-    // MuiIconButton: {
-    //   styleOverrides: {
-    //     root: {
-    //       color: COLORS.WHITE
-    //     }
-    //   }
-    // },
     MuiTextField: {
       styleOverrides: {
         root: {

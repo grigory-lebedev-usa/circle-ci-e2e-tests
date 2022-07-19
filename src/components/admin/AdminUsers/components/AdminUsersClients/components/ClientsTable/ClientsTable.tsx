@@ -1,8 +1,9 @@
 import { Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
 
 import Hint from '../../../../../../../shared/components/Hint/Hint';
-import { formatDateHint } from '../../../../../../helpers/helpers';
+import { formatDateAndTime } from '../../../../../../helpers/helpers';
 import AdminBlock from '../../../../../AdminActions/components/AdminBlock/AdminBlock';
+import AdminUnblock from '../../../../../AdminActions/components/AdminUnblock/AdminUnblock';
 
 import { AdminUsersTableProps } from '../../../../admin-users.types';
 
@@ -28,7 +29,7 @@ function ClientsTable({ items, getUsers }: AdminUsersTableProps) {
                   <Hint
                     content={
                       item.blockedUntil
-                        ? `User is blocked until ${formatDateHint(item.blockedUntil)}`
+                        ? `User is blocked until ${formatDateAndTime(item.blockedUntil)}`
                         : 'User is blocked permanently'
                     }
                   >
@@ -41,7 +42,11 @@ function ClientsTable({ items, getUsers }: AdminUsersTableProps) {
             <TableCell>{item.lastName}</TableCell>
             <TableCell>{item.email}</TableCell>
             <TableCell>
-              <AdminBlock getUsers={getUsers} userInfo={item} title="Block client" />
+              {item.blocked ? (
+                <AdminUnblock getUsers={getUsers} userInfo={item} />
+              ) : (
+                <AdminBlock getUsers={getUsers} userInfo={item} title="Block client" />
+              )}
             </TableCell>
           </TableRow>
         ))}

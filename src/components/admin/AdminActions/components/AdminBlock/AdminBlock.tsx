@@ -11,18 +11,13 @@ import {
   BUTTON_VARIANTS
 } from '../../../../../shared/components/Button/button.constants';
 import { useModal } from '../../../../../shared/hooks/useModal';
-import { Users } from '../../../AdminUsers/admin-users.types';
+
+import { AdminBlockProps } from './admin-block.types';
 
 import AdminBlockModal from './components/AdminBlockModal/AdminBlockModal';
 
-type AdminBlockProps = {
-  title: string;
-  userInfo: Users;
-  getUsers: () => void;
-};
-
 function AdminBlock({ title, userInfo, getUsers }: AdminBlockProps) {
-  const { isModalOpened, closeModal, openModal, toggleModal: toggleBlockModal } = useModal();
+  const { isModalOpened, closeModal, openModal } = useModal();
   return (
     <>
       <AdminBlockModal
