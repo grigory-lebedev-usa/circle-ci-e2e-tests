@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { capitalize } from '@mui/material';
 
 import { userBlocked } from '../../../../../api/hooks/useUsers/users.actions';
 import { REQUEST_STATUS } from '../../../../../constants/app.constants';
@@ -17,7 +18,6 @@ import { useModal } from '../../../../../shared/hooks/useModal';
 import { addNotification } from '../../../../../slices/notifications.slice';
 import { userSelector } from '../../../../../slices/user.slice';
 import { useAppDispatch } from '../../../../../store';
-import { toUpperFirstLetter } from '../../../../helpers/helpers';
 
 import { AdminUnblockProps } from './admin-unblock.types';
 
@@ -35,7 +35,7 @@ function AdminUnblock({ userInfo, getUsers }: AdminUnblockProps) {
         dispatch(
           addNotification({
             type: NOTIFICATION_TYPES.SUCCESS,
-            message: `${toUpperFirstLetter(userInfo.role)} unlocked successfully`
+            message: `${capitalize(userInfo.role)} unlocked successfully`
           })
         );
       })
