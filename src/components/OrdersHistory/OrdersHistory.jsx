@@ -39,12 +39,15 @@ function OrdersHistory({ renderTable }) {
 
   useEffect(() => {
     setCount(calculatePagesCount(total, rowsPerPage));
+  }, [rowsPerPage, total]);
+
+  useEffect(() => {
     dispatch(getTrips({ page: page - START_PAGE, size: rowsPerPage }))
       .unwrap()
       .catch(({ message }) =>
         dispatch(addNotification({ type: NOTIFICATION_TYPES.ERROR, message }))
       );
-  }, [dispatch, page, rowsPerPage, total]);
+  }, [dispatch, page, rowsPerPage]);
 
   if (status === REQUEST_STATUS.LOADING) {
     return <ProgressSpinner isShow />;
