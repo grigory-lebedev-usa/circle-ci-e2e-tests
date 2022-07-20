@@ -1,13 +1,18 @@
+import { useState } from 'react';
+
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 
 import ArrowButtonReport from '../../../../../shared/components/ArrowButtonReport/ArrowButtonReport';
 import DropDown from '../../../../../shared/components/DropDown/DropDown';
+import { useModal } from '../../../../../shared/hooks/useModal';
 import DriverCar from '../../../../client/ClientOrdersHistory/components/OrdersHistoryTable/components/DriverCar/DriverCar';
 
 import { formatDate } from '../../../../helpers/helpers';
+import AdminBlockModal from '../../../AdminActions/components/AdminBlock/components/AdminBlockModal/AdminBlockModal';
 
 import { ReportsTableProps } from './reports-table.types';
 import { PAGINATION_ACTIONS } from './reports.constants';
+import DropDownActions from './components/DropDownActions/DropDownActions';
 
 function ReportsTable({ items }: ReportsTableProps) {
   return (
@@ -37,7 +42,7 @@ function ReportsTable({ items }: ReportsTableProps) {
               <DriverCar car={item.driver.car} />
             </TableCell>
             <TableCell>
-              <DropDown hasAction value={null} items={PAGINATION_ACTIONS} />
+              <DropDownActions userInfo={item} />
             </TableCell>
           </TableRow>
         ))}

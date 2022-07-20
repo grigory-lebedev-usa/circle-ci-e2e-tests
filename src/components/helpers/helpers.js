@@ -16,7 +16,7 @@ export const formatDate = (createdAt) => {
   return `${day}.${month}.${year}`;
 };
 
-export const formatDateHint = (createdAt) => {
+export const formatDateAndTime = (createdAt) => {
   const date = new Date(createdAt);
   let day = date.getDate();
   if (day < 10) day = `0${day}`;
@@ -38,4 +38,9 @@ export const calculatePagesCount = (total, rowsPerPage) => {
     return 1;
   }
   return Math.ceil(total / rowsPerPage);
+};
+
+export const toUpperFirstLetter = (str) => {
+  if (!str) return str;
+  return str[0].toUpperCase() + str.slice(1);
 };

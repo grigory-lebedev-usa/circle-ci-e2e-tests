@@ -1,20 +1,15 @@
 import { Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
 
-import Button from '../../../../../../../shared/components/Button/Button';
-import {
-  BUTTON_COLORS,
-  BUTTON_SIZES,
-  BUTTON_TYPES,
-  BUTTON_VARIANTS
-} from '../../../../../../../shared/components/Button/button.constants';
 import Hint from '../../../../../../../shared/components/Hint/Hint';
-import { formatDateHint } from '../../../../../../helpers/helpers';
+import { formatDateAndTime } from '../../../../../../helpers/helpers';
+import AdminBlock from '../../../../../AdminActions/components/AdminBlock/AdminBlock';
+import AdminUnblock from '../../../../../AdminActions/components/AdminUnblock/AdminUnblock';
 
 import { AdminUsersTableProps } from '../../../../admin-users.types';
 
 import classes from './clients-table.module.css';
 
-function ClientsTable({ items }: AdminUsersTableProps) {
+function ClientsTable({ items, getUsers }: AdminUsersTableProps) {
   return (
     <Table sx={{ minWidth: '1100px', marginTop: '60px' }}>
       <TableHead>
@@ -34,7 +29,7 @@ function ClientsTable({ items }: AdminUsersTableProps) {
                   <Hint
                     content={
                       item.blockedUntil
-                        ? `User is blocked until ${formatDateHint(item.blockedUntil)}`
+                        ? `User is blocked until ${formatDateAndTime(item.blockedUntil)}`
                         : 'User is blocked permanently'
                     }
                   >
@@ -47,13 +42,11 @@ function ClientsTable({ items }: AdminUsersTableProps) {
             <TableCell>{item.lastName}</TableCell>
             <TableCell>{item.email}</TableCell>
             <TableCell>
-              <Button
-                variant={BUTTON_VARIANTS.CONTAINED}
-                size={BUTTON_SIZES.EXTRA_SMALL}
-                color={BUTTON_COLORS.ERROR}
-              >
-                Block
-              </Button>
+              {item.blocked ? (
+                <AdminUnblock getUsers={getUsers} userInfo={item} />
+              ) : (
+                <AdminBlock getUsers={getUsers} userInfo={item} title="Block client" />
+              )}
             </TableCell>
           </TableRow>
         ))}

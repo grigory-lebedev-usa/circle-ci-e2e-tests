@@ -1,6 +1,6 @@
+@import url(styles/overrides-clock.style.css);
+
 * {
   font-family: 'Roboto', sans-serif;
   outline: none;
 }
-
-

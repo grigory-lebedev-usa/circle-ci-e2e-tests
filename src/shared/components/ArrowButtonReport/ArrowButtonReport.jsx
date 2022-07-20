@@ -13,7 +13,7 @@ function ArrowButtonReport({ report }) {
   return (
     <>
       <IconButton onClick={handleChange}>
-        <ArrowDropDown fontSize="large" />
+        <ArrowDropDown sx={{ color: '#fff' }} fontSize="large" />
       </IconButton>
       {isChecked && (
         <Grow in={isChecked}>

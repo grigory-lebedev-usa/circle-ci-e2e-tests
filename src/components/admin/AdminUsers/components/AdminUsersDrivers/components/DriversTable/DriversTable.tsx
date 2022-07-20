@@ -9,13 +9,15 @@ import {
 import Hint from '../../../../../../../shared/components/Hint/Hint';
 
 import DriverCar from '../../../../../../client/ClientOrdersHistory/components/OrdersHistoryTable/components/DriverCar/DriverCar';
-import { formatDateHint } from '../../../../../../helpers/helpers';
+import { formatDateAndTime } from '../../../../../../helpers/helpers';
+import AdminBlock from '../../../../../AdminActions/components/AdminBlock/AdminBlock';
+import AdminUnblock from '../../../../../AdminActions/components/AdminUnblock/AdminUnblock';
 
 import { AdminUsersTableProps } from '../../../../admin-users.types';
 
 import classes from './drivers-table.module.css';
 
-function DriversTable({ items }: AdminUsersTableProps) {
+function DriversTable({ items, getUsers }: AdminUsersTableProps) {
   return (
     <Table sx={{ minWidth: '1100px', marginTop: '60px' }}>
       <TableHead>
@@ -36,7 +38,7 @@ function DriversTable({ items }: AdminUsersTableProps) {
                   <Hint
                     content={
                       item.blockedUntil
-                        ? `User is blocked until ${formatDateHint(item.blockedUntil)}`
+                        ? `User is blocked until ${formatDateAndTime(item.blockedUntil)}`
                         : 'User is blocked permanently'
                     }
                   >
@@ -52,13 +54,11 @@ function DriversTable({ items }: AdminUsersTableProps) {
               <DriverCar car={item.car} />
             </TableCell>
             <TableCell>
-              <Button
-                variant={BUTTON_VARIANTS.CONTAINED}
-                size={BUTTON_SIZES.EXTRA_SMALL}
-                color={BUTTON_COLORS.ERROR}
-              >
-                Block
-              </Button>
+              {item.blocked ? (
+                <AdminUnblock getUsers={getUsers} userInfo={item} />
+              ) : (
+                <AdminBlock getUsers={getUsers} userInfo={item} title="Block driver" />
+              )}
             </TableCell>
           </TableRow>
         ))}

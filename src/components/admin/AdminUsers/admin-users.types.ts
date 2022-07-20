@@ -14,9 +14,10 @@ export type Users = {
 };
 
 export type AdminUsersProps = {
-  renderTable: (items: Users[]) => JSX.Element;
+  renderTable: (items: Users[], getUsers: () => void) => JSX.Element;
 };
 
 export type AdminUsersTableProps = {
   items: Users[];
+  getUsers: () => void;
 };

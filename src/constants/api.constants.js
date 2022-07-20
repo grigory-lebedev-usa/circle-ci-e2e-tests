@@ -9,5 +9,6 @@ export const API_ROUTES = {
   OFFER: 'offer',
   TRIP: 'trip',
   REPORT: 'report',
-  REFRESH: 'refresh'
+  REFRESH: 'refresh',
+  BLOCKED: 'blocked'
 };
