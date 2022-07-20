@@ -40,7 +40,7 @@ export function registerInterceptors() {
         return axiosService(storedRequest);
       }
       LocalStorageService.clear();
-      // window.location.replace(PUBLIC_ROUTES.LOGIN);
+      window.location.replace(PUBLIC_ROUTES.LOGIN);
       return Promise.reject(error);
     }
   );
