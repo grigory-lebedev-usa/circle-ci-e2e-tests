@@ -1,17 +1,11 @@
-import { useState } from 'react';
-
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import moment from 'moment';
 
 import ArrowButtonReport from '../../../../../shared/components/ArrowButtonReport/ArrowButtonReport';
-import DropDown from '../../../../../shared/components/DropDown/DropDown';
-import { useModal } from '../../../../../shared/hooks/useModal';
+
 import DriverCar from '../../../../client/ClientOrdersHistory/components/OrdersHistoryTable/components/DriverCar/DriverCar';
 
-import { formatDate } from '../../../../helpers/helpers';
-import AdminBlockModal from '../../../AdminActions/components/AdminBlock/components/AdminBlockModal/AdminBlockModal';
-
 import { ReportsTableProps } from './reports-table.types';
-import { PAGINATION_ACTIONS } from './reports.constants';
 import DropDownActions from './components/DropDownActions/DropDownActions';
 
 function ReportsTable({ items }: ReportsTableProps) {
@@ -30,7 +24,7 @@ function ReportsTable({ items }: ReportsTableProps) {
       <TableBody>
         {items.map((item) => (
           <TableRow key={item.id}>
-            <TableCell>{formatDate(item.createdAt)}</TableCell>
+            <TableCell>{moment(item.createdAt).format('DD.MM.YYYY')}</TableCell>
             <TableCell>{item.comment ? <ArrowButtonReport report={item.comment} /> : ''}</TableCell>
             <TableCell>
               {item.driver?.firstName} {item.driver?.lastName}
