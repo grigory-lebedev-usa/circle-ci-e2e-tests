@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { capitalize } from '@mui/material';
+
 import { useSelector } from 'react-redux';
 
 import { userBlocked } from '../../../../../../../../../api/hooks/useUsers/users.actions';
@@ -17,7 +19,6 @@ import { useModal } from '../../../../../../../../../shared/hooks/useModal';
 import { addNotification } from '../../../../../../../../../slices/notifications.slice';
 import { userSelector } from '../../../../../../../../../slices/user.slice';
 import { useAppDispatch } from '../../../../../../../../../store';
-import { toUpperFirstLetter } from '../../../../../../../../helpers/helpers';
 
 import { BlockPermanentlyProps } from './block-permanently.types';
 
@@ -35,7 +36,7 @@ function BlockPermanently({ userInfo, closeAdminBlockModal, getUsers }: BlockPer
         dispatch(
           addNotification({
             type: NOTIFICATION_TYPES.SUCCESS,
-            message: `${toUpperFirstLetter(userInfo.role)} successfully blocked`
+            message: `${capitalize(userInfo.role)} successfully blocked`
           })
         );
       })

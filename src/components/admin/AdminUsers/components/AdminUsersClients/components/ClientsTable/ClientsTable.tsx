@@ -1,7 +1,7 @@
 import { Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
+import moment from 'moment';
 
 import Hint from '../../../../../../../shared/components/Hint/Hint';
-import { formatDateAndTime } from '../../../../../../helpers/helpers';
 import AdminBlock from '../../../../../AdminActions/components/AdminBlock/AdminBlock';
 import AdminUnblock from '../../../../../AdminActions/components/AdminUnblock/AdminUnblock';
 
@@ -29,7 +29,9 @@ function ClientsTable({ items, getUsers }: AdminUsersTableProps) {
                   <Hint
                     content={
                       item.blockedUntil
-                        ? `User is blocked until ${formatDateAndTime(item.blockedUntil)}`
+                        ? `User is blocked until ${moment(item.blockedUntil).format(
+                            'DD.MM.YYYY LTS'
+                          )}`
                         : 'User is blocked permanently'
                     }
                   >

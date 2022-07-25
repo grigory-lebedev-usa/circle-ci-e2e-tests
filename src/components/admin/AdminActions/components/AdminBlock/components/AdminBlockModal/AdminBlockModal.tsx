@@ -1,6 +1,7 @@
-import { SetStateAction, useState } from 'react';
+import { useState } from 'react';
 
-import { TextField } from '@mui/material';
+import moment from 'moment';
+import { capitalize, TextField } from '@mui/material';
 import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -14,13 +15,10 @@ import {
 
 import Modal from '../../../../../../../shared/components/Modal/Modal';
 import { MODAL_SIZE } from '../../../../../../../shared/components/Modal/modal.constants';
-import { Users } from '../../../../../AdminUsers/admin-users.types';
 
 import ConfirmationModal from '../../../../../../../shared/components/ConfirmationModal/ConfirmationModal';
 
 import { useModal } from '../../../../../../../shared/hooks/useModal';
-
-import { formatDateAndTime, toUpperFirstLetter } from '../../../../../../helpers/helpers';
 
 import { useAppDispatch } from '../../../../../../../store';
 
@@ -76,7 +74,7 @@ function AdminBlockModal({
         dispatch(
           addNotification({
             type: NOTIFICATION_TYPES.SUCCESS,
-            message: `${toUpperFirstLetter(userInfo.role)} successfully blocked`
+            message: `${capitalize(userInfo.role)} successfully blocked`
           })
         );
       })
@@ -143,7 +141,7 @@ function AdminBlockModal({
                 onConfirm={handleBlockUntilAccept}
                 text={`Are you sure you want to block ${userInfo.firstName} ${
                   userInfo.lastName
-                } until ${formatDateAndTime(dateTimePickerValue)}`}
+                } until ${moment(dateTimePickerValue).format('DD.MM.YYYY LTS')}`}
               />
               <Button
                 variant={BUTTON_VARIANTS.CONTAINED}

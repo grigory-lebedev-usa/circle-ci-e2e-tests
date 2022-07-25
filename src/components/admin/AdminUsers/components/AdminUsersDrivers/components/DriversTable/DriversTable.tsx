@@ -1,15 +1,10 @@
 import { Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
+import moment from 'moment';
 
-import Button from '../../../../../../../shared/components/Button/Button';
-import {
-  BUTTON_COLORS,
-  BUTTON_SIZES,
-  BUTTON_VARIANTS
-} from '../../../../../../../shared/components/Button/button.constants';
 import Hint from '../../../../../../../shared/components/Hint/Hint';
 
 import DriverCar from '../../../../../../client/ClientOrdersHistory/components/OrdersHistoryTable/components/DriverCar/DriverCar';
-import { formatDateAndTime } from '../../../../../../helpers/helpers';
+
 import AdminBlock from '../../../../../AdminActions/components/AdminBlock/AdminBlock';
 import AdminUnblock from '../../../../../AdminActions/components/AdminUnblock/AdminUnblock';
 
@@ -38,7 +33,9 @@ function DriversTable({ items, getUsers }: AdminUsersTableProps) {
                   <Hint
                     content={
                       item.blockedUntil
-                        ? `User is blocked until ${formatDateAndTime(item.blockedUntil)}`
+                        ? `User is blocked until ${moment(item.blockedUntil).format(
+                            'DD.MM.YYYY LTS'
+                          )}`
                         : 'User is blocked permanently'
                     }
                   >
