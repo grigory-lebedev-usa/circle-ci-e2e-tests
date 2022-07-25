@@ -44,7 +44,7 @@ function AdminUsers({ renderTable }: AdminUsersProps) {
   const [status, setStatus] = useState(REQUEST_STATUS.IDLE);
   const dispatch = useAppDispatch();
   const {
-    users: { items = [], total },
+    users: { items = [], total = 0 },
     isAuthenticated
   } = useSelector(userSelector);
   const [count, setCount] = useState(0);
@@ -70,20 +70,14 @@ function AdminUsers({ renderTable }: AdminUsersProps) {
 
   useEffect(() => {
     setCount(calculatePagesCount(total, rowsPerPage));
+  }, [rowsPerPage, total]);
+
+  useEffect(() => {
     if (isAuthenticated && isPrivatePage) {
       setStatus(REQUEST_STATUS.LOADING);
       getUsersCallback();
     }
-  }, [
-    dispatch,
-    getUsersCallback,
-    isAuthenticated,
-    isPrivatePage,
-    page,
-    pathname,
-    rowsPerPage,
-    total
-  ]);
+  }, [dispatch, getUsersCallback, isAuthenticated, isPrivatePage, page, pathname, rowsPerPage]);
 
   if (status === REQUEST_STATUS.LOADING) {
     return <ProgressSpinner isShow />;

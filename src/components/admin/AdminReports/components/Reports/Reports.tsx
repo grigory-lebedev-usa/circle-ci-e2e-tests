@@ -43,8 +43,11 @@ function Reports({ renderTable }: ReportsProps) {
 
   useEffect(() => {
     setCount(calculatePagesCount(total, rowsPerPage));
+  }, [rowsPerPage, total]);
+
+  useEffect(() => {
     getReportsCallback();
-  }, [getReportsCallback, rowsPerPage, total]);
+  }, [getReportsCallback, page, rowsPerPage]);
 
   if (status === REQUEST_STATUS.LOADING) {
     return <ProgressSpinner isShow />;
