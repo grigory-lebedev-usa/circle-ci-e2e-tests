@@ -1,0 +1,120 @@
+{
+  "welcome": "Добро пожаловать",
+  "home_title": "Лучшее такси в мире",
+  "home_content_text": "Мы поможем вам быстро и комфортно передвигаться в любую точку мира",
+  "admin_title": "Администрация",
+  "order_text": "Пожалуйста, введите откуда и куда вам нужно. И мы найдем для вас машину за несколько секунд",
+  "destination": "Куда",
+  "source": "Откуда",
+  "current_order_title": "Текущий заказ",
+  "current_order_not_found_data": "На данный момент нет свободных водителей. Обновите список, чтобы увидеть предложения водителя.",
+  "current_order_cancel_text": "Вы уверены, что хотите отменить заказ?",
+  "orders_history_title": "История заказов",
+  "items_per_page": "Элементы на странице",
+  "reports_title": "Отчёты",
+  "users_title": {
+    "drivers": "Водители",
+    "clients": "Клиенты"
+  },
+  "driver_orders_title": "Заказы",
+  "create_offer_modal_text": "Пожалуйста, предложите свою цену для заказа",
+  "order_row": {
+    "who": "Кто",
+    "from": "Откуда",
+    "to": "Куда"
+  },
+  "characteristics": {
+    "ch1": "Быстро",
+    "ch2": "Комфорт",
+    "ch3": "24/7 Помощь"
+  },
+  "log_out": "Выйти",
+  "input_name": {
+    "title": "Регистрация",
+    "email": "Почта",
+    "password": "Пароль",
+    "confirm_password": "Подтверждение пароля",
+    "first_name": "Имя",
+    "last_name": "Фамилия",
+    "role": "Роль",
+    "make": "Марка",
+    "model": "Модель",
+    "year": "Год",
+    "color": "Цвет",
+    "block_until": "Заблокировать до"
+  },
+  "car": "Машина",
+  "driver_car_info": {
+    "info": "Инфо",
+    "make": "Марка",
+    "model": "Модель",
+    "year": "Год",
+    "color": "Цвет"
+  },
+  "rate_driver_title": "Оцените водителя",
+  "driver_report": "Жалоба",
+  "accept_offer_text": "Вы уверены, что хотите принять предложение от",
+  "sign_up": "Регистрация",
+  "sign_in": "Вход",
+  "active_trip": {
+    "title": "Активная поездка",
+    "from": "Откуда",
+    "to": "Куда",
+    "price": "Цена",
+    "driver": "Водитель",
+    "car": "Машина",
+    "rating": "Рейтинг"
+  },
+  "forgot_password": "Забыли пароль",
+  "no_account": "У меня нет аккаунта",
+  "keep_me_logged_in": "Оставаться в системе",
+  "blocked_users_title": {
+    "block_client": "Заблокировать клиента",
+    "block_driver": "Заблокировать водителя"
+  },
+  "hint": {
+    "user_blocked_permanently": "Пользователь заблокирован навсегда",
+    "user_blocked_until": "Пользователь заблокирован до"
+  },
+  "unblock_text": "Вы уверены, что хотите разблокировать учетную запись для",
+  "button": {
+    "login": "Войти",
+    "register": "Зарегистрироваться",
+    "create_order": "Создать заказ",
+    "view_history": "Показать историю",
+    "start_treep": "Начать стрип",
+    "all_users": "Все пользователи",
+    "reports": "Отчёты",
+    "order": "Заказать",
+    "cancel_order": "Отменить заказ",
+    "cancel": "Отмена",
+    "ok": "Ок",
+    "offer": "Предложить",
+    "accept": "Принять",
+    "finish_treep": "Закончить поездку",
+    "report_driver": "Пожаловаться",
+    "submit": "Отправить",
+    "car": "Машина",
+    "block": "Заблокировать",
+    "unblock": "Разблокировать",
+    "back": "Назад",
+    "block_permanently": "Заблокировать навсегда",
+    "block_until": "Заблокировать до"
+  },
+  "table": {
+    "date": "Дата",
+    "from": "Откуда",
+    "to": "Куда",
+    "driver": "Водитель",
+    "client": "Клиент",
+    "rate": "Рейтинг",
+    "coast": "Стоимость",
+    "report": "Жалоба",
+    "car": "Машина",
+    "comment": "Комментарии",
+    "action": "Действия",
+    "email": "Почта",
+    "first_name": "Имя",
+    "last_name": "Фамилия"
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "welcome": "Willkommen",
+  "home_title": "das Beste Taxi der Welt",
+  "home_content_text": "Wir helfen Ihnen, sich schnell und bequem überall auf der Welt zu bewegen",
+  "admin_title": "Verwaltung",
+  "order_text": "Bitte geben Sie ein, wo und wo Sie wollen. Und wir werden in wenigen Sekunden ein Auto für Sie finden.",
+  "destination": "Wohin",
+  "source": "Woher",
+  "current_order_title": "Aktuelle Bestellung",
+  "current_order_not_found_data": "Es gibt derzeit keine freien Fahrer. Aktualisieren Sie die Liste, um die Vorschläge des Fahrers zu sehen.",
+  "current_order_cancel_text": "Sind Sie sicher, dass Sie die Bestellung stornieren möchten?",
+  "orders_history_title": "Bestellhistorie",
+  "items_per_page": "Elemente auf der Seite",
+  "reports_title": "Berichte",
+  "users_title": {
+    "drivers": "Fahrer",
+    "clients": "Kunden"
+  },
+  "driver_orders_title": "Aufträge",
+  "create_offer_modal_text": "Bitte bieten Sie Ihren Preis für die Bestellung an",
+  "order_row": {
+    "who": "Wer",
+    "from": "Woher",
+    "to": "Wohin"
+  },
+  "characteristics": {
+    "ch1": "Schnell",
+    "ch2": "Komfort",
+    "ch3": "24/7 Hilfe"
+  },
+  "log_out": "Abmelden",
+  "input_name": {
+    "title": "Registrieren",
+    "email": "Mail",
+    "password": "Passwort",
+    "confirm_password": "Passwort Bestätigen",
+    "first_name": "Name",
+    "last_name": "Nachname",
+    "role": "Rolle",
+    "make": "Marke",
+    "model": "Model",
+    "year": "Jahr",
+    "color": "Farbe",
+    "block_until": "Blockieren, bis"
+  },
+  "car": "Das Auto",
+  "driver_car_info": {
+    "info": "Info",
+    "make": "Marke",
+    "model": "Model",
+    "year": "Jahr",
+    "color": "Farbe"
+  },
+  "rate_driver_title": "Bewerten Sie den Fahrer",
+  "driver_report": "Beschwerde",
+  "accept_offer_text": "Sie sind sicher, dass Sie das Angebot von annehmen möchten",
+  "sign_up": "Registrieren",
+  "sign_in": "Eingang",
+  "active_trip": {
+    "title": "Aktive Fahrt",
+    "from": "Woher",
+    "to": "Wohin",
+    "price": "Preis",
+    "driver": "Fahrer",
+    "car": "Das Auto",
+    "rating": "Bewertung"
+  },
+  "forgot_password": "Passwort Vergessen",
+  "no_account": "Ich habe kein Konto",
+  "keep_me_logged_in": "Angemeldet bleiben",
+  "blocked_users_title": {
+    "block_client": "Client blockieren",
+    "block_driver": "Fahrer sperren"
+  },
+  "hint": {
+    "user_blocked_permanently": "Benutzer für immer gesperrt",
+    "user_blocked_until": "Benutzer ist bis gesperrt"
+  },
+  "unblock_text": "Sie sind sicher, dass Sie Ihr Konto für",
+  "button": {
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "create_order": "Neu bestellen",
+    "view_history": "Verlauf Anzeigen",
+    "start_treep": "Streifen starten",
+    "all_users": "Alle Benutzer",
+    "reports": "Berichte",
+    "order": "Bestellen",
+    "cancel_order": "Bestellung Stornieren",
+    "cancel": "Abbrechen",
+    "ok": "Ok",
+    "offer": "Vorschlagen",
+    "accept": "Akzeptieren",
+    "finish_treep": "Reise beenden",
+    "report_driver": "Beschweren",
+    "submit": "Senden",
+    "car": "Das Auto",
+    "block": "Block",
+    "unblock": "Entsperren",
+    "back": "Zurück",
+    "block_permanently": "Für immer sperren",
+    "block_until": "Blockieren, bis"
+  },
+  "table": {
+    "date": "Datum",
+    "from": "Woher",
+    "to": "Wohin",
+    "driver": "Fahrer",
+    "client": "Client",
+    "rate": "Bewertung",
+    "coast": "Kosten",
+    "report": "Beschwerde",
+    "car": "Das Auto",
+    "comment": "Kommentare",
+    "action": "Aktionen",
+    "email": "Mail",
+    "first_name": "Name",
+    "last_name": "Nachname"
+  }
+}
