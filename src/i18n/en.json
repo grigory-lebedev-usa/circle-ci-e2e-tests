@@ -12,6 +12,7 @@
   "orders_history_title": "Order’s History",
   "items_per_page": "Items per page",
   "reports_title": "Reports",
+  "not_found_page": "Not found page",
   "users_title": {
     "drivers": "Drivers",
     "clients": "Clients"
@@ -61,6 +62,11 @@
     "year": "Year",
     "color": "Color"
   },
+  "driver_photo": {
+    "title": "Car photo",
+    "text1": "Please select photo of your car.",
+    "text2": "IMPORTANT: You can upload photo only once!"
+  },
   "rate_driver_title": "Rate Driver",
   "driver_report": "Driver report",
   "accept_offer_text": "Are you sure you want to accept the offer from",
@@ -98,7 +104,10 @@
     "unblock": "Unblock",
     "back": "Back",
     "block_permanently": "Block permanently",
-    "block_until": "Block until"
+    "block_until": "Block until",
+    "go_home": "Go home",
+    "upload_photo": "Upload photo",
+    "save": "Save"
   },
   "table": {
     "date": "Date",

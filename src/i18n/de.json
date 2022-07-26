@@ -12,6 +12,7 @@
   "orders_history_title": "Bestellhistorie",
   "items_per_page": "Elemente auf der Seite",
   "reports_title": "Berichte",
+  "not_found_page": "Keine Seite gefunden",
   "users_title": {
     "drivers": "Fahrer",
     "clients": "Kunden"
@@ -50,6 +51,11 @@
     "model": "Model",
     "year": "Jahr",
     "color": "Farbe"
+  },
+  "driver_photo": {
+    "title": "Foto der Maschine",
+    "text1": "Bitte wählen Sie ein Foto Ihres Autos aus.",
+    "text2": "WICHTIG: Du kannst ein Foto nur einmal hochladen!"
   },
   "rate_driver_title": "Bewerten Sie den Fahrer",
   "driver_report": "Beschwerde",
@@ -99,7 +105,10 @@
     "unblock": "Entsperren",
     "back": "Zurück",
     "block_permanently": "Für immer sperren",
-    "block_until": "Blockieren, bis"
+    "block_until": "Blockieren, bis",
+    "go_home": "Nach Hause",
+    "upload_photo": "Foto hochladen",
+    "save": "Speichern"
   },
   "table": {
     "date": "Datum",
