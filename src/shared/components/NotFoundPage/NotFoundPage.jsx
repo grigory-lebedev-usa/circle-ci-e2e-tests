@@ -14,7 +14,7 @@ function NotFoundPage() {
       <h1 className={classes.notfound__title}>{t('not_found_page')}</h1>
       <Link to={PRIVATE_ROUTES.HOME}>
         <Button
-          size={BUTTON_SIZES.BIG}
+          size={BUTTON_SIZES.LARGE}
           color={BUTTON_COLORS.PRIMARY}
           variant={BUTTON_VARIANTS.CONTAINED}
         >

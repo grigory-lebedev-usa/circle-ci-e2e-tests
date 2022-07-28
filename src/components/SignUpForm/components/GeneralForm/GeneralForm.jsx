@@ -41,10 +41,10 @@ function GeneralForm({ control, errors, watch }) {
         className={classes.form__input}
         error={errors?.confirmPassword}
         rules={{
-          required: 'Confirm password is required',
+          required: t('input_errors.confirm_password.required'),
           validate: (value) => {
             if (watch('password') !== value) {
-              return 'Your passwords do no match';
+              return t('input_errors.confirm_password.message');
             }
             // eslint-disable-next-line prettier/prettier
             return () => { };

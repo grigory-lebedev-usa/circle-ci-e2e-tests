@@ -4,6 +4,7 @@
   "home_content_text": "Wir helfen Ihnen, sich schnell und bequem überall auf der Welt zu bewegen",
   "admin_title": "Verwaltung",
   "order_text": "Bitte geben Sie ein, wo und wo Sie wollen. Und wir werden in wenigen Sekunden ein Auto für Sie finden.",
+  "forgot_password_text": "Wir müssen Ihre E-Mail-Adresse kennen, um einen Link zum Zurücksetzen Ihres Passworts zu senden.",
   "destination": "Wohin",
   "source": "Woher",
   "current_order_title": "Aktuelle Bestellung",
@@ -108,7 +109,8 @@
     "block_until": "Blockieren, bis",
     "go_home": "Nach Hause",
     "upload_photo": "Foto hochladen",
-    "save": "Speichern"
+    "save": "Speichern",
+    "send": "Senden"
   },
   "table": {
     "date": "Datum",
@@ -125,5 +127,59 @@
     "email": "Mail",
     "first_name": "Name",
     "last_name": "Nachname"
+  },
+  "notifications_message": {
+    "register_success": "Wir haben einen Aktivierungslink an die E-Mail-Adresse gesendet. Bitte aktivieren Sie Ihr Konto.",
+    "login_success": "Sie sind erfolgreich angemeldet",
+    "forgot_success": "Wir haben einen Link zum Zurücksetzen des Passworts an Ihre E-Mail-Adresse gesendet.",
+    "create_offer_success": "Ihr Vorschlag wurde erfolgreich gesendet",
+    "cancel_offer_success": "Ihr Angebot wurde abgebrochen",
+    "create_order_success": "Sie haben den Auftrag erfolgreich erstellt",
+    "cancel_order_success": "Sie haben die Bestellung erfolgreich storniert",
+    "block_success": "erfolgreich blockiert",
+    "unblock_success": "erfolgreich freigeschaltet"
+  },
+  "input_errors": {
+    "email": {
+      "required": "E-Mails können nicht leer sein",
+      "message": "Die Post ist unausweichlich"
+    },
+    "password": {
+      "required": "Das Passwort darf nicht leer sein",
+      "messageMin": "Das Passwort muss mindestens 6 Zeichen lang sein",
+      "messageMax": "Das Passwort darf nicht größer als 20 Zeichen sein"
+    },
+    "first_name": {
+      "required": "Der Name darf nicht leer sein"
+    },
+    "last_name": {
+      "required": "Nachname darf nicht leer sein"
+    },
+    "role": {
+      "required": "Die Rolle darf nicht leer sein"
+    },
+    "make": {
+      "required": "Eine Marke darf nicht leer sein"
+    },
+    "model": {
+      "required": "Das Modell darf nicht leer sein"
+    },
+    "year": {
+      "required": "Das Jahr darf nicht leer sein",
+      "messageMin": "Das Jahr muss mindestens 4 Zeichen lang sein",
+      "messageMax": "Das Jahr darf nicht größer als 4 Zeichen sein"
+    },
+    "color": {
+      "required": "Die Farbe darf nicht leer sein"
+    },
+    "source": {
+      "required": "Woher kann es nicht leer sein?"
+    },
+    "destination": {
+      "required": "Wo kann nicht leer sein"
+    },
+    "price": {
+      "required": "Der Preis darf nicht leer sein"
+    }
   }
 }

@@ -38,7 +38,7 @@ function AdminUnblock({ userInfo, getUsers }: AdminUnblockProps) {
         dispatch(
           addNotification({
             type: NOTIFICATION_TYPES.SUCCESS,
-            message: `${capitalize(userInfo.role)} unblocked successfully`
+            message: `${capitalize(userInfo.role)} ${t('notifications_message.unblock_success')}`
           })
         );
       })

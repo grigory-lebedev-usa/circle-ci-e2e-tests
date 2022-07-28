@@ -39,7 +39,7 @@ function BlockPermanently({ userInfo, closeAdminBlockModal, getUsers }: BlockPer
         dispatch(
           addNotification({
             type: NOTIFICATION_TYPES.SUCCESS,
-            message: `${capitalize(userInfo.role)} successfully blocked`
+            message: `${capitalize(userInfo.role)} ${t('notifications_message.block_success')}`
           })
         );
       })

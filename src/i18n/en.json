@@ -4,6 +4,7 @@
   "home_content_text": "We will help you quickly and comfortably move anywhere in the world",
   "admin_title": "Administration",
   "order_text": "Please input Source and Destination for your order. And we will find a car for you in a few seconds",
+  "forgot_password_text": "We need to know your email to send the link to reset you password.",
   "destination": "Destination",
   "source": "Source",
   "current_order_title": "Current order",
@@ -107,7 +108,8 @@
     "block_until": "Block until",
     "go_home": "Go home",
     "upload_photo": "Upload photo",
-    "save": "Save"
+    "save": "Save",
+    "send": "Send"
   },
   "table": {
     "date": "Date",
@@ -124,5 +126,63 @@
     "email": "Email",
     "first_name": "First name",
     "last_name": "Last name"
+  },
+  "notifications_message": {
+    "register_success": "We sent the activation link to email address. Please activate your account.",
+    "login_success": "You have successfully logged in",
+    "forgot_success": "We sent the link for reset password on your email address.",
+    "create_offer_success": "Your offer was successfully sent",
+    "cancel_offer_success": "Your offer was cancel",
+    "create_order_success": "You have successfully created an order",
+    "cancel_order_success": "You have successfully cancel an order",
+    "block_success": "successfully blocked",
+    "unblock_success": "unblocked successfully"
+  },
+  "input_errors": {
+    "email": {
+      "required": "Email is required",
+      "message": "Email does not pass validation"
+    },
+    "password": {
+      "required": "Password is required",
+      "messageMin": "Password need to be 6 characters",
+      "messageMax": "Password must be no more than 20 characters"
+    },
+    "confirm_password": {
+      "required": "Confirm password is required",
+      "message": "Your passwords do no match"
+    },
+    "first_name": {
+      "required": "First name is required"
+    },
+    "last_name": {
+      "required": "Last name is required"
+    },
+    "role": {
+      "required": "Role is required"
+    },
+    "make": {
+      "required": "Make is required"
+    },
+    "model": {
+      "required": "Model is required"
+    },
+    "year": {
+      "required": "Year is required",
+      "messageMin": "Year need to be 4 characters",
+      "messageMax": "Year must be no more than 4 characters"
+    },
+    "color": {
+      "required": "Color is required"
+    },
+    "source": {
+      "required": "Source is required"
+    },
+    "destination": {
+      "required": "Destination is required"
+    },
+    "price": {
+      "required": "Price is required"
+    }
   }
 }
