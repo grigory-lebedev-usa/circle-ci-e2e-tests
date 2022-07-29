@@ -63,5 +63,3 @@ export const OPTIONS_VALIDATE = {
     required: true
   }
 };
-
-console.log(OPTIONS_VALIDATE.EMAIL);
