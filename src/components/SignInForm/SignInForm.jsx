@@ -43,8 +43,9 @@ function SignInForm() {
   const {
     handleSubmit,
     control,
+    reset,
     formState: { errors, isValid }
-  } = useForm({ defaultValues: defaultLoginValues, mode: 'onTouched' });
+  } = useForm({ defaultValues: defaultLoginValues, mode: 'all' });
   const handleCheckboxChange = (e) => {
     setIsKeepLoggedInChecked(e.target.checked);
   };
@@ -64,6 +65,7 @@ function SignInForm() {
       .then(() => {
         setLoginRequestStatus(REQUEST_STATUS.SUCCESS);
         navigate(PRIVATE_ROUTES.HOME);
+        reset(defaultLoginValues);
       })
       .catch(({ message }) => {
         setLoginRequestStatus(REQUEST_STATUS.FAILED);

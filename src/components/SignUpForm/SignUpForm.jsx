@@ -40,8 +40,9 @@ function SignUpForm() {
     handleSubmit,
     control,
     watch,
+    reset,
     formState: { errors, isValid }
-  } = useForm({ defaultValues: defaultRegisterValues, mode: 'onTouched' });
+  } = useForm({ defaultValues: defaultRegisterValues, mode: 'all' });
 
   useEffect(() => {
     const subscribe = watch(({ role }) => {
@@ -68,6 +69,7 @@ function SignUpForm() {
             })
           )
         );
+      reset(defaultRegisterValues);
     } else {
       const { car, ...clientState } = driverState;
       dispatch(registrationUser(clientState))
@@ -81,6 +83,7 @@ function SignUpForm() {
             })
           )
         );
+      reset(defaultRegisterValues);
     }
   };
 
