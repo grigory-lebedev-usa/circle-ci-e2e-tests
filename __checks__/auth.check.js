@@ -1,7 +1,7 @@
 const {chromium} = require('@playwright/test');
 
 const run = async () => {
-  const browser = await chromium.launch({ headless: false })
+  const browser = await chromium.launch();
   const page = await browser.newPage();
   await page.goto('https://tomas-taxi.vercel.app/login');
   await page.locator('#email').fill('lebedevgrisha21@gmail.com');
