@@ -4,7 +4,7 @@ export const COLORS = {
   SUCCESS: '#00CB82',
   WARNING: '#E1CB00',
   ERROR: '#FC004C',
-  ERROR_LIGHT: 'CE6A5D',
+  ERROR_LIGHT: '#CE6A5D',
   DISABLED: '#AEAEAE',
   WHITE: '#FFF',
   BLACK: '#000',

@@ -1,7 +1,6 @@
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import PropTypes from 'prop-types';
-
-import { formatDate } from '../../../../helpers/helpers';
+import moment from 'moment';
 
 function OrdersHistoryTable({ items }) {
   return (
@@ -18,7 +17,7 @@ function OrdersHistoryTable({ items }) {
       <TableBody>
         {items.map((item) => (
           <TableRow key={item.id}>
-            <TableCell>{formatDate(item.createdAt)}</TableCell>
+            <TableCell>{moment(item.createdAt).format('DD.MM.YYYY')}</TableCell>
             <TableCell>{item.source}</TableCell>
             <TableCell>{item.destination}</TableCell>
             <TableCell>

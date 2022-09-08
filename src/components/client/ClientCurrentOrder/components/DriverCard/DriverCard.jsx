@@ -77,6 +77,7 @@ function DriverCard({ offer }) {
         closeModal={closeModal}
         onClick={openAcceptOfferConfirmationModal}
         info={offer}
+        car={offer.driver.car}
       />
       <div className={classes.card__container} role="button" tabIndex="0" onClick={openModal}>
         <img className={classes.img} src={offer.driver.car.photo} alt="Car" />

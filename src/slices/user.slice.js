@@ -6,6 +6,8 @@ import {
   isRejectedWithValue
 } from '@reduxjs/toolkit';
 
+import { getUsers, userBlocked } from '../api/hooks/useUsers/users.actions';
+
 import { API_ROUTES } from '../constants/api.constants';
 import { REQUEST_STATUS, USER_VALUES } from '../constants/app.constants';
 import { axiosService } from '../services/axios.service';
@@ -25,7 +27,8 @@ const INITIAL_STATE = {
     role: ''
   },
   status: REQUEST_STATUS.IDLE,
-  isAuthenticated: LocalStorageService.isAuthenticated
+  isAuthenticated: LocalStorageService.isAuthenticated,
+  users: []
 };
 
 export const getUser = createAsyncThunk('user/get', async (_, { rejectWithValue }) => {
@@ -127,28 +130,49 @@ const userSlice = createSlice({
         state.userData = action.payload;
       })
 
+      .addCase(getUsers.fulfilled, (state, action) => {
+        state.status = REQUEST_STATUS.SUCCESS;
+        state.users = action.payload;
+      })
+
       .addCase(loginUser.fulfilled, (state) => {
         state.isAuthenticated = true;
       })
 
       .addMatcher(
-        isPending(getUser, registrationUser, resetUserPassword, uploadUserPhoto, finishedUserTrip),
+        isPending(
+          getUser,
+          registrationUser,
+          resetUserPassword,
+          uploadUserPhoto,
+          finishedUserTrip,
+          userBlocked
+        ),
         (state) => {
           state.status = REQUEST_STATUS.LOADING;
         }
       )
 
       .addMatcher(
-        isFulfilled(registrationUser, resetUserPassword, uploadUserPhoto, finishedUserTrip),
+        isFulfilled(
+          registrationUser,
+          resetUserPassword,
+          uploadUserPhoto,
+          finishedUserTrip,
+          userBlocked
+        ),
         (state) => {
           state.status = REQUEST_STATUS.SUCCESS;
         }
       )
 
-      .addMatcher(isRejectedWithValue(getUser, loginUser, registrationUser), (state, action) => {
-        state.status = REQUEST_STATUS.FAILED;
-        state.error = action.error.message;
-      })
+      .addMatcher(
+        isRejectedWithValue(getUser, loginUser, registrationUser, getUsers, userBlocked),
+        (state, action) => {
+          state.status = REQUEST_STATUS.FAILED;
+          state.error = action.error.message;
+        }
+      )
 });
 
 export const userSelector = (state) => state.user;

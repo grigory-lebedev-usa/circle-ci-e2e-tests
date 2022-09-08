@@ -24,14 +24,16 @@ function AdminActions() {
           Reports
         </Button>
       </Link>
-      <Button
-        size={BUTTON_SIZES.LARGE}
-        color={BUTTON_COLORS.PRIMARY}
-        variant={BUTTON_VARIANTS.CONTAINED}
-        type={BUTTON_TYPES.BUTTON}
-      >
-        All users
-      </Button>
+      <Link to={PRIVATE_ROUTES.USERS_CLIENTS}>
+        <Button
+          size={BUTTON_SIZES.LARGE}
+          color={BUTTON_COLORS.PRIMARY}
+          variant={BUTTON_VARIANTS.CONTAINED}
+          type={BUTTON_TYPES.BUTTON}
+        >
+          All users
+        </Button>
+      </Link>
     </div>
   );
 }

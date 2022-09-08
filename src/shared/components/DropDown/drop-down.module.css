@@ -20,15 +20,6 @@
   font-size: 28px;
 }
 
-.dropdown__arrow_down {
-  margin-left: 3px;
-  width: 16px;
-  height: 4px;
-  background-image: url(/public/img/dropdown__arrow_down.svg);
-  background-size: cover;
-  background-position: 0 0;
-}
-
 .dropdown__list {
   position: absolute;
   box-sizing: border-box;
@@ -47,9 +38,6 @@
 .dropdown__item {
   position: relative;
   padding: 10px 30px;
-  font-size: 28px;
-  font-family: 'Rasa', sans-serif;
-  font-weight: 400;
   list-style-type: none;
   background: var(--bg-dropdown-color);
   box-sizing: border-box;
@@ -90,4 +78,19 @@
 
 .dropdown__value {
   color: #fff;
+  font-family: 'Rasa', sans-serif;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 34px;
+  text-align: center;
+}
+
+.dropdown__value_action {
+  font-family: 'Rasa', sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+  font-weight: 400;
+  text-align: center;
+  width: 120px;
 }

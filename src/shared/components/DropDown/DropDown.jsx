@@ -49,7 +49,9 @@ function DropDown({ items, onListItemClick, value, hasAction }) {
               key={item.id}
               onClick={() => handleListItemClick(item)}
             >
-              <span className={classes.dropdown__text}>{item.value}</span>
+              <div className={hasAction ? classes.dropdown__value_action : classes.dropdown__value}>
+                {item.value}
+              </div>
             </li>
           ))}
         </ul>

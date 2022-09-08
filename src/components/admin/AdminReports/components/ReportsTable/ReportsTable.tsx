@@ -1,13 +1,12 @@
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import moment from 'moment';
 
 import ArrowButtonReport from '../../../../../shared/components/ArrowButtonReport/ArrowButtonReport';
-import DropDown from '../../../../../shared/components/DropDown/DropDown';
+
 import DriverCar from '../../../../client/ClientOrdersHistory/components/OrdersHistoryTable/components/DriverCar/DriverCar';
 
-import { formatDate } from '../../../../helpers/helpers';
-
 import { ReportsTableProps } from './reports-table.types';
-import { PAGINATION_ACTIONS } from './reports.constants';
+import DropDownActions from './components/DropDownActions/DropDownActions';
 
 function ReportsTable({ items }: ReportsTableProps) {
   return (
@@ -25,7 +24,7 @@ function ReportsTable({ items }: ReportsTableProps) {
       <TableBody>
         {items.map((item) => (
           <TableRow key={item.id}>
-            <TableCell>{formatDate(item.createdAt)}</TableCell>
+            <TableCell>{moment(item.createdAt).format('DD.MM.YYYY')}</TableCell>
             <TableCell>{item.comment ? <ArrowButtonReport report={item.comment} /> : ''}</TableCell>
             <TableCell>
               {item.driver?.firstName} {item.driver?.lastName}
@@ -34,10 +33,10 @@ function ReportsTable({ items }: ReportsTableProps) {
               {item.client?.firstName} {item.client?.lastName}
             </TableCell>
             <TableCell>
-              <DriverCar info={item} />
+              <DriverCar car={item.driver.car} />
             </TableCell>
             <TableCell>
-              <DropDown hasAction value={null} items={PAGINATION_ACTIONS} />
+              <DropDownActions userInfo={item} />
             </TableCell>
           </TableRow>
         ))}
