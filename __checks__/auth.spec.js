@@ -1,13 +1,13 @@
-import {test, expect, Page} from "@playwright/test";
+const {test} = require('@playwright/test');
 
 test.use({
   headless: false,
-  baseURL: 'http://localhost:3000/'
+  baseURL: 'https://tomas-taxi.vercel.app'
 });
 
 test.describe.serial("Authentication", () => {
 
-  let page: Page;
+  let page;
 
   test.beforeAll(async ({browser}) => {
     page = await browser.newPage();

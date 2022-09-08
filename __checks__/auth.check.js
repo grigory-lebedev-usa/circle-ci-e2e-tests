@@ -1,4 +1,4 @@
-import {test} from "@playwright/test";
+const {test} = require('@playwright/test');
 
 test.use({
   headless: false,
