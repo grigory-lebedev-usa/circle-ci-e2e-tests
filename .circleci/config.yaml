@@ -1,0 +1,14 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: qawolf/playwright-ci:v1.0.0
+    steps:
+      - checkout
+        command: git clone https://github.com/grigory-lebedev-usa/circle-ci-e2e-tests.git
+
+      - run:
+          command: npm install
+
+      - run:
+          command: npm run test:e2e
