@@ -35,9 +35,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject",
-    "test": "jest"
+    "test:e2e": "npx playwright test"
   },
   "eslintConfig": {
     "extends": [
@@ -58,6 +58,7 @@
     ]
   },
   "devDependencies": {
+    "@playwright/test": "^1.25.2",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",
     "eslint": "^8.15.0",
