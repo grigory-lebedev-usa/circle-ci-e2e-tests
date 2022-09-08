@@ -2,7 +2,7 @@ import {test} from "@playwright/test";
 
 test.use({
   headless: false,
-  baseURL: 'http://localhost:3000/'
+  baseURL: 'https://tomas-taxi.vercel.app'
 });
 
 test.describe.serial("Authentication", () => {
